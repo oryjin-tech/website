@@ -1,33 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- SEO Core -->
-<title>oryjin — Payment Cost Intelligence · Stop Overpaying Your PSP</title>
-<meta name="description" content="oryjin audits your payment stack in 7 days — no system access required. We cross-reference your PSP contracts and billing statements to surface what you're overpaying. Based in Paris.">
-<meta name="keywords" content="payment audit, PSP audit, payment cost intelligence, PSP fees, payment stack, overpaying PSP, payment optimization, Adyen audit, Stripe audit, PSP contract review">
-<meta name="robots" content="index, follow">
+<!-- ═══ CORE SEO ═══════════════════════════════ -->
+<title>oryjin — Stop Losing Margin in Payments · PSP Audit in 7 Days</title>
+<meta name="description" content="oryjin finds what your PSP bills above your contract — in 7 days, with documents you already have. No system access. No integration. Just the gap, in euros.">
+<meta name="keywords" content="payment audit, PSP audit, payment cost intelligence, PSP fees, overpaying PSP, payment optimization, Adyen audit, Stripe audit, PSP contract review, payment margin, interchange fees, scheme fees, payment cost recovery, PSP billing, Paris fintech, audit paiement, frais PSP, Mangopay, Stripe fees">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="author" content="Farah Chabchoub">
+<meta name="theme-color" content="#060711">
 <link rel="canonical" href="https://oryjin.com">
 
-<!-- Open Graph / LinkedIn -->
+<!-- ═══ GEO / LOCAL SEO ════════════════════════ -->
+<meta name="geo.region" content="FR-IDF">
+<meta name="geo.placename" content="Paris, France">
+<meta name="language" content="English">
+<meta name="coverage" content="Europe">
+<meta name="target" content="CFO, finance director, payment manager">
+
+<!-- ═══ AI CRAWLERS (GPTBot, Perplexity, Claude) ═ -->
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
+
+<!-- ═══ OPEN GRAPH / LINKEDIN / FACEBOOK ══════ -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://oryjin.com">
-<meta property="og:title" content="oryjin — Something in your payment stack is costing you more than it should.">
-<meta property="og:description" content="We can prove it. In 7 days. With documents you already have. 5 free audits available this month.">
+<meta property="og:title" content="Stop losing margin in payments — oryjin">
+<meta property="og:description" content="Most companies pay their PSP above their contracted rate. We find the gap in 7 days, with 2 documents. No integrations. No system access.">
 <meta property="og:image" content="https://oryjin.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="oryjin — PSP payment cost audit">
 <meta property="og:site_name" content="oryjin">
 <meta property="og:locale" content="en_EU">
 
-<!-- Twitter Card -->
+<!-- ═══ TWITTER / X CARD ══════════════════════ -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="oryjin — Payment Cost Intelligence">
-<meta name="twitter:description" content="Stop overpaying your PSP. We audit your payment stack in 7 days with documents you already have.">
+<meta name="twitter:site" content="@oryjin">
 <meta name="twitter:creator" content="@farahchabchoub">
+<meta name="twitter:title" content="Stop losing margin in payments — oryjin">
+<meta name="twitter:description" content="PSP audit in 7 days. We find what you're overbilled vs. contract — in euros — with documents you already have.">
+<meta name="twitter:image" content="https://oryjin.com/og.png">
 
-<!-- Structured Data -->
+<!-- ═══ FAVICON ════════════════════════════════ -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+
+<!-- ═══ RSS / SUBSTACK ════════════════════════ -->
+<link rel="alternate" type="application/rss+xml" title="oryjin — Payment Intelligence" href="https://oryjin.substack.com/feed">
+
+<!-- ═══ STRUCTURED DATA ════════════════════════ -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -37,36 +60,83 @@
       "@id": "https://oryjin.com/#org",
       "name": "oryjin",
       "url": "https://oryjin.com",
-      "description": "Payment cost intelligence — we audit your PSP contracts and billing statements to surface what you're overpaying.",
+      "logo": { "@type": "ImageObject", "url": "https://oryjin.com/og.png", "width": 1200, "height": 630 },
+      "description": "Payment cost intelligence — we audit PSP contracts and billing statements to surface what you're overbilled, in euros, in 7 days.",
       "email": "contact@oryjin.com",
       "foundingDate": "2026",
-      "areaServed": {"@type": "Place", "name": "Europe"},
-      "founder": {"@id": "https://oryjin.com/#farah"}
+      "address": { "@type": "PostalAddress", "addressLocality": "Paris", "addressCountry": "FR" },
+      "areaServed": { "@type": "Place", "name": "Europe" },
+      "founder": { "@id": "https://oryjin.com/#farah" },
+      "contactPoint": { "@type": "ContactPoint", "email": "contact@oryjin.com", "contactType": "sales", "availableLanguage": ["English", "French"] },
+      "sameAs": ["https://www.linkedin.com/company/oryjin", "https://oryjin.substack.com"]
     },
     {
       "@type": "Person",
       "@id": "https://oryjin.com/#farah",
       "name": "Farah Chabchoub",
-      "jobTitle": "Founder & Payment Audit Specialist",
-      "worksFor": {"@id": "https://oryjin.com/#org"},
-      "sameAs": ["https://www.linkedin.com/in/farahchabchoub"]
+      "jobTitle": "Founder, Payment Audit Specialist",
+      "worksFor": { "@id": "https://oryjin.com/#org" },
+      "knowsAbout": ["PSP pricing", "payment cost audit", "interchange fees", "scheme fees", "merchant billing", "Adyen", "Stripe", "Mangopay"],
+      "sameAs": ["https://www.linkedin.com/in/farahchabchoub", "https://oryjin.substack.com"]
     },
     {
       "@type": "Service",
-      "name": "Payment Stack Audit",
-      "provider": {"@id": "https://oryjin.com/#org"},
-      "description": "7-day payment cost audit using PSP contracts and billing statements",
+      "@id": "https://oryjin.com/#service",
+      "name": "PSP Payment Cost Audit",
+      "provider": { "@id": "https://oryjin.com/#org" },
+      "description": "7-day payment cost audit: we cross-reference your PSP contract and billing statements to quantify every billing gap in euros — no system access required.",
       "areaServed": "Europe",
-      "serviceType": "Payment Audit"
+      "serviceType": "Payment Audit",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR", "description": "Free audit for early access clients", "eligibleRegion": "Europe" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://oryjin.com/#website",
+      "url": "https://oryjin.com",
+      "name": "oryjin",
+      "publisher": { "@id": "https://oryjin.com/#org" },
+      "potentialAction": { "@type": "SearchAction", "target": "https://oryjin.com/#apply", "query-input": "required name=search_term_string" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://oryjin.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does oryjin's payment audit work?",
+          "acceptedAnswer": { "@type": "Answer", "text": "You share two documents — your signed PSP merchant agreement and your last 3 months of billing statements. We cross-reference every fee line against your contracted rates and deliver a report quantifying every gap in euros within 7 days. No system access, no integrations required." }
+        },
+        {
+          "@type": "Question",
+          "name": "How much do merchants typically overpay their PSP?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Industry analysis shows European merchants routinely pay between 0.10% and 0.40% above their contracted rate. On €1M/month in volume, that's €48,000 per year in avoidable costs. On €5M/month, it exceeds €240,000 annually." }
+        },
+        {
+          "@type": "Question",
+          "name": "Which PSPs does oryjin audit?",
+          "acceptedAnswer": { "@type": "Answer", "text": "oryjin audits all major PSPs operating in Europe, including Adyen, Stripe, Mangopay, Worldline, PayPal, Braintree, Checkout.com, and others. The audit is document-based, so it works with any PSP that provides a signed merchant agreement and itemised billing statements." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the audit confidential?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your documents are reviewed exclusively for your audit and are never shared with third parties. All form submissions are encrypted end-to-end using AES-256-GCM. An NDA is available on request before any documents are shared." }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does a payment cost audit take?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The audit is completed in as little as 7 days from the moment you share your two documents. No onboarding, no integration, no meetings required upfront." }
+        }
+      ]
     }
   ]
 }
 </script>
 
-<!-- Fonts -->
+<!-- ═══ FONTS ══════════════════════════════════ -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 /* ─────────────────────────────────────────────
@@ -665,38 +735,68 @@ nav {
 ───────────────────────────────────────────── */
 .who-section {
   padding: 0 24px 100px;
-  max-width: 860px;
+  max-width: 920px;
   margin: 0 auto;
 }
 .who-box {
   background: var(--surf);
   border: 1px solid var(--bdr);
   border-radius: 20px;
-  padding: 40px 44px;
+  padding: 44px 48px;
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
-  gap: 36px;
+  gap: 44px;
+  position: relative;
+  overflow: hidden;
+}
+.who-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--v) 40%, transparent);
+  opacity: 0.6;
 }
 @media (max-width: 680px) {
   .who-box { grid-template-columns: 1fr; padding: 28px 24px; }
   .who-divider { display: none; }
 }
 .who-col-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 .who-col-head.yes { color: var(--green); }
 .who-col-head.no  { color: #EF4444; }
-.who-divider { background: var(--bdr); }
-.who-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.who-list li {
-  display: flex; align-items: flex-start; gap: 10px;
-  font-size: 13px; color: var(--dim); line-height: 1.5;
+.who-col-head-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
-.who-list li span:first-child { flex-shrink: 0; font-size: 12px; margin-top: 1px; }
+.who-col-head.yes .who-col-head-dot { background: var(--green); }
+.who-col-head.no  .who-col-head-dot { background: #EF4444; }
+.who-divider { background: var(--bdr); }
+.who-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.who-list li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 13.5px; color: var(--dim); line-height: 1.55;
+}
+.who-icon {
+  flex-shrink: 0;
+  width: 20px; height: 20px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  margin-top: 0px;
+}
+.who-icon.yes { background: rgba(16,185,129,0.12); color: var(--green); }
+.who-icon.no  { background: rgba(239,68,68,0.1);  color: #EF4444; }
+.who-list li span.who-txt { color: var(--dim); }
 
 /* ─────────────────────────────────────────────
    FORM SECTION
@@ -1042,26 +1142,174 @@ nav {
   transition: background 0.2s;
 }
 .nl-btn:hover { background: var(--vdk); }
+.nl-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+#nl-status {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  min-height: 18px;
+  transition: opacity 0.3s;
+}
+#nl-status.success { color: #10B981; }
+#nl-status.error   { color: #EF4444; }
+
+/* ─────────────────────────────────────────────
+   SECURITY STRIP
+───────────────────────────────────────────── */
+.security-strip {
+  border-top: 1px solid var(--bdr);
+  padding: 28px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.security-strip-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.security-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.security-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--bdr);
+  border-radius: 8px;
+  padding: 7px 13px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--dim);
+  white-space: nowrap;
+}
+.security-item svg {
+  flex-shrink: 0;
+  color: var(--vlt);
+}
+.security-note {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  max-width: 560px;
+  line-height: 1.6;
+}
+@media (max-width: 600px) {
+  .security-strip { padding: 24px 20px; }
+  .security-items { gap: 8px; }
+}
 
 /* ─────────────────────────────────────────────
    FOOTER
 ───────────────────────────────────────────── */
 footer {
   border-top: 1px solid var(--bdr);
-  padding: 28px 48px;
+  background: var(--bg2);
+  padding: 56px 64px 40px;
+}
+.footer-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+@media (max-width: 720px) {
+  footer { padding: 40px 24px 32px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+}
+.footer-brand-logo {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  text-decoration: none;
+}
+.footer-brand-logo-mark { color: var(--vlt); font-size: 18px; }
+.footer-brand-desc {
+  font-size: 13px;
+  color: var(--dim);
+  line-height: 1.7;
+  max-width: 240px;
+  margin-bottom: 20px;
+}
+.footer-brand-tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--bdr);
+  border-radius: 6px;
+  padding: 5px 10px;
+}
+.footer-col-head {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 18px;
+}
+.footer-links-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-links-col a,
+.footer-links-col span {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+  line-height: 1.5;
+}
+.footer-links-col a:hover { color: var(--vlt); }
+.footer-bottom {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--bdr);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 12px;
-  color: var(--muted);
-  font-weight: 500;
   flex-wrap: wrap;
   gap: 12px;
 }
-footer a { color: var(--dim); text-decoration: none; transition: color 0.2s; }
-footer a:hover { color: var(--vlt); }
-.footer-links { display: flex; gap: 16px; align-items: center; }
-@media (max-width: 600px) { footer { padding: 24px 20px; justify-content: center; text-align: center; } }
+.footer-copy {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.footer-legal {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.footer-legal a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-legal a:hover { color: var(--dim); }
+@media (max-width: 600px) {
+  .footer-bottom { justify-content: center; text-align: center; }
+  .footer-legal { justify-content: center; }
+}
 
 /* Divider */
 .divider {
@@ -1163,14 +1411,13 @@ footer a:hover { color: var(--vlt); }
     </div>
 
     <h1 class="headline">
-      Something in your<br>
-      payment stack is costing<br>
-      you <span class="headline-em">more than agreed.</span>
+      Stop losing margin<br>
+      <span class="headline-em">in payments.</span>
     </h1>
 
     <p class="sub">
       Most companies pay their PSP more than their contract says.<br>
-      <strong>We can tell you exactly how much. In 7 days.</strong>
+      <strong>We can tell you exactly how much — in 7 days, with documents you already have.</strong>
     </p>
 
     <div class="cta-group">
@@ -1328,27 +1575,26 @@ footer a:hover { color: var(--vlt); }
 <!-- ─── FOR WHO ─── -->
 <section class="who-section" style="padding-top:80px;">
   <p class="section-label reveal" style="text-align:center;margin-bottom:14px;">Who this is for</p>
-  <h2 class="section-head reveal" style="margin-bottom:40px;">Made for the right company,<br>not every company.</h2>
+  <h2 class="section-head reveal" style="margin-bottom:12px;">Built for one problem.<br><span>Not everything.</span></h2>
+  <p class="section-sub reveal" style="margin-bottom:40px;">We keep the scope tight on purpose — so the audit is fast, the finding is real, and you don't pay for work that doesn't apply to you.</p>
 
   <div class="who-box reveal">
     <div class="who-col">
-      <div class="who-col-head yes">✓ &nbsp;Good fit</div>
+      <div class="who-col-head yes"><span class="who-col-head-dot"></span>Good fit</div>
       <ul class="who-list">
-        <li><span>→</span><span>Processing €2M+ per month through at least one PSP</span></li>
-        <li><span>→</span><span>You have a signed merchant agreement on file</span></li>
-        <li><span>→</span><span>Finance, CFO, or Head of Payments has access to billing statements</span></li>
-        <li><span>→</span><span>You've never had your PSP contract reviewed against actual charges</span></li>
-        <li><span>→</span><span>You negotiate contracts but don't audit them afterwards</span></li>
+        <li><span class="who-icon yes">✓</span><span class="who-txt">Processing <strong style="color:var(--txt)">€2M+/month</strong> through at least one PSP</span></li>
+        <li><span class="who-icon yes">✓</span><span class="who-txt">You have a signed merchant agreement on file</span></li>
+        <li><span class="who-icon yes">✓</span><span class="who-txt">Finance, CFO, or Head of Payments can access the last 3 months of billing statements</span></li>
+        <li><span class="who-icon yes">✓</span><span class="who-txt">You've never had your PSP contract cross-checked against what you were actually billed</span></li>
+        <li><span class="who-icon yes">✓</span><span class="who-txt">You negotiate pricing — but nobody audits it after signature</span></li>
       </ul>
     </div>
     <div class="who-divider"></div>
     <div class="who-col">
-      <div class="who-col-head no">✕ &nbsp;Not yet</div>
+      <div class="who-col-head no"><span class="who-col-head-dot"></span>Not the right fit</div>
       <ul class="who-list">
-        <li><span>→</span><span>Processing under €1M/month — the math won't justify the time</span></li>
-        <li><span>→</span><span>No signed contract (usage-based, self-serve Stripe plans)</span></li>
-        <li><span>→</span><span>Looking for a tool, not an expert analysis</span></li>
-        <li><span>→</span><span>Already running regular payment cost audits internally</span></li>
+        <li><span class="who-icon no">✕</span><span class="who-txt">Processing under €1M/month — the math won't cover the time invested</span></li>
+        <li><span class="who-icon no">✕</span><span class="who-txt">No signed merchant contract — usage-based or self-serve Stripe plans have no contract to audit against</span></li>
       </ul>
     </div>
   </div>
@@ -1458,7 +1704,7 @@ footer a:hover { color: var(--vlt); }
       <span class="founder-avatar-initials" id="avatar-initials">FC</span>
       <img
         id="founder-photo"
-        src="https://unavatar.io/linkedin/farahchabchoub"
+        src="./farah.jpg"
         alt="Farah Chabchoub"
         onload="document.getElementById('avatar-initials').style.display='none'"
         onerror="this.style.display='none'"
@@ -1473,7 +1719,7 @@ footer a:hover { color: var(--vlt); }
         <span class="exp-badge"><span class="exp-dot exp-work"></span>Worklife — Card distribution</span>
       </div>
       <div class="founder-quote">
-        <strong>I worked inside payment infrastructure.</strong> At Mangopay as a PSP, at Ankorstore processing marketplace payments at scale, at Worklife distributing payment cards. The same pattern kept appearing: a gap between what was contracted and what was actually billed. Nobody was systematically looking at both documents side by side. oryjin exists to close that gap.
+        <strong>Three companies. Three payment stacks. The same problem every time.</strong> At Mangopay I built PSP products. At Ankorstore I ran marketplace payments at scale. At Worklife I distributed payment cards. In every role, I saw a gap between what the contract said and what was actually billed — and nobody was cross-referencing the two documents. I built oryjin to do exactly that.
       </div>
       <a href="https://www.linkedin.com/in/farahchabchoub" target="_blank" rel="noopener" class="founder-li">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -1487,16 +1733,19 @@ footer a:hover { color: var(--vlt); }
 <div style="max-width:800px;margin:0 auto;padding:0 24px;">
   <div class="growth-section reveal">
 
-    <div class="growth-card">
+    <div class="growth-card" id="nl-card">
       <div class="growth-card-icon">📩</div>
       <div class="growth-card-head">Payment intelligence, monthly</div>
       <div class="growth-card-body">
         One email per month. PSP pricing benchmarks, billing patterns, negotiation signals — no fluff, no sales pitch.
       </div>
-      <div class="nl-input-row">
-        <input class="nl-input" id="nl-email" type="email" placeholder="your@email.com">
-        <button class="nl-btn" onclick="subscribeNL()">Subscribe</button>
+      <div class="nl-input-row" id="nl-form-row">
+        <input class="nl-input" id="nl-email" type="email"
+               placeholder="your@company.com"
+               onkeydown="if(event.key==='Enter')subscribeNL()">
+        <button class="nl-btn" id="nl-btn" onclick="subscribeNL()">Subscribe</button>
       </div>
+      <div id="nl-status"></div>
     </div>
 
     <div class="growth-card">
@@ -1513,13 +1762,105 @@ footer a:hover { color: var(--vlt); }
   </div>
 </div>
 
+<!-- ─── SECURITY STRIP ─── -->
+<div class="security-strip">
+  <div class="security-strip-label">Security &amp; data handling</div>
+  <div class="security-items">
+
+    <div class="security-item">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+      AES-256-GCM encrypted submissions
+    </div>
+
+    <div class="security-item">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      HTTPS / TLS 1.3 in transit
+    </div>
+
+    <div class="security-item">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+      </svg>
+      Document-only — no credentials, no API access
+    </div>
+
+    <div class="security-item">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+      </svg>
+      GDPR-aligned · EU data handling
+    </div>
+
+    <div class="security-item">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      Data used solely for your audit
+    </div>
+
+    <div class="security-item">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+      NDA available on request
+    </div>
+
+  </div>
+  <p class="security-note">
+    Your documents are reviewed exclusively for the purpose of your audit and never shared with third parties.
+    Application data is encrypted before transmission using AES-256-GCM — only oryjin can decrypt it.
+  </p>
+</div>
+
 <!-- ─── FOOTER ─── -->
 <footer>
-  <span>✦ oryjin · Paris · 2026</span>
-  <div class="footer-links">
-    <a href="mailto:contact@oryjin.com">contact@oryjin.com</a>
-    <span style="color:var(--bdr2)">·</span>
-    <a href="https://www.linkedin.com/company/oryjin" target="_blank" rel="noopener">LinkedIn →</a>
+  <div class="footer-inner">
+
+    <!-- Brand col -->
+    <div>
+      <a href="#" class="footer-brand-logo">
+        <span class="footer-brand-logo-mark">✦</span>oryjin
+      </a>
+      <p class="footer-brand-desc">
+        Payment cost intelligence for European merchants. We audit PSP contracts against actual billing — and quantify the gap in euros.
+      </p>
+      <span class="footer-brand-tagline">Paris, France · 2026</span>
+    </div>
+
+    <!-- Contact col -->
+    <div>
+      <div class="footer-col-head">Contact</div>
+      <div class="footer-links-col">
+        <a href="mailto:contact@oryjin.com">contact@oryjin.com</a>
+        <a href="https://www.linkedin.com/company/oryjin" target="_blank" rel="noopener">LinkedIn → oryjin</a>
+        <a href="https://oryjin.substack.com" target="_blank" rel="noopener">Newsletter → Substack</a>
+      </div>
+    </div>
+
+    <!-- Legal col -->
+    <div>
+      <div class="footer-col-head">Legal & data</div>
+      <div class="footer-links-col">
+        <span>SIRET pending registration</span>
+        <span>French law · GDPR-aligned</span>
+        <a href="mailto:contact@oryjin.com?subject=NDA%20request">NDA available on request</a>
+        <a href="mailto:contact@oryjin.com?subject=Data%20inquiry">Data inquiry</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 oryjin · All rights reserved</span>
+    <div class="footer-legal">
+      <span>AES-256-GCM · HTTPS/TLS 1.3</span>
+      <span style="color:var(--bdr2)">·</span>
+      <a href="mailto:contact@oryjin.com">contact@oryjin.com</a>
+    </div>
   </div>
 </footer>
 
@@ -1725,7 +2066,7 @@ async function encryptCSV(plain) {
 ═══════════════════════════════════════════════ */
 
 // ← Paste your Web3Forms key here (free at web3forms.com)
-const WEB3FORMS_KEY = '6c0f91fc-080a-4046-bcbb-819996bc6df5';
+const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_KEY';
 
 async function submitForm() {
   if (!validateForm()) return;
@@ -1775,7 +2116,7 @@ async function submitForm() {
   // ── Try Web3Forms first (no activation, works from localhost) ──
   let sent = false;
 
-  if (WEB3FORMS_KEY && WEB3FORMS_KEY !== 'YOUR_WEB3FORMS_KEY') {
+  if (WEB3FORMS_KEY && WEB3FORMS_KEY !== '6c0f91fc-080a-4046-bcbb-819996bc6df5') {
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
         method:  'POST',
@@ -1864,21 +2205,61 @@ function showSuccess() {
 }
 
 /* ═══════════════════════════════════════════════
-   NEWSLETTER
+   NEWSLETTER — direct Substack API subscription
+   Calls the Substack free-sub endpoint; on CORS
+   failure falls back to opening the Substack page.
 ═══════════════════════════════════════════════ */
-function subscribeNL() {
-  const el  = document.getElementById('nl-email');
-  const val = el.value.trim();
-  if (!val || !val.includes('@')) {
-    el.style.borderColor = '#EF4444';
-    setTimeout(() => { el.style.borderColor = ''; }, 2000);
+async function subscribeNL() {
+  const input  = document.getElementById('nl-email');
+  const btn    = document.getElementById('nl-btn');
+  const status = document.getElementById('nl-status');
+  const email  = input.value.trim();
+
+  // Basic validation
+  status.className = '';
+  status.textContent = '';
+  if (!email || !email.includes('@') || !email.includes('.')) {
+    input.style.borderColor = '#EF4444';
+    setTimeout(() => { input.style.borderColor = ''; }, 2000);
+    status.className = 'error';
+    status.textContent = 'Please enter a valid email address.';
     return;
   }
-  el.disabled = true;
-  el.value    = 'Subscribed ✓';
-  el.style.color = '#10B981';
-  el.nextElementSibling.textContent = '✓';
-  el.nextElementSibling.style.background = '#10B981';
+
+  btn.disabled = true;
+  btn.textContent = 'Subscribing…';
+
+  try {
+    const res = await fetch('https://oryjin.substack.com/api/v1/free', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        first_url: 'https://oryjin.com',
+        first_referrer: document.referrer || ''
+      })
+    });
+
+    if (res.ok) {
+      // Success — hide the form, show confirmation
+      document.getElementById('nl-form-row').style.display = 'none';
+      btn.style.display = 'none';
+      status.className = 'success';
+      status.textContent = '✓ Check your inbox to confirm your subscription.';
+    } else {
+      throw new Error('non-200');
+    }
+  } catch (e) {
+    // CORS or network error — fallback: open Substack in new tab
+    window.open(
+      'https://oryjin.substack.com/?r=9ay9r&utm_campaign=pub-share-checklist',
+      '_blank', 'noopener,noreferrer'
+    );
+    btn.disabled = false;
+    btn.textContent = 'Subscribe';
+    status.className = 'success';
+    status.textContent = '→ Substack opened — enter your email there to confirm.';
+  }
 }
 
 /* ═══════════════════════════════════════════════
