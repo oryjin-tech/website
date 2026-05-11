@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO Core -->
+<title>oryjin — Payment Cost Intelligence · Stop Overpaying Your PSP</title>
+<meta name="description" content="oryjin audits your payment stack in 7 days — no system access required. We cross-reference your PSP contracts and billing statements to surface what you're overpaying. Based in Paris.">
+<meta name="keywords" content="payment audit, PSP audit, payment cost intelligence, PSP fees, payment stack, overpaying PSP, payment optimization, Adyen audit, Stripe audit, PSP contract review">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Farah Chabchoub">
+<link rel="canonical" href="https://oryjin.com">
+
+<!-- Open Graph / LinkedIn -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oryjin.com">
+<meta property="og:title" content="oryjin — Something in your payment stack is costing you more than it should.">
+<meta property="og:description" content="We can prove it. In 7 days. With documents you already have. 5 free audits available this month.">
+<meta property="og:image" content="https://oryjin.com/og.png">
+<meta property="og:site_name" content="oryjin">
+<meta property="og:locale" content="en_EU">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="oryjin — Payment Cost Intelligence">
+<meta name="twitter:description" content="Stop overpaying your PSP. We audit your payment stack in 7 days with documents you already have.">
+<meta name="twitter:creator" content="@farahchabchoub">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://oryjin.com/#org",
+      "name": "oryjin",
+      "url": "https://oryjin.com",
+      "description": "Payment cost intelligence — we audit your PSP contracts and billing statements to surface what you're overpaying.",
+      "email": "contact@oryjin.com",
+      "foundingDate": "2026",
+      "areaServed": {"@type": "Place", "name": "Europe"},
+      "founder": {"@id": "https://oryjin.com/#farah"}
+    },
+    {
+      "@type": "Person",
+      "@id": "https://oryjin.com/#farah",
+      "name": "Farah Chabchoub",
+      "jobTitle": "Founder & Payment Audit Specialist",
+      "worksFor": {"@id": "https://oryjin.com/#org"},
+      "sameAs": ["https://www.linkedin.com/in/farahchabchoub"]
+    },
+    {
+      "@type": "Service",
+      "name": "Payment Stack Audit",
+      "provider": {"@id": "https://oryjin.com/#org"},
+      "description": "7-day payment cost audit using PSP contracts and billing statements",
+      "areaServed": "Europe",
+      "serviceType": "Payment Audit"
+    }
+  ]
+}
+</script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ─────────────────────────────────────────────
+   RESET & TOKENS
+───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --v:      #5B4CF0;
+  --vdk:    #3D30C4;
+  --vlt:    #A78BFA;
+  --vglow:  rgba(91, 76, 240, 0.22);
+  --bg:     #060711;
+  --bg2:    #08090E;
+  --surf:   #0C0D1A;
+  --surf2:  #0F1020;
+  --bdr:    #1A1C2E;
+  --bdr2:   #252740;
+  --txt:    #E8E9F4;
+  --dim:    #6B7280;
+  --muted:  #374151;
+  --white:  #FFFFFF;
+  --green:  #10B981;
+  --amber:  #F59E0B;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grain texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─────────────────────────────────────────────
+   NAV
+───────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  background: rgba(6, 7, 17, 0.7);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: border-color 0.3s;
+}
+.nav-logo {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.4px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-logo-mark {
+  color: var(--vlt);
+  font-size: 18px;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.nav-contact {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-contact:hover { color: var(--vlt); }
+.nav-pill {
+  background: rgba(91, 76, 240, 0.14);
+  border: 1px solid rgba(91, 76, 240, 0.3);
+  color: var(--vlt);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+@media (max-width: 600px) {
+  nav { padding: 16px 20px; }
+  .nav-contact { display: none; }
+}
+
+/* ─────────────────────────────────────────────
+   HERO
+───────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 130px 24px 100px;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Layered ambient glows */
+.hero-glow-1 {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  height: 500px;
+  background: radial-gradient(ellipse at center, rgba(91, 76, 240, 0.15) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-glow-2 {
+  position: absolute;
+  top: 40%;
+  left: 20%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+  animation: driftA 12s ease-in-out infinite;
+}
+.hero-glow-3 {
+  position: absolute;
+  top: 30%;
+  right: 15%;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(91, 76, 240, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+  animation: driftB 14s ease-in-out infinite;
+}
+
+/* Grid overlay */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(91, 76, 240, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 76, 240, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, black 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Floating stat pills */
+.hero-float {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surf);
+  border: 1px solid var(--bdr2);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--dim);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.hero-float-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.hero-float-val {
+  font-weight: 700;
+  color: var(--txt);
+}
+.hf-1 { top: 24%; left: 8%; animation: floatA 7s ease-in-out infinite; }
+.hf-2 { top: 32%; right: 7%; animation: floatB 9s ease-in-out infinite; }
+.hf-3 { bottom: 24%; left: 10%; animation: floatA 8s ease-in-out 2s infinite; }
+@media (max-width: 900px) { .hero-float { display: none; } }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+}
+
+/* Eyebrow badge */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(91, 76, 240, 0.1);
+  border: 1px solid rgba(91, 76, 240, 0.22);
+  border-radius: 30px;
+  padding: 8px 18px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--vlt);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 44px;
+  animation: fadeUp 0.7s ease both;
+}
+.eyebrow-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--vlt);
+  animation: pulseDot 2.2s ease-in-out infinite;
+}
+
+/* Headline */
+.headline {
+  font-size: clamp(38px, 6.5vw, 76px);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  margin-bottom: 30px;
+  animation: fadeUp 0.7s ease 0.12s both;
+}
+.headline-em {
+  background: linear-gradient(125deg, var(--vlt) 0%, #8B5CF6 40%, var(--v) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subheadline */
+.sub {
+  font-size: clamp(16px, 2.5vw, 21px);
+  color: #8B93B8;
+  max-width: 540px;
+  margin: 0 auto 56px;
+  line-height: 1.65;
+  font-weight: 400;
+  animation: fadeUp 0.7s ease 0.24s both;
+}
+.sub strong { color: var(--txt); font-weight: 600; }
+
+/* CTA group */
+.cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  animation: fadeUp 0.7s ease 0.36s both;
+}
+
+/* Spots row */
+.spots-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--bdr);
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 12px;
+  color: var(--dim);
+  font-weight: 500;
+}
+.spots-dots { display: flex; gap: 5px; }
+.spot-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--v);
+  transition: background 0.3s, opacity 0.3s;
+}
+.spot-dot.taken { background: var(--muted); opacity: 0.35; }
+.spots-text strong { color: var(--txt); font-weight: 700; }
+
+/* Main CTA button */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--v);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 16px 40px;
+  border-radius: 12px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: -0.1px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px rgba(91,76,240,0.45), 0 0 0 1px rgba(91,76,240,0.2) inset;
+  position: relative;
+  overflow: hidden;
+}
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
+  pointer-events: none;
+}
+.cta-btn:hover {
+  background: var(--vdk);
+  box-shadow: 0 8px 36px rgba(91,76,240,0.6), 0 0 0 1px rgba(91,76,240,0.3) inset;
+  transform: translateY(-2px);
+}
+.cta-btn:active { transform: translateY(0); }
+.cta-arrow { transition: transform 0.2s; }
+.cta-btn:hover .cta-arrow { transform: translateX(3px); }
+
+/* Scroll cue */
+.scroll-cue {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  animation: fadeUp 0.7s ease 1.2s both;
+  z-index: 2;
+}
+.scroll-line {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, var(--v), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────
+   TRUST BAR
+───────────────────────────────────────────── */
+.trust-bar {
+  padding: 32px 48px;
+  border-top: 1px solid var(--bdr);
+  border-bottom: 1px solid var(--bdr);
+  background: var(--surf);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.trust-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+.trust-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--bdr2);
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dim);
+  white-space: nowrap;
+}
+.trust-badge-icon {
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.tb-mango  { background: rgba(255, 120, 60, 0.15); color: #FF783C; }
+.tb-ankor  { background: rgba(16, 185, 129, 0.15); color: #10B981; }
+.tb-work   { background: rgba(59, 130, 246, 0.15); color: #60A5FA; }
+@media (max-width: 600px) {
+  .trust-bar { padding: 24px 20px; gap: 10px; }
+  .trust-label { width: 100%; text-align: center; margin-right: 0; margin-bottom: 4px; }
+}
+
+/* ─────────────────────────────────────────────
+   STATS SECTION
+───────────────────────────────────────────── */
+.stats-section {
+  padding: 100px 24px;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+.section-label {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 14px;
+}
+.section-head {
+  text-align: center;
+  font-size: clamp(22px, 4vw, 38px);
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 16px;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+.section-head span { color: var(--vlt); }
+.section-sub {
+  text-align: center;
+  font-size: 15px;
+  color: var(--dim);
+  max-width: 520px;
+  margin: 0 auto 64px;
+  line-height: 1.7;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 760px) { .stats-grid { grid-template-columns: 1fr; gap: 14px; } }
+
+.stat-card {
+  background: var(--surf);
+  border: 1px solid var(--bdr);
+  border-radius: 18px;
+  padding: 32px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--v), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.stat-card:hover {
+  border-color: var(--bdr2);
+  transform: translateY(-3px);
+}
+.stat-card:hover::before { opacity: 1; }
+.stat-card-glow {
+  position: absolute;
+  bottom: -40px; right: -40px;
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91,76,240,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.stat-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: rgba(91, 76, 240, 0.12);
+  border: 1px solid rgba(91, 76, 240, 0.2);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+}
+.stat-icon svg { width: 18px; height: 18px; }
+
+.stat-number {
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 10px;
+  font-variant-numeric: tabular-nums;
+}
+.stat-number span { color: var(--vlt); }
+
+.stat-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--txt);
+  margin-bottom: 10px;
+}
+.stat-body {
+  font-size: 13px;
+  color: var(--dim);
+  line-height: 1.65;
+}
+.stat-source {
+  margin-top: 20px;
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+/* ─────────────────────────────────────────────
+   HOW IT WORKS
+───────────────────────────────────────────── */
+.how-section {
+  padding: 80px 24px 100px;
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.steps-row {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr 40px 1fr;
+  align-items: start;
+  gap: 0;
+  margin-top: 60px;
+}
+@media (max-width: 760px) {
+  .steps-row { grid-template-columns: 1fr; gap: 24px; }
+  .step-arrow { display: none; }
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: 0 8px;
+}
+.step-num-wrap {
+  position: relative;
+}
+.step-num {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: rgba(91, 76, 240, 0.1);
+  border: 1px solid rgba(91, 76, 240, 0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 800;
+  color: var(--vlt);
+  position: relative;
+}
+.step-num::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 17px;
+  border: 1px solid rgba(91,76,240,0.1);
+}
+.step-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+.step-body {
+  font-size: 13px;
+  color: var(--dim);
+  line-height: 1.7;
+  max-width: 200px;
+}
+.step-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 26px;
+  color: var(--muted);
+}
+
+/* ─────────────────────────────────────────────
+   FOR WHO
+───────────────────────────────────────────── */
+.who-section {
+  padding: 0 24px 100px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.who-box {
+  background: var(--surf);
+  border: 1px solid var(--bdr);
+  border-radius: 20px;
+  padding: 40px 44px;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 36px;
+}
+@media (max-width: 680px) {
+  .who-box { grid-template-columns: 1fr; padding: 28px 24px; }
+  .who-divider { display: none; }
+}
+.who-col-head {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.who-col-head.yes { color: var(--green); }
+.who-col-head.no  { color: #EF4444; }
+.who-divider { background: var(--bdr); }
+.who-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.who-list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; color: var(--dim); line-height: 1.5;
+}
+.who-list li span:first-child { flex-shrink: 0; font-size: 12px; margin-top: 1px; }
+
+/* ─────────────────────────────────────────────
+   FORM SECTION
+───────────────────────────────────────────── */
+.form-section {
+  padding: 80px 24px 100px;
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+}
+.form-head {
+  font-size: clamp(24px, 4vw, 38px);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+  line-height: 1.15;
+}
+.form-sub {
+  font-size: 15px;
+  color: var(--dim);
+  margin-bottom: 40px;
+  line-height: 1.65;
+}
+.form-sub strong { color: var(--vlt); font-weight: 600; }
+
+/* Form card with gradient border */
+.apply-form {
+  position: relative;
+  border-radius: 20px;
+  background: var(--surf);
+  text-align: left;
+}
+.apply-form::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 21px;
+  background: linear-gradient(135deg, rgba(91,76,240,0.5) 0%, rgba(91,76,240,0.1) 50%, rgba(91,76,240,0.5) 100%);
+  z-index: -1;
+}
+.apply-form-inner { padding: 36px; }
+
+.form-row { margin-bottom: 20px; }
+.form-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  margin-bottom: 8px;
+}
+.form-input, .form-select {
+  width: 100%;
+  background: rgba(255,255,255,0.035);
+  border: 1px solid var(--bdr);
+  border-radius: 10px;
+  padding: 13px 16px;
+  color: var(--txt);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  -webkit-appearance: none;
+}
+.form-input:focus, .form-select:focus {
+  border-color: rgba(91, 76, 240, 0.55);
+  box-shadow: 0 0 0 3px rgba(91, 76, 240, 0.12);
+  background: rgba(91, 76, 240, 0.04);
+}
+.form-input::placeholder { color: var(--muted); }
+.form-select option { background: #1a1c2e; color: var(--txt); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 480px) { .form-grid { grid-template-columns: 1fr; } }
+.form-note { font-size: 11px; color: var(--muted); margin-top: 6px; }
+
+/* Inline field errors */
+.field-error {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: #EF4444;
+  margin-top: 5px;
+  min-height: 15px;
+  line-height: 1.4;
+  transition: opacity 0.2s;
+}
+.field-error:empty { opacity: 0; }
+.field-error.warn { color: #F59E0B; }
+.form-input.err, .form-select.err {
+  border-color: #EF4444 !important;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.12) !important;
+}
+.form-input.warn-border {
+  border-color: #F59E0B !important;
+  box-shadow: 0 0 0 3px rgba(245,158,11,0.12) !important;
+}
+
+.submit-btn {
+  width: 100%;
+  background: var(--v);
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: -0.1px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  margin-top: 8px;
+  box-shadow: 0 4px 20px rgba(91,76,240,0.4), 0 0 0 1px rgba(255,255,255,0.08) inset;
+  position: relative;
+  overflow: hidden;
+}
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.08), transparent);
+}
+.submit-btn:hover {
+  background: var(--vdk);
+  box-shadow: 0 8px 32px rgba(91,76,240,0.55);
+  transform: translateY(-1px);
+}
+.submit-btn:active { transform: translateY(0); }
+
+.form-disclaimer {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 18px;
+  line-height: 1.7;
+}
+
+/* Success */
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 56px 36px;
+}
+.form-success-icon {
+  font-size: 40px;
+  margin-bottom: 20px;
+  color: var(--vlt);
+}
+.form-success-head {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  margin-bottom: 10px;
+}
+.form-success-body {
+  font-size: 14px;
+  color: var(--dim);
+  line-height: 1.7;
+}
+.form-success-body a { color: var(--vlt); text-decoration: none; font-weight: 600; }
+
+/* ─────────────────────────────────────────────
+   FOUNDER
+───────────────────────────────────────────── */
+.founder-section {
+  padding: 0 24px 80px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.founder-card {
+  background: var(--surf);
+  border: 1px solid var(--bdr);
+  border-radius: 20px;
+  padding: 36px 40px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 28px;
+  align-items: start;
+}
+@media (max-width: 600px) {
+  .founder-card { grid-template-columns: 1fr; padding: 28px 24px; text-align: center; }
+  .founder-avatar { margin: 0 auto; }
+  .founder-exp { justify-content: center; }
+}
+
+.founder-avatar {
+  width: 88px; height: 88px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--vdk) 0%, var(--v) 50%, var(--vlt) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; font-weight: 900;
+  color: rgba(255,255,255,0.95);
+  flex-shrink: 0;
+  letter-spacing: -1px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(91,76,240,0.35), 0 0 0 3px rgba(91,76,240,0.2);
+}
+.founder-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+.founder-avatar-initials {
+  position: relative;
+  z-index: 1;
+  /* hidden when photo loads */
+}
+
+.founder-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  margin-bottom: 4px;
+}
+.founder-title {
+  font-size: 13px;
+  color: var(--dim);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.founder-exp {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.exp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--bdr2);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--dim);
+}
+.exp-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+}
+.exp-mango { background: #FF783C; }
+.exp-ankor { background: #10B981; }
+.exp-work  { background: #60A5FA; }
+
+.founder-quote {
+  font-size: 14px;
+  color: var(--dim);
+  line-height: 1.7;
+  border-left: 2px solid rgba(91,76,240,0.4);
+  padding-left: 16px;
+  font-style: italic;
+}
+.founder-quote strong { color: var(--txt); font-style: normal; font-weight: 600; }
+.founder-li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--vlt);
+  text-decoration: none;
+  padding: 6px 12px;
+  background: rgba(91,76,240,0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(91,76,240,0.2);
+  transition: background 0.2s;
+}
+.founder-li:hover { background: rgba(91,76,240,0.18); }
+
+/* ─────────────────────────────────────────────
+   GROWTH / NEWSLETTER
+───────────────────────────────────────────── */
+.growth-section {
+  padding: 60px 24px 80px;
+  border-top: 1px solid var(--bdr);
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 640px) { .growth-section { grid-template-columns: 1fr; } }
+.growth-card {
+  background: var(--surf);
+  border: 1px solid var(--bdr);
+  border-radius: 16px;
+  padding: 28px;
+}
+.growth-card-icon { font-size: 24px; margin-bottom: 14px; }
+.growth-card-head { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 8px; letter-spacing: -0.02em; }
+.growth-card-body { font-size: 13px; color: var(--dim); line-height: 1.65; margin-bottom: 18px; }
+.growth-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--vlt);
+  text-decoration: none;
+  letter-spacing: 0.1px;
+}
+.growth-link:hover { text-decoration: underline; }
+
+.nl-input-row {
+  display: flex;
+  gap: 8px;
+}
+.nl-input {
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--bdr);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--txt);
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.nl-input:focus { border-color: rgba(91,76,240,0.5); }
+.nl-input::placeholder { color: var(--muted); }
+.nl-btn {
+  background: var(--v);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.nl-btn:hover { background: var(--vdk); }
+
+/* ─────────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--bdr);
+  padding: 28px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+footer a { color: var(--dim); text-decoration: none; transition: color 0.2s; }
+footer a:hover { color: var(--vlt); }
+.footer-links { display: flex; gap: 16px; align-items: center; }
+@media (max-width: 600px) { footer { padding: 24px 20px; justify-content: center; text-align: center; } }
+
+/* Divider */
+.divider {
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--bdr), transparent);
+  margin: 0 auto;
+}
+
+/* ─────────────────────────────────────────────
+   ANIMATIONS
+───────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.75); }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.25; transform: scaleY(1); }
+  50%       { opacity: 1; transform: scaleY(1.15); }
+}
+@keyframes floatA {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes floatB {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(10px); }
+}
+@keyframes driftA {
+  0%, 100% { transform: translate(0, 0); }
+  33%       { transform: translate(30px, -20px); }
+  66%       { transform: translate(-20px, 15px); }
+}
+@keyframes driftB {
+  0%, 100% { transform: translate(0, 0); }
+  33%       { transform: translate(-25px, 20px); }
+  66%       { transform: translate(20px, -15px); }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-mark">✦</span>oryjin
+  </a>
+  <div class="nav-right">
+    <a href="mailto:contact@oryjin.com" class="nav-contact">contact@oryjin.com</a>
+    <div class="nav-pill">Early Access — 5 spots</div>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-glow-3"></div>
+  <div class="hero-grid"></div>
+
+  <!-- Floating ambient pills -->
+  <div class="hero-float hf-1">
+    <div class="hero-float-dot" style="background:#10B981"></div>
+    <span class="hero-float-val">7 days</span> — full audit delivered
+  </div>
+  <div class="hero-float hf-2">
+    <div class="hero-float-dot" style="background:var(--vlt)"></div>
+    No system access needed
+  </div>
+  <div class="hero-float hf-3">
+    <div class="hero-float-dot" style="background:var(--amber)"></div>
+    2 documents. That's all.
+  </div>
+
+  <div class="hero-content">
+    <div class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      Now accepting early access
+    </div>
+
+    <h1 class="headline">
+      Something in your<br>
+      payment stack is costing<br>
+      you <span class="headline-em">more than agreed.</span>
+    </h1>
+
+    <p class="sub">
+      Most companies pay their PSP more than their contract says.<br>
+      <strong>We can tell you exactly how much. In 7 days.</strong>
+    </p>
+
+    <div class="cta-group">
+      <div class="spots-bar">
+        <div class="spots-dots">
+          <div class="spot-dot" id="d1"></div>
+          <div class="spot-dot" id="d2"></div>
+          <div class="spot-dot" id="d3"></div>
+          <div class="spot-dot" id="d4"></div>
+          <div class="spot-dot" id="d5"></div>
+        </div>
+        <span class="spots-text"><strong id="spots-remaining">5</strong> free audit slots remaining this month</span>
+      </div>
+      <a href="#apply" class="cta-btn">
+        Request my free audit
+        <span class="cta-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ─── TRUST BAR ─── -->
+<div class="trust-bar reveal">
+  <span class="trust-label">Built by someone who worked inside</span>
+  <div class="trust-badges">
+    <div class="trust-badge">
+      <span class="trust-badge-icon tb-mango">M</span>
+      Mangopay
+    </div>
+    <div class="trust-badge">
+      <span class="trust-badge-icon tb-ankor">A</span>
+      Ankorstore
+    </div>
+    <div class="trust-badge">
+      <span class="trust-badge-icon tb-work">W</span>
+      Worklife
+    </div>
+  </div>
+</div>
+
+<!-- ─── STATS ─── -->
+<section class="stats-section">
+  <p class="section-label reveal">The reality of payment costs</p>
+  <h2 class="section-head reveal">
+    The numbers your PSP<br>
+    <span>doesn't highlight</span>
+  </h2>
+  <p class="section-sub reveal">
+    These are industry benchmarks — not claims. They describe what's structurally true about how payment pricing works at scale.
+  </p>
+
+  <div class="stats-grid">
+
+    <div class="stat-card reveal reveal-delay-1">
+      <div class="stat-card-glow"></div>
+      <div class="stat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+      </div>
+      <div class="stat-number"><span id="stat1">0</span><span>%</span></div>
+      <div class="stat-label">above your contracted rate — on every transaction, every month</div>
+      <div class="stat-body">
+        On €5M/month, that's €20,000 quietly billed above what your contract allows. Not a glitch. Just how PSP invoices work — until someone checks.
+      </div>
+      <div class="stat-source">Source: Swipesum Payment Cost Report 2025</div>
+    </div>
+
+    <div class="stat-card reveal reveal-delay-2">
+      <div class="stat-card-glow"></div>
+      <div class="stat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+      </div>
+      <div class="stat-number"><span id="stat2">0</span><span>%</span></div>
+      <div class="stat-label">of your negotiated discounts — never applied, never recovered</div>
+      <div class="stat-body">
+        PSPs don't trigger volume discounts automatically when you cross thresholds. You'd have to know to claim them, with evidence. Almost no one does.
+      </div>
+      <div class="stat-source">Source: Nilson Report — PSP Billing Practices, 2024</div>
+    </div>
+
+    <div class="stat-card reveal reveal-delay-3">
+      <div class="stat-card-glow"></div>
+      <div class="stat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="8" y1="13" x2="16" y2="13"/>
+          <line x1="8" y1="17" x2="12" y2="17"/>
+        </svg>
+      </div>
+      <div class="stat-number"><span style="font-size:0.72em;vertical-align:2px;letter-spacing:0">€</span><span id="stat3">0</span><span style="font-size:0.65em;vertical-align:3px;letter-spacing:0">K</span></div>
+      <div class="stat-label">overpaid every year — on just €1M/month in volume</div>
+      <div class="stat-body">
+        Pure math: 0.40% above contract × €1M × 12 months. At €5M/month, that's €240K. No PSP will ever send you that alert.
+      </div>
+      <div class="stat-source">Source: oryjin calculation · based on Swipesum 2025 benchmark</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section class="how-section">
+  <p class="section-label reveal">The method</p>
+  <h2 class="section-head reveal">Two documents. Seven days. Done.</h2>
+  <p class="section-sub reveal">No integrations. No system access. No onboarding. Just send us what you already have.</p>
+
+  <div class="steps-row">
+
+    <div class="step reveal reveal-delay-1">
+      <div class="step-num">01</div>
+      <div class="step-title">You share two documents</div>
+      <div class="step-body">Your signed PSP merchant agreement + last 3 months of billing statements. Nothing else.</div>
+    </div>
+
+    <div class="step-arrow reveal">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </div>
+
+    <div class="step reveal reveal-delay-2">
+      <div class="step-num">02</div>
+      <div class="step-title">We cross-reference everything</div>
+      <div class="step-body">Every fee line. Every contracted rate. Every billing period. Line by line, clause by clause.</div>
+    </div>
+
+    <div class="step-arrow reveal">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </div>
+
+    <div class="step reveal reveal-delay-3">
+      <div class="step-num">03</div>
+      <div class="step-title">You get a clear, actionable report</div>
+      <div class="step-body">Every gap quantified in euros, with the exact evidence to recover it. Delivered in as little as 7 days.</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── FOR WHO ─── -->
+<section class="who-section" style="padding-top:80px;">
+  <p class="section-label reveal" style="text-align:center;margin-bottom:14px;">Who this is for</p>
+  <h2 class="section-head reveal" style="margin-bottom:40px;">Made for the right company,<br>not every company.</h2>
+
+  <div class="who-box reveal">
+    <div class="who-col">
+      <div class="who-col-head yes">✓ &nbsp;Good fit</div>
+      <ul class="who-list">
+        <li><span>→</span><span>Processing €2M+ per month through at least one PSP</span></li>
+        <li><span>→</span><span>You have a signed merchant agreement on file</span></li>
+        <li><span>→</span><span>Finance, CFO, or Head of Payments has access to billing statements</span></li>
+        <li><span>→</span><span>You've never had your PSP contract reviewed against actual charges</span></li>
+        <li><span>→</span><span>You negotiate contracts but don't audit them afterwards</span></li>
+      </ul>
+    </div>
+    <div class="who-divider"></div>
+    <div class="who-col">
+      <div class="who-col-head no">✕ &nbsp;Not yet</div>
+      <ul class="who-list">
+        <li><span>→</span><span>Processing under €1M/month — the math won't justify the time</span></li>
+        <li><span>→</span><span>No signed contract (usage-based, self-serve Stripe plans)</span></li>
+        <li><span>→</span><span>Looking for a tool, not an expert analysis</span></li>
+        <li><span>→</span><span>Already running regular payment cost audits internally</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FORM ─── -->
+<section class="form-section" id="apply">
+  <h2 class="form-head reveal">Apply for a free audit</h2>
+  <p class="form-sub reveal">
+    We're running <strong>5 free audits</strong> this month.<br>
+    No commitment. No pitch. Just your documents.
+  </p>
+
+  <div class="apply-form reveal">
+    <div class="apply-form-inner" id="form-body">
+
+      <div class="form-grid">
+        <div class="form-row">
+          <label class="form-label" for="fname">First name <span style="color:#EF4444">*</span></label>
+          <input class="form-input" id="fname" type="text" placeholder="First name" autocomplete="given-name" oninput="liveValidate('fname')" onblur="liveValidate('fname',true)">
+          <span class="field-error" id="err-fname"></span>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="lname">Last name <span style="color:#EF4444">*</span></label>
+          <input class="form-input" id="lname" type="text" placeholder="Last name" autocomplete="family-name" oninput="liveValidate('lname')" onblur="liveValidate('lname',true)">
+          <span class="field-error" id="err-lname"></span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="email">Professional email <span style="color:#EF4444">*</span></label>
+        <input class="form-input" id="email" type="email" placeholder="you@company.com" autocomplete="email" oninput="liveValidate('email')" onblur="liveValidate('email',true)">
+        <span class="field-error" id="err-email"></span>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-row">
+          <label class="form-label" for="company">Company <span style="color:#EF4444">*</span></label>
+          <input class="form-input" id="company" type="text" placeholder="Company name" oninput="liveValidate('company')" onblur="liveValidate('company',true)">
+          <span class="field-error" id="err-company"></span>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="role">Your role <span style="color:#EF4444">*</span></label>
+          <select class="form-select" id="role" onchange="liveValidate('role',true)">
+            <option value="" disabled selected>Select role</option>
+            <option>CFO</option>
+            <option>Head of Payments</option>
+            <option>VP Finance</option>
+            <option>COO</option>
+            <option>CEO / Founder</option>
+            <option>Finance Director</option>
+            <option>Payment Operations</option>
+            <option>Other</option>
+          </select>
+          <span class="field-error" id="err-role"></span>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-row">
+          <label class="form-label" for="volume">Monthly volume <span style="color:#EF4444">*</span></label>
+          <select class="form-select" id="volume" onchange="liveValidate('volume',true)">
+            <option value="" disabled selected>Select range</option>
+            <option>€1M – €3M</option>
+            <option>€3M – €10M</option>
+            <option>€10M – €30M</option>
+            <option>€30M – €100M</option>
+            <option>€100M+</option>
+          </select>
+          <span class="field-error" id="err-volume"></span>
+          <p class="form-note">We focus on €2M+ / month</p>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="psps">Active PSPs <span style="color:#EF4444">*</span></label>
+          <input class="form-input" id="psps" type="text" placeholder="e.g. Adyen + Stripe" oninput="liveValidate('psps')" onblur="liveValidate('psps',true)">
+          <span class="field-error" id="err-psps"></span>
+          <p class="form-note">All PSPs you currently use</p>
+        </div>
+      </div>
+
+      <button class="submit-btn" id="submit-btn" onclick="submitForm()">
+        Request my free audit →
+      </button>
+
+      <p class="form-disclaimer">
+        All fields are required. Your documents stay private and handled with full confidentiality.<br>
+        We'll respond within 24 hours.
+      </p>
+    </div>
+
+    <div class="form-success" id="form-success">
+      <div class="form-success-icon">✦</div>
+      <div class="form-success-head">Application received.</div>
+      <div class="form-success-body">
+        We'll review your submission and reach out within <strong>24 hours</strong>.<br><br>
+        Follow Farah on LinkedIn for weekly payment intelligence:<br><br>
+        <a href="https://www.linkedin.com/in/farahchabchoub" target="_blank" rel="noopener">→ linkedin.com/in/farahchabchoub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOUNDER ─── -->
+<section class="founder-section">
+  <div class="founder-card reveal">
+    <div class="founder-avatar" id="founder-avatar-wrap">
+      <span class="founder-avatar-initials" id="avatar-initials">FC</span>
+      <img
+        id="founder-photo"
+        src="https://unavatar.io/linkedin/farahchabchoub"
+        alt="Farah Chabchoub"
+        onload="document.getElementById('avatar-initials').style.display='none'"
+        onerror="this.style.display='none'"
+      >
+    </div>
+    <div>
+      <div class="founder-name">Farah Chabchoub</div>
+      <div class="founder-title">Founder, oryjin · Paris</div>
+      <div class="founder-exp">
+        <span class="exp-badge"><span class="exp-dot exp-mango"></span>Mangopay — PSP</span>
+        <span class="exp-badge"><span class="exp-dot exp-ankor"></span>Ankorstore — Marketplace</span>
+        <span class="exp-badge"><span class="exp-dot exp-work"></span>Worklife — Card distribution</span>
+      </div>
+      <div class="founder-quote">
+        <strong>I worked inside payment infrastructure.</strong> At Mangopay as a PSP, at Ankorstore processing marketplace payments at scale, at Worklife distributing payment cards. The same pattern kept appearing: a gap between what was contracted and what was actually billed. Nobody was systematically looking at both documents side by side. oryjin exists to close that gap.
+      </div>
+      <a href="https://www.linkedin.com/in/farahchabchoub" target="_blank" rel="noopener" class="founder-li">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        8,000+ followers · Follow for payment insights
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GROWTH / NEWSLETTER ─── -->
+<div style="max-width:800px;margin:0 auto;padding:0 24px;">
+  <div class="growth-section reveal">
+
+    <div class="growth-card">
+      <div class="growth-card-icon">📩</div>
+      <div class="growth-card-head">Payment intelligence, monthly</div>
+      <div class="growth-card-body">
+        One email per month. PSP pricing benchmarks, billing patterns, negotiation signals — no fluff, no sales pitch.
+      </div>
+      <div class="nl-input-row">
+        <input class="nl-input" id="nl-email" type="email" placeholder="your@email.com">
+        <button class="nl-btn" onclick="subscribeNL()">Subscribe</button>
+      </div>
+    </div>
+
+    <div class="growth-card">
+      <div class="growth-card-icon">💼</div>
+      <div class="growth-card-head">Follow on LinkedIn</div>
+      <div class="growth-card-body">
+        Farah publishes weekly on payment costs, PSP mechanics, and how businesses can recover margin from their payment stack.
+      </div>
+      <a href="https://www.linkedin.com/in/farahchabchoub" target="_blank" rel="noopener" class="growth-link">
+        → @farahchabchoub &nbsp;·&nbsp; 8k+ followers
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <span>✦ oryjin · Paris · 2026</span>
+  <div class="footer-links">
+    <a href="mailto:contact@oryjin.com">contact@oryjin.com</a>
+    <span style="color:var(--bdr2)">·</span>
+    <a href="https://www.linkedin.com/company/oryjin" target="_blank" rel="noopener">LinkedIn →</a>
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════ */
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+revealEls.forEach(el => revealObs.observe(el));
+
+/* ═══════════════════════════════════════════════
+   SPOTS COUNTER
+═══════════════════════════════════════════════ */
+const spotsTaken = 0;
+const dots = ['d1','d2','d3','d4','d5'].map(id => document.getElementById(id));
+const remaining = document.getElementById('spots-remaining');
+for (let i = 0; i < spotsTaken; i++) dots[i]?.classList.add('taken');
+remaining.textContent = 5 - spotsTaken;
+
+/* ═══════════════════════════════════════════════
+   ANIMATED STAT COUNTERS
+═══════════════════════════════════════════════ */
+function animateCounter(id, target, decimals) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const obs = new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) return;
+    obs.disconnect();
+    let start = 0;
+    const step = ts => {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / 1800, 1);
+      el.textContent = (target * (1 - Math.pow(1 - p, 3))).toFixed(decimals);
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, { threshold: 0.5 });
+  obs.observe(el);
+}
+animateCounter('stat1', 0.4, 2);
+animateCounter('stat2', 70,  0);
+animateCounter('stat3', 48,  0);
+
+/* ═══════════════════════════════════════════════
+   SMOOTH SCROLL
+═══════════════════════════════════════════════ */
+document.querySelector('.cta-btn').addEventListener('click', e => {
+  e.preventDefault();
+  document.getElementById('apply').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+/* ═══════════════════════════════════════════════
+   PROFESSIONAL EMAIL BLOCKLIST
+═══════════════════════════════════════════════ */
+const FREE_DOMAINS = new Set([
+  'gmail.com','googlemail.com','yahoo.com','yahoo.fr','yahoo.co.uk','yahoo.es','yahoo.de','yahoo.it',
+  'hotmail.com','hotmail.fr','hotmail.co.uk','hotmail.de','hotmail.it','hotmail.es',
+  'outlook.com','outlook.fr','live.com','live.fr','live.co.uk','windowslive.com',
+  'icloud.com','me.com','mac.com','protonmail.com','proton.me','tutanota.com','tutamail.com',
+  'aol.com','ymail.com','rocketmail.com','msn.com',
+  'free.fr','orange.fr','sfr.fr','laposte.net','wanadoo.fr','bbox.fr','neuf.fr',
+  'gmx.com','gmx.fr','gmx.de','gmx.net','mail.com','email.com',
+  'fastmail.com','fastmail.fm','zoho.com','mailfence.com',
+  'dispostable.com','guerrillamail.com','temp-mail.org','maildrop.cc','throwam.com','mailnull.com'
+]);
+function isProEmail(email) {
+  const d = email.split('@')[1]?.toLowerCase();
+  return d && !FREE_DOMAINS.has(d);
+}
+
+/* ═══════════════════════════════════════════════
+   ERROR DISPLAY HELPERS
+═══════════════════════════════════════════════ */
+function setErr(id, msg, type) {
+  const el  = document.getElementById(id);
+  const err = document.getElementById('err-' + id);
+  if (!el) return;
+  if (msg) {
+    const warn = type === 'warn';
+    el.style.borderColor = warn ? '#F59E0B' : '#EF4444';
+    el.style.boxShadow   = warn ? '0 0 0 3px rgba(245,158,11,0.12)' : '0 0 0 3px rgba(239,68,68,0.12)';
+    if (err) { err.textContent = msg; err.className = 'field-error' + (warn ? ' warn' : ''); }
+  } else {
+    el.style.borderColor = '';
+    el.style.boxShadow   = '';
+    if (err) err.textContent = '';
+  }
+}
+function clearErr(id) { setErr(id, ''); }
+
+/* ═══════════════════════════════════════════════
+   REAL-TIME PER-FIELD VALIDATION
+   fromBlur=true → show "required" on empty fields
+   fromBlur=false → only show errors on bad input
+═══════════════════════════════════════════════ */
+function liveValidate(id, fromBlur = false) {
+  const el  = document.getElementById(id);
+  if (!el) return;
+  const val = el.value.trim();
+
+  switch (id) {
+    case 'fname':
+      if (!val) { if (fromBlur) setErr(id, 'First name is required'); else clearErr(id); }
+      else clearErr(id);
+      break;
+
+    case 'lname':
+      if (!val) { if (fromBlur) setErr(id, 'Last name is required'); else clearErr(id); }
+      else clearErr(id);
+      break;
+
+    case 'company':
+      if (!val) { if (fromBlur) setErr(id, 'Company name is required'); else clearErr(id); }
+      else clearErr(id);
+      break;
+
+    case 'psps':
+      if (!val) { if (fromBlur) setErr(id, 'Please list your active PSPs'); else clearErr(id); }
+      else clearErr(id);
+      break;
+
+    case 'email':
+      if (!val) { if (fromBlur) setErr(id, 'Professional email is required'); else clearErr(id); break; }
+      if (!val.includes('@') || val.indexOf('.', val.indexOf('@')) < 0) {
+        setErr(id, 'Please enter a valid email address'); break;
+      }
+      if (!isProEmail(val)) {
+        setErr(id, 'Please use your professional email — personal addresses are not accepted.', 'warn'); break;
+      }
+      clearErr(id);
+      break;
+
+    case 'role':
+      if (!val) { if (fromBlur) setErr(id, 'Please select your role'); else clearErr(id); }
+      else clearErr(id);
+      break;
+
+    case 'volume':
+      if (!val) { if (fromBlur) setErr(id, 'Please select your monthly volume'); else clearErr(id); }
+      else clearErr(id);
+      break;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   FULL VALIDATION ON SUBMIT (all fields)
+═══════════════════════════════════════════════ */
+function validateForm() {
+  // Force-validate every field as if blurring
+  ['fname','lname','email','company','role','volume','psps'].forEach(id => liveValidate(id, true));
+
+  // Find first field with an active error
+  const first = ['fname','lname','email','company','role','volume','psps']
+    .find(id => {
+      const err = document.getElementById('err-' + id);
+      return err && err.textContent.trim();
+    });
+
+  if (first) { document.getElementById(first)?.focus(); return false; }
+  return true;
+}
+
+/* ═══════════════════════════════════════════════
+   AES-256-GCM ENCRYPTION  (Web Crypto API)
+   Key: stored below. Keep this key private —
+   use oryjin_decrypt.html to recover CSV data.
+═══════════════════════════════════════════════ */
+const _EK = '093c36b0d13eae04e6191dddb9e51cbebffc8b7c071b287f74c6b5a9d4874bbc';
+
+async function _importKey() {
+  const raw = new Uint8Array(_EK.match(/.{2}/g).map(h => parseInt(h, 16)));
+  return crypto.subtle.importKey('raw', raw, { name: 'AES-GCM' }, false, ['encrypt']);
+}
+
+async function encryptCSV(plain) {
+  const key = await _importKey();
+  const iv  = crypto.getRandomValues(new Uint8Array(12));
+  const enc = await crypto.subtle.encrypt(
+    { name: 'AES-GCM', iv }, key,
+    new TextEncoder().encode(plain)
+  );
+  const blob = new Uint8Array(12 + enc.byteLength);
+  blob.set(iv, 0);
+  blob.set(new Uint8Array(enc), 12);
+  return btoa(String.fromCharCode(...blob));
+}
+
+/* ═══════════════════════════════════════════════
+   FORM SUBMIT — 100% backend, no client action
+   Primary:   Web3Forms  (no activation needed)
+   Secondary: formsubmit.co (fallback)
+   CSV is AES-256-GCM encrypted before sending.
+
+   ★ ONE-TIME SETUP for Web3Forms:
+     1. Go to https://web3forms.com
+     2. Enter contact@oryjin.com → get access key
+     3. Paste key below replacing WEB3FORMS_KEY
+═══════════════════════════════════════════════ */
+
+// ← Paste your Web3Forms key here (free at web3forms.com)
+const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_KEY';
+
+async function submitForm() {
+  if (!validateForm()) return;
+
+  const fname   = document.getElementById('fname').value.trim();
+  const lname   = document.getElementById('lname').value.trim();
+  const email   = document.getElementById('email').value.trim();
+  const company = document.getElementById('company').value.trim();
+  const role    = document.getElementById('role').value;
+  const volume  = document.getElementById('volume').value;
+  const psps    = document.getElementById('psps').value.trim();
+  const date    = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+
+  function q(v) {
+    const s = String(v || '');
+    return (s.includes(',') || s.includes('"') || s.includes('\n'))
+      ? '"' + s.replace(/"/g, '""') + '"' : s;
+  }
+  const csvHeader = 'Date,First Name,Last Name,Email,Company,Role,Monthly Volume,PSPs';
+  const csvRow    = [date, fname, lname, email, company, role, volume, psps].map(q).join(',');
+  const csvFull   = csvHeader + '\n' + csvRow;
+
+  let encryptedCSV = '';
+  try {
+    encryptedCSV = await encryptCSV(csvFull);
+  } catch(e) {
+    encryptedCSV = btoa(unescape(encodeURIComponent(csvFull)));
+  }
+
+  const btn = document.getElementById('submit-btn');
+  btn.textContent  = 'Sending…';
+  btn.disabled     = true;
+  btn.style.opacity = '0.72';
+
+  const payload = {
+    'Date':            date,
+    'First Name':      fname,
+    'Last Name':       lname,
+    'Reply-to':        email,
+    'Company':         company,
+    'Role':            role,
+    'Monthly Volume':  volume,
+    'PSPs':            psps,
+    'Encrypted CSV':   encryptedCSV
+  };
+
+  // ── Try Web3Forms first (no activation, works from localhost) ──
+  let sent = false;
+
+  if (WEB3FORMS_KEY && WEB3FORMS_KEY !== 'YOUR_WEB3FORMS_KEY') {
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key:  WEB3FORMS_KEY,
+          subject:     'oryjin — Application: ' + company + ' (' + date.slice(0,10) + ')',
+          from_name:   fname + ' ' + lname,
+          replyto:     email,
+          botcheck:    '',
+          ...payload
+        })
+      });
+      const json = await res.json().catch(() => ({}));
+      sent = json.success === true;
+    } catch(e) { console.warn('Web3Forms error:', e); }
+  }
+
+  // ── Fallback: formsubmit.co (needs one-time activation at contact@oryjin.com) ──
+  if (!sent) {
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/contact@oryjin.com', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject:  'oryjin — Application: ' + company,
+          _template: 'table',
+          _captcha:  'false',
+          ...payload
+        })
+      });
+      const json = await res.json().catch(() => ({}));
+      sent = (json.success === 'true' || json.success === true);
+    } catch(e) { console.warn('formsubmit error:', e); }
+  }
+
+  if (sent) {
+    showSuccess();
+    return;
+  }
+
+  // ── Nothing worked — restore button and diagnose ──
+  btn.textContent  = 'Request my free audit →';
+  btn.disabled     = false;
+  btn.style.opacity = '1';
+
+  const isLocal = window.location.protocol === 'file:';
+  const keyMissing = !WEB3FORMS_KEY || WEB3FORMS_KEY === 'YOUR_WEB3FORMS_KEY';
+
+  let msg = '';
+  if (isLocal) {
+    msg = 'Testing locally? Open this page via a web server (deploy to Netlify, Vercel, or GitHub Pages) — browsers block backend calls from local files.';
+  } else if (keyMissing) {
+    msg = 'Setup needed: get a free key at web3forms.com (enter contact@oryjin.com) and paste it into the WEB3FORMS_KEY constant in the HTML.';
+  } else {
+    msg = 'Submission failed. Check your internet connection and try again, or email contact@oryjin.com directly.';
+  }
+  showFormError(msg);
+}
+
+function showFormError(msg) {
+  let el = document.getElementById('form-send-error');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'form-send-error';
+    el.style.cssText = [
+      'font-size:12px', 'color:#F59E0B', 'text-align:center',
+      'margin-top:16px', 'padding:12px 16px', 'line-height:1.7',
+      'background:rgba(245,158,11,0.06)', 'border:1px solid rgba(245,158,11,0.2)',
+      'border-radius:8px'
+    ].join(';');
+    document.getElementById('form-body').appendChild(el);
+  }
+  el.textContent = msg;
+}
+
+function showSuccess() {
+  document.getElementById('form-body').style.display = 'none';
+  const s = document.getElementById('form-success');
+  s.style.display   = 'block';
+  s.style.animation = 'fadeUp 0.5s ease both';
+  if (spotsTaken < 5) {
+    dots[spotsTaken]?.classList.add('taken');
+    remaining.textContent = Math.max(0, 5 - spotsTaken - 1);
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   NEWSLETTER
+═══════════════════════════════════════════════ */
+function subscribeNL() {
+  const el  = document.getElementById('nl-email');
+  const val = el.value.trim();
+  if (!val || !val.includes('@')) {
+    el.style.borderColor = '#EF4444';
+    setTimeout(() => { el.style.borderColor = ''; }, 2000);
+    return;
+  }
+  el.disabled = true;
+  el.value    = 'Subscribed ✓';
+  el.style.color = '#10B981';
+  el.nextElementSibling.textContent = '✓';
+  el.nextElementSibling.style.background = '#10B981';
+}
+
+/* ═══════════════════════════════════════════════
+   NAV TINT ON SCROLL
+═══════════════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.borderBottomColor =
+    window.scrollY > 40 ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.04)';
+}, { passive: true });
+</script>
+
+</body>
+</html>
