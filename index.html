@@ -8,7 +8,7 @@
 <meta name="description" content="oryjin finds what your PSP bills above your contract — in 15 days, with documents you already have. No system access. No integration. Just the gap, in euros.">
 <meta name="keywords" content="payment audit, PSP audit, payment cost intelligence, PSP fees, overpaying PSP, payment optimization, Adyen audit, Stripe audit, PSP contract review, payment margin, interchange fees, scheme fees, payment cost recovery, PSP billing, Paris fintech, audit paiement, frais PSP, Mangopay, Stripe fees, multi-PSP, multi-currency audit">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<meta name="author" content="Farah Chabchoub">
+<meta name="author" content="oryjin">
 <meta name="theme-color" content="#060711">
 <link rel="canonical" href="https://oryjin.com">
 <!-- ═══ GEO / LOCAL SEO ════════════════════════ -->
@@ -34,7 +34,7 @@
 <!-- ═══ TWITTER / X CARD ══════════════════════ -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@oryjin">
-<meta name="twitter:creator" content="@farahchabchoub">
+<meta name="twitter:creator" content="@oryjin">
 <meta name="twitter:title" content="Stop losing margin in payments — oryjin">
 <meta name="twitter:description" content="PSP audit in 15 days. We find what you're overbilled vs. contract — in euros — with documents you already have.">
 <meta name="twitter:image" content="https://oryjin.com/og.png">
@@ -58,18 +58,8 @@
       "foundingDate": "2026",
       "address": { "@type": "PostalAddress", "addressLocality": "Paris", "addressCountry": "FR" },
       "areaServed": { "@type": "Place", "name": "Europe" },
-      "founder": { "@id": "https://oryjin.com/#farah" },
       "contactPoint": { "@type": "ContactPoint", "email": "contact@oryjin.com", "contactType": "sales", "availableLanguage": ["English", "French"] },
-      "sameAs": ["https://www.linkedin.com/company/oryjin", "https://oryjin.substack.com"]
-    },
-    {
-      "@type": "Person",
-      "@id": "https://oryjin.com/#farah",
-      "name": "Farah Chabchoub",
-      "jobTitle": "Founder, Payment Audit Specialist",
-      "worksFor": { "@id": "https://oryjin.com/#org" },
-      "knowsAbout": ["PSP pricing", "payment cost audit", "interchange fees", "scheme fees", "merchant billing", "Adyen", "Stripe", "Mangopay", "multi-PSP", "multi-currency billing"],
-      "sameAs": ["https://www.linkedin.com/in/farahchabchoub", "https://oryjin.substack.com"]
+      "sameAs": ["https://www.linkedin.com/company/oryjin-payment-intelligence", "https://oryjin.substack.com"]
     },
     {
       "@type": "Service",
@@ -515,6 +505,87 @@ nav {
 @media (max-width: 600px) {
   .trust-bar { padding: 24px 20px; gap: 10px; }
   .trust-label { width: 100%; text-align: center; margin-right: 0; margin-bottom: 4px; }
+}
+/* ─────────────────────────────────────────────
+   MARQUEE TRUST STRIP
+───────────────────────────────────────────── */
+.marquee-section {
+  border-top: 1px solid var(--bdr);
+  border-bottom: 1px solid var(--bdr);
+  background: var(--surf);
+  padding: 28px 0 26px;
+  overflow: hidden;
+}
+.marquee-label-row {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+.marquee-outer {
+  overflow: hidden;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+.marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: marqueeScroll 18s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 80px;
+  opacity: 0.42;
+  filter: grayscale(1) brightness(1.5);
+  transition: opacity 0.35s, filter 0.35s;
+  cursor: default;
+  flex-shrink: 0;
+}
+.marquee-item:hover {
+  opacity: 1;
+  filter: grayscale(0) brightness(1);
+}
+.marquee-logo-img {
+  height: 26px;
+  width: auto;
+  max-width: 140px;
+  display: block;
+  object-fit: contain;
+  object-position: left center;
+  border-radius: 0;
+  /* SVG wordmarks need full opacity and no grayscale — handled by parent */
+}
+.marquee-role {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.4px;
+  padding: 3px 9px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--bdr);
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.marquee-sep {
+  width: 1px;
+  height: 32px;
+  background: var(--bdr2);
+  flex-shrink: 0;
+  margin: 0 4px;
 }
 /* ─────────────────────────────────────────────
    STATS SECTION
@@ -1374,7 +1445,6 @@ footer {
   </a>
   <div class="nav-right">
     <a href="mailto:contact@oryjin.com" class="nav-contact">contact@oryjin.com</a>
-    <div class="nav-pill">Early Access — 5 spots</div>
   </div>
 </nav>
 <!-- ─── HERO ─── -->
@@ -1410,16 +1480,6 @@ footer {
       <strong>We can tell you exactly how much — in 15 days, with documents you already have.</strong>
     </p>
     <div class="cta-group">
-      <div class="spots-bar">
-        <div class="spots-dots">
-          <div class="spot-dot" id="d1"></div>
-          <div class="spot-dot" id="d2"></div>
-          <div class="spot-dot" id="d3"></div>
-          <div class="spot-dot" id="d4"></div>
-          <div class="spot-dot" id="d5"></div>
-        </div>
-        <span class="spots-text"><strong id="spots-remaining">5</strong> audit slots open this month*</span>
-      </div>
       <a href="#apply" class="cta-btn">
         Claim my audit slot
         <span class="cta-arrow">→</span>
@@ -1431,23 +1491,66 @@ footer {
     <span>Scroll</span>
   </div>
 </section>
-<!-- ─── TRUST BAR ─── -->
-<div class="trust-bar reveal">
-  <span class="trust-label">Built by someone who worked inside</span>
-  <div class="trust-badges">
-    <div class="trust-badge">
-      <span class="trust-badge-icon tb-mango">M</span>
-      Mangopay
-    </div>
-    <div class="trust-badge">
-      <span class="trust-badge-icon tb-ankor">A</span>
-      Ankorstore
-    </div>
-    <div class="trust-badge">
-      <span class="trust-badge-icon tb-work">W</span>
-      Worklife
-    </div>
-  </div>
+<!-- ─── MARQUEE TRUST STRIP ─── -->
+<div class="marquee-section reveal">
+  <div class="marquee-label-row">Built by a team who have worked inside</div>
+  <div class="marquee-outer">
+    <div class="marquee-track" id="marquee-track">
+
+      <!-- ── SET 1 ── -->
+      <a class="marquee-item" href="https://www.mangopay.com" target="_blank" rel="noopener">
+        <img class="marquee-logo-img" src="https://logo.clearbit.com/mangopay.com" alt="Mangopay"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjRkY3ODNDIiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+bWFuZ29wYXk8L3RleHQ+PC9zdmc+';this.onerror=null;">
+        <span class="marquee-role">PSP</span>
+      </a>
+      <div class="marquee-sep"></div>
+      <a class="marquee-item" href="https://www.leetchi.com" target="_blank" rel="noopener">
+        <img class="marquee-logo-img" src="https://logo.clearbit.com/leetchi.com" alt="Leetchi"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjQzAyNkQzIiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+bGVldGNoaTwvdGV4dD48L3N2Zz4=';this.onerror=null;">
+        <span class="marquee-role">Crowdfunding</span>
+      </a>
+      <div class="marquee-sep"></div>
+      <a class="marquee-item" href="https://www.ankorstore.com" target="_blank" rel="noopener">
+        <img class="marquee-logo-img" src="https://logo.clearbit.com/ankorstore.com" alt="Ankorstore"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTBCOTgxIiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+YW5rb3JzdG9yZTwvdGV4dD48L3N2Zz4=';this.onerror=null;">
+        <span class="marquee-role">Marketplace</span>
+      </a>
+      <div class="marquee-sep"></div>
+      <a class="marquee-item" href="https://www.worklife.fr" target="_blank" rel="noopener">
+        <img class="marquee-logo-img" src="https://logo.clearbit.com/worklife.fr" alt="Worklife"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMzhCREY4IiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+d29ya2xpZmU8L3RleHQ+PC9zdmc+';this.onerror=null;">
+        <span class="marquee-role">Card distribution</span>
+      </a>
+      <div class="marquee-sep"></div>
+
+      <!-- ── SET 2 (exact duplicate — for seamless loop) ── -->
+      <a class="marquee-item" href="https://www.mangopay.com" target="_blank" rel="noopener">
+        <img class="marquee-logo-img" src="https://logo.clearbit.com/mangopay.com" alt="Mangopay"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjRkY3ODNDIiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+bWFuZ29wYXk8L3RleHQ+PC9zdmc+';this.onerror=null;">
+        <span class="marquee-role">PSP</span>
+      </a>
+      <div class="marquee-sep"></div>
+      <a class="marquee-item" href="https://www.leetchi.com" target="_blank" rel="noopener">
+        <img class="marquee-logo-img" src="https://logo.clearbit.com/leetchi.com" alt="Leetchi"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjQzAyNkQzIiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+bGVldGNoaTwvdGV4dD48L3N2Zz4=';this.onerror=null;">
+        <span class="marquee-role">Crowdfunding</span>
+      </a>
+      <div class="marquee-sep"></div>
+      <a class="marquee-item" href="https://www.ankorstore.com" target="_blank" rel="noopener">
+        <img class="marquee-logo-img" src="https://logo.clearbit.com/ankorstore.com" alt="Ankorstore"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTBCOTgxIiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+YW5rb3JzdG9yZTwvdGV4dD48L3N2Zz4=';this.onerror=null;">
+        <span class="marquee-role">Marketplace</span>
+      </a>
+      <div class="marquee-sep"></div>
+      <a class="marquee-item" href="https://www.worklife.fr" target="_blank" rel="noopener">
+        <img class="marquee-logo-img" src="https://logo.clearbit.com/worklife.fr" alt="Worklife"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMzhCREY4IiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+d29ya2xpZmU8L3RleHQ+PC9zdmc+';this.onerror=null;">
+        <span class="marquee-role">Card distribution</span>
+      </a>
+      <div class="marquee-sep"></div>
+
+    </div><!-- end marquee-track -->
+  </div><!-- end marquee-outer -->
 </div>
 <!-- ─── STATS ─── -->
 <section class="stats-section">
@@ -1686,40 +1789,9 @@ footer {
       <div class="form-success-head">Application received.</div>
       <div class="form-success-body">
         We'll review your submission and reach out within <strong>24 hours</strong>.<br><br>
-        Follow Farah on LinkedIn for weekly payment intelligence:<br><br>
-        <a href="https://www.linkedin.com/in/farahchabchoub" target="_blank" rel="noopener">→ linkedin.com/in/farahchabchoub</a>
+        Follow oryjin on LinkedIn for weekly payment intelligence:<br><br>
+        <a href="https://www.linkedin.com/company/oryjin-payment-intelligence" target="_blank" rel="noopener">→ linkedin.com/company/oryjin-payment-intelligence</a>
       </div>
-    </div>
-  </div>
-</section>
-<!-- ─── FOUNDER ─── -->
-<section class="founder-section">
-  <div class="founder-card reveal">
-    <div class="founder-avatar" id="founder-avatar-wrap">
-      <span class="founder-avatar-initials" id="avatar-initials">FC</span>
-      <img
-        id="founder-photo"
-        src="./farah.jpg"
-        alt="Farah Chabchoub"
-        onload="document.getElementById('avatar-initials').style.display='none'"
-        onerror="this.style.display='none'"
-      >
-    </div>
-    <div>
-      <div class="founder-name">Farah Chabchoub</div>
-      <div class="founder-title">Founder, oryjin · Paris</div>
-      <div class="founder-exp">
-        <span class="exp-badge"><span class="exp-dot exp-mango"></span>Mangopay — PSP</span>
-        <span class="exp-badge"><span class="exp-dot exp-ankor"></span>Ankorstore — Marketplace</span>
-        <span class="exp-badge"><span class="exp-dot exp-work"></span>Worklife — Card distribution</span>
-      </div>
-      <div class="founder-quote">
-        <strong>Three companies. Three payment stacks. The same problem every time.</strong> At Mangopay I built PSP products. At Ankorstore I ran marketplace payments at scale. At Worklife I distributed payment cards. In every role, I saw a gap between what the contract said and what was actually billed — and nobody was cross-referencing the two documents. I built oryjin to do exactly that.
-      </div>
-      <a href="https://www.linkedin.com/in/farahchabchoub" target="_blank" rel="noopener" class="founder-li">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        8,000+ followers · Follow for payment insights
-      </a>
     </div>
   </div>
 </section>
@@ -1744,10 +1816,10 @@ footer {
       <div class="growth-card-icon">💼</div>
       <div class="growth-card-head">Follow on LinkedIn</div>
       <div class="growth-card-body">
-        Farah publishes weekly on payment costs, PSP mechanics, and how businesses can recover margin from their payment stack.
+        We publish weekly on payment costs, PSP mechanics, and how businesses can recover margin from their payment stack.
       </div>
-      <a href="https://www.linkedin.com/in/farahchabchoub" target="_blank" rel="noopener" class="growth-link">
-        → @farahchabchoub &nbsp;·&nbsp; 8k+ followers
+      <a href="https://www.linkedin.com/company/oryjin-payment-intelligence" target="_blank" rel="noopener" class="growth-link">
+        → oryjin · Payment Intelligence
       </a>
     </div>
   </div>
@@ -1816,7 +1888,7 @@ footer {
       <div class="footer-col-head">Contact</div>
       <div class="footer-links-col">
         <a href="mailto:contact@oryjin.com">contact@oryjin.com</a>
-        <a href="https://www.linkedin.com/company/oryjin" target="_blank" rel="noopener">LinkedIn → oryjin</a>
+        <a href="https://www.linkedin.com/company/oryjin-payment-intelligence" target="_blank" rel="noopener">LinkedIn → oryjin</a>
         <a href="https://oryjin.substack.com" target="_blank" rel="noopener">Newsletter → Substack</a>
       </div>
     </div>
@@ -1855,10 +1927,8 @@ revealEls.forEach(el => revealObs.observe(el));
    SPOTS COUNTER
 ═══════════════════════════════════════════════ */
 const spotsTaken = 0;
-const dots = ['d1','d2','d3','d4','d5'].map(id => document.getElementById(id));
-const remaining = document.getElementById('spots-remaining');
-for (let i = 0; i < spotsTaken; i++) dots[i]?.classList.add('taken');
-remaining.textContent = 5 - spotsTaken;
+const spotsCtaEl = document.getElementById('spots-remaining-cta');
+if (spotsCtaEl) spotsCtaEl.textContent = (5 - spotsTaken) + ' audit slots';
 /* ═══════════════════════════════════════════════
    ANIMATED STAT COUNTERS
 ═══════════════════════════════════════════════ */
