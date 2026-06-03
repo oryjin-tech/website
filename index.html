@@ -142,7 +142,6 @@
   --amber:  #B7791F;
 }
 html { scroll-behavior: smooth; }
-body {
   background: var(--bg);
   color: var(--txt);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -1569,6 +1568,26 @@ body,button,input,select,textarea,.faq-q{font-family:'Inter',system-ui,-apple-sy
 /* ─── BRAND TYPEFACE · Plus Jakarta Sans ─── */
 :root{--font-display:'Plus Jakarta Sans','Inter',system-ui,-apple-system,'Segoe UI',sans-serif}
 body,h1,h2,h3,p,a,span,div,button,input,select,textarea,.faq-q,.cta-btn,.submit-btn,.form-input,.form-select,.nav-logo,.footer-brand-logo{font-family:var(--font-display)}
+
+/* ─── TOP BAR + SECTION SHAPING ─── */
+.nav-right{gap:18px}
+.nav-cta{display:inline-flex;align-items:center;background:var(--v);color:#fff;font-weight:700;font-size:13px;padding:9px 18px;border-radius:10px;text-decoration:none;letter-spacing:-0.01em;box-shadow:0 4px 14px rgba(91,76,240,0.32);transition:background 0.2s,transform 0.15s,box-shadow 0.2s;white-space:nowrap}
+.nav-cta:hover{background:var(--vdk);transform:translateY(-1px);box-shadow:0 8px 22px rgba(91,76,240,0.45)}
+nav{border-bottom:1px solid transparent;transition:border-color 0.25s,box-shadow 0.25s,background 0.25s}
+nav.scrolled{border-bottom-color:rgba(20,18,45,0.10);box-shadow:0 8px 30px -20px rgba(20,18,45,0.30);background:rgba(255,255,255,0.78)}
+/* consistent vertical rhythm across marketing sections */
+.stats-section,.how-section,.who-section,.faq-section{padding-top:100px !important;padding-bottom:100px !important}
+.form-section{padding-top:84px !important;padding-bottom:100px !important}
+@media (max-width:600px){
+  .stats-section,.how-section,.who-section,.faq-section{padding-top:72px !important;padding-bottom:72px !important}
+  .nav-cta{padding:8px 14px;font-size:12px}
+}
+
+/* ─── TRUST LOGOS · full colour, clickable ─── */
+.marquee-item{filter:none !important;opacity:0.96;transition:opacity 0.25s,transform 0.25s}
+.marquee-item:hover{opacity:1;transform:translateY(-2px)}
+.marquee-logo-img{height:30px;max-width:170px}
+.marquee-label-row{color:var(--dim)}
 </style>
 </head>
 <body>
@@ -1580,6 +1599,7 @@ body,h1,h2,h3,p,a,span,div,button,input,select,textarea,.faq-q,.cta-btn,.submit-
   </a>
   <div class="nav-right">
     <a href="mailto:contact@oryjin.com" class="nav-contact">contact@oryjin.com</a>
+    <a href="#apply" class="nav-cta">Request an audit</a>
   </div>
 </nav>
 <!-- ─── HERO ─── -->
@@ -1629,51 +1649,51 @@ body,h1,h2,h3,p,a,span,div,button,input,select,textarea,.faq-q,.cta-btn,.submit-
     <div class="marquee-track" id="marquee-track">
       <!-- ── SET 1 ── -->
       <a class="marquee-item" href="https://www.mangopay.com" target="_blank" rel="noopener">
-        <img class="marquee-logo-img" src="https://logo.clearbit.com/mangopay.com" alt="Mangopay"
-             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjRkY3ODNDIiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+bWFuZ29wYXk8L3RleHQ+PC9zdmc+';this.onerror=null;">
+        <img class="marquee-logo-img" src="logos/mangopay.svg" alt="Mangopay"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNTAnIGhlaWdodD0nMzQnIHZpZXdCb3g9JzAgMCAxNTAgMzQnPjx0ZXh0IHg9JzAnIHk9JzI2JyBmb250LWZhbWlseT0nSW50ZXIsQXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjYnIGZvbnQtd2VpZ2h0PSc4MDAnIGZvbnQtc3R5bGU9J25vcm1hbCcgbGV0dGVyLXNwYWNpbmc9Jy0xJyBmaWxsPScjM0ExQjRFJz5tYW5nb3BheTwvdGV4dD48L3N2Zz4=';this.onerror=null;">
         <span class="marquee-role">PSP</span>
       </a>
       <div class="marquee-sep"></div>
       <a class="marquee-item" href="https://www.leetchi.com" target="_blank" rel="noopener">
-        <img class="marquee-logo-img" src="https://logo.clearbit.com/leetchi.com" alt="Leetchi"
-             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjQzAyNkQzIiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+bGVldGNoaTwvdGV4dD48L3N2Zz4=';this.onerror=null;">
+        <img class="marquee-logo-img" src="logos/leetchi.svg" alt="Leetchi"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNTAnIGhlaWdodD0nMzQnIHZpZXdCb3g9JzAgMCAxNTAgMzQnPjx0ZXh0IHg9JzAnIHk9JzI2JyBmb250LWZhbWlseT0nSW50ZXIsQXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjYnIGZvbnQtd2VpZ2h0PSc4MDAnIGZvbnQtc3R5bGU9J25vcm1hbCcgbGV0dGVyLXNwYWNpbmc9Jy0xJyBmaWxsPScjMUM1QzRGJz5sZWV0Y2hpPC90ZXh0Pjwvc3ZnPg==';this.onerror=null;">
         <span class="marquee-role">Crowdfunding</span>
       </a>
       <div class="marquee-sep"></div>
       <a class="marquee-item" href="https://www.ankorstore.com" target="_blank" rel="noopener">
-        <img class="marquee-logo-img" src="https://logo.clearbit.com/ankorstore.com" alt="Ankorstore"
-             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTBCOTgxIiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+YW5rb3JzdG9yZTwvdGV4dD48L3N2Zz4=';this.onerror=null;">
+        <img class="marquee-logo-img" src="logos/ankorstore.svg" alt="Ankorstore"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNTAnIGhlaWdodD0nMzQnIHZpZXdCb3g9JzAgMCAxNTAgMzQnPjx0ZXh0IHg9JzAnIHk9JzI2JyBmb250LWZhbWlseT0nSW50ZXIsQXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjYnIGZvbnQtd2VpZ2h0PSc4MDAnIGZvbnQtc3R5bGU9J25vcm1hbCcgbGV0dGVyLXNwYWNpbmc9Jy0xJyBmaWxsPScjMTQxNDE0Jz5hbmtvcnN0b3JlPC90ZXh0Pjwvc3ZnPg==';this.onerror=null;">
         <span class="marquee-role">Marketplace</span>
       </a>
       <div class="marquee-sep"></div>
       <a class="marquee-item" href="https://www.worklife.fr" target="_blank" rel="noopener">
-        <img class="marquee-logo-img" src="https://logo.clearbit.com/worklife.fr" alt="Worklife"
-             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMzhCREY4IiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+d29ya2xpZmU8L3RleHQ+PC9zdmc+';this.onerror=null;">
+        <img class="marquee-logo-img" src="logos/worklife.svg" alt="Worklife"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNTAnIGhlaWdodD0nMzQnIHZpZXdCb3g9JzAgMCAxNTAgMzQnPjx0ZXh0IHg9JzAnIHk9JzI2JyBmb250LWZhbWlseT0nSW50ZXIsQXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjYnIGZvbnQtd2VpZ2h0PSc4MDAnIGZvbnQtc3R5bGU9J25vcm1hbCcgbGV0dGVyLXNwYWNpbmc9Jy0xJyBmaWxsPScjMTQxNDE0Jz53b3JrbGlmZTwvdGV4dD48L3N2Zz4=';this.onerror=null;">
         <span class="marquee-role">Card distribution</span>
       </a>
       <div class="marquee-sep"></div>
       <!-- ── SET 2 (exact duplicate — for seamless loop) ── -->
       <a class="marquee-item" href="https://www.mangopay.com" target="_blank" rel="noopener">
-        <img class="marquee-logo-img" src="https://logo.clearbit.com/mangopay.com" alt="Mangopay"
-             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjRkY3ODNDIiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+bWFuZ29wYXk8L3RleHQ+PC9zdmc+';this.onerror=null;">
+        <img class="marquee-logo-img" src="logos/mangopay.svg" alt="Mangopay"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNTAnIGhlaWdodD0nMzQnIHZpZXdCb3g9JzAgMCAxNTAgMzQnPjx0ZXh0IHg9JzAnIHk9JzI2JyBmb250LWZhbWlseT0nSW50ZXIsQXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjYnIGZvbnQtd2VpZ2h0PSc4MDAnIGZvbnQtc3R5bGU9J25vcm1hbCcgbGV0dGVyLXNwYWNpbmc9Jy0xJyBmaWxsPScjM0ExQjRFJz5tYW5nb3BheTwvdGV4dD48L3N2Zz4=';this.onerror=null;">
         <span class="marquee-role">PSP</span>
       </a>
       <div class="marquee-sep"></div>
       <a class="marquee-item" href="https://www.leetchi.com" target="_blank" rel="noopener">
-        <img class="marquee-logo-img" src="https://logo.clearbit.com/leetchi.com" alt="Leetchi"
-             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjQzAyNkQzIiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+bGVldGNoaTwvdGV4dD48L3N2Zz4=';this.onerror=null;">
+        <img class="marquee-logo-img" src="logos/leetchi.svg" alt="Leetchi"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNTAnIGhlaWdodD0nMzQnIHZpZXdCb3g9JzAgMCAxNTAgMzQnPjx0ZXh0IHg9JzAnIHk9JzI2JyBmb250LWZhbWlseT0nSW50ZXIsQXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjYnIGZvbnQtd2VpZ2h0PSc4MDAnIGZvbnQtc3R5bGU9J25vcm1hbCcgbGV0dGVyLXNwYWNpbmc9Jy0xJyBmaWxsPScjMUM1QzRGJz5sZWV0Y2hpPC90ZXh0Pjwvc3ZnPg==';this.onerror=null;">
         <span class="marquee-role">Crowdfunding</span>
       </a>
       <div class="marquee-sep"></div>
       <a class="marquee-item" href="https://www.ankorstore.com" target="_blank" rel="noopener">
-        <img class="marquee-logo-img" src="https://logo.clearbit.com/ankorstore.com" alt="Ankorstore"
-             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTBCOTgxIiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+YW5rb3JzdG9yZTwvdGV4dD48L3N2Zz4=';this.onerror=null;">
+        <img class="marquee-logo-img" src="logos/ankorstore.svg" alt="Ankorstore"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNTAnIGhlaWdodD0nMzQnIHZpZXdCb3g9JzAgMCAxNTAgMzQnPjx0ZXh0IHg9JzAnIHk9JzI2JyBmb250LWZhbWlseT0nSW50ZXIsQXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjYnIGZvbnQtd2VpZ2h0PSc4MDAnIGZvbnQtc3R5bGU9J25vcm1hbCcgbGV0dGVyLXNwYWNpbmc9Jy0xJyBmaWxsPScjMTQxNDE0Jz5hbmtvcnN0b3JlPC90ZXh0Pjwvc3ZnPg==';this.onerror=null;">
         <span class="marquee-role">Marketplace</span>
       </a>
       <div class="marquee-sep"></div>
       <a class="marquee-item" href="https://www.worklife.fr" target="_blank" rel="noopener">
-        <img class="marquee-logo-img" src="https://logo.clearbit.com/worklife.fr" alt="Worklife"
-             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAxNDAgMzgiPjx0ZXh0IHg9IjIiIHk9IjI3IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMzhCREY4IiBsZXR0ZXItc3BhY2luZz0iLTAuMyI+d29ya2xpZmU8L3RleHQ+PC9zdmc+';this.onerror=null;">
+        <img class="marquee-logo-img" src="logos/worklife.svg" alt="Worklife"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNTAnIGhlaWdodD0nMzQnIHZpZXdCb3g9JzAgMCAxNTAgMzQnPjx0ZXh0IHg9JzAnIHk9JzI2JyBmb250LWZhbWlseT0nSW50ZXIsQXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjYnIGZvbnQtd2VpZ2h0PSc4MDAnIGZvbnQtc3R5bGU9J25vcm1hbCcgbGV0dGVyLXNwYWNpbmc9Jy0xJyBmaWxsPScjMTQxNDE0Jz53b3JrbGlmZTwvdGV4dD48L3N2Zz4=';this.onerror=null;">
         <span class="marquee-role">Card distribution</span>
       </a>
       <div class="marquee-sep"></div>
@@ -1988,13 +2008,26 @@ body,h1,h2,h3,p,a,span,div,button,input,select,textarea,.faq-q,.cta-btn,.submit-
 /* ═══════════════════════════════════════════════
    SCROLL REVEAL
 ═══════════════════════════════════════════════ */
-const revealEls = document.querySelectorAll('.reveal');
-const revealObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+var revealEls = [].slice.call(document.querySelectorAll('.reveal'));
+function show(el){ el.classList.add('visible'); }
+var revealObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if (e.isIntersecting){ show(e.target); revealObs.unobserve(e.target); } });
+}, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+revealEls.forEach(function(el){ revealObs.observe(el); });
+// fallback: reveal anything already in view (handles fast scroll, scroll-up, reloads mid-page)
+function revealInView(){
+  var vh = window.innerHeight || document.documentElement.clientHeight;
+  revealEls.forEach(function(el){
+    if (el.classList.contains('visible')) return;
+    var r = el.getBoundingClientRect();
+    if (r.top < vh * 0.96 && r.bottom > 0) show(el);
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-revealEls.forEach(el => revealObs.observe(el));
+}
+window.addEventListener('load', revealInView);
+window.addEventListener('scroll', revealInView, { passive: true });
+window.addEventListener('resize', revealInView, { passive: true });
+// safety net: never leave content stuck hidden
+setTimeout(function(){ revealEls.forEach(show); }, 1600);
 /* ═══════════════════════════════════════════════
    SPOTS COUNTER
 ═══════════════════════════════════════════════ */
@@ -2326,15 +2359,19 @@ async function subscribeNL() {
 /* ═══════════════════════════════════════════════
    NAV TINT ON SCROLL
 ═══════════════════════════════════════════════ */
-window.addEventListener('scroll', () => {
-  document.querySelector('nav').style.borderBottomColor =
-    window.scrollY > 40 ? 'rgba(20,18,45,0.12)' : 'rgba(20,18,45,0.06)';
-  const sp = document.getElementById('scrollProg');
-  if (sp) {
-    const hgt = document.documentElement.scrollHeight - window.innerHeight;
-    sp.style.width = (hgt > 0 ? (window.scrollY / hgt * 100) : 0) + '%';
+var navEl = document.querySelector('nav');
+var progEl = document.getElementById('scrollProg');
+function onScroll(){
+  if (navEl) navEl.classList.toggle('scrolled', window.scrollY > 8);
+  if (progEl){
+    var hgt = document.documentElement.scrollHeight - window.innerHeight;
+    progEl.style.width = (hgt > 0 ? Math.min(100, window.scrollY / hgt * 100) : 0) + '%';
   }
-}, { passive: true });
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onScroll, { passive: true });
+window.addEventListener('load', onScroll);
+onScroll();
 
 /* ═══ FAQ ACCORDION ═══ */
 document.querySelectorAll('.faq-q').forEach(function(q){
