@@ -54,11 +54,11 @@
       "url": "https://oryjin.com",
       "logo": { "@type": "ImageObject", "url": "https://oryjin.com/og.png", "width": 1200, "height": 630 },
       "description": "Payment cost intelligence — we audit PSP contracts and billing statements to surface what you're overbilled, in euros, in 15 days.",
-      "email": "contact@oryjin.com",
+      "email": "farah@oryjin.com",
       "foundingDate": "2026",
       "address": { "@type": "PostalAddress", "addressLocality": "Paris", "addressCountry": "FR" },
       "areaServed": { "@type": "Place", "name": "Europe" },
-      "contactPoint": { "@type": "ContactPoint", "email": "contact@oryjin.com", "contactType": "sales", "availableLanguage": ["English", "French"] },
+      "contactPoint": { "@type": "ContactPoint", "email": "farah@oryjin.com", "contactType": "sales", "availableLanguage": ["English", "French"] },
       "sameAs": ["https://www.linkedin.com/company/oryjin-payment-intelligence", "https://oryjin.substack.com"]
     },
     {
@@ -1598,7 +1598,7 @@ nav.scrolled{border-bottom-color:rgba(20,18,45,0.10);box-shadow:0 8px 30px -20px
     <span class="nav-logo-mark">✦</span>oryjin
   </a>
   <div class="nav-right">
-    <a href="mailto:contact@oryjin.com" class="nav-contact">contact@oryjin.com</a>
+    <a href="mailto:farah@oryjin.com" class="nav-contact">farah@oryjin.com</a>
     <a href="#apply" class="nav-cta">Request an audit</a>
   </div>
 </nav>
@@ -1979,7 +1979,7 @@ nav.scrolled{border-bottom-color:rgba(20,18,45,0.10);box-shadow:0 8px 30px -20px
     <div>
       <div class="footer-col-head">Contact</div>
       <div class="footer-links-col">
-        <a href="mailto:contact@oryjin.com">contact@oryjin.com</a>
+        <a href="mailto:farah@oryjin.com">farah@oryjin.com</a>
         <a href="https://www.linkedin.com/company/oryjin-payment-intelligence" target="_blank" rel="noopener">LinkedIn → oryjin</a>
         <a href="https://oryjin.substack.com" target="_blank" rel="noopener">Newsletter → Substack</a>
       </div>
@@ -1990,8 +1990,8 @@ nav.scrolled{border-bottom-color:rgba(20,18,45,0.10);box-shadow:0 8px 30px -20px
       <div class="footer-links-col">
         <span>SIRET 982 946 428 00017</span>
         <span>French law · GDPR-aligned</span>
-        <a href="mailto:contact@oryjin.com?subject=NDA%20request">NDA available on request</a>
-        <a href="mailto:contact@oryjin.com?subject=Data%20inquiry">Data inquiry</a>
+        <a href="mailto:farah@oryjin.com?subject=NDA%20request">NDA available on request</a>
+        <a href="mailto:farah@oryjin.com?subject=Data%20inquiry">Data inquiry</a>
       </div>
     </div>
   </div>
@@ -2000,7 +2000,7 @@ nav.scrolled{border-bottom-color:rgba(20,18,45,0.10);box-shadow:0 8px 30px -20px
     <div class="footer-legal">
       <span>AES-256-GCM · HTTPS/TLS 1.3</span>
       <span style="color:var(--bdr2)">·</span>
-      <a href="mailto:contact@oryjin.com">contact@oryjin.com</a>
+      <a href="mailto:farah@oryjin.com">farah@oryjin.com</a>
     </div>
   </div>
 </footer>
@@ -2182,17 +2182,17 @@ async function encryptCSV(plain) {
    • EASIEST — FormSubmit (no signup, no key):
      Leave WEB3FORMS_KEY as is. Deploy the page to a real
      URL (Netlify / Vercel / GitHub Pages), submit the form
-     once, then open contact@oryjin.com and click the
+     once, then open farah@oryjin.com and click the
      FormSubmit activation link. After that, every submission
-     is emailed to contact@oryjin.com automatically.
+     is emailed to farah@oryjin.com automatically.
 
    • BEST DELIVERABILITY — Web3Forms (free):
      1. Go to https://web3forms.com
-     2. Enter contact@oryjin.com → they email you an Access Key.
+     2. Enter farah@oryjin.com → they email you an Access Key.
      3. Paste that key below, replacing YOUR_WEB3FORMS_KEY.
-     Submissions then arrive instantly at contact@oryjin.com.
+     Submissions then arrive instantly at farah@oryjin.com.
 ═══════════════════════════════════════════════ */
-const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_KEY';
+const WEB3FORMS_KEY = 'd4a26234-36c7-4fcc-8205-05f2e97beec1';
 async function submitForm() {
   if (!validateForm()) return;
   const fname   = document.getElementById('fname').value.trim();
@@ -2253,7 +2253,7 @@ async function submitForm() {
   }
   if (!sent) {
     try {
-      const res = await fetch('https://formsubmit.co/ajax/contact@oryjin.com', {
+      const res = await fetch('https://formsubmit.co/ajax/farah@oryjin.com', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
@@ -2280,9 +2280,9 @@ async function submitForm() {
   if (isLocal) {
     msg = 'Testing locally? Open this page via a web server (deploy to Netlify, Vercel, or GitHub Pages) — browsers block backend calls from local files.';
   } else if (keyMissing) {
-    msg = 'First submission with FormSubmit? Check contact@oryjin.com for a one-time activation email and click the link — then resubmit. Or add a Web3Forms key (see comment in the code).';
+    msg = 'First submission with FormSubmit? Check farah@oryjin.com for a one-time activation email and click the link — then resubmit. Or add a Web3Forms key (see comment in the code).';
   } else {
-    msg = 'Submission failed. Check your internet connection and try again, or email contact@oryjin.com directly.';
+    msg = 'Submission failed. Check your internet connection and try again, or email farah@oryjin.com directly.';
   }
   showFormError(msg);
 }
