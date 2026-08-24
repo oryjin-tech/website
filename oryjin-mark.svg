@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+<!--
+  The Oryjin mark: a thin ring crossed by a two-strand wave.
+
+  Redrawn (Aug 2026) from `../png/oryjin-mark-transparent-1024.png`, because the
+  version that shipped with the bundle drew the wave as ONE round-capped stroke
+  plus a navy knockout line, and the approved brand board draws two strands. The
+  bundle disagrees with itself — `svg/oryjin-mark.svg` and `png/oryjin-lockup-*`
+  had one stroke; the app-icon PNGs, `png/oryjin-mark-transparent-1024.png` and
+  `favicon/*` have two. The board is the authority, so the SVG was the drift.
+  See the `favicon/` section of ../README.md.
+
+  The ring is unchanged: measured against the raster it already matched
+  proportionally (stroke/radius 18/153 = 0.1176 vs 29.5/252.25 = 0.117).
+
+  The wave is ONE filled path, not two — the strands merge at both ends, so the
+  gap between them is a hole rather than a space between separate shapes. Hence
+  `fill-rule="evenodd"`: subpath one is the outer contour, subpath two the hole.
+  Four edges, each single-valued in x and each fitted as a chain of cubics, with
+  these landmarks read off the raster (in this file's coordinates):
+
+    (48, 286…293)  the left end. NOT a point: the top edge leaves it flat while
+                   the bottom plunges, so the terminus is a ~7-unit chamfer,
+                   drawn by the outer subpath's closing `Z`.
+    (64.6, 306.3)  the hole opens
+    (408.2, 203.2) the hole closes
+    (472.5, 220.2) the right end, a genuine needle point
+
+  Max deviation from the raster is 1.5 units in 512 — sub-pixel at every size
+  the app renders. There is no knockout stroke: every ring crossing in the
+  reference is solid, so nothing needs separating and nothing has to know what
+  colour the surface behind the mark is.
+
+  The gradient stops are the bundle's literal hexes, held deliberately (see the
+  brand-palette note in AGENTS.md). The reference raster's own ramp is greener
+  and more saturated than these (#02F6D7 → #4133FD measured); the board's colour
+  swatches list #22D3EE, so the stops stay and only the wave gradient's AXIS
+  moved, to span the new geometry's two ends instead of the old shorter stroke's.
+-->
+<defs>
+  <linearGradient id="ring" x1="98" y1="96" x2="420" y2="420" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#22D3EE"/><stop offset="0.55" stop-color="#1D9BF0"/><stop offset="1" stop-color="#4F46E5"/>
+  </linearGradient>
+  <linearGradient id="wave" x1="48" y1="290" x2="473" y2="220" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#22D3EE"/><stop offset="0.5" stop-color="#0EA5E9"/><stop offset="1" stop-color="#4F46E5"/>
+  </linearGradient>
+</defs>
+<circle cx="256" cy="256" r="153" stroke="url(#ring)" stroke-width="18"/>
+<path fill="url(#wave)" fill-rule="evenodd" d="M48 286.3 C54.6 283.8 61.3 292.8 68 295 C80.1 299.1 92.2 302 104.4 301.9 C128.6 301.9 152.9 295 177.1 283.9 C209.5 269.3 241.8 247.1 274.2 228.6 C302.5 212.5 330.8 199.9 359.1 195.2 C381.4 191.4 403.6 189.6 425.8 195.1 C441.4 199 457 201 472.5 220.2 C457 217 441.4 214.6 425.8 216.9 C403.6 220.2 381.4 225.7 359.1 235.9 C330.8 248.8 302.5 268.9 274.2 291 C241.8 316.3 209.5 341.8 177.1 351.6 C152.9 359 128.6 360.8 104.4 354.4 C92.2 351.2 80.1 347.1 68 334.4 C61.3 327.4 54.6 322.8 48 293Z M64.6 306.3 C77.9 310.1 91.1 315.4 104.4 316.1 C128.6 317.3 152.9 312.7 177.1 303.1 C205.5 292 233.8 272.8 262.1 254.5 C290.4 236.1 318.7 220.1 347 211 C367.4 204.4 387.8 200.6 408.2 203.2 C387.8 208.1 367.4 215.4 347 226.1 C318.7 241 290.4 262.4 262.1 284.1 C233.8 305.7 205.5 325.3 177.1 335.2 C152.9 343.6 128.6 349.6 104.4 341.6 C91.1 337.3 77.9 337.4 64.6 306.3Z"/>
+</svg>
