@@ -57,11 +57,11 @@
       "url": "https://oryjin.com",
       "logo": { "@type": "ImageObject", "url": "https://oryjin.com/favicon-512x512.png", "width": 512, "height": 512 },
       "description": "Oryjin is the payment intelligence platform: it continuously audits what payment providers charge against what they promised, and turns every gap into recoverable value.",
-      "email": "farah@oryjin.com",
+      "email": "contact@oryjin.com",
       "foundingDate": "2026",
       "address": { "@type": "PostalAddress", "addressLocality": "Paris", "addressCountry": "FR" },
       "areaServed": { "@type": "Place", "name": "Europe" },
-      "contactPoint": { "@type": "ContactPoint", "email": "farah@oryjin.com", "contactType": "sales", "availableLanguage": ["English", "French"] },
+      "contactPoint": { "@type": "ContactPoint", "email": "contact@oryjin.com", "contactType": "sales", "availableLanguage": ["English", "French"] },
       "sameAs": ["https://www.linkedin.com/company/oryjin-payment-intelligence", "https://oryjin.substack.com"]
     },
     {
@@ -1615,7 +1615,7 @@ nav.scrolled{border-bottom-color:rgba(20,18,45,0.10);box-shadow:0 8px 30px -20px
     <div>
       <div class="footer-col-head">Contact</div>
       <div class="footer-links-col">
-        <a href="mailto:farah@oryjin.com">farah@oryjin.com</a>
+        <a href="mailto:contact@oryjin.com">contact@oryjin.com</a>
         <a href="https://www.linkedin.com/company/oryjin-payment-intelligence" target="_blank" rel="noopener">LinkedIn → Oryjin</a>
         <a href="https://oryjin.substack.com" target="_blank" rel="noopener">Newsletter → Substack</a>
       </div>
@@ -1626,7 +1626,7 @@ nav.scrolled{border-bottom-color:rgba(20,18,45,0.10);box-shadow:0 8px 30px -20px
       <div class="footer-links-col">
         <span>SIRET 982 946 428 00017</span>
         <span>French law · GDPR-aligned</span>
-        <a href="mailto:farah@oryjin.com?subject=Data%20inquiry">Data inquiry</a>
+        <a href="mailto:contact@oryjin.com?subject=Data%20inquiry">Data inquiry</a>
       </div>
     </div>
   </div>
@@ -1635,7 +1635,7 @@ nav.scrolled{border-bottom-color:rgba(20,18,45,0.10);box-shadow:0 8px 30px -20px
     <div class="footer-legal">
       <span>EU-hosted · GDPR</span>
       <span style="color:var(--bdr2)">·</span>
-      <a href="mailto:farah@oryjin.com">farah@oryjin.com</a>
+      <a href="mailto:contact@oryjin.com">contact@oryjin.com</a>
     </div>
   </div>
 </footer>
@@ -1790,7 +1790,7 @@ function validateForm() {
 }
 /* ═══════════════════════════════════════════════
    FORM SUBMIT — Web3Forms primary, FormSubmit fallback,
-   both delivering to farah@oryjin.com
+   both delivering to contact@oryjin.com
 ═══════════════════════════════════════════════ */
 const WEB3FORMS_KEY = 'd4a26234-36c7-4fcc-8205-05f2e97beec1';
 async function submitForm() {
@@ -1838,7 +1838,7 @@ async function submitForm() {
   }
   if (!sent) {
     try {
-      const res = await fetch('https://formsubmit.co/ajax/farah@oryjin.com', {
+      const res = await fetch('https://formsubmit.co/ajax/contact@oryjin.com', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
@@ -1865,9 +1865,9 @@ async function submitForm() {
   if (isLocal) {
     msg = 'Testing locally? Open this page via a web server (deploy to Netlify, Vercel, or GitHub Pages) — browsers block backend calls from local files.';
   } else if (keyMissing) {
-    msg = 'First submission with FormSubmit? Check farah@oryjin.com for a one-time activation email and click the link — then resubmit. Or add a Web3Forms key (see comment in the code).';
+    msg = 'First submission with FormSubmit? Check contact@oryjin.com for a one-time activation email and click the link — then resubmit. Or add a Web3Forms key (see comment in the code).';
   } else {
-    msg = 'Submission failed. Check your internet connection and try again, or email farah@oryjin.com directly.';
+    msg = 'Submission failed. Check your internet connection and try again, or email contact@oryjin.com directly.';
   }
   showFormError(msg);
 }

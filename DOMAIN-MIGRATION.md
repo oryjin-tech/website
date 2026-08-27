@@ -41,8 +41,10 @@ during the switch.
 
 - `curl -sI https://oryjin.com` → `server: GitHub.com` with a fresh `last-modified`.
 - `https://www.oryjin.com` resolves and redirects correctly after DNS propagation.
-- Submit the site form once — Web3Forms/FormSubmit are bound to farah@oryjin.com,
-  not to the repo or domain, so delivery should be unaffected.
+- Submit the site form once — Web3Forms/FormSubmit are bound to contact@oryjin.com,
+  not to the repo or domain. The first submission to a new address triggers a
+  one-time FormSubmit activation email to contact@oryjin.com; click its link,
+  then resubmit to confirm delivery end-to-end.
 - Padlock/certificate valid once Enforce HTTPS is on.
 
 ## Notes
