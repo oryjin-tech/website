@@ -363,6 +363,7 @@ section { position: relative; }
   line-height: 1.75;
 }
 .band strong { color: var(--txt); font-weight: 600; }
+.band p + p { margin-top: 14px; }
 
 /* ─────────────────────────────────────────────
    CONTACT
@@ -526,8 +527,8 @@ footer {
     <div class="flow">
       <div class="step">
         <div class="step-num">1</div>
-        <div class="step-title">Mutual NDA</div>
-        <div class="step-body">Signed before anything is shared. It covers your documents, your numbers and what you tell us about your stack.</div>
+        <div class="step-title">NDA and DPA</div>
+        <div class="step-body">Both signed before anything is shared. The NDA covers your documents, your numbers and what you tell us about your stack; the data processing agreement sets out how the data itself is handled.</div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
@@ -650,7 +651,7 @@ footer {
       <div class="card">
         <div class="card-head">What we ask of you</div>
         <ul class="list">
-          <li><span class="ic ic-dot">→</span><span><strong>A signed NDA</strong> before any document changes hands.</span></li>
+          <li><span class="ic ic-dot">→</span><span><strong>A signed NDA and DPA</strong> before any document changes hands.</span></li>
           <li><span class="ic ic-dot">→</span><span><strong>One point of contact</strong> on your side who can find the contracts and reports when we need them.</span></li>
           <li><span class="ic ic-dot">→</span><span><strong>The documents themselves</strong> — as complete as you can make them. Partial data means a partial picture.</span></li>
           <li><span class="ic ic-dot">→</span><span><strong>Honest feedback.</strong> Tell us what's wrong, confusing or useless. That's the whole point of the program.</span></li>
@@ -675,36 +676,45 @@ footer {
     <p class="section-label">Your data</p>
     <h2 class="section-head">What to send —<br><span>and what to never send.</span></h2>
     <p class="section-sub">
-      Oryjin works on commercial documents, not on payment data. The distinction matters,
-      and it keeps the whole engagement out of scope for the parts of compliance nobody enjoys.
+      Oryjin works from the commercial paperwork behind your payments — contracts, invoices,
+      fee and settlement reports. Neither cardholder data nor your customers' personal details
+      go into the analysis: card data we ask you never to send, and whatever else your exports
+      happen to carry, we simply don't use.
     </p>
     <div class="grid-2">
       <div class="card">
         <div class="card-head">What we need</div>
         <ul class="list">
-          <li><span class="ic ic-ok">✓</span><span><strong>Provider contracts</strong> and pricing annexes — including amendments and renegotiated terms.</span></li>
+          <li><span class="ic ic-ok">✓</span><span><strong>Provider contracts</strong> and pricing annexes, amendments included.</span></li>
           <li><span class="ic ic-ok">✓</span><span><strong>Invoices</strong> from your PSPs, acquirers and orchestrators.</span></li>
-          <li><span class="ic ic-ok">✓</span><span><strong>Settlement and fee reports</strong> — the monthly exports your providers already generate.</span></li>
-          <li><span class="ic ic-ok">✓</span><span><strong>Whatever format they arrive in.</strong> PDF, CSV, XLSX, an ugly export nobody has opened in a year — all fine.</span></li>
-          <li><span class="ic ic-ok">✓</span><span><strong>Optional — read-only API access.</strong> If you'd rather not gather files by hand, you can generate a restricted key in your provider dashboard: reporting endpoints only, revocable by you whenever you want. Entirely optional — documents alone work just as well.</span></li>
+          <li><span class="ic ic-ok">✓</span><span><strong>Settlement and fee reports</strong>, monthly or daily.</span></li>
+          <li><span class="ic ic-ok">✓</span><span><strong>Any file type</strong> — PDF, CSV, XLSX, or whatever export your provider produces.</span></li>
+          <li><span class="ic ic-ok">✓</span><span><strong>Optional — read-only API access</strong>, if you'd rather not send files by hand. You generate the key, you revoke it.</span></li>
         </ul>
       </div>
       <div class="card">
         <div class="card-head">What we never want</div>
         <ul class="list">
           <li><span class="ic ic-no">✕</span><span><strong>Card data.</strong> No PANs, no expiry dates, no CVVs — in any file, ever.</span></li>
-          <li><span class="ic ic-no">✕</span><span><strong>Your customers' personal data.</strong> Names, emails, addresses, order details. If an export contains them, strip the columns or tell us and we'll tell you which ones to drop.</span></li>
           <li><span class="ic ic-no">✕</span><span><strong>Passwords, or keys we didn't ask for.</strong> Never your dashboard password, never a key with write access — nothing that can move money or change settings. The only credential we'd ever ask for is the read-only reporting key you generate yourself. If anyone asks you for more than that in our name, it isn't us.</span></li>
         </ul>
       </div>
     </div>
     <div class="band">
-      <strong>Hosted in the EU.</strong> Your documents are used solely to produce your own analysis —
-      never shared with third parties, never used to benchmark
-      you to another client by name. They're kept for the duration of the engagement, and
-      <strong>deleted on request at any time</strong> — write to
-      <a href="mailto:contact@oryjin.com?subject=Data%20deletion%20request" style="color:var(--vlt);text-decoration:none;font-weight:600;">contact@oryjin.com</a>
-      and we'll confirm once it's done. French law, GDPR-aligned.
+      <p>
+        <strong>We keep only what the analysis needs.</strong> Exports often carry more than that —
+        an order reference, a billing country, an email column. Send them as they come: we extract
+        the fee and amount fields the analysis runs on, and the rest is never used or indexed.
+      </p>
+      <p>
+        <strong>Hosted in the EU.</strong> Your documents are used solely to produce your own analysis —
+        never shared with third parties, never used to benchmark
+        you to another client by name. They're kept for the duration of the engagement, and
+        <strong>deleted on request at any time</strong> — write to
+        <a href="mailto:contact@oryjin.com?subject=Data%20deletion%20request" style="color:var(--vlt);text-decoration:none;font-weight:600;">contact@oryjin.com</a>
+        and we'll confirm once it's done. French law, GDPR-aligned, under the data processing
+        agreement signed at onboarding.
+      </p>
     </div>
   </div>
 </section>
