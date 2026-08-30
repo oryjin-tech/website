@@ -9,18 +9,21 @@
 # main moved is itself a signal, the same way oryjin-tech/core reports its own
 # deploys into the same channel.
 #
-# Validating a change to this file takes a real push to main. `workflow_dispatch`
+# Validating a change to this file takes a real push to main: `workflow_dispatch`
 # exercises the smoke test and the webhook, but not the `workflow_run` trigger
-# below, which is the part that carries the whole thing. Note that the trigger
-# does not fire for the push that introduces or edits it: GitHub resolves
-# workflow_run subscriptions from the copy already on the default branch, so the
-# Pages run racing alongside that push is not being listened to. The first deploy
-# it reports on is always the one after.
+# below, which is the part that carries the whole thing.
+#
+# The workflow this listens for has two different names, and picking the wrong
+# one fails silently — no run, no error, just nothing. Runs of it are titled
+# "pages build and deployment", but the workflow's own name, which is what the
+# `workflows:` filter matches on, is "pages-build-deployment". Confirm with:
+#
+#   gh api repos/oryjin-tech/website/actions/workflows --jq '.workflows[].name'
 name: Notify deploy
 
 on:
   workflow_run:
-    workflows: ["pages build and deployment"]
+    workflows: ["pages-build-deployment"]
     types: [completed]
   # The workflow_run path cannot be triggered by hand, so this exists to
   # exercise the smoke test and the webhook without pushing a commit.
