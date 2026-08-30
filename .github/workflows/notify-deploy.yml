@@ -8,6 +8,14 @@
 # One line per successful deploy, on purpose: a heartbeat means silence on a day
 # main moved is itself a signal, the same way oryjin-tech/core reports its own
 # deploys into the same channel.
+#
+# Validating a change to this file takes a real push to main. `workflow_dispatch`
+# exercises the smoke test and the webhook, but not the `workflow_run` trigger
+# below, which is the part that carries the whole thing. Note that the trigger
+# does not fire for the push that introduces or edits it: GitHub resolves
+# workflow_run subscriptions from the copy already on the default branch, so the
+# Pages run racing alongside that push is not being listened to. The first deploy
+# it reports on is always the one after.
 name: Notify deploy
 
 on:
