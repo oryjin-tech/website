@@ -1,0 +1,15 @@
+{
+  "name": "Oryjin",
+  "short_name": "Oryjin",
+  "description": "Oryjin is the intelligence layer over your payment stack: it audits acquirer fees, scheme costs and orchestration, and turns them into decision-grade intelligence.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "theme_color": "#1652D9",
+  "background_color": "#141C2E",
+  "icons": [
+    { "src": "/favicon-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicon-512x512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/favicon-maskable-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

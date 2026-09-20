@@ -1,0 +1,56 @@
+# Fails a commit that lets the brand drift.
+#
+# The app repo enforces the same rule with `logo-geometry.test.ts`, which cannot
+# see this repo — so the check is repeated here, standalone, over the vendored
+# copies in brand/. See scripts/check-brand-sync.sh for what it checks and why.
+#
+# This CANNOT block a deploy. GitHub Pages publishes whatever lands on main via
+# its own generated workflow, and there is nowhere to add a gate to it. So this
+# runs on pull requests, where it can be a required check and is the point at
+# which drift is cheap to fix, and again on main, where a red tick next to the
+# commit is the honest signal that something shipped wrong.
+#
+# It does not need Chrome or ImageMagick: it reads the vectors and the HTML, and
+# never re-renders. Re-rendering is scripts/render-brand-assets.sh, which is run
+# by hand because its output is committed.
+name: Brand
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'brand/**'
+      - 'index.html'
+      - 'partners/**'
+      - 'scripts/check-brand-sync.sh'
+      - 'scripts/check-old-palette.py'
+      - '.github/workflows/brand.yml'
+  pull_request:
+    paths:
+      - 'brand/**'
+      - 'index.html'
+      - 'partners/**'
+      - 'scripts/check-brand-sync.sh'
+      - 'scripts/check-old-palette.py'
+      - '.github/workflows/brand.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: brand-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The vendoring check needs oryjin-tech/core checked out alongside, which
+      # a public CI run has no credentials for. It degrades to a skip on its
+      # own, and the geometry and token checks — the ones that catch a change
+      # made *in this repo* — do not need it.
+      - name: Check the brand
+        run: ./scripts/check-brand-sync.sh

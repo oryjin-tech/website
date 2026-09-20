@@ -12,8 +12,13 @@
 <meta name="googlebot" content="noindex, nofollow">
 <meta name="referrer" content="no-referrer">
 
-<link rel="icon" type="image/svg+xml" href="/oryjin-favicon.svg">
+<!-- Same ladder as the homepage, rendered from brand/ by
+     scripts/render-brand-assets.sh. No manifest here on purpose: this page is
+     unlisted and is not something anyone should be installing. -->
+<link rel="icon" type="image/svg+xml" href="/brand/oryjin-favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
 <link rel="shortcut icon" href="/favicon.ico">
 
@@ -27,21 +32,31 @@
 ───────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --v:      #2563EB;
-  --vdk:    #1D4ED8;
-  --vlt:    #2563EB;
-  --violet: #7C3AED;
-  --navy:   #0B1220;
+  /* ─── BRAND ──────────────────────────────────────────────────────────
+     This block is IDENTICAL, byte for byte, to the one in ../index.html,
+     and both are checked against brand/colors.css by
+     scripts/check-brand-sync.sh. Two inline copies is the price of two
+     pages with no build step and no render-blocking stylesheet; the check
+     is what stops the price being paid in drift. */
+  --v:      #1652D9; /* kit blue   — 6.31:1. Was #2563EB at 5.03:1. */
+  --violet: #6302CC; /* kit purple — 8.48:1. Supporting; used sparingly. */
+  --teal:   #037E8F; /* kit teal   — 4.67:1. Replaces #22D3EE at 1.76:1. */
+  --vdk:    #1142B0; /* hover. Not a kit colour — see ../index.html. */
+  --grad:   linear-gradient(90deg, var(--teal) 0%, var(--v) 55%, var(--violet) 100%);
+  --v-rgb:      22 82 217;
+  --violet-rgb: 99 2 204;
+
+  /* ─── SURFACES & INK ────────────────────────────────────────────────── */
   --bg:     #FBFCFE;
-  --bg2:    #F4F7FB;
+  --bg2:    #EBF0FF;
   --surf:   #FFFFFF;
-  --surf2:  #F7F9FC;
-  --bdr:    rgba(11,18,32,0.10);
-  --bdr2:   rgba(11,18,32,0.17);
+  --surf2:  #F6F8FC;
+  --bdr:    rgba(20,28,46,0.10);
+  --bdr2:   rgba(20,28,46,0.17);
+  --ink:    #141C2E;
   --txt:    #14213B;
   --dim:    #5B6172;
   --muted:  #7C8294;
-  --white:  #0B1220;
   --green:  #10B981;
   --red:    #B91C1C;
 }
@@ -87,22 +102,19 @@ nav {
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
   background: rgba(255,255,255,0.72);
-  border-bottom: 1px solid rgba(20,18,45,0.05);
+  border-bottom: 1px solid rgba(20,28,46,0.05);
 }
+/* The wordmark is a vector now (brand/oryjin-lockup.svg), not this
+   page's own Plus Jakarta pretending to be it — so no type here. */
 .nav-logo {
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--white);
-  letter-spacing: -0.4px;
   display: flex;
   align-items: center;
-  gap: 6px;
 }
-.nav-logo-img { width: 24px; height: 24px; display: block; }
+.nav-lockup { height: 30px; width: auto; display: block; }
 .nav-pill {
-  background: rgba(37, 99, 235, 0.14);
-  border: 1px solid rgba(37, 99, 235, 0.3);
-  color: var(--vlt);
+  background: rgb(var(--v-rgb) / 0.14);
+  border: 1px solid rgb(var(--v-rgb) / 0.3);
+  color: var(--v);
   font-size: 11px;
   font-weight: 700;
   padding: 6px 14px;
@@ -129,15 +141,15 @@ nav {
   transform: translateX(-50%);
   width: 1000px;
   height: 520px;
-  background: radial-gradient(ellipse at center, rgba(37, 99, 235, 0.15) 0%, transparent 65%);
+  background: radial-gradient(ellipse at center, rgb(var(--v-rgb) / 0.15) 0%, transparent 65%);
   pointer-events: none;
 }
 .hero-grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+    linear-gradient(rgb(var(--v-rgb) / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--v-rgb) / 0.05) 1px, transparent 1px);
   background-size: 56px 56px;
   -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 40%, black 0%, transparent 100%);
   mask-image: radial-gradient(ellipse 70% 80% at 50% 40%, black 0%, transparent 100%);
@@ -148,13 +160,13 @@ nav {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(37, 99, 235, 0.1);
-  border: 1px solid rgba(37, 99, 235, 0.22);
+  background: rgb(var(--v-rgb) / 0.1);
+  border: 1px solid rgb(var(--v-rgb) / 0.22);
   border-radius: 30px;
   padding: 8px 18px;
   font-size: 11px;
   font-weight: 700;
-  color: var(--vlt);
+  color: var(--v);
   letter-spacing: 0.8px;
   text-transform: uppercase;
   margin-bottom: 36px;
@@ -163,20 +175,20 @@ nav {
 .eyebrow-dot {
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: var(--vlt);
+  background: var(--v);
   animation: pulseDot 2.2s ease-in-out infinite;
 }
 .headline {
   font-size: clamp(34px, 5.6vw, 62px);
   font-weight: 900;
-  color: var(--white);
+  color: var(--ink);
   line-height: 1.06;
   letter-spacing: -0.035em;
   margin-bottom: 26px;
   animation: fadeUp 0.7s ease 0.12s both;
 }
 .headline-em {
-  background: linear-gradient(125deg, var(--v) 0%, #4F46E5 45%, var(--violet) 100%);
+  background: linear-gradient(125deg, var(--v) 0%, var(--violet) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -211,13 +223,13 @@ section { position: relative; }
   text-align: center;
   font-size: clamp(22px, 4vw, 36px);
   font-weight: 800;
-  color: var(--white);
+  color: var(--ink);
   margin-bottom: 16px;
   letter-spacing: -0.03em;
   line-height: 1.2;
 }
 .section-head span {
-  background: linear-gradient(120deg, var(--v), #4F46E5 55%, var(--violet));
+  background: linear-gradient(120deg, var(--v), var(--violet));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -251,11 +263,11 @@ section { position: relative; }
 .step-num {
   width: 52px; height: 52px;
   border-radius: 14px;
-  background: rgba(37, 99, 235, 0.1);
-  border: 1px solid rgba(37, 99, 235, 0.25);
+  background: rgb(var(--v-rgb) / 0.1);
+  border: 1px solid rgb(var(--v-rgb) / 0.25);
   display: flex; align-items: center; justify-content: center;
   font-size: 18px; font-weight: 800;
-  color: var(--vlt);
+  color: var(--v);
   position: relative;
   transition: transform 0.25s, box-shadow 0.25s;
 }
@@ -264,16 +276,16 @@ section { position: relative; }
   position: absolute;
   inset: -4px;
   border-radius: 17px;
-  border: 1px solid rgba(37,99,235,0.1);
+  border: 1px solid rgb(var(--v-rgb) / 0.1);
 }
 .step:hover .step-num {
   transform: translateY(-4px);
-  box-shadow: 0 10px 26px -10px rgba(37,99,235,0.6);
+  box-shadow: 0 10px 26px -10px rgb(var(--v-rgb) / 0.6);
 }
 .step-title {
   font-size: 15px;
   font-weight: 700;
-  color: var(--white);
+  color: var(--ink);
   letter-spacing: -0.02em;
 }
 .step-body {
@@ -299,12 +311,12 @@ section { position: relative; }
 .card:hover {
   transform: translateY(-3px);
   border-color: var(--bdr2);
-  box-shadow: 0 30px 70px -50px rgba(37,99,235,0.45);
+  box-shadow: 0 30px 70px -50px rgb(var(--v-rgb) / 0.45);
 }
 .card-head {
   font-size: 15px;
   font-weight: 700;
-  color: var(--white);
+  color: var(--ink);
   letter-spacing: -0.02em;
   margin-bottom: 8px;
 }
@@ -315,9 +327,9 @@ section { position: relative; }
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--vlt);
-  background: rgba(37, 99, 235, 0.1);
-  border: 1px solid rgba(37, 99, 235, 0.22);
+  color: var(--v);
+  background: rgb(var(--v-rgb) / 0.1);
+  border: 1px solid rgb(var(--v-rgb) / 0.22);
   border-radius: 20px;
   padding: 4px 11px;
   margin-bottom: 14px;
@@ -346,7 +358,7 @@ section { position: relative; }
 }
 .ic-ok  { background: rgba(16,185,129,0.14); color: #047857; border: 1px solid rgba(16,185,129,0.3); }
 .ic-no  { background: rgba(185,28,28,0.10); color: var(--red); border: 1px solid rgba(185,28,28,0.25); }
-.ic-dot { background: rgba(37,99,235,0.12); color: var(--vlt); border: 1px solid rgba(37,99,235,0.28); }
+.ic-dot { background: rgb(var(--v-rgb) / 0.12); color: var(--v); border: 1px solid rgb(var(--v-rgb) / 0.28); }
 
 /* ─────────────────────────────────────────────
    BAND
@@ -382,11 +394,11 @@ section { position: relative; }
   text-decoration: none;
   letter-spacing: -0.1px;
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  box-shadow: 0 4px 24px rgba(37,99,235,0.45), 0 0 0 1px rgba(37,99,235,0.2) inset;
+  box-shadow: 0 4px 24px rgb(var(--v-rgb) / 0.45), 0 0 0 1px rgb(var(--v-rgb) / 0.2) inset;
 }
 .cta-btn:hover {
   background: var(--vdk);
-  box-shadow: 0 8px 36px rgba(37,99,235,0.6), 0 0 0 1px rgba(37,99,235,0.3) inset;
+  box-shadow: 0 8px 36px rgb(var(--v-rgb) / 0.6), 0 0 0 1px rgb(var(--v-rgb) / 0.3) inset;
   transform: translateY(-2px);
 }
 .contact-note { font-size: 13px; color: var(--muted); margin-top: 18px; }
@@ -412,16 +424,11 @@ footer {
   .footer-inner { grid-template-columns: 1fr; gap: 32px; }
 }
 .footer-brand-logo {
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--white);
-  letter-spacing: -0.4px;
   display: flex;
   align-items: center;
-  gap: 6px;
   margin-bottom: 14px;
 }
-.footer-brand-logo img { width: 22px; height: 22px; display: block; }
+.footer-brand-logo .nav-lockup { height: 28px; }
 .footer-brand-desc {
   font-size: 13px;
   color: var(--dim);
@@ -438,7 +445,7 @@ footer {
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--muted);
-  background: rgba(20,18,45,0.04);
+  background: rgba(20,28,46,0.04);
   border: 1px solid var(--bdr);
   border-radius: 6px;
   padding: 5px 10px;
@@ -460,7 +467,7 @@ footer {
   transition: color 0.2s;
   line-height: 1.5;
 }
-.footer-links-col a:hover { color: var(--vlt); }
+.footer-links-col a:hover { color: var(--v); }
 .footer-bottom {
   max-width: 960px;
   margin: 0 auto;
@@ -493,7 +500,7 @@ footer {
 <!-- ─── NAV ─── -->
 <nav>
   <div class="nav-logo">
-    <img class="nav-logo-img" src="/oryjin-mark.svg" alt="" width="24" height="24">Oryjin
+    <img class="nav-lockup" src="/brand/oryjin-lockup.svg" alt="Oryjin" width="111" height="30">
   </div>
   <span class="nav-pill">Design partners</span>
 </nav>
@@ -711,7 +718,7 @@ footer {
         never shared with third parties, never used to benchmark
         you to another client by name. They're kept for the duration of the engagement, and
         <strong>deleted on request at any time</strong> — write to
-        <a href="mailto:contact@oryjin.com?subject=Data%20deletion%20request" style="color:var(--vlt);text-decoration:none;font-weight:600;">contact@oryjin.com</a>
+        <a href="mailto:contact@oryjin.com?subject=Data%20deletion%20request" style="color:var(--v);text-decoration:none;font-weight:600;">contact@oryjin.com</a>
         and we'll confirm once it's done. French law, GDPR-aligned, under the data processing
         agreement signed at onboarding.
       </p>
@@ -740,7 +747,7 @@ footer {
   <div class="footer-inner">
     <div>
       <div class="footer-brand-logo">
-        <img src="/oryjin-mark.svg" alt="" width="22" height="22">Oryjin
+        <img class="nav-lockup" src="/brand/oryjin-lockup.svg" alt="Oryjin" width="104" height="28">
       </div>
       <p class="footer-brand-desc">
         Oryjin is the payment intelligence platform — auditing what your providers charge
