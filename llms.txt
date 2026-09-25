@@ -1,0 +1,23 @@
+# Oryjin
+
+> Oryjin is an independent payment cockpit for European merchants processing €2M–€20M a month online. It continuously monitors the whole payment stack (acquirer fees, scheme costs, FX, fraud, chargebacks, orchestration) into one model, checks billing against contracts, explains what moves payment cost, ranks the next actions in euros (each labelled detected or modelled), and forecasts future fees. It is not a PSP or an orchestrator: it never moves money and never changes a setting. Based in Paris, France.
+
+## Key facts
+- Connectors: Stripe, Adyen
+- Other providers (Mangopay, Worldline, Checkout.com, PayPal, Braintree, acquirers): via contracts, invoices and reports
+- Detect: billing checked against contract terms every month; claim packs with transaction-level evidence
+- Explain: full cost split into acquisition, processing and FX, operations and losses; variance split into volume, mix and unit cost; cost per payment pattern
+- Plan: fee forecast by month, quarter or fiscal year with a P10–P90 range; what-if scenarios; contract renewal radar and negotiation brief
+- Act: alerts in Slack and an in-app inbox; recoveries summary for the CFO
+- Detected and modelled savings are never added together
+- Users: CFOs, Heads of Payments, Payment Operations (unlimited users)
+- Pricing: yearly subscription by payment volume, no success fee
+- Early access: 90-day paid design partnership on real data, fee credited to year one
+- Hosting: Scaleway, Paris region (EU); no cardholder data
+- Contact: contact@oryjin.com
+
+## Links
+- Apply for early access: https://oryjin.com/#apply
+- Privacy policy: https://oryjin.com/privacy.html
+- The Payment Economics, an independent payment economics review: https://www.thepaymenteconomics.com
+- LinkedIn: https://www.linkedin.com/company/oryjin-payment-intelligence
