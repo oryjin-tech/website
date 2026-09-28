@@ -1423,10 +1423,23 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     </div>
     <div class="nl-input-row" id="nl-form-row">
       <label for="nl-email" class="sr-only">Email for the monthly study</label>
-      <input class="nl-input" id="nl-email" type="email" placeholder="you@company.com" autocomplete="email">
+      <input class="nl-input" id="nl-email" type="email" placeholder="you@company.com" autocomplete="email" onkeydown="if(event.key==='Enter'){event.preventDefault();subscribeNL();}">
       <button class="nl-btn" id="nl-btn" type="button" onclick="subscribeNL()">Subscribe</button>
     </div>
     <div id="nl-status" aria-live="polite"></div>
+    <!-- Real subscription: same POST as Substack's own embed form, submitted into a hidden frame (no redirect) -->
+    <form id="nl-substack" action="https://www.thepaymenteconomics.com/api/v1/free?nojs=true" method="post" target="nl-sink" hidden aria-hidden="true" tabindex="-1">
+      <input type="hidden" name="email" id="nl-substack-email">
+      <input type="hidden" name="first_url" value="https://oryjin.com/">
+      <input type="hidden" name="first_referrer" id="nl-substack-ref" value="">
+      <input type="hidden" name="current_url" value="https://oryjin.com/">
+      <input type="hidden" name="current_referrer" value="">
+      <input type="hidden" name="first_session_url" value="https://oryjin.com/">
+      <input type="hidden" name="first_session_referrer" value="">
+      <input type="hidden" name="referral_code" value="9ay9r">
+      <input type="hidden" name="source" value="embed">
+    </form>
+    <iframe name="nl-sink" title="Newsletter subscription" hidden aria-hidden="true" tabindex="-1" style="display:none;width:0;height:0;border:0"></iframe>
   </div>
 </section>
 <!-- ─── SECURITY STRIP ─── -->
@@ -1890,43 +1903,45 @@ async function subscribeNL() {
   const email  = input.value.trim();
   status.className = '';
   status.textContent = '';
-  if (!email || !email.includes('@') || !email.includes('.')) {
+  if (!EMAIL_RE.test(email)) {
     input.style.borderColor = '#EF4444';
     setTimeout(() => { input.style.borderColor = ''; }, 2000);
     status.className = 'error';
     status.textContent = 'Please enter a valid email address.';
+    input.focus();
     return;
   }
   btn.disabled = true;
   btn.textContent = 'Subscribing…';
+  /* 1. Create the subscription on Substack: identical POST to its own embed form, sent into a hidden frame. */
   try {
-    const res = await fetch('https://www.thepaymenteconomics.com/api/v1/free', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email,
-        first_url: 'https://oryjin.com',
-        first_referrer: document.referrer || ''
-      })
-    });
-    if (res.ok) {
-      document.getElementById('nl-form-row').style.display = 'none';
-      btn.style.display = 'none';
-      status.className = 'success';
-      status.textContent = '✓ Check your inbox to confirm your subscription.';
-    } else {
-      throw new Error('non-200');
-    }
-  } catch (e) {
-    window.open(
-      'https://www.thepaymenteconomics.com/?r=9ay9r&utm_campaign=pub-share-checklist',
-      '_blank', 'noopener,noreferrer'
-    );
-    btn.disabled = false;
-    btn.textContent = 'Subscribe';
-    status.className = 'success';
-    status.textContent = '→ The Payment Economics opened — enter your email there to confirm.';
+    document.getElementById('nl-substack-email').value = email;
+    document.getElementById('nl-substack-ref').value = document.referrer || '';
+    document.getElementById('nl-substack').submit();
+  } catch (e) {}
+  /* 2. Keep a copy in the Oryjin inbox so no subscriber is lost. */
+  if (WEB3FORMS_KEY && WEB3FORMS_KEY !== 'YOUR_WEB3FORMS_KEY') {
+    try {
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: 'Newsletter subscriber — The Payment Economics',
+          from_name: 'Oryjin website',
+          Email: email,
+          Source: 'oryjin.com newsletter strip',
+          Page: location.href,
+          Referrer: document.referrer || 'direct'
+        })
+      });
+    } catch (e) {}
   }
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: 'newsletter_subscribe', form: 'the_payment_economics' });
+  document.getElementById('nl-form-row').style.display = 'none';
+  status.className = 'success';
+  status.textContent = '✓ Subscribed. The next study lands in your inbox; if Substack asks you to confirm, one click and you\'re in.';
 }
 /* ═══════════════════════════════════════════════
    NAV TINT + SCROLL PROGRESS
