@@ -11,8 +11,7 @@
 - Act: alerts in Slack and an in-app inbox; recoveries summary for the CFO
 - Detected and modelled savings are never added together
 - Users: CFOs, Heads of Payments, Payment Operations (unlimited users)
-- Pricing: yearly subscription by payment volume, no success fee
-- Early access: 90-day paid design partnership on real data, fee credited to year one
+- Early access: onboarding on real data, with a founder on every account
 - Hosting: Scaleway, Paris region (EU); no cardholder data
 - Contact: contact@oryjin.com
 
@@ -21,3 +20,10 @@
 - Privacy policy: https://oryjin.com/privacy.html
 - The Payment Economics, an independent payment economics review: https://www.thepaymenteconomics.com
 - LinkedIn: https://www.linkedin.com/company/oryjin-payment-intelligence
+
+## Guides
+- PSP fees vs contract: why your payment fees go up when nothing changed: https://oryjin.com/psp-fees-vs-contract
+- Scheme fees and interchange: what a card payment really costs in Europe: https://oryjin.com/scheme-fees-interchange
+- How to prepare a PSP contract renegotiation with your own data: https://oryjin.com/psp-contract-renegotiation
+- Forecasting payment costs: how to budget PSP fees for next quarter: https://oryjin.com/payment-cost-forecast
+- Chargeback ratio: staying under the card scheme thresholds: https://oryjin.com/chargeback-ratio-thresholds

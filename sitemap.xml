@@ -4,14 +4,44 @@
     <loc>https://oryjin.com/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://oryjin.com/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://oryjin.com/"/>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://oryjin.com/privacy.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://oryjin.com/psp-fees-vs-contract</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://oryjin.com/scheme-fees-interchange</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://oryjin.com/psp-contract-renegotiation</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://oryjin.com/payment-cost-forecast</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://oryjin.com/chargeback-ratio-thresholds</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>
