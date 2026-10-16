@@ -133,11 +133,11 @@
     banner.setAttribute("aria-describedby", "ory-consent-desc");
     banner.hidden = true;
     banner.innerHTML =
-      '<h2 id="ory-consent-title">Cookies on oryjin.com</h2>' +
-      '<p id="ory-consent-desc">We use PostHog (EU) to see which pages and links are useful, and, if you agree, advertising tags from LinkedIn and Google to measure our campaigns. Nothing is set until you choose. <a href="/privacy.html">Privacy policy</a></p>' +
+      '<h2 id="ory-consent-title">Cookies</h2>' +
+      '<p id="ory-consent-desc">We use cookies to measure how the site is used and how our campaigns perform. Nothing is set until you choose. <a href="/privacy.html">Privacy policy</a></p>' +
       '<ul class="ory-consent-choices">' +
-      '<li><input type="checkbox" id="ory-consent-analytics"><label for="ory-consent-analytics"><b>Analytics</b><small>PostHog, hosted in the EU: pages viewed, links clicked, where you came from.</small></label></li>' +
-      '<li><input type="checkbox" id="ory-consent-advertising"><label for="ory-consent-advertising"><b>Advertising</b><small>LinkedIn Insight Tag and Google Ads conversion tags, to measure our campaigns.</small></label></li>' +
+      '<li><input type="checkbox" id="ory-consent-analytics"><label for="ory-consent-analytics"><b>Analytics</b><small>Audience measurement.</small></label></li>' +
+      '<li><input type="checkbox" id="ory-consent-advertising"><label for="ory-consent-advertising"><b>Advertising</b><small>Campaign measurement.</small></label></li>' +
       "</ul>" +
       '<div class="ory-consent-actions">' +
       '<button type="button" class="ory-primary" data-ory-consent="accept">Accept all</button>' +

@@ -28,5 +28,5 @@ window.ORYJIN_SITE = {
   linkedinConversionId: "",
   googleAdsId: "",
   googleAdsLeadLabel: "",
-  consentVersion: "website-2026-10-16"
+  consentVersion: "website-2026-10-16b"
 };

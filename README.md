@@ -41,7 +41,7 @@ copy always arrives. The app body is:
   "name": "Camille Durand", "email": "camille@acme.example", "company": "Acme",
   "role": "CFO", "volumeBand": "pro_25_50", "processors": ["adyen", "stripe"],
   "message": "Monthly card volume: €2M – €5M. Processors as typed: Adyen + Stripe",
-  "consent": true, "consentVersion": "website-2026-10-16", "locale": "en", "website": "",
+  "consent": true, "consentVersion": "website-2026-10-16b", "locale": "en", "website": "",
   "attribution": {
     "utmSource": "linkedin", "utmMedium": "social", "utmCampaign": "202610-renewal",
     "utmContent": "post-3", "utmTerm": "", "referrer": "https://www.linkedin.com/",
