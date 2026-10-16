@@ -95,29 +95,50 @@
   var banner = null;
 
   var BANNER_CSS = [
-    ".ory-consent{position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:560px;margin:0 auto;background:#fff;color:#141C2E;border:1px solid rgba(20,28,46,0.14);border-radius:16px;box-shadow:0 18px 48px rgba(20,28,46,0.18);padding:20px 22px;font-family:inherit;font-size:14px;line-height:1.55}",
+    ".ory-consent{position:fixed;left:24px;bottom:24px;z-index:9999;width:380px;max-width:calc(100vw - 48px);box-sizing:border-box;overflow:hidden;background:rgba(255,255,255,0.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#141C2E;border:1px solid rgba(20,28,46,0.10);border-radius:18px;box-shadow:0 1px 2px rgba(20,28,46,0.06),0 16px 40px rgba(20,28,46,0.14);padding:22px 20px 18px;font-family:inherit;font-size:14px;line-height:1.55}",
+    ".ory-consent *{box-sizing:border-box}",
+    ".ory-consent::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,#037E8F 0%,#1652D9 55%,#6302CC 100%)}",
     ".ory-consent[hidden]{display:none}",
-    ".ory-consent h2{margin:0 0 6px;font-size:16px;font-weight:700;color:#141C2E}",
-    ".ory-consent p{margin:0 0 12px;color:#3B4660}",
-    ".ory-consent a{color:#1142B0;text-decoration:underline}",
-    ".ory-consent-choices{display:none;margin:0 0 12px;padding:0;list-style:none;border-top:1px solid rgba(20,28,46,0.10);padding-top:10px}",
-    ".ory-consent.is-choosing .ory-consent-choices{display:block}",
-    ".ory-consent-choices li{display:flex;gap:10px;align-items:flex-start;padding:6px 0}",
-    ".ory-consent-choices input{margin-top:3px;accent-color:#1652D9;width:16px;height:16px;flex:none}",
+    ".ory-consent-head{display:flex;align-items:center;gap:10px;margin:0 0 8px}",
+    ".ory-consent-icon{display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:10px;background:rgba(22,82,217,0.08);color:#1652D9}",
+    ".ory-consent h2{margin:0;font-size:16px;font-weight:700;letter-spacing:-0.2px;color:#141C2E}",
+    ".ory-consent p{margin:0 0 16px;font-size:13.5px;color:#3B4660}",
+    ".ory-consent a{color:#1142B0;text-decoration:underline;text-underline-offset:2px}",
+    // The choices fold open with a grid-rows transition; visibility keeps the
+    // folded switches out of the tab order.
+    ".ory-consent-panel{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .28s ease,visibility 0s linear .28s}",
+    ".ory-consent.is-choosing .ory-consent-panel{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .28s ease,visibility 0s}",
+    ".ory-consent-choices{min-height:0;overflow:hidden;margin:0;padding:0;list-style:none}",
+    ".ory-consent-choices li{margin:0 0 8px}",
+    ".ory-consent-choices li:last-child{margin-bottom:16px}",
+    ".ory-consent-choices label{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 12px;border:1px solid rgba(20,28,46,0.10);border-radius:12px;background:#fff;cursor:pointer}",
     ".ory-consent-choices b{display:block;font-weight:600}",
-    ".ory-consent-choices small{display:block;color:#3B4660}",
-    ".ory-consent-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}",
-    ".ory-consent button{font:inherit;font-weight:600;font-size:14px;border-radius:10px;padding:9px 16px;cursor:pointer;border:1px solid rgba(20,28,46,0.17);background:#fff;color:#141C2E}",
-    ".ory-consent button.ory-primary{background:#1652D9;border-color:#1652D9;color:#fff}",
-    ".ory-consent button.ory-primary:hover{background:#1142B0}",
-    ".ory-consent button:hover{border-color:#1652D9}",
+    ".ory-consent-choices small{display:block;font-size:12.5px;color:#3B4660}",
+    ".ory-consent-choices input{-webkit-appearance:none;appearance:none;position:relative;flex:none;width:36px;height:20px;margin:0;border-radius:999px;background:#8E95A6;cursor:pointer;transition:background .2s}",
+    ".ory-consent-choices input::before{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(20,28,46,0.25);transition:transform .2s}",
+    ".ory-consent-choices input:checked{background:#1652D9}",
+    ".ory-consent-choices input:checked::before{transform:translateX(16px)}",
+    ".ory-consent-choices input:focus-visible{outline:3px solid #1652D9;outline-offset:2px}",
+    // Accept and Refuse share size and weight: refusing is as easy as accepting.
+    ".ory-consent-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}",
+    ".ory-consent button{font:inherit;font-weight:600;font-size:14px;border:0;border-radius:12px;padding:11px 14px;cursor:pointer;color:#fff;transition:background .2s,border-color .2s,transform .2s,box-shadow .2s}",
+    ".ory-consent button:active{transform:translateY(0) scale(0.985)}",
     ".ory-consent button:focus-visible{outline:3px solid #1652D9;outline-offset:2px}",
-    ".ory-consent button.ory-link{border:0;padding:9px 6px;color:#1142B0;text-decoration:underline;font-weight:500}",
+    ".ory-consent button.ory-primary{background:#1652D9}",
+    ".ory-consent button.ory-primary:hover{background:#1142B0;transform:translateY(-1px);box-shadow:0 6px 18px rgba(22,82,217,0.35)}",
+    ".ory-consent button.ory-dark{background:#141C2E}",
+    ".ory-consent button.ory-dark:hover{background:#26304A;transform:translateY(-1px);box-shadow:0 6px 18px rgba(20,28,46,0.25)}",
+    ".ory-consent button.ory-link{grid-column:1/-1;background:none;padding:6px;color:#1142B0;font-weight:500;text-decoration:underline;text-underline-offset:2px}",
     ".ory-consent-save{display:none}",
-    ".ory-consent.is-choosing .ory-consent-save{display:inline-flex}",
+    ".ory-consent button.ory-consent-save{grid-column:1/-1;background:#fff;color:#141C2E;border:1px solid rgba(20,28,46,0.17)}",
+    ".ory-consent button.ory-consent-save:hover{border-color:#1652D9;transform:translateY(-1px)}",
+    ".ory-consent.is-choosing .ory-consent-save{display:block}",
     ".ory-consent.is-choosing .ory-consent-choose{display:none}",
+    // The landing page's mobile sticky bar would sit under the banner.
+    ".ory-consent-open .sticky-cta{visibility:hidden !important}",
     "@media (prefers-reduced-motion:no-preference){.ory-consent{animation:ory-consent-in .28s ease both}@keyframes ory-consent-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}}",
-    "@media (max-width:480px){.ory-consent{left:8px;right:8px;bottom:8px;padding:16px}.ory-consent-actions button{flex:1 1 auto}}"
+    "@media (prefers-reduced-motion:reduce){.ory-consent *,.ory-consent-panel{transition:none !important}}",
+    "@media (max-width:480px){.ory-consent{left:0;right:0;bottom:0;width:auto;max-width:none;border-width:1px 0 0;border-radius:18px 18px 0 0;padding:20px 16px calc(16px + env(safe-area-inset-bottom))}.ory-consent-actions{grid-template-columns:1fr}}"
   ].join("\n");
 
   function buildBanner() {
@@ -133,16 +154,19 @@
     banner.setAttribute("aria-describedby", "ory-consent-desc");
     banner.hidden = true;
     banner.innerHTML =
+      '<div class="ory-consent-head">' +
+      '<span class="ory-consent-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/><path d="M11 17v.01"/><path d="M7 14v.01"/></svg></span>' +
       '<h2 id="ory-consent-title">Cookies</h2>' +
+      "</div>" +
       '<p id="ory-consent-desc">We use cookies to measure how the site is used and how our campaigns perform. Nothing is set until you choose. <a href="/privacy.html">Privacy policy</a></p>' +
-      '<ul class="ory-consent-choices">' +
-      '<li><input type="checkbox" id="ory-consent-analytics"><label for="ory-consent-analytics"><b>Analytics</b><small>Audience measurement.</small></label></li>' +
-      '<li><input type="checkbox" id="ory-consent-advertising"><label for="ory-consent-advertising"><b>Advertising</b><small>Campaign measurement.</small></label></li>' +
-      "</ul>" +
+      '<div class="ory-consent-panel"><ul class="ory-consent-choices">' +
+      '<li><label for="ory-consent-analytics"><span><b>Analytics</b><small>Audience measurement.</small></span><input type="checkbox" role="switch" id="ory-consent-analytics"></label></li>' +
+      '<li><label for="ory-consent-advertising"><span><b>Advertising</b><small>Campaign measurement.</small></span><input type="checkbox" role="switch" id="ory-consent-advertising"></label></li>' +
+      "</ul></div>" +
       '<div class="ory-consent-actions">' +
       '<button type="button" class="ory-primary" data-ory-consent="accept">Accept all</button>' +
-      '<button type="button" data-ory-consent="refuse">Refuse all</button>' +
-      '<button type="button" class="ory-link ory-consent-choose" data-ory-consent="choose">Choose</button>' +
+      '<button type="button" class="ory-dark" data-ory-consent="refuse">Refuse all</button>' +
+      '<button type="button" class="ory-link ory-consent-choose" data-ory-consent="choose">Customize</button>' +
       '<button type="button" class="ory-consent-save" data-ory-consent="save">Save my choices</button>' +
       "</div>";
     document.body.appendChild(banner);
@@ -177,6 +201,7 @@
     el.querySelector("#ory-consent-advertising").checked = !!(consent && consent.advertising);
     el.classList.toggle("is-choosing", !!choosing);
     el.hidden = false;
+    document.documentElement.classList.add("ory-consent-open");
     el.querySelector("[data-ory-consent=accept]").focus();
   }
 
@@ -184,6 +209,7 @@
     if (!banner) return;
     banner.hidden = true;
     banner.classList.remove("is-choosing");
+    document.documentElement.classList.remove("ory-consent-open");
     if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
   }
 
