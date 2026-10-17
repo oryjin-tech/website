@@ -12,6 +12,10 @@
 /chargeback-ratio-thresholds
 /learn
 /methodology
+/authors/victor-morel
+/covers/psp-fees-vs-contract.svg
+/covers/scheme-fees-interchange.svg
+/covers/psp-contract-renegotiation.svg
 /sitemap.xml
 /rss.xml
 /robots.txt

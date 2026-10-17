@@ -24,12 +24,22 @@ related:
   - psp-contract-renegotiation
   - payment-cost-forecast
   - chargeback-ratio-thresholds
+author: victor-morel
+cover: layers
+pullQuote: "Keeping the three apart is what makes the recoverable amount credible when you send it to the provider."
+takeaways:
+  - "Your contract fixes the markup and a few per-event prices. Interchange, scheme fees, FX and losses move on their own."
+  - "Six drivers explain most fee drift without a contract change: card mix, conditional scheme fees, tiers, geography, per-event growth and renamed billing lines."
+  - "Checking billing against the contract means pricing every settled payment under its terms and comparing it with what was billed, every month."
+  - "Keep recoverable billing errors, contractual drift and per-event costs apart: that separation is what makes a claim credible."
 ---
 ## A PSP invoice is one total on top of six moving layers
 
 The cost of accepting a card payment stacks at least six components, each with its own owner and its own revision cycle: interchange paid to the issuer, scheme fees charged by Visa or Mastercard, the acquirer or PSP markup, FX conversion, per-event fees (authorisation, 3-D Secure, refunds, retries, disputes) and the losses from fraud and chargebacks. Your contract fixes the markup and a few per-event prices. It does not fix the rest.
 
 In the EEA, consumer interchange is capped at 0.20% for debit and 0.30% for credit by Regulation (EU) 2015/751. That is the only capped layer. Everything above it moves, and it has been moving in one direction: EuroCommerce measured a 33.9% increase in scheme fees charged to European merchants between 2018 and 2022, and a European Commission study cited by Ecommerce Europe put the schemes' net charge on merchants at 0.44% of value in 2022, up from 0.27% four years earlier.
+
+[[figure:cost-layers]]
 
 ## The six reasons fees drift without a contract line moving
 
@@ -45,6 +55,8 @@ In the EEA, consumer interchange is capped at 0.20% for debit and 0.30% for cred
 Checking PSP fees against a contract is not reading the invoice. It is computing what each settled payment should have cost under the contract's terms (rate by card type, tier applicable at that volume, per-event prices, FX terms) and comparing that expected cost with what was actually billed, line by line, every month.
 
 Done properly, this separates three very different findings that a single invoice blends together: billing that departs from the contract (recoverable, with the payment references to prove it), drift that is contractually correct but commercially painful (mix, scheme revisions, FX, priced in euros so you know what it costs you), and per-event costs that no rate card would have caught. Keeping the three apart is what makes the recoverable amount credible when you send it to the provider.
+
+[[pullquote]]
 
 ## What to do this quarter
 

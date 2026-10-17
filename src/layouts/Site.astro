@@ -7,7 +7,7 @@
  * history are how a change here is reviewed.
  */
 import { getCollection } from "astro:content";
-import "../styles/guide.css";
+import "../styles/site.css";
 import { SITE, absolute, guidePath } from "../lib/site";
 
 interface Alternate {
@@ -28,6 +28,10 @@ interface Props {
 	ogImage?: string;
 	alternates?: Alternate[];
 	jsonLd?: unknown;
+	/** The byline's name, for <meta name="author">. */
+	author?: string;
+	/** The above-the-fold image (an article's cover), preloaded. */
+	preloadImage?: string;
 }
 
 const {
@@ -40,6 +44,8 @@ const {
 	ogImage = "/og-navy.png",
 	alternates = [{ hreflang: "en", href: path }, { hreflang: "x-default", href: path }],
 	jsonLd,
+	author = "Oryjin",
+	preloadImage,
 } = Astro.props;
 
 const guides = (await getCollection("guides", (g) => g.data.locale === "en")).sort(
@@ -57,9 +63,10 @@ const ogLocale = lang === "fr" ? "fr_FR" : "en_GB";
 <title>{title}</title>
 <meta name="description" content={description}>
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-<meta name="author" content="Oryjin">
+<meta name="author" content={author}>
 <meta name="theme-color" content="#1652D9">
 <link rel="canonical" href={canonical}>
+{preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high">}
 {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={absolute(a.href)}>)}
 <meta property="og:type" content={ogType}>
 <meta property="og:url" content={canonical}>
@@ -115,7 +122,7 @@ function oryFallback(img){
     <a href="/#platform" class="nav-link">Why Oryjin</a>
     <a href="/#product" class="nav-link">Product</a>
     <a href="/#integrations" class="nav-link">Integrations</a>
-    <a href="/#faq" class="nav-link">FAQ</a>
+    <a href="/learn" class="nav-link nav-guides" aria-current={path === "/learn" || path.startsWith("/authors/") ? "page" : undefined}>Guides</a>
     <a href="https://app.oryjin.com/request-access?source=website&amp;utm_source=website&amp;utm_medium=cta&amp;utm_content=guide-nav" class="nav-link" data-app-link="guide-nav">Request access</a>
     <a href="/#apply" class="nav-cta" data-cta="nav-guide">Apply for early access</a>
   </div>
@@ -141,6 +148,7 @@ function oryFallback(img){
     <div>
       <div class="footer-col-head">Guides</div>
       <div class="footer-links-col">
+        <a href="/learn">All guides</a>
 {guides.map((g) => (
         <a href={guidePath(g)}>{g.data.shortTitle}</a>
       ))}

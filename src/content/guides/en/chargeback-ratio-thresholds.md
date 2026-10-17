@@ -24,6 +24,14 @@ related:
   - scheme-fees-interchange
   - psp-contract-renegotiation
   - payment-cost-forecast
+author: victor-morel
+cover: threshold
+pullQuote: "A ratio that is comfortable in aggregate can be at 0.9% on German Visa credit while the blended figure reads 0.4%."
+takeaways:
+  - "Compute the ratio yourself from raw disputes and authorisations: providers define it differently."
+  - "Visa's enforcement threshold for the EU is 1.5% from April 2026. Set your own internal limit well below it."
+  - "Watch it weekly, by market, card type and payment method; the blended ratio hides the cell that breaches."
+  - "Fraud and non-fraud disputes have different owners and different fixes. Split them and price each lever before pulling it."
 ---
 ## How the ratio is computed, and why the definition matters
 
@@ -33,6 +41,8 @@ The chargeback or dispute ratio is the number of disputes in a month divided by 
 
 Both Visa and Mastercard run programmes that place a merchant under monitoring when its ratio and dispute count exceed published thresholds, with escalating fees the longer the merchant stays above. Visa's programme tightened its enforcement threshold to 1.5% for the EU and other regions from April 2026, with a per-dispute enforcement fee already in place. Thresholds are revised; the direction of travel has been downwards. Treat the published threshold as a ceiling you never approach, and set your own internal limit well below it.
 
+[[figure:threshold-cells]]
+
 ## What a breach costs
 
 Beyond the dispute fees themselves, a merchant above threshold pays programme fees per dispute, may be required to implement a remediation plan, and can face acquirer reserves or termination. The indirect cost is larger: an acquirer that sees a rising ratio prices the risk into the next contract. This is why the ratio belongs in the payment cost cockpit, next to fees and FX, rather than in a separate fraud report.
@@ -41,9 +51,13 @@ Beyond the dispute fees themselves, a merchant above threshold pays programme fe
 
 A monthly ratio arrives too late to act on. Track disputes and authorisations weekly, cut by market, card type and payment method, and compare each cell to the threshold. A ratio that is comfortable in aggregate can be at 0.9% on German Visa credit while the blended figure reads 0.4%. Set alerts in absolute terms (a count and a ratio per cell) and route them to the person who can change a rule, not to a dashboard someone must remember to open.
 
+[[pullquote]]
+
 ## Fraud disputes and non-fraud disputes are two different problems
 
 The schemes count fraud-coded disputes and all disputes separately, and the remedies differ. A fraud dispute (the cardholder says they never made the payment) is a question of authentication and screening: 3-D Secure, velocity rules, device signals. A non-fraud dispute (the goods did not arrive, the subscription was not cancelled, the charge was not recognised) is a question of operations: delivery confirmation, cancellation flows, a descriptor the customer recognises on their statement. Reporting the two as one ratio hides which team owns the fix. Split them, price them, and give each its own threshold.
+
+[[figure:dispute-types]]
 
 ## The levers, and what each one costs
 

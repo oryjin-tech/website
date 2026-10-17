@@ -1,0 +1,218 @@
+/* ─────────────────────────────────────────────
+   site.css — the chrome every generated page shares: tokens, nav,
+   buttons, newsletter strip, footer, motion. Lifted from the one-pager's
+   stylesheet (public/index.html), which keeps its own inline copy; the
+   brand hexes below must match brand/colors.css (scripts/check-brand-sync.sh
+   checks public/index.html and partners/, so keep the two in step by hand).
+   Article typography lives in article.css, the hub's grid in hub.css.
+───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  /* ─── BRAND ──────────────────────────────────────────────────────────
+     Oryjin brand kit 1.0. These three hexes are `brand/colors.css`,
+     vendored byte-for-byte from oryjin-tech/core, which owns the brand.
+     `scripts/check-brand-sync.sh` fails the moment this block and that
+     file disagree, so change a brand colour in core and re-sync — never
+     here. Contrast figures are against --bg. */
+  --v:      #1652D9; /* kit blue   — 6.31:1. Was #2563EB at 5.03:1. */
+  --violet: #6302CC; /* kit purple — 8.48:1. Supporting; used sparingly. */
+  --teal:   #037E8F; /* kit teal   — 4.67:1. Replaces the #22D3EE this block
+                        used to carry with a comment conceding it failed
+                        contrast; it was 1.76:1. Lives in --grad, and is
+                        still not a text colour. */
+
+  /* Hover/pressed blue. NOT a kit colour: the kit ships ONE blue, and
+     #1652D9 is already dark enough that the old hover (#1D4ED8, 6.53:1)
+     would now read LIGHTER than rest state. A step down the same hue. */
+  --vdk:    #1142B0; /* 8.64:1 on white */
+
+  /* The brand gradient — teal → blue → purple, the same three stops at the
+     same offsets as core's --brand-gradient. For SURFACES only: rules,
+     bars, washes. Never the mark. The mark's geometry is 2-unit arcs and a
+     three-stop ramp across one of those is banding at 24px, not brand. */
+  --grad:   linear-gradient(90deg, var(--teal) 0%, var(--v) 55%, var(--violet) 100%);
+
+  /* Channels, so a tint can resolve from the token instead of restating it.
+     38 washes on this page used to hardcode rgba(37, 99, 235, …), which is
+     why the old blue outlived two of its own retirements. */
+  --v-rgb:      22 82 217;
+  --violet-rgb: 99 2 204;
+
+  /* ─── SURFACES & INK ────────────────────────────────────────────────── */
+  --bg:     #FBFCFE;
+  --bg2:    #EBF0FF; /* kit sidebar tint — footer, alternating bands */
+  --surf:   #FFFFFF;
+  --surf2:  #F6F8FC; /* kit surface */
+  --bdr:    rgba(20,28,46,0.10);
+  --bdr2:   rgba(20,28,46,0.17);
+  --ink:    #141C2E; /* kit dark. Was --white, which named its own opposite. */
+  --txt:    #14213B;
+  --dim:    #5B6172;
+  --muted:  #5A6072; /* darker than live #7C8294: 4.5:1+ for small labels */
+  --green:  #10B981;
+  --amber:  #B7791F;
+  /* Aliases kept for the page's component CSS. */
+  --vlt:    var(--v);
+  --vglow:  rgb(var(--v-rgb) / 0.18);
+  --white:  var(--ink); /* legacy name; resolves to kit ink */
+}
+html { scroll-behavior: smooth; overflow-x: clip; }
+/* FIX: the "body {" selector was missing in the previous version, so none of these rules applied */
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+a:focus-visible,button:focus-visible,.form-input:focus-visible,.form-select:focus-visible,.nl-input:focus-visible{outline:2px solid var(--v);outline-offset:2px}
+/* ─────────────────────────────────────────────
+   NAV
+───────────────────────────────────────────── */
+body > nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 16px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  background: rgba(255,255,255,0.62);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+nav.scrolled{border-bottom-color:rgba(20,28,46,0.10);box-shadow:0 8px 30px -20px rgba(20,28,46,0.30);background:rgba(255,255,255,0.78)}
+.nav-logo {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.4px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 0.2s;
+}
+.nav-logo:hover{opacity:0.85}
+.nav-lockup{display:block;height:30px;width:auto}
+.footer-brand-logo .nav-lockup{height:28px}
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.nav-link, .nav-contact {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.2s;
+  padding: 10px 6px;
+  border-radius: 6px;
+}
+.nav-link:hover, .nav-contact:hover { color: var(--vlt); }
+.nav-cta{display:inline-flex;align-items:center;background:var(--v);color:#fff;font-weight:700;font-size:14px;padding:9px 18px;border-radius:10px;text-decoration:none;letter-spacing:-0.01em;box-shadow:0 4px 14px rgb(var(--v-rgb) / 0.32);transition:background 0.2s,transform 0.15s,box-shadow 0.2s;white-space:nowrap}
+.nav-cta:hover{background:var(--vdk);transform:translateY(-1px);box-shadow:0 8px 22px rgb(var(--v-rgb) / 0.45)}
+@media (max-width: 760px) { .nav-link { display: none; } }
+@media (max-width: 600px) {
+  body > nav { padding: 14px 20px; }
+  .nav-contact { display: none; }
+  .nav-cta{padding:8px 14px;font-size:13px}
+}
+/* ─── BUTTONS ─── */
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--v); color: #fff;
+  font-size: 15px; font-weight: 700;
+  padding: 16px 36px;
+  border-radius: 14px;
+  text-decoration: none; border: none; cursor: pointer;
+  letter-spacing: -0.1px;
+  transition: background 0.25s, transform 0.25s, box-shadow 0.4s;
+  box-shadow: 0 4px 24px rgb(var(--v-rgb) / 0.45), 0 0 0 1px rgb(var(--v-rgb) / 0.2) inset;
+  position: relative; overflow: hidden;
+}
+.cta-btn:hover { background: var(--vdk); transform: translateY(-2px); box-shadow: 0 8px 36px rgb(var(--v-rgb) / 0.6); }
+.cta-btn:active { transform: translateY(0) scale(0.985); }
+.cta-arrow { transition: transform 0.2s; }
+.cta-btn:hover .cta-arrow { transform: translateX(3px); }
+.cta-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 15px; font-weight: 600; color: var(--txt);
+  padding: 15px 26px; border-radius: 14px; text-decoration: none;
+  border: 1px solid var(--bdr2); background: var(--surf);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.cta-ghost:hover { border-color: var(--v); transform: translateY(-2px); }
+.section-label { text-align: center; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); margin-bottom: 14px; }
+/* ─── NEWSLETTER STRIP ─── */
+.nl-section { padding: 40px 24px; max-width: 1040px; margin: 0 auto; }
+.nl-strip { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 18px; background: var(--surf); border: 1px solid var(--bdr); border-radius: 16px; padding: 18px 22px; }
+.nl-logo { width: 44px; height: 44px; border-radius: 50%; display: block; }
+.nl-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.nl-txt b { font-size: 16px; font-weight: 800; color: var(--ink); letter-spacing: -0.01em; }
+.nl-txt span { font-size: 14px; color: var(--dim); line-height: 1.5; }
+#nl-status { grid-column: 1 / -1; font-size: 13px; color: var(--dim); }
+#nl-status:empty { display: none; }
+@media (max-width: 760px) { .nl-strip { grid-template-columns: auto 1fr; } .nl-input-row { grid-column: 1 / -1; } }
+.nl-input-row { display: flex; gap: 8px; }
+.nl-input { flex: 1; min-width: 0; background: rgba(20,28,46,0.05); border: 1px solid var(--bdr); border-radius: 8px; padding: 10px 14px; color: var(--txt); font-size: 16px; font-family: inherit; outline: none; transition: border-color 0.2s; }
+.nl-input:focus { border-color: rgb(var(--v-rgb) / 0.5); }
+.nl-input::placeholder { color: var(--muted); }
+.nl-btn { background: var(--v); border: none; border-radius: 8px; padding: 10px 18px; color: #fff; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
+.nl-btn:hover { background: var(--vdk); }
+.nl-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+#nl-status { margin-top: 10px; font-size: 13px; font-weight: 600; min-height: 18px; }
+#nl-status.success { color: #047857; }
+#nl-status.error   { color: #DC2626; }
+/* ─────────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────────── */
+footer { border-top: 1px solid var(--bdr); background: var(--bg2); padding: 56px 64px 40px; }
+.footer-inner { max-width: 1040px; margin: 0 auto 48px; display: grid; grid-template-columns: 1.3fr 1fr 1.2fr 1fr; gap: 40px; }
+@media (max-width: 900px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 720px) { footer { padding: 40px 24px 32px; } .footer-inner { grid-template-columns: 1fr; gap: 32px; } }
+.footer-brand-logo { font-size: 17px; font-weight: 800; color: var(--white); letter-spacing: -0.4px; display: flex; align-items: center; gap: 6px; margin-bottom: 14px; text-decoration: none; }
+.footer-brand-logo-mark { color: var(--vlt); font-size: 18px; }
+.footer-brand-desc { font-size: 14px; color: var(--dim); line-height: 1.7; max-width: 260px; margin-bottom: 20px; }
+.footer-brand-tagline { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: rgba(20,28,46,0.04); border: 1px solid var(--bdr); border-radius: 6px; padding: 5px 10px; }
+.footer-col-head { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); margin-bottom: 18px; }
+.footer-links-col { display: flex; flex-direction: column; gap: 12px; }
+.footer-links-col a, .footer-links-col span { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; line-height: 1.5; }
+.footer-links-col a:hover { color: var(--vlt); }
+.footer-bottom { max-width: 960px; margin: 0 auto; padding-top: 24px; border-top: 1px solid var(--bdr); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.footer-copy { font-size: 13px; color: var(--muted); font-weight: 500; }
+.footer-legal { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--muted); }
+.footer-legal a { color: var(--muted); text-decoration: none; }
+.footer-legal a:hover { color: var(--dim); }
+@media (max-width: 600px) { .footer-bottom { justify-content: center; text-align: center; } .footer-legal { justify-content: center; } }
+/* ─────────────────────────────────────────────
+   ANIMATIONS
+───────────────────────────────────────────── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.75); } }
+@keyframes floatA { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+@keyframes floatB { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(10px); } }
+@keyframes driftA { 0%, 100% { transform: translate(0, 0); } 33% { transform: translate(30px, -20px); } 66% { transform: translate(-20px, 15px); } }
+@keyframes driftB { 0%, 100% { transform: translate(0, 0); } 33% { transform: translate(-25px, 20px); } 66% { transform: translate(20px, -15px); } }
+@keyframes breathe{0%,100%{opacity:0.85;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.08)}}
+.scroll-prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:200;background:var(--grad);box-shadow:0 0 12px rgb(var(--v-rgb) / 0.6);transition:width 0.12s ease}
+.reveal { opacity: 0; transform: translateY(26px) scale(0.992); transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1), transform 0.85s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+/* Metric-matched fallback so the web-font swap does not shift layout (CLS) */
+@font-face{font-family:'Jakarta Fallback';src:local('Arial'),local('Helvetica'),local('Liberation Sans');font-weight:100 649;size-adjust:105.8%;ascent-override:99%;descent-override:20%;line-gap-override:0%}
+@font-face{font-family:'Jakarta Fallback';src:local('Arial Bold'),local('Arial'),local('Helvetica'),local('Liberation Sans');font-weight:650 900;size-adjust:110.2%;ascent-override:95%;descent-override:19%;line-gap-override:0%}
+/* ─── BRAND TYPEFACE · Plus Jakarta Sans ─── */
+:root{--font-display:'Plus Jakarta Sans','Jakarta Fallback',system-ui,-apple-system,'Segoe UI',sans-serif}
+body,button,input,select,textarea{font-family:var(--font-display)}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition-duration:0.01ms !important}
+  .reveal{opacity:1 !important; transform:none !important}
+  .dc-bar i{width:var(--w) !important}
+  html{scroll-behavior:auto}
+}

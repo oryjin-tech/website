@@ -24,10 +24,20 @@ related:
   - scheme-fees-interchange
   - payment-cost-forecast
   - chargeback-ratio-thresholds
+author: victor-morel
+cover: timeline
+pullQuote: "Published list prices are your leverage; they are not something to hand the other side."
+takeaways:
+  - "Start when the 60-day window before renewal opens, with every end date and notice period on one radar."
+  - "Price twelve months of your own volume under the contract: the billing gap, the tier position and the effective markup fall out of it."
+  - "Ask for what your data proves, easiest first: credit the gap, apply the tier, move to interchange++, then lower the markup."
+  - "After signing, run the first three invoices against the new terms and record what the renegotiation earned."
 ---
 ## Start 60 days out, not the week the notice arrives
 
 Renewal clauses typically require notice one to three months before the end date. If the contract end date is not in a calendar you actually look at, it will renew on last year's terms. Put every provider's end date and notice period on a renewal radar, and start the preparation when the 60-day window opens: that leaves time to pull the data, build the case and hold two rounds of conversation.
+
+[[figure:renewal-timeline]]
 
 ## Price a year of your own volume against the contract
 
@@ -39,9 +49,13 @@ Each ask should rest on a fact from your own data rather than on a market rumour
 
 Keep two documents. An internal brief that includes the market references and the full reasoning, and a provider-facing fact sheet that states only what the contract and your data already say. Published list prices are your leverage; they are not something to hand the other side.
 
+[[figure:asks-ladder]]
+
 ## Know what you will concede, and what you will not
 
 A provider will ask for volume commitments, longer terms or exclusivity in exchange for rate. Decide beforehand which of those you can give. A volume commitment on a market you are growing is cheap; exclusivity that prevents a second acquirer is not. Model the scenarios: what the year costs at the current terms, at your target terms, and at the provider's likely counter. Bring the downside case as well as the target, because a forecast you cannot defend is a forecast nobody signs off.
+
+[[pullquote]]
 
 ## Compare like for like before you compare prices
 

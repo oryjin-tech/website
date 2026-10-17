@@ -36,6 +36,10 @@
  *                                                      (target "apply")
  *   site_faq_opened          { page }                  once per guide page load
  *   site_why_step            { step }                  the "why" stepper
+ *   learn_article_read       { slug, locale, depth }   a guide's body read
+ *                                                      to 25/50/75/100%
+ *   learn_share              { slug, locale, network } a guide's share buttons
+ *                                                      (linkedin, x, email, copy)
  *
  * Public surface: window.OryjinSite — consent.get/open/set, attribution(),
  * landingPath(), distinctId(), capture(), postLead(), conversion().
@@ -348,7 +352,9 @@
     generate_lead: "site_lead_submitted",
     newsletter_subscribe: "site_newsletter_subscribed",
     cta_click: "site_cta_clicked",
-    why_step: "site_why_step"
+    why_step: "site_why_step",
+    learn_article_read: "learn_article_read",
+    learn_share: "learn_share"
   };
 
   function forward(entry) {

@@ -24,6 +24,14 @@ related:
   - scheme-fees-interchange
   - psp-contract-renegotiation
   - chargeback-ratio-thresholds
+author: victor-morel
+cover: fan
+pullQuote: "A forecast nobody checks is a guess with a spreadsheet."
+takeaways:
+  - "A flat percentage on a revenue forecast misses mix shifts, scheme fee revisions, tiers and per-event growth."
+  - "Forecast from three inputs: volume by processor and month, the mix trajectory and the contract's mechanics."
+  - "Publish a range with named drivers, a P10 to P90 band, rather than a single line."
+  - "Snapshot the forecast each month and attribute every miss to volume, mix and unit cost."
 ---
 ## Why a flat percentage fails
 
@@ -39,9 +47,13 @@ A single forecast line invites the wrong conversation. A range (a conservative h
 
 Guard the forecast against its own inputs. A seasonal spike should not be allowed to inflate the trend; clamp the growth rate. An approaching tier should be listed as a driver, not silently applied. The band is the P10 to P90 of the effective rate applied to projected volume, never the clamp read as an uncertainty.
 
+[[figure:forecast-band]]
+
 ## Scenarios finance can actually ask
 
 The questions a forecast has to answer are conditional: if volume grows 30% next quarter, do we cross a tier and what does the fee line become? If we open Germany and Spain, what is the incremental cost and at what basket size does local acquiring pay for itself? If commercial card share keeps drifting at the current rate, what does it cost over four quarters? If the renegotiation lands at the target rate rather than the current one, what is the annualised saving, and the downside case? If the announced scheme fee revisions apply in full to our mix, what is the exposure? Each scenario is priced on your own data, never on a slider.
+
+[[pullquote]]
 
 ## Hold every closed month against the forecast
 

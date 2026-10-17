@@ -33,50 +33,45 @@ function load() {
 const NAVY = "#141C2E";
 const SKY = "#8FB2FF";
 
-export async function ogImage(kicker: string, title: string): Promise<Buffer> {
+/**
+ * With a cover (a guide's, from src/lib/covers.ts), the cover fills the card
+ * and a navy scrim on the left carries the text; without one, the plain navy
+ * card the hub's other pages use.
+ */
+export async function ogImage(
+	kicker: string,
+	title: string,
+	opts: { cover?: string; byline?: string } = {},
+): Promise<Buffer> {
 	const { regular, bold, lockup } = await load();
-	const size = title.length > 70 ? 52 : title.length > 50 ? 58 : 66;
-	const tree = {
-		type: "div",
-		props: {
-			style: {
-				width: 1200,
-				height: 630,
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "flex-start",
-				padding: "72px 80px",
-				background: NAVY,
-				fontFamily: "Jakarta",
-				color: "#FFFFFF",
-			},
-			children: [
-				{ type: "img", props: { src: lockup, width: 222, height: 60 } },
-				{
-					type: "div",
-					props: {
-						style: { display: "flex", flexDirection: "column", gap: 24, width: 1040, marginTop: 150 },
-						children: [
-							{
-								type: "div",
-								props: {
-									style: { fontSize: 28, fontWeight: 500, color: SKY, letterSpacing: 1 },
-									children: kicker,
-								},
-							},
-							{
-								type: "div",
-								props: {
-									style: { width: 1040, fontSize: size, fontWeight: 700, lineHeight: 1.12, letterSpacing: -1.5 },
-									children: title,
-								},
-							},
-						],
-					},
-				},
-			],
-		},
-	};
+	const withCover = Boolean(opts.cover);
+	const size = withCover
+		? title.length > 70 ? 46 : title.length > 50 ? 52 : 58
+		: title.length > 70 ? 52 : title.length > 50 ? 58 : 66;
+	const cover = opts.cover
+		? `data:image/png;base64,${new Resvg(opts.cover, { fitTo: { mode: "width", value: 1200 } }).render().asPng().toString("base64")}`
+		: null;
+	const layer = (style: Record<string, unknown>, children?: unknown) => ({ type: "div", props: { style: { display: "flex", ...style }, children } });
+	const tree = layer(
+		{ position: "relative", width: 1200, height: 630, background: NAVY, fontFamily: "Jakarta", color: "#FFFFFF" },
+		[
+			...(cover ? [{ type: "img", props: { src: cover, width: 1200, height: 630, style: { position: "absolute", left: 0, top: 0 } } }] : []),
+			...(cover
+				? [layer({ position: "absolute", left: 0, top: 0, width: 1200, height: 630, backgroundImage: `linear-gradient(90deg, ${NAVY} 0%, rgba(20,28,46,0.94) 46%, rgba(20,28,46,0.35) 72%, rgba(20,28,46,0) 100%)` })]
+				: []),
+			layer(
+				{ position: "absolute", left: 0, top: 0, width: 1200, height: 630, flexDirection: "column", padding: "64px 80px" },
+				[
+					{ type: "img", props: { src: lockup, width: 200, height: 54 } },
+					layer({ flexDirection: "column", gap: 22, width: withCover ? 700 : 1040, marginTop: withCover ? 110 : 150 }, [
+						layer({ fontSize: 26, fontWeight: 500, color: SKY, letterSpacing: 1 }, kicker),
+						layer({ fontSize: size, fontWeight: 700, lineHeight: 1.12, letterSpacing: -1.5 }, title),
+						...(opts.byline ? [layer({ fontSize: 24, fontWeight: 500, color: "rgba(255,255,255,0.72)", marginTop: 6 }, opts.byline)] : []),
+					]),
+				],
+			),
+		],
+	);
 	const svg = await satori(tree as Parameters<typeof satori>[0], {
 		width: 1200,
 		height: 630,
