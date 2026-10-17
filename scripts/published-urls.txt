@@ -1,0 +1,21 @@
+# Every URL oryjin.com has ever published. A URL never leaves this list, and
+# scripts/check-site.mjs fails the build if one stops resolving: GitHub Pages
+# has no redirects, so a moved page is a dead link for whoever saved it and
+# a lost ranking. Add a line when a page is published.
+/
+/privacy.html
+/partners/
+/psp-fees-vs-contract
+/scheme-fees-interchange
+/psp-contract-renegotiation
+/payment-cost-forecast
+/chargeback-ratio-thresholds
+/learn
+/methodology
+/sitemap.xml
+/rss.xml
+/robots.txt
+/llms.txt
+/og-navy.png
+/favicon.ico
+/site.webmanifest

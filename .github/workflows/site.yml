@@ -1,0 +1,30 @@
+# Builds the site and runs the SEO gate on every pull request, so a change
+# that would fail the deploy fails here first, where it is cheap to fix.
+# Deploy runs the same two steps on main (deploy.yml).
+name: Site
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: SEO gate
+        run: pnpm check:site

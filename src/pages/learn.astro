@@ -1,0 +1,105 @@
+---
+/**
+ * The knowledge hub's landing page: every guide, grouped by pillar, the free
+ * tools, and how figures are sourced. Articles keep their flat root URLs;
+ * this page is the hub, not a path prefix
+ * (oryjin-tech/core docs/plans/payment-knowledge-hub.md).
+ */
+import { getCollection } from "astro:content";
+import Site from "../layouts/Site.astro";
+import "../styles/hub.css";
+import { PILLAR_ORDER, PILLARS } from "../lib/i18n";
+import { absolute, appLink, guidePath } from "../lib/site";
+
+const guides = (await getCollection("guides", (g) => g.data.locale === "en")).sort(
+	(a, b) => a.data.order - b.data.order,
+);
+const pillars = PILLAR_ORDER.map((key) => ({
+	key,
+	...PILLARS.en[key],
+	guides: guides.filter((g) => g.data.pillar === key),
+})).filter((p) => p.guides.length > 0);
+
+const title = "Payment cost guides for finance teams";
+const description =
+	"Guides on payment costs: interchange, scheme fees, PSP pricing, chargebacks and forecasting, with worked figures and their sources.";
+const path = "/learn";
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "CollectionPage",
+			"@id": `${absolute(path)}#page`,
+			name: title,
+			description,
+			inLanguage: "en",
+			url: absolute(path),
+			isPartOf: { "@type": "WebSite", name: "Oryjin", url: "https://oryjin.com/" },
+			mainEntity: {
+				"@type": "ItemList",
+				itemListElement: guides.map((g, i) => ({
+					"@type": "ListItem",
+					position: i + 1,
+					url: absolute(guidePath(g)),
+					name: g.data.title,
+				})),
+			},
+		},
+		{
+			"@type": "BreadcrumbList",
+			itemListElement: [
+				{ "@type": "ListItem", position: 1, name: "Oryjin", item: "https://oryjin.com/" },
+				{ "@type": "ListItem", position: 2, name: "Guides", item: absolute(path) },
+			],
+		},
+	],
+};
+---
+<Site title={`${title} | Oryjin`} description={description} path={path} ogType="website" ogTitle={title} jsonLd={jsonLd}>
+<section class="guide-hero">
+  <p class="guide-crumb"><a href="/">Oryjin</a> › Guides</p>
+  <p class="section-label">Guides · Payment economics</p>
+  <h1>What your payments really cost, and how to lower it</h1>
+  <p class="lede">Practical guides for finance teams at European merchants. Each one answers a single question about payment costs, works it through with figures, and says where every figure comes from.</p>
+</section>
+<article class="guide-body">
+  {pillars.map((p) => (
+    <section>
+      <h2 id={p.key}>{p.title}</h2>
+      <p>{p.intro}</p>
+      <ul class="hub-list">
+        {p.guides.map((g) => (
+          <li>
+            <span class="hub-kicker">{g.data.label} · {g.data.readingMinutes} min</span>
+            <a href={guidePath(g)}>{g.data.title}</a>
+            <p>{g.data.description}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+  <h2 id="tools">Free tools</h2>
+  <p>Put your own numbers next to the guides, without an account.</p>
+  <ul class="hub-list">
+    <li>
+      <span class="hub-kicker">Estimate</span>
+      <a href={appLink("/try/estimate", "learn-hub-estimate")} data-app-link="learn-hub-estimate" data-app-target="estimate">Estimate your payment fees</a>
+      <p>Six figures you already know, read against published prices and the interchange caps: what a competitive deal would cost you, as a range. A model, not an audit.</p>
+    </li>
+    <li>
+      <span class="hub-kicker">Explore</span>
+      <a href={appLink("/try", "learn-hub-sample")} data-app-link="learn-hub-sample" data-app-target="sample">Open a sample company</a>
+      <p>A working payments workspace for a mid-market merchant on Stripe and Adyen, refreshed nightly. Nothing you do there changes anything.</p>
+    </li>
+  </ul>
+  <h2 id="sources">Where the figures come from</h2>
+  <p>Every rate in these guides is a published figure with a source and a date, or a model built from them and labelled as one. <a href="/methodology">Read how figures are chosen and kept current</a>.</p>
+  <div class="guide-cta">
+    <b>See your own payment costs, layer by layer, from your own data.</b>
+    <span>Oryjin continuously monitors your entire stack, from PSP and acquirer fees to scheme fees, fraud, chargebacks and orchestration, and turns it into decision-grade intelligence. Early access is open for European merchants doing €2 to 20M GMV a month.</span>
+    <a href="/#apply" class="cta-btn" data-cta="learn-hub">Apply for early access <span class="cta-arrow" aria-hidden="true">→</span></a>
+    <a href={appLink("/request-access", "learn-hub")} class="cta-ghost" data-app-link="learn-hub">Request access</a>
+  </div>
+</article>
+</Site>

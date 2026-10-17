@@ -1,13 +1,10 @@
 # Publishes oryjin.com. GitHub Pages deploys from GitHub Actions since
-# 2026-10-17 (Settings → Pages → Source); before that it published `main`
-# through its own generated "pages-build-deployment" workflow, which no
-# longer runs.
+# 2026-10-17 (Settings → Pages → Source). The site is an Astro build: the
+# hand-written pages in public/ are copied as-is, the guides and the hub are
+# generated from src/ (oryjin-tech/core, docs/plans/payment-knowledge-hub.md).
 #
-# This workflow reproduces that build exactly: the same Jekyll pass over the
-# repository root, so every page, asset and clean URL is served as before.
-# It exists now so a merge to main keeps publishing; the knowledge hub's
-# Astro build replaces the build job later (oryjin-tech/core,
-# docs/plans/payment-knowledge-hub.md, slice 1).
+# The SEO gate (scripts/check-site.mjs) runs before the upload, so a build
+# that drops a published URL or ships a broken link never goes live.
 #
 # notify-deploy.yml listens for this workflow's name, "Deploy". Renaming it
 # silently stops the Slack heartbeat.
@@ -33,13 +30,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - name: Build with Jekyll, as the branch deploy did
-        uses: actions/jekyll-build-pages@v1
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
         with:
-          source: ./
-          destination: ./_site
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: SEO gate
+        run: pnpm check:site
+      - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
 
   deploy:
     needs: build

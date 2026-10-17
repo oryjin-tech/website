@@ -19,17 +19,17 @@ on:
   push:
     branches: [main]
     paths:
-      - 'brand/**'
-      - 'index.html'
-      - 'partners/**'
+      - 'public/brand/**'
+      - 'public/index.html'
+      - 'public/partners/**'
       - 'scripts/check-brand-sync.sh'
       - 'scripts/check-old-palette.py'
       - '.github/workflows/brand.yml'
   pull_request:
     paths:
-      - 'brand/**'
-      - 'index.html'
-      - 'partners/**'
+      - 'public/brand/**'
+      - 'public/index.html'
+      - 'public/partners/**'
       - 'scripts/check-brand-sync.sh'
       - 'scripts/check-old-palette.py'
       - '.github/workflows/brand.yml'

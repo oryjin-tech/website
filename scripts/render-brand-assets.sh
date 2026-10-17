@@ -17,7 +17,9 @@
 # defend.
 set -euo pipefail
 
-cd "$(dirname "$0")/.."
+# Every path below is relative to public/, which is what the site serves
+# (the Astro build copies it as-is since 2026-10-17).
+cd "$(dirname "$0")/../public"
 
 CHROME=${CHROME:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}
 if [[ ! -x $CHROME ]]; then
