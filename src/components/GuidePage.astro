@@ -1,0 +1,123 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import Site from "../layouts/Site.astro";
+import { GUIDE_COPY, HUB_PATH } from "../lib/i18n";
+import { absolute, appLink, guidePath, guideSlug, isoDate, monthYear } from "../lib/site";
+
+interface Props {
+	guide: CollectionEntry<"guides">;
+}
+
+const { guide } = Astro.props;
+const { data } = guide;
+const copy = GUIDE_COPY[data.locale];
+const slug = guideSlug(guide);
+const path = guidePath(guide);
+const { Content } = await render(guide);
+
+const all = await getCollection("guides");
+const fileName = (g: CollectionEntry<"guides">) => g.id.split("/").pop()!;
+const sameLocale = all.filter((g) => g.data.locale === data.locale);
+const related = data.related.map((name) => {
+	const hit = sameLocale.find((g) => fileName(g) === name);
+	if (!hit) throw new Error(`${guide.id}: related guide "${name}" does not exist in ${data.locale}`);
+	return hit;
+});
+
+// hreflang pairs: the English guide and every translation that names it.
+const englishName = data.locale === "en" ? fileName(guide) : data.translationOf!;
+const family = all.filter((g) =>
+	g.data.locale === "en" ? fileName(g) === englishName : g.data.translationOf === englishName,
+);
+const english = family.find((g) => g.data.locale === "en");
+const alternates = [
+	...family.map((g) => ({ hreflang: g.data.locale, href: guidePath(g) })),
+	...(english ? [{ hreflang: "x-default", href: guidePath(english) }] : []),
+];
+
+const ogImage = `/og/${data.locale}/${slug}.png`;
+const url = absolute(path);
+const ctaContent = `guide-${slug}`;
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "Article",
+			"@id": `${url}#article`,
+			headline: data.title,
+			description: data.description,
+			inLanguage: data.locale,
+			datePublished: isoDate(data.published),
+			dateModified: isoDate(data.updated),
+			author: { "@type": "Organization", name: "Oryjin", url: "https://oryjin.com/" },
+			publisher: {
+				"@type": "Organization",
+				name: "Oryjin",
+				logo: { "@type": "ImageObject", url: "https://oryjin.com/favicon-512x512.png" },
+			},
+			mainEntityOfPage: url,
+			image: absolute(ogImage),
+		},
+		{
+			"@type": "BreadcrumbList",
+			itemListElement: [
+				{ "@type": "ListItem", position: 1, name: "Oryjin", item: "https://oryjin.com/" },
+				{ "@type": "ListItem", position: 2, name: copy.crumbGuides, item: absolute(HUB_PATH[data.locale]) },
+				{ "@type": "ListItem", position: 3, name: data.title, item: url },
+			],
+		},
+		...(data.faq.length > 0
+			? [
+					{
+						"@type": "FAQPage",
+						mainEntity: data.faq.map((f) => ({
+							"@type": "Question",
+							name: f.q,
+							acceptedAnswer: { "@type": "Answer", text: f.a },
+						})),
+					},
+				]
+			: []),
+	],
+};
+---
+<Site
+	title={`${data.seoTitle} | Oryjin`}
+	description={data.description}
+	path={path}
+	lang={data.locale}
+	ogTitle={data.title}
+	ogImage={ogImage}
+	alternates={alternates}
+	jsonLd={jsonLd}
+>
+<section class="guide-hero">
+  <p class="guide-crumb"><a href="/">Oryjin</a> › <a href={HUB_PATH[data.locale]}>{copy.crumbGuides}</a></p>
+  <p class="section-label">{copy.kicker} · {data.label}</p>
+  <h1>{data.title}</h1>
+  <p class="lede">{data.lede}</p>
+  <div class="guide-meta"><span>{copy.minRead(data.readingMinutes)}</span><span>{copy.updated(monthYear(data.updated, data.locale))}</span><span>{copy.byline}</span></div>
+</section>
+<article class="guide-body">
+<Content />
+  <div class="guide-cta">
+    <b>{data.cta.headline}</b>
+    <span>{data.cta.text}</span>
+    <a href="/#apply" class="cta-btn" data-cta={ctaContent}>{copy.apply} <span class="cta-arrow" aria-hidden="true">→</span></a>
+    <a href={appLink("/request-access", ctaContent)} class="cta-ghost" data-app-link={ctaContent}>{copy.requestAccess}</a>
+  </div>
+  {data.faq.length > 0 && (
+  <section class="guide-faq">
+    <h2>{copy.faq}</h2>
+    <dl>{data.faq.map((f) => (<><dt>{f.q}</dt><dd>{f.a}</dd></>))}</dl>
+  </section>
+  )}
+  {related.length > 0 && (
+  <aside class="guide-related" aria-label={copy.relatedLabel}>
+    <h2>{copy.related}</h2>
+    <ul>{related.map((g) => (<li><a href={guidePath(g)}>{g.data.title}</a></li>))}</ul>
+  </aside>
+  )}
+</article>
+</Site>

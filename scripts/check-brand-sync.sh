@@ -32,9 +32,11 @@
 #      and silent in CI rather than a failure.
 set -euo pipefail
 
-cd "$(dirname "$0")/.."
+# Every path below is relative to public/, which is what the site serves
+# (the Astro build copies it as-is since 2026-10-17).
+cd "$(dirname "$0")/../public"
 
-CORE=${CORE:-../core}
+CORE=${CORE:-../../core}
 fail=0
 note() { printf '  %s\n' "$*"; }
 bad()  { printf '  FAIL  %s\n' "$*"; fail=1; }
@@ -124,7 +126,7 @@ done
 # Nothing may resurrect the old palette. Comments are stripped before the scan,
 # which is why this one lives in its own file — see its docstring.
 echo "old palette:"
-python3 scripts/check-old-palette.py || fail=1
+python3 ../scripts/check-old-palette.py || fail=1
 
 # ─── 3. VENDORING ───────────────────────────────────────────────────────────
 echo "vendoring:"

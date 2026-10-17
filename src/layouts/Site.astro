@@ -1,0 +1,181 @@
+---
+/**
+ * The chrome every hub page shares with the five original guides: the head
+ * (metadata, favicons, fonts), the nav, the footer and the site scripts.
+ * Generated once from the hand-written guide HTML (2026-10-17) and kept
+ * byte-close to it on purpose: scripts/check-site.mjs and the guides' own
+ * history are how a change here is reviewed.
+ */
+import { getCollection } from "astro:content";
+import "../styles/guide.css";
+import { SITE, absolute, guidePath } from "../lib/site";
+
+interface Alternate {
+	hreflang: string;
+	href: string;
+}
+
+interface Props {
+	/** Full <title>, brand suffix included. */
+	title: string;
+	description: string;
+	/** Path of this page, e.g. `/scheme-fees-interchange`. */
+	path: string;
+	lang?: "en" | "fr";
+	ogType?: "article" | "website";
+	ogTitle?: string;
+	/** Absolute or root-relative image URL, 1200x630. */
+	ogImage?: string;
+	alternates?: Alternate[];
+	jsonLd?: unknown;
+}
+
+const {
+	title,
+	description,
+	path,
+	lang = "en",
+	ogType = "article",
+	ogTitle = title,
+	ogImage = "/og-navy.png",
+	alternates = [{ hreflang: "en", href: path }, { hreflang: "x-default", href: path }],
+	jsonLd,
+} = Astro.props;
+
+const guides = (await getCollection("guides", (g) => g.data.locale === "en")).sort(
+	(a, b) => a.data.order - b.data.order,
+);
+const canonical = absolute(path);
+const image = absolute(ogImage);
+const ogLocale = lang === "fr" ? "fr_FR" : "en_GB";
+---
+<!DOCTYPE html>
+<html lang={lang} prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<meta name="description" content={description}>
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="Oryjin">
+<meta name="theme-color" content="#1652D9">
+<link rel="canonical" href={canonical}>
+{alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={absolute(a.href)}>)}
+<meta property="og:type" content={ogType}>
+<meta property="og:url" content={canonical}>
+<meta property="og:title" content={ogTitle}>
+<meta property="og:description" content={description}>
+<meta property="og:image" content={image}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content={SITE.name}>
+<meta property="og:locale" content={ogLocale}>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={ogTitle}>
+<meta name="twitter:description" content={description}>
+<meta name="twitter:image" content={image}>
+<!-- ═══ FAVICON ════════════════════════════════ -->
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon-64x64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="manifest" href="/site.webmanifest">
+<!-- ═══ RSS / NEWSLETTER ═══════════════════════ -->
+<link rel="alternate" type="application/rss+xml" title="The Payment Economics" href="https://www.thepaymenteconomics.com/feed">
+<link rel="alternate" type="application/rss+xml" title="Oryjin guides" href="/rss.xml">
+{jsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd, null, 2)} />}
+<!-- ═══ FONTS ══════════════════════════════════ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yygg_vb.woff2" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
+<noscript><style is:inline>.reveal{opacity:1!important;transform:none!important}.dc-bar i{width:var(--w)!important}</style></noscript>
+<script is:inline>
+/* Logo fallback (replaces the per-image base64 blobs — same visual result) */
+function oryFallback(img){
+  var c = img.getAttribute('data-color') || '#141414';
+  var t = img.getAttribute('data-name') || img.alt.toLowerCase();
+  var w = Math.max(90, Math.round(t.length * 15));
+  var svg = "<svg xmlns='http://www.w3.org/2000/svg' width='" + w + "' height='34' viewBox='0 0 " + w + " 34'><text x='0' y='26' font-family='Inter,Arial,Helvetica,sans-serif' font-size='26' font-weight='800' letter-spacing='-1' fill='" + c + "'>" + t + "</text></svg>";
+  img.onerror = null;
+  img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+</script>
+</head>
+<body>
+<div class="scroll-prog" id="scrollProg"></div>
+<nav aria-label="Main">
+  <a href="/" class="nav-logo" aria-label="Oryjin home">
+    <img class="nav-lockup" src="/brand/oryjin-lockup.svg" alt="Oryjin" width="111" height="30">
+  </a>
+  <div class="nav-right">
+    <a href="/#platform" class="nav-link">Why Oryjin</a>
+    <a href="/#product" class="nav-link">Product</a>
+    <a href="/#integrations" class="nav-link">Integrations</a>
+    <a href="/#faq" class="nav-link">FAQ</a>
+    <a href="https://app.oryjin.com/request-access?source=website&amp;utm_source=website&amp;utm_medium=cta&amp;utm_content=guide-nav" class="nav-link" data-app-link="guide-nav">Request access</a>
+    <a href="/#apply" class="nav-cta" data-cta="nav-guide">Apply for early access</a>
+  </div>
+</nav>
+<main>
+<slot />
+</main>
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a href="/" class="footer-brand-logo"><img class="nav-lockup" src="/brand/oryjin-lockup.svg" alt="Oryjin" width="104" height="28" loading="lazy"></a>
+      <p class="footer-brand-desc">The independent payment cockpit for European merchants. Your whole payment margin, from acquirers and schemes to PSPs and fraud tools, in one place: every fee, every loss, every routing choice, turned into decisions you can defend.</p>
+      <span class="footer-brand-tagline">Paris, France · 2026</span>
+    </div>
+    <div>
+      <div class="footer-col-head">Contact</div>
+      <div class="footer-links-col">
+        <a href="mailto:contact@oryjin.com">contact@oryjin.com</a>
+        <a href="https://www.linkedin.com/company/oryjin-payment-intelligence" target="_blank" rel="noopener">LinkedIn → Oryjin</a>
+        <a href="https://www.thepaymenteconomics.com" target="_blank" rel="noopener">The Payment Economics — independent review</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-head">Guides</div>
+      <div class="footer-links-col">
+{guides.map((g) => (
+        <a href={guidePath(g)}>{g.data.shortTitle}</a>
+      ))}
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-head">Legal &amp; data</div>
+      <div class="footer-links-col">
+        <span>SIRET 982 946 428 00017</span>
+        <span>French law · GDPR-aligned</span>
+        <a href="mailto:contact@oryjin.com?subject=NDA%20request">NDA available on request</a>
+        <a href="/privacy.html">Privacy policy</a>
+        <a href="#" data-ory-cookies>Cookies</a>
+        <a href="mailto:contact@oryjin.com?subject=Data%20inquiry">Data inquiry</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Oryjin · All rights reserved</span>
+    <div class="footer-legal">
+      <span>HTTPS/TLS · EU hosting</span>
+      <span style="color:var(--bdr2)">·</span>
+      <a href="mailto:contact@oryjin.com">contact@oryjin.com</a>
+    </div>
+  </div>
+</footer>
+<script is:inline src="/assets/site-config.js"></script>
+<script is:inline src="/assets/site-analytics.js"></script>
+<script is:inline>
+(function(){
+  var p = document.getElementById('scrollProg');
+  function u(){ var h = document.documentElement.scrollHeight - innerHeight; if (p && h > 0) p.style.width = (scrollY / h * 100) + '%'; }
+  addEventListener('scroll', u, { passive: true }); u();
+  document.querySelectorAll('[data-cta]').forEach(function(a){ a.addEventListener('click', function(){ window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'cta_click', placement: a.getAttribute('data-cta') }); }); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+---
+/**
+ * How the guides choose, label and refresh their figures. The rules here are
+ * the ones the app's own reference data follows (oryjin-tech/core
+ * src/domain/benchmarks.ts: a source and a date on every figure, bands not
+ * points, the cautious end first) — keep the two in step.
+ */
+import Site from "../layouts/Site.astro";
+import "../styles/hub.css";
+import { absolute } from "../lib/site";
+
+const title = "How the Oryjin guides source and check their figures";
+const description =
+	"Where the rates in Oryjin's payment guides come from, why measured, billed and modelled figures are kept apart, and how often they are checked.";
+const path = "/methodology";
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "WebPage",
+			"@id": `${absolute(path)}#page`,
+			name: title,
+			description,
+			inLanguage: "en",
+			url: absolute(path),
+		},
+		{
+			"@type": "BreadcrumbList",
+			itemListElement: [
+				{ "@type": "ListItem", position: 1, name: "Oryjin", item: "https://oryjin.com/" },
+				{ "@type": "ListItem", position: 2, name: "Guides", item: absolute("/learn") },
+				{ "@type": "ListItem", position: 3, name: "Methodology", item: absolute(path) },
+			],
+		},
+	],
+};
+---
+<Site title={`Methodology: how our guides source figures | Oryjin`} description={description} path={path} ogType="website" ogTitle={title} jsonLd={jsonLd}>
+<section class="guide-hero">
+  <p class="guide-crumb"><a href="/">Oryjin</a> › <a href="/learn">Guides</a></p>
+  <p class="section-label">Guides · Methodology</p>
+  <h1>{title}</h1>
+  <p class="lede">A payment cost guide is only as good as its numbers. These are the rules every figure in our guides follows, so you can tell how far to trust each one before you take it into a negotiation.</p>
+</section>
+<article class="guide-body">
+  <h2 id="sources">Every figure has a source and a date</h2>
+  <p>Rates come from published material: the Interchange Fee Regulation's caps, the commitments Visa and Mastercard gave the European Commission for cards issued outside the EEA, the schemes' published fee schedules, payment providers' public price lists, and studies by regulators and merchant associations such as the UK Payment Systems Regulator and EuroCommerce. A guide names its source next to the figure, and the date at the top of the page says when its figures were last checked.</p>
+  <p>Payment prices move. The card schemes revise their fees on published cycles, and providers change their list prices. A figure without a date is a figure you cannot rely on.</p>
+
+  <h2 id="three-kinds">Measured, billed and modelled figures are never added together</h2>
+  <p>Three kinds of figures describe payment costs, and the guides say which one they are using.</p>
+  <ul>
+    <li><strong>Measured</strong>: read from settlement data or a network-cost report that splits each charge into its layers.</li>
+    <li><strong>Billed</strong>: read from a provider's invoice, classified by fee type.</li>
+    <li><strong>Modelled</strong>: estimated from the regulated caps, the schemes' published commitments and public price lists, applied to a card mix. This is what you have when a provider discloses nothing.</li>
+  </ul>
+  <p>They describe the same cost from different angles, so adding them double-counts it. A modelled figure is shown as a range, because collapsing honest uncertainty into one number invents a precision nobody has.</p>
+
+  <h2 id="cautious">Ranges lead with the cautious end</h2>
+  <p>When a figure is a range, the guides use the end that understates the saving. A reference price is set at the top of its published range, so the gap between what you pay and what you could pay comes out smaller rather than larger. If a saving still shows up on cautious assumptions, it is worth raising with your provider.</p>
+
+  <h2 id="examples">Examples use published prices, never customer data</h2>
+  <p>No figure in these guides comes from an Oryjin customer's data. Worked examples are built from published prices and stated assumptions, and an illustration is labelled as one.</p>
+
+  <h2 id="refresh">Figures are checked twice a year</h2>
+  <p>Every page that carries a rate is reviewed in January and July, after the card schemes' usual revision cycles, and whenever a regulator or a scheme announces a change that affects it. The date at the top of a guide changes only when its figures were actually checked.</p>
+
+  <h2 id="errors">Reporting an error</h2>
+  <p>If a figure is wrong or out of date, write to <a href="mailto:contact@oryjin.com?subject=Guide%20correction">contact@oryjin.com</a> with the page and the source you are reading. Corrections are made on the page itself and its date is updated.</p>
+
+  <aside class="guide-related" aria-label="Guides">
+    <h2>Read next</h2>
+    <ul><li><a href="/learn">All payment economics guides</a></li>
+<li><a href="/scheme-fees-interchange">Scheme fees and interchange: what a card payment really costs in Europe</a></li></ul>
+  </aside>
+</article>
+</Site>

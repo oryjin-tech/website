@@ -1,0 +1,8 @@
+/* The hub's index lists. Tokens only, from guide.css's :root. */
+.hub-list { list-style: none; padding: 0 !important; margin: 0 0 8px !important; display: grid; gap: 14px; }
+.hub-list li { margin: 0 !important; border: 1px solid var(--bdr); border-radius: 14px; background: var(--surf); padding: 18px 20px; }
+.hub-list a { display: block; color: var(--ink); font-weight: 700; font-size: 18px; line-height: 1.35; text-decoration: none; letter-spacing: -0.01em; }
+.hub-list a:hover { color: var(--vdk); text-decoration: underline; }
+.hub-list p { margin: 6px 0 0 !important; font-size: 15px !important; color: var(--dim) !important; line-height: 1.6 !important; }
+.hub-list .hub-kicker { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.guide-body p a, .guide-body li a:not(.hub-list a) { color: var(--vdk); font-weight: 600; }
