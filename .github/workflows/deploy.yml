@@ -1,0 +1,52 @@
+# Publishes oryjin.com. GitHub Pages deploys from GitHub Actions since
+# 2026-10-17 (Settings → Pages → Source); before that it published `main`
+# through its own generated "pages-build-deployment" workflow, which no
+# longer runs.
+#
+# This workflow reproduces that build exactly: the same Jekyll pass over the
+# repository root, so every page, asset and clean URL is served as before.
+# It exists now so a merge to main keeps publishing; the knowledge hub's
+# Astro build replaces the build job later (oryjin-tech/core,
+# docs/plans/payment-knowledge-hub.md, slice 1).
+#
+# notify-deploy.yml listens for this workflow's name, "Deploy". Renaming it
+# silently stops the Slack heartbeat.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time, and a deploy in flight is never cancelled half-way.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Build with Jekyll, as the branch deploy did
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+      - uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
