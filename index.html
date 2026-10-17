@@ -653,6 +653,11 @@ nav.scrolled{border-bottom-color:rgba(20,28,46,0.10);box-shadow:0 8px 30px -20px
 .submit-btn:disabled { cursor: progress; }
 .form-summary { font-size: 14px; font-weight: 600; color: #B91C1C; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; text-align: center; }
 .form-disclaimer { font-size: 13px; color: var(--muted); text-align: center; margin-top: 18px; line-height: 1.7; }
+.hp-field { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+.form-consent { display: flex; gap: 10px; align-items: flex-start; margin: 16px 0 4px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+.form-consent input { margin-top: 3px; width: 16px; height: 16px; flex-shrink: 0; accent-color: var(--v); }
+.form-consent a { color: var(--vdk); }
+.submit-btn:disabled { opacity: 0.55; cursor: not-allowed; }
 .form-success { display: none; text-align: center; padding: 56px 36px; }
 .form-success-icon { font-size: 40px; margin-bottom: 20px; color: var(--vlt); }
 .form-success-head { font-size: 22px; font-weight: 800; color: var(--white); letter-spacing: -0.03em; margin-bottom: 10px; }
@@ -998,6 +1003,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 .sticky-cta.is-on { transform: none; visibility: visible; }
 .sticky-cta span { font-size: 13px; font-weight: 700; color: var(--ink); }
 .sticky-cta .cta-btn { padding: 11px 16px; font-size: 14px; box-shadow: none; flex-shrink: 0; }
+.sticky-cta .cta-ghost { padding: 10px 14px; font-size: 13px; flex-shrink: 0; }
 @media (max-width: 760px) { .sticky-cta { display: flex; } body.has-sticky { padding-bottom: 64px; } }
 .security-item::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--grad); flex-shrink: 0; }
 </style>
@@ -1014,6 +1020,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     <a href="#product" class="nav-link">Product</a>
     <a href="#integrations" class="nav-link">Integrations</a>
     <a href="#faq" class="nav-link">FAQ</a>
+    <a href="https://app.oryjin.com/request-access?source=website&amp;utm_source=website&amp;utm_medium=cta&amp;utm_content=nav" class="nav-link" data-app-link="nav">Request access</a>
     <a href="#apply" class="nav-cta" data-cta="nav">Apply for early access</a>
   </div>
 </nav>
@@ -1038,6 +1045,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     <div class="cta-group">
       <a href="#apply" class="cta-btn" data-cta="hero">Apply for early access <span class="cta-arrow" aria-hidden="true">→</span></a>
       <a href="#product" class="cta-ghost">See the platform</a>
+      <a href="https://app.oryjin.com/request-access?source=website&amp;utm_source=website&amp;utm_medium=cta&amp;utm_content=hero" class="cta-ghost" data-app-link="hero">Request access</a>
     </div>
     <p class="hero-integr">Built for European merchants doing <b>€2 to 20M GMV a month</b>. A PSP renewal in the next 12 months? <b>That's the best moment to start.</b></p>
   </div>
@@ -1389,8 +1397,13 @@ body,button,input,select,textarea{font-family:var(--font-display)}
           <p class="form-note">All PSPs and acquirers you use</p>
         </div>
       </div>
+      <div class="hp-field" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <div class="form-consent">
+        <input type="checkbox" id="consent" name="consent" required aria-describedby="consent-note">
+        <label for="consent" id="consent-note">I agree that Oryjin stores what I typed here to answer this request, as described in the <a href="/privacy.html">privacy policy</a>.</label>
+      </div>
       <p class="form-summary" id="form-summary" role="alert" hidden></p>
-      <button class="submit-btn" id="submit-btn" type="button" onclick="submitForm()">
+      <button class="submit-btn" id="submit-btn" type="button" onclick="submitForm()" disabled>
         Apply for early access →
       </button>
       <p class="form-disclaimer">
@@ -1453,6 +1466,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 <div class="sticky-cta" id="sticky-cta">
   <span>Know where your margin goes.</span>
   <a href="#apply" class="cta-btn" data-cta="sticky">Apply for early access <span class="cta-arrow" aria-hidden="true">→</span></a>
+  <a href="https://app.oryjin.com/request-access?source=website&amp;utm_source=website&amp;utm_medium=cta&amp;utm_content=sticky" class="cta-ghost" data-app-link="sticky">Request access</a>
 </div>
 <!-- ─── FOOTER ─── -->
 <footer>
@@ -1468,6 +1482,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
         <a href="mailto:contact@oryjin.com">contact@oryjin.com</a>
         <a href="https://www.linkedin.com/company/oryjin-payment-intelligence" target="_blank" rel="noopener">LinkedIn → Oryjin</a>
         <a href="https://www.thepaymenteconomics.com" target="_blank" rel="noopener">The Payment Economics — independent review</a>
+        <a href="https://app.oryjin.com/request-access?source=website&amp;utm_source=website&amp;utm_medium=cta&amp;utm_content=footer" data-app-link="footer">Request access</a>
       </div>
     </div>
     <div>
@@ -1487,6 +1502,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
         <span>French law · GDPR-aligned</span>
         <a href="mailto:contact@oryjin.com?subject=NDA%20request">NDA available on request</a>
         <a href="/privacy.html">Privacy policy</a>
+        <a href="#" data-ory-cookies>Cookies</a>
         <a href="mailto:contact@oryjin.com?subject=Data%20inquiry">Data inquiry</a>
       </div>
     </div>
@@ -1500,25 +1516,15 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     </div>
   </div>
 </footer>
+<script src="assets/site-config.js"></script>
+<script src="assets/site-analytics.js"></script>
 <script>
 /* ═══════════════════════════════════════════════
-   ATTRIBUTION (UTM / gclid / li_fat_id) — for SEA tracking
-   Captured on landing, kept for the session, sent with the form.
+   ATTRIBUTION — captured and kept by assets/site-analytics.js (utm_*,
+   gclid, li_fat_id, msclkid, ref, landing, referrer); read here for the form.
 ═══════════════════════════════════════════════ */
-var ATTR_KEYS = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','li_fat_id'];
-(function captureAttribution(){
-  try {
-    var p = new URLSearchParams(window.location.search), got = {};
-    ATTR_KEYS.forEach(function(k){ if (p.get(k)) got[k] = p.get(k); });
-    if (Object.keys(got).length) {
-      got.landing = window.location.pathname;
-      got.referrer = document.referrer || '';
-      sessionStorage.setItem('ory_attr', JSON.stringify(got));
-    }
-  } catch(e) {}
-})();
 function getAttribution(){
-  try { return JSON.parse(sessionStorage.getItem('ory_attr') || '{}'); } catch(e) { return {}; }
+  try { return (window.OryjinSite && window.OryjinSite.attribution()) || {}; } catch(e) { return {}; }
 }
 /* ═══════════════════════════════════════════════
    PRODUCT TOUR — tabs, auto-rotate, counters
@@ -1613,8 +1619,10 @@ var MM = {
 function trackConversion(meta){
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ event: 'generate_lead', form: 'early_access', volume: meta.volume, role: meta.role });
-  // if (window.gtag) gtag('event', 'conversion', { send_to: 'AW-XXXXXXXXX/XXXXXXXXXXXX' });
-  // if (window.lintrk) lintrk('track', { conversion_id: 0000000 });
+  // LinkedIn and Google Ads conversions: fired by assets/site-analytics.js
+  // only when the visitor accepted advertising and the ids are set in
+  // assets/site-config.js.
+  if (window.OryjinSite) { try { window.OryjinSite.conversion(); } catch(e) {} }
 }
 /* ═══════════════════════════════════════════════
    SCROLL REVEAL
@@ -1786,8 +1794,35 @@ function validateForm() {
 ═══════════════════════════════════════════════ */
 const WEB3FORMS_KEY = 'd4a26234-36c7-4fcc-8205-05f2e97beec1';
 const SUBMIT_LABEL  = 'Apply for early access →';
+/* The consent box gates the button: nothing is sent until it is ticked. */
+(function consentGate(){
+  var box = document.getElementById('consent'), btn = document.getElementById('submit-btn');
+  if (!box || !btn) return;
+  function sync(){ btn.disabled = !box.checked; }
+  box.addEventListener('change', sync); sync();
+})();
+/* The app's lead desk speaks ANNUAL card-volume bands; the form asks monthly. */
+const VOLUME_BANDS = {
+  'Under €2M':  'starter',
+  '€2M – €5M':  'pro_25_50',
+  '€5M – €10M': 'pro_50_100',
+  '€10M – €20M':'pro_100_200',
+  '€20M+':      'above_200'
+};
+/* Free-text PSP field → the app's processor slugs; unknown names stay in the message. */
+const PSP_SLUGS = [
+  ['stripe','stripe'], ['adyen','adyen'], ['mollie','mollie'], ['paypal','paypal'], ['checkout','checkout'],
+  ['worldline','worldline'], ['monext','monext'], ['klarna','klarna'], ['viva','viva'], ['braintree','braintree'],
+  ['nuvei','nuvei'], ['mangopay','mangopay'], ['payplug','payplug'], ['lyra','lyra'], ['hipay','hipay']
+];
+function pspSlugsOf(text){
+  var lower = (text || '').toLowerCase(), found = [];
+  PSP_SLUGS.forEach(function(pair){ if (lower.indexOf(pair[0]) !== -1 && found.indexOf(pair[1]) === -1) found.push(pair[1]); });
+  return found.slice(0, 8);
+}
 async function submitForm() {
   if (!validateForm()) return;
+  if (!document.getElementById('consent').checked) return;
   const fname   = document.getElementById('fname').value.trim();
   const lname   = document.getElementById('lname').value.trim();
   const email   = document.getElementById('email').value.trim();
@@ -1815,6 +1850,25 @@ async function submitForm() {
     'Click ID':        attr.gclid || attr.li_fat_id || ''
   };
   let sent = false;
+  /* 1. The app's lead desk first (/admin/leads, with where the visitor came
+        from), with a short timeout; its failure never blocks the application. */
+  let appSent = false;
+  if (window.OryjinSite) {
+    try {
+      appSent = await window.OryjinSite.postLead({
+        name: (fname + ' ' + lname).trim(),
+        email: email,
+        company: company,
+        role: role,
+        volumeBand: VOLUME_BANDS[volume],
+        processors: pspSlugsOf(psps),
+        message: 'Monthly card volume: ' + volume + '. Processors as typed: ' + psps,
+        locale: 'en',
+        website: document.getElementById('website').value
+      }, 6000);
+    } catch(e) { appSent = false; }
+  }
+  /* 2. The email copy, as before: web3forms, then formsubmit as a fallback. */
   if (WEB3FORMS_KEY && WEB3FORMS_KEY !== 'YOUR_WEB3FORMS_KEY') {
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
@@ -1849,7 +1903,7 @@ async function submitForm() {
       sent = (json.success === 'true' || json.success === true);
     } catch(e) { console.warn('formsubmit error:', e); }
   }
-  if (sent) {
+  if (sent || appSent) {
     trackConversion({ volume: volume, role: role });
     showSuccess();
     return;
