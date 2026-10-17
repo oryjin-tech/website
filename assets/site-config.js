@@ -21,7 +21,7 @@
  *                       given under. See README.md.
  */
 window.ORYJIN_SITE = {
-  posthogKey: "",
+  posthogKey: "phc_ppgWZ8hwtRcY2cPZGkH4WaTtSrCfzqydzWtWtrZk5969",
   posthogHost: "https://eu.i.posthog.com",
   appUrl: "https://app.oryjin.com",
   linkedinPartnerId: "",
