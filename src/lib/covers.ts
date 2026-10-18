@@ -1,7 +1,7 @@
 /**
  * A guide's cover: a 1200x630 SVG on the brand navy, the kit's three colours
  * as light washes, and one motif per topic drawn in light strokes. No text,
- * so the same file serves the article hero, the hub and homepage cards
+ * so the same file serves the article hero and the hub cards
  * (served at /covers/<slug>.svg) and the background of the social card
  * (src/lib/og-image.ts). Generated, never hand-drawn, so a new guide gets
  * one by naming its motif in frontmatter.

@@ -1006,25 +1006,6 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 .sticky-cta .cta-ghost { padding: 10px 14px; font-size: 13px; flex-shrink: 0; }
 @media (max-width: 760px) { .sticky-cta { display: flex; } body.has-sticky { padding-bottom: 64px; } }
 .security-item::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--grad); flex-shrink: 0; }
-/* ─── GUIDES (the hub's three latest, linking to /learn) ─── */
-.gd-section{padding:96px 24px;max-width:1128px;margin:0 auto}
-.gd-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 32px;margin-bottom:36px}
-.gd-head .section-label,.gd-head .section-head{text-align:left;margin-left:0}
-.gd-head .section-head{margin-bottom:0}
-.gd-all{font-size:15px;font-weight:700;color:var(--v);text-decoration:none;white-space:nowrap}
-.gd-all:hover{text-decoration:underline;text-underline-offset:3px}
-.gd-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.gd-card{position:relative;display:flex;flex-direction:column;gap:12px;text-align:left}
-.gd-card img{display:block;width:100%;height:auto;aspect-ratio:1200/630;border-radius:14px;background:var(--ink);box-shadow:0 0 0 1px rgba(20,28,46,0.06);transition:transform .5s cubic-bezier(0.16,1,0.3,1),box-shadow .5s}
-.gd-card:hover img{transform:translateY(-3px);box-shadow:0 24px 44px -26px rgba(20,28,46,0.5)}
-.gd-kicker{font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--v)}
-.gd-card h3{font-size:19px;font-weight:800;line-height:1.28;letter-spacing:-0.02em;color:var(--ink);margin:0;text-wrap:balance}
-.gd-card h3 a{color:inherit;text-decoration:none}
-.gd-card h3 a::after{content:'';position:absolute;inset:0}
-.gd-card:hover h3{color:var(--v)}
-.gd-card p{font-size:15px;line-height:1.6;color:var(--dim);margin:0}
-.gd-meta{font-size:13px;color:var(--muted)}
-@media (max-width: 860px){.gd-grid{grid-template-columns:1fr}.gd-section{padding:64px 24px}.gd-card{display:grid;grid-template-columns:120px 1fr;gap:4px 16px;align-items:start}.gd-card img{grid-row:1/span 3;border-radius:10px}.gd-card p{display:none}}
 </style>
 </head>
 <body>
@@ -1039,7 +1020,6 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     <a href="#product" class="nav-link">Product</a>
     <a href="#integrations" class="nav-link">Integrations</a>
     <a href="#faq" class="nav-link">FAQ</a>
-    <a href="/learn" class="nav-link">Guides</a>
     <a href="https://app.oryjin.com/request-access?source=website&amp;utm_source=website&amp;utm_medium=cta&amp;utm_content=nav" class="nav-link" data-app-link="nav">Request access</a>
     <a href="#apply" class="nav-cta" data-cta="nav">Apply for early access</a>
   </div>
@@ -1351,39 +1331,6 @@ body,button,input,select,textarea{font-family:var(--font-display)}
   </div>
 </section>
 <!-- ─── FORM ─── -->
-<!-- ─── GUIDES ─── -->
-<section class="gd-section" id="guides" aria-labelledby="gd-title">
-  <div class="gd-head reveal">
-    <div>
-      <p class="section-label">Guides</p>
-      <h2 class="section-head" id="gd-title">What payments really cost,<br><span>explained.</span></h2>
-    </div>
-    <a class="gd-all" href="/learn">All guides →</a>
-  </div>
-  <div class="gd-grid reveal">
-    <article class="gd-card">
-      <img src="/covers/psp-fees-vs-contract.svg" alt="" width="1200" height="630" loading="lazy" decoding="async">
-      <span class="gd-kicker">Payment fees</span>
-      <h3><a href="/psp-fees-vs-contract">PSP fees vs contract: why your payment fees go up when nothing changed</a></h3>
-      <p>The six drivers behind fee drift, and how to check billing against the contract.</p>
-      <span class="gd-meta">Victor Morel · 3 min read</span>
-    </article>
-    <article class="gd-card">
-      <img src="/covers/scheme-fees-interchange.svg" alt="" width="1200" height="630" loading="lazy" decoding="async">
-      <span class="gd-kicker">Scheme fees</span>
-      <h3><a href="/scheme-fees-interchange">Scheme fees and interchange: what a card payment really costs in Europe</a></h3>
-      <p>The anatomy of a card payment's cost, which layers are capped, and which are not.</p>
-      <span class="gd-meta">Victor Morel · 4 min read</span>
-    </article>
-    <article class="gd-card">
-      <img src="/covers/psp-contract-renegotiation.svg" alt="" width="1200" height="630" loading="lazy" decoding="async">
-      <span class="gd-kicker">Renegotiation</span>
-      <h3><a href="/psp-contract-renegotiation">How to prepare a PSP contract renegotiation with your own data</a></h3>
-      <p>Start 60 days out, price a year of your own volume, and build asks the provider can check.</p>
-      <span class="gd-meta">Victor Morel · 4 min read</span>
-    </article>
-  </div>
-</section>
 <section class="band form-section" id="apply">
   <p class="section-label reveal">Early access</p>
   <h2 class="form-head reveal">Ready to see where<br>your margin goes?</h2>
@@ -1546,6 +1493,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
         <a href="/psp-contract-renegotiation">How to prepare a PSP contract renegotiation with your own data</a>
         <a href="/payment-cost-forecast">Forecasting payment costs</a>
         <a href="/chargeback-ratio-thresholds">Chargeback ratio</a>
+        <a href="/learn">All guides →</a>
       </div>
     </div>
     <div>
