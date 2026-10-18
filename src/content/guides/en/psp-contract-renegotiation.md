@@ -24,7 +24,7 @@ related:
   - scheme-fees-interchange
   - payment-cost-forecast
   - chargeback-ratio-thresholds
-author: victor-morel
+author: oryjin-team
 cover: timeline
 pullQuote: "Published list prices are your leverage; they are not something to hand the other side."
 takeaways:

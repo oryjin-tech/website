@@ -24,7 +24,7 @@ related:
   - scheme-fees-interchange
   - psp-contract-renegotiation
   - chargeback-ratio-thresholds
-author: victor-morel
+author: oryjin-team
 cover: fan
 pullQuote: "A forecast nobody checks is a guess with a spreadsheet."
 takeaways:

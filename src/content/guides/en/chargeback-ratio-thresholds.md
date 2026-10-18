@@ -24,7 +24,7 @@ related:
   - scheme-fees-interchange
   - psp-contract-renegotiation
   - payment-cost-forecast
-author: victor-morel
+author: oryjin-team
 cover: threshold
 pullQuote: "A ratio that is comfortable in aggregate can be at 0.9% on German Visa credit while the blended figure reads 0.4%."
 takeaways:

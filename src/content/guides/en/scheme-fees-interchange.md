@@ -24,7 +24,7 @@ related:
   - psp-contract-renegotiation
   - payment-cost-forecast
   - chargeback-ratio-thresholds
-author: victor-morel
+author: oryjin-team
 cover: network
 pullQuote: "A blended-price account with no network-cost report can only be modelled. That is itself a finding."
 takeaways:

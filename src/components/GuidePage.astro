@@ -3,7 +3,7 @@ import { type CollectionEntry, getCollection, render } from "astro:content";
 import Site from "../layouts/Site.astro";
 import "@fontsource-variable/source-serif-4/opsz.css";
 import "../styles/article.css";
-import { authorOf, authorPath } from "../lib/authors";
+import { authorOf, authorPath, authorSchema } from "../lib/authors";
 import { coverPath } from "../lib/covers";
 import { GUIDE_COPY, HUB_PATH, PILLARS } from "../lib/i18n";
 import { absolute, appLink, guidePath, guideSlug, isoDate, monthYear } from "../lib/site";
@@ -79,13 +79,7 @@ const jsonLd = {
 			inLanguage: data.locale,
 			datePublished: isoDate(data.published),
 			dateModified: isoDate(data.updated),
-			author: {
-				"@type": "Person",
-				name: author.name,
-				jobTitle: author.role,
-				url: absolute(authorPath(author)),
-				worksFor: { "@type": "Organization", name: "Oryjin", url: "https://oryjin.com/" },
-			},
+			author: authorSchema(author, absolute(authorPath(author))),
 			publisher: {
 				"@type": "Organization",
 				name: "Oryjin",

@@ -24,7 +24,7 @@ related:
   - psp-contract-renegotiation
   - payment-cost-forecast
   - chargeback-ratio-thresholds
-author: victor-morel
+author: oryjin-team
 cover: layers
 pullQuote: "Keeping the three apart is what makes the recoverable amount credible when you send it to the provider."
 takeaways:

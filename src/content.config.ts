@@ -39,7 +39,7 @@ const guides = defineCollection({
 			/** File names of related guides in the same locale, in display order. */
 			related: z.array(z.string()).default([]),
 			/** Key of the byline in src/lib/authors.ts. */
-			author: z.string().default("victor-morel"),
+			author: z.string().default("oryjin-team"),
 			/** Three to four sentences a reader can stop after; shown above the body. */
 			takeaways: z.array(z.string()).default([]),
 			/**
