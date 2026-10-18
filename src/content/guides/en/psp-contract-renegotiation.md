@@ -13,7 +13,7 @@ order: 3
 locale: en
 cta:
   headline: "Get the renewal radar, the negotiation brief and the provider fact sheet built from your own volume."
-  text: "Every month, Oryjin reconciles each processor against its contract, ranks the next actions in euros with each figure labelled detected or modelled, sends the claims and shows what came back. Early access is open for European merchants with €10 to 200M of card payments a year."
+  text: "Oryjin continuously monitors your entire stack, from PSP and acquirer fees to scheme fees, fraud, chargebacks and orchestration, and turns it into decision-grade intelligence. Early access is open for European merchants with €10 to 200M of card payments a year."
 faq:
   - q: "What is a realistic saving from a PSP renegotiation?"
     a: "It depends entirely on where the markup sits today and how far your volume has moved since the contract was signed. The credible number comes from pricing your own year of volume at target terms, not from a benchmark. Billing gaps and unapplied tiers are recovered in full; markup reductions are negotiated."

@@ -13,7 +13,7 @@ order: 2
 locale: en
 cta:
   headline: "See your full cost per payment, split into its layers, measured where your provider reports it and modelled where it does not."
-  text: "Every month, Oryjin reconciles each processor against its contract, ranks the next actions in euros with each figure labelled detected or modelled, sends the claims and shows what came back. Early access is open for European merchants with €10 to 200M of card payments a year."
+  text: "Oryjin continuously monitors your entire stack, from PSP and acquirer fees to scheme fees, fraud, chargebacks and orchestration, and turns it into decision-grade intelligence. Early access is open for European merchants with €10 to 200M of card payments a year."
 faq:
   - q: "Are scheme fees negotiable?"
     a: "Not directly by a merchant: they are set by the schemes and charged to acquirers. What is negotiable is how your acquirer passes them through (at cost on interchange++, or blended), and which behaviours you can change to avoid conditional fees, such as retry policies and token use."
