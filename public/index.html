@@ -1025,19 +1025,12 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 .security-item::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--grad); flex-shrink: 0; }
 /* ─── V6: decision intelligence ─── */
 .cta-group .cta-ghost { max-width: 100%; }
-.wv-bar .s1 { flex-basis: 58%; background: var(--v); }
-.wv-bar .s2 { flex-basis: 42%; background: var(--violet); }
-.wv-bar .s3 { display: none; }
-.wv-bar .s4 { flex-basis: 0%; background: repeating-linear-gradient(135deg, rgb(var(--v-rgb) / 0.18) 0 5px, transparent 5px 10px); border-left: 0 solid var(--bdr2); }
-.why-viz[data-state="1"] .wv-bar .s1 { flex-basis: 58%; }
-.why-viz[data-state="1"] .wv-bar .s2 { opacity: 1; filter: none; }
-.why-viz[data-state="1"] .wv-bar .s1::after { content: '€18,400'; }
-.why-viz[data-state="1"] .wv-bar .s2::after { content: '€13,300'; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 11px; font-weight: 700; color: #fff; background: rgba(255,255,255,0.22); border-radius: 6px; padding: 2px 6px; }
-.why-viz[data-state="2"] .wv-bar .s1 { flex-basis: 56%; }
-.why-viz[data-state="2"] .wv-bar .s1 span::after { content: ' · came back'; font-weight: 500; }
-.why-viz[data-state="2"] .wv-bar .s2 { flex-basis: 0%; opacity: 0; }
-.why-viz[data-state="2"] .wv-bar .s4 { flex-basis: 2%; border-left-width: 1px; }
-.why-viz[data-state="2"] .wv-set[data-set="2"] b { background: linear-gradient(110deg,var(--teal),var(--v)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.why-step .why-n em { font-style: normal; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--dim); }
+.why-step.is-on .why-n em { color: var(--vdk); }
+.wv-lbl { flex: none; font-size: 11px; font-weight: 700; border-radius: 6px; padding: 2px 7px; white-space: nowrap; }
+.wv-lbl.det { color: #047857; background: rgba(16,185,129,0.12); }
+.wv-lbl.mod { color: var(--violet); background: rgb(var(--violet-rgb) / 0.09); }
+@media (max-width: 480px) { .wv-lbl { display: none; } .why-step .why-n em { display: block; margin-top: 2px; } }
 .letter { background: var(--surf2); border: 1px solid var(--bdr); border-left: 3px solid var(--v); border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; font-size: 13.5px; color: var(--txt); line-height: 1.55; }
 .letter p { margin: 0 0 6px; }
 .letter p:last-child { margin: 0; }
@@ -1175,35 +1168,35 @@ body,button,input,select,textarea{font-family:var(--font-display)}
   </div>
   <div class="why-wrap">
     <div class="why-steps reveal reveal-delay-1" role="tablist" aria-label="Why Oryjin">
-      <button class="why-step is-on" role="tab" aria-selected="true" data-why="0" type="button"><span class="why-n">01</span><b>What should I change first?</b><p>One ranked list across every processor: billed above contract, a volume tier about to be missed, a market or a method costing more than it should. Each line with the rows and the clause behind it.</p><i></i></button>
-      <button class="why-step" role="tab" aria-selected="false" data-why="1" type="button"><span class="why-n">02</span><b>What will it earn me?</b><p>Every action priced in euros on your own volume and mix, and labelled. Detected: billed above contract, claimable. Modelled: from published schedules, with its assumptions stated. The two are never added together.</p><i></i></button>
-      <button class="why-step" role="tab" aria-selected="false" data-why="2" type="button"><span class="why-n">03</span><b>How sure are you?</b><p>Claims go out as letters and are settled line by line. Each closed month is held against the forecast made at its start. You see what we said, and what came back.</p><i></i></button>
+      <button class="why-step is-on" role="tab" aria-selected="true" data-why="0" type="button"><span class="why-n">01 <em>· What should I change first?</em></span><b>The whole margin, not just the fees</b><p>Acceptance, operations, losses. Every provider, every market, every payment pattern, in one number your CFO can defend, and the next actions ranked under it.</p><i></i></button>
+      <button class="why-step" role="tab" aria-selected="false" data-why="1" type="button"><span class="why-n">02 <em>· Why did it move?</em></span><b>The cause, not the symptom</b><p>When your margin moves, you know which fee, market, method or pattern moved it and what it costs. Each cause is labelled: detected, from the rows and the contract clause, or modelled, from published schedules, with its assumptions. Never added together.</p><i></i></button>
+      <button class="why-step" role="tab" aria-selected="false" data-why="2" type="button"><span class="why-n">03 <em>· What will it earn me?</em></span><b>Ahead of the quarter, not behind the invoice</b><p>The next months played out in scenarios, each action priced on your own volume and mix, and the signal at the right desk while there is still time to win the margin back.</p><i></i></button>
     </div>
     <div class="why-viz reveal reveal-delay-2" id="why-viz" data-state="0">
-      <div class="wv-head"><span class="wv-ttl">Next actions · September</span><span class="wv-tag">Illustrative</span></div>
+      <div class="wv-head"><span class="wv-ttl">Where €100 of revenue goes</span><span class="wv-tag">Illustrative</span></div>
       <div class="wv-big" aria-live="polite">
-        <div class="wv-set" data-set="0"><b>€31,700</b><span>at stake, ranked across 3 processors</span></div>
-        <div class="wv-set" data-set="1"><b>€18,400</b><span>detected · €13,300 modelled, never added</span></div>
-        <div class="wv-set" data-set="2"><b>€17,900</b><span>came back, of €18,400 claimed</span></div>
+        <div class="wv-set" data-set="0"><b>€2.00</b><span>of every €100, this month</span></div>
+        <div class="wv-set" data-set="1"><b>+€0.13</b><span>vs last month · three causes, each labelled</span></div>
+        <div class="wv-set" data-set="2"><b>€1.86</b><span>next quarter, if you act now</span></div>
       </div>
       <div class="wv-bar" aria-hidden="true">
-        <i class="s1"><span>Detected</span></i><i class="s2"><span>Modelled</span></i><i class="s4"></i>
+        <i class="s1"><span>Acceptance</span></i><i class="s2"><span>Ops</span></i><i class="s3"><span>Losses</span></i><i class="s4"><span>Won back</span></i>
       </div>
       <div class="wv-panes">
         <ul class="wv-pane" data-pane="0">
-          <li><em class="k1"></em><span>Volume tier never applied <small>Adyen · 3 months · 41,200 payments</small></span><b>€18,400</b></li>
-          <li><em class="k2"></em><span>Ask for interchange++ pricing <small>Stripe · blended today</small></span><b>€9k–14k / yr</b></li>
-          <li><em class="k2"></em><span>Bancontact for BE shoppers <small>Mollie · share of card volume priced</small></span><b>€3,100 / yr</b></li>
+          <li><em class="k1"></em><span>Acceptance <small>PSP, acquirer, scheme, FX</small></span><b>€1.42</b></li>
+          <li><em class="k2"></em><span>Operations <small>3DS, retries, disputes handling</small></span><b>€0.31</b></li>
+          <li><em class="k3"></em><span>Losses <small>fraud, chargebacks, refund fees</small></span><b>€0.27</b></li>
         </ul>
         <ul class="wv-pane" data-pane="1">
-          <li><em class="k1"></em><span>Detected <small>rows, clause 4.2, claim pack ready</small></span><b>€18,400</b></li>
-          <li><em class="k2"></em><span>Modelled <small>published schedule, assumptions shown</small></span><b>€13,300 / yr</b></li>
-          <li><em class="ghost"></em><span>Not checked <small>Mollie: no contract on file yet, said so</small></span><b class="dimb">—</b></li>
+          <li><em class="up"></em><span>Germany <small>3DS challenges failing, retried twice</small></span><span class="wv-lbl mod">Modelled</span><b>+€0.06</b></li>
+          <li><em class="up"></em><span>GBP <small>FX markup applied above contract, clause 6.1</small></span><span class="wv-lbl det">Detected</span><b>+€0.04</b></li>
+          <li><em class="up"></em><span>Recurring <small>MIT retries billed as new attempts</small></span><span class="wv-lbl det">Detected</span><b>+€0.03</b></li>
         </ul>
         <ul class="wv-pane" data-pane="2">
-          <li><em class="k1"></em><span>Claim settled <small>Adyen · credited on the October invoice</small></span><b>€17,900</b></li>
-          <li><em class="won"></em><span>Forecast vs closed month <small>September · said €139k, came in at €137k</small></span><b>−1.4%</b></li>
-          <li class="wv-toast"><i></i><span><b>Recovered</b> · Adyen claim · €17,900 of €18,400 · 2 lines written off</span><small>now</small></li>
+          <li><em class="ghost"></em><span>If nothing changes <small>Q4, same mix and volume</small></span><b class="dimb">€2.11</b></li>
+          <li><em class="won"></em><span>With the three actions <small>claim the FX line · retry rule · route DE debit via acquirer B</small></span><b>€1.86</b></li>
+          <li class="wv-toast"><i></i><span><b>Signal sent</b> · Head of Payments · Adyen renewal in 52 days, dossier ready</span><small>now</small></li>
         </ul>
       </div>
     </div>
