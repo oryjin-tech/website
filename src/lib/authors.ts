@@ -31,10 +31,9 @@ export const AUTHORS: Record<string, Author> = {
 		name: "The Oryjin team",
 		initials: "O",
 		role: "Oryjin, Paris",
-		short: "The team building Oryjin, the independent payment cockpit for European merchants.",
+		short: "The team building Oryjin, the payment intelligence copilot for European merchants.",
 		bio: [
-			"Oryjin gives European merchants an independent reading of what their payments cost: every fee, every loss and every routing choice, checked against the contracts they signed.",
-			"The team writes these guides from what the product reads in real PSP invoices and from the schemes' published schedules, and checks every figure before a guide ships. Corrections are welcome at contact@oryjin.com.",
+			"Oryjin is the payment intelligence copilot for European merchants. It brings together every source a payment leaves behind, from PSP and acquirer settlements and invoices to scheme fee schedules, fraud and dispute tools, and contracts, so finance teams see what each fee, each loss and each routing choice really costs, and what to do about it.",
 		],
 		photo: "/brand/oryjin-tile-square.svg",
 		linkedin: "https://www.linkedin.com/company/oryjin-payment-intelligence",
