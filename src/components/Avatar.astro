@@ -1,0 +1,13 @@
+---
+/** An author's photo, or their initials on the brand gradient until one is committed. */
+import type { Author } from "../lib/authors";
+
+interface Props {
+	author: Author;
+	size?: number;
+}
+const { author, size = 44 } = Astro.props;
+---
+{author.photo
+	? <img class="avatar" src={author.photo} alt="" width={size} height={size} style={`--s:${size}px`} loading="lazy">
+	: <span class="avatar avatar-initials" style={`--s:${size}px`} aria-hidden="true">{author.initials}</span>}

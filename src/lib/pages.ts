@@ -25,6 +25,7 @@ export const STATIC_PAGES: StaticPage[] = [
 		],
 	},
 	{ path: "/learn", lastmod: "2026-10-17", changefreq: "weekly", priority: 0.8 },
+	{ path: "/authors/oryjin-team", lastmod: "2026-10-17", changefreq: "monthly", priority: 0.4 },
 	{ path: "/methodology", lastmod: "2026-10-17", changefreq: "yearly", priority: 0.4 },
 	{ path: "/privacy.html", lastmod: "2026-09-26", changefreq: "yearly", priority: 0.3 },
 ];

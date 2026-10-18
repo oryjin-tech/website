@@ -7,13 +7,21 @@
  */
 import { getCollection } from "astro:content";
 import Site from "../layouts/Site.astro";
+import "@fontsource-variable/source-serif-4/opsz.css";
+import "../styles/article.css";
 import "../styles/hub.css";
+import GuideCard from "../components/GuideCard.astro";
+import Avatar from "../components/Avatar.astro";
+import { AUTHORS, authorPath } from "../lib/authors";
 import { PILLAR_ORDER, PILLARS } from "../lib/i18n";
 import { absolute, appLink, guidePath } from "../lib/site";
 
 const guides = (await getCollection("guides", (g) => g.data.locale === "en")).sort(
 	(a, b) => a.data.order - b.data.order,
 );
+// The lead story: the most recently updated guide, ties broken by order.
+const featured = [...guides].sort((a, b) => b.data.updated.getTime() - a.data.updated.getTime() || a.data.order - b.data.order)[0];
+const authors = Object.values(AUTHORS);
 const pillars = PILLAR_ORDER.map((key) => ({
 	key,
 	...PILLARS.en[key],
@@ -57,49 +65,84 @@ const jsonLd = {
 };
 ---
 <Site title={`${title} | Oryjin`} description={description} path={path} ogType="website" ogTitle={title} jsonLd={jsonLd}>
-<section class="guide-hero">
-  <p class="guide-crumb"><a href="/">Oryjin</a> › Guides</p>
-  <p class="section-label">Guides · Payment economics</p>
-  <h1>What your payments really cost, and how to lower it</h1>
-  <p class="lede">Practical guides for finance teams at European merchants. Each one answers a single question about payment costs, works it through with figures, and says where every figure comes from.</p>
-</section>
-<article class="guide-body">
-  {pillars.map((p) => (
-    <section>
-      <h2 id={p.key}>{p.title}</h2>
-      <p>{p.intro}</p>
-      <ul class="hub-list">
-        {p.guides.map((g) => (
-          <li>
-            <span class="hub-kicker">{g.data.label} · {g.data.readingMinutes} min</span>
-            <a href={guidePath(g)}>{g.data.title}</a>
-            <p>{g.data.description}</p>
-          </li>
-        ))}
-      </ul>
-    </section>
-  ))}
-  <h2 id="tools">Free tools</h2>
-  <p>Put your own numbers next to the guides, without an account.</p>
-  <ul class="hub-list">
-    <li>
-      <span class="hub-kicker">Estimate</span>
-      <a href={appLink("/try/estimate", "learn-hub-estimate")} data-app-link="learn-hub-estimate" data-app-target="estimate">Estimate your payment fees</a>
-      <p>Six figures you already know, read against published prices and the interchange caps: what a competitive deal would cost you, as a range. A model, not an audit.</p>
-    </li>
-    <li>
-      <span class="hub-kicker">Explore</span>
-      <a href={appLink("/try", "learn-hub-sample")} data-app-link="learn-hub-sample" data-app-target="sample">Open a sample company</a>
-      <p>A working payments workspace for a mid-market merchant on Stripe and Adyen, refreshed nightly. Nothing you do there changes anything.</p>
-    </li>
-  </ul>
-  <h2 id="sources">Where the figures come from</h2>
-  <p>Every rate in these guides is a published figure with a source and a date, or a model built from them and labelled as one. <a href="/methodology">Read how figures are chosen and kept current</a>.</p>
-  <div class="guide-cta">
-    <b>See your own payment costs, layer by layer, from your own data.</b>
-    <span>Oryjin continuously monitors your entire stack, from PSP and acquirer fees to scheme fees, fraud, chargebacks and orchestration, and turns it into decision-grade intelligence. Early access is open for European merchants doing €2 to 20M GMV a month.</span>
-    <a href="/#apply" class="cta-btn" data-cta="learn-hub">Apply for early access <span class="cta-arrow" aria-hidden="true">→</span></a>
-    <a href={appLink("/request-access", "learn-hub")} class="cta-ghost" data-app-link="learn-hub">Request access</a>
+<div class="hub">
+  <header class="hub-hero">
+    <p class="hub-eyebrow"><span class="hub-dot" aria-hidden="true"></span>Guides · Payment economics</p>
+    <h1>What your payments really cost, and how to lower it</h1>
+    <p class="hub-lede">Practical guides for finance teams at European merchants. Each one answers a single question about payment costs, works it through with figures, and says where every figure comes from.</p>
+    <nav class="hub-chips" aria-label="Topics">
+      {pillars.map((p) => <a href={`#${p.key}`}>{p.title}<span>{p.guides.length}</span></a>)}
+      <a href="#tools">Free tools</a>
+    </nav>
+  </header>
+
+  <section class="hub-featured" aria-label="Featured guide">
+    <GuideCard guide={featured} variant="feature" level={2} eager />
+  </section>
+
+  <div class="hub-main">
+    <div class="hub-list-col">
+      {pillars.map((p) => (
+        <section class="hub-pillar" id={p.key} aria-labelledby={`h-${p.key}`}>
+          <h2 id={`h-${p.key}`}>{p.title}</h2>
+          <p class="hub-pillar-intro">{p.intro}</p>
+          <div>{p.guides.map((g) => <GuideCard guide={g} variant="row" />)}</div>
+        </section>
+      ))}
+    </div>
+
+    <aside class="hub-side" aria-label="About these guides">
+      <div class="hub-side-inner">
+        <section class="hub-box">
+          <h2>Who writes these</h2>
+          {authors.map((a) => (
+            <a class="hub-author" href={authorPath(a)}>
+              <Avatar author={a} size={40} />
+              <span><b>{a.name}</b><small>{a.role}</small></span>
+            </a>
+          ))}
+          <p>Every rate is a published figure with its source and date, or a model built from them and labelled as one. <a href="/methodology">How figures are chosen</a>.</p>
+        </section>
+        <section class="hub-box hub-nl">
+          <img src="/the-payment-economics.svg" alt="" width="40" height="40" loading="lazy">
+          <h2>The Payment Economics</h2>
+          <p>One independent study a month on what payment acceptance really costs in Europe.</p>
+          <a class="cta-ghost" href="https://www.thepaymenteconomics.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+        </section>
+      </div>
+    </aside>
   </div>
-</article>
+
+  <section class="hub-tools" id="tools" aria-labelledby="h-tools">
+    <div class="hub-tools-head">
+      <h2 id="h-tools">Free tools</h2>
+      <p>Put your own numbers next to the guides, without an account.</p>
+    </div>
+    <div class="hub-tools-grid">
+      <a class="hub-tool" href={appLink("/try/estimate", "learn-hub-estimate")} data-app-link="learn-hub-estimate" data-app-target="estimate">
+        <span class="hub-tool-kicker">Estimate</span>
+        <b>Estimate your payment fees</b>
+        <span>Six figures you already know, read against published prices and the interchange caps: what a competitive deal would cost you, as a range. A model, not an audit.</span>
+        <i aria-hidden="true">→</i>
+      </a>
+      <a class="hub-tool" href={appLink("/try", "learn-hub-sample")} data-app-link="learn-hub-sample" data-app-target="sample">
+        <span class="hub-tool-kicker">Explore</span>
+        <b>Open a sample company</b>
+        <span>A working payments workspace for a mid-market merchant on Stripe and Adyen, refreshed nightly. Nothing you do there changes anything.</span>
+        <i aria-hidden="true">→</i>
+      </a>
+    </div>
+  </section>
+
+  <article class="guide-body hub-cta-wrap">
+    <div class="guide-cta">
+      <b>See your own payment costs, layer by layer, from your own data.</b>
+      <span>Oryjin continuously monitors your entire stack, from PSP and acquirer fees to scheme fees, fraud, chargebacks and orchestration, and turns it into decision-grade intelligence. Early access is open for European merchants doing €2 to 20M GMV a month.</span>
+      <div class="guide-cta-actions">
+        <a href="/#apply" class="cta-btn" data-cta="learn-hub">Apply for early access <span class="cta-arrow" aria-hidden="true">→</span></a>
+        <a href={appLink("/request-access", "learn-hub")} class="cta-ghost" data-app-link="learn-hub">Request access</a>
+      </div>
+    </div>
+  </article>
+</div>
 </Site>

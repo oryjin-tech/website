@@ -1,0 +1,60 @@
+---
+/**
+ * An author's page: who signs the guides and what they have written. Linked
+ * from every byline and named in each guide's schema.org author.
+ */
+import { getCollection } from "astro:content";
+import Site from "../../layouts/Site.astro";
+import Avatar from "../../components/Avatar.astro";
+import GuideCard from "../../components/GuideCard.astro";
+import "@fontsource-variable/source-serif-4/opsz.css";
+import "../../styles/article.css";
+import "../../styles/hub.css";
+import { AUTHORS, type Author, authorPath, authorSchema } from "../../lib/authors";
+import { absolute } from "../../lib/site";
+
+export function getStaticPaths() {
+	return Object.values(AUTHORS).map((author) => ({ params: { author: author.key }, props: { author } }));
+}
+
+const { author } = Astro.props as { author: Author };
+const guides = (await getCollection("guides", (g) => g.data.locale === "en" && g.data.author === author.key)).sort(
+	(a, b) => a.data.order - b.data.order,
+);
+const path = authorPath(author);
+const title = author.organization ? author.name : `${author.name}, ${author.role}`;
+const description = `${author.short} Guides on payment costs for finance teams at European merchants.`;
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "ProfilePage",
+			"@id": `${absolute(path)}#page`,
+			url: absolute(path),
+			mainEntity: authorSchema(author, absolute(path), author.photo ? absolute(author.photo) : undefined),
+		},
+		{
+			"@type": "BreadcrumbList",
+			itemListElement: [
+				{ "@type": "ListItem", position: 1, name: "Oryjin", item: "https://oryjin.com/" },
+				{ "@type": "ListItem", position: 2, name: "Guides", item: absolute("/learn") },
+				{ "@type": "ListItem", position: 3, name: author.name, item: absolute(path) },
+			],
+		},
+	],
+};
+---
+<Site title={`${title} | Oryjin`} description={description} path={path} ogType="website" ogTitle={title} jsonLd={jsonLd} author={author.name}>
+<div class="hub">
+  <header class="author-hero">
+    <Avatar author={author} size={112} />
+    <h1>{author.name}</h1>
+    <p class="author-role">{author.role}</p>
+    <div class="author-bio">{author.bio.map((p) => <p>{p}</p>)}</div>
+  </header>
+  <section class="author-guides" aria-labelledby="h-guides">
+    <h2 id="h-guides">Guides by {author.organization ? "the team" : author.name.split(" ")[0]}</h2>
+    <div class="author-grid">{guides.map((g) => <GuideCard guide={g} variant="card" />)}</div>
+  </section>
+</div>
+</Site>

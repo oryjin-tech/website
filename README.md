@@ -24,11 +24,21 @@ pnpm check:site   # the SEO gate over dist/, as CI runs it
   English URL (`/scheme-fees-interchange`); a French guide sets its own
   `slug` and names the English file in `translationOf`, and the hreflang
   pairs follow from that. The schema is `src/content.config.ts`.
-- **`src/components/GuidePage.astro`** — the guide page; **`src/layouts/Site.astro`**
-  the head, nav and footer every generated page shares. Both were lifted from
-  the hand-written guides on 2026-10-17 and render the same markup.
-- **`src/pages/`** — `/learn` (the hub), `/methodology`, the guides, the
-  per-guide social cards (`/og/<locale>/<slug>.png`, rendered at build time),
+- **`src/components/GuidePage.astro`** — the guide page: cover, byline,
+  key takeaways, table of contents, body with figures and pull quote, author
+  card, FAQ, CTA, related guides. **`src/layouts/Site.astro`** is the head,
+  nav and footer every generated page shares.
+- **`src/components/Figure.astro`** — the guides' figures, one per id;
+  **`src/lib/covers.ts`** — the generated covers, one motif per topic;
+  **`src/lib/authors.ts`** — the bylines.
+- **`src/styles/`** — `site.css` (tokens, nav, buttons, footer: the chrome
+  lifted from the one-pager), `article.css` (guide typography, figures,
+  cards), `hub.css` (`/learn` and author pages). Article body text is set in
+  Source Serif 4 (self-hosted, `@fontsource-variable`); everything else is
+  Plus Jakarta Sans, as in the app.
+- **`src/pages/`** — `/learn` (the hub), `/authors/<key>`, `/methodology`,
+  the guides, the covers (`/covers/<slug>.svg`), the per-guide social cards
+  (`/og/<locale>/<slug>.png`, the cover with the title, rendered at build time),
   `sitemap.xml`, `rss.xml` and `llms.txt` (its header is `src/llms-header.txt`;
   the guides list is generated).
 
@@ -44,7 +54,16 @@ pnpm check:site   # the SEO gate over dist/, as CI runs it
 4. Every figure carries its source and date in the text, as `/methodology`
    promises. French follows the app's vocabulary
    (`src/integrations/i18n/GLOSSARY.md` in core, mirrored by hand).
-5. Add the URL to `scripts/published-urls.txt` when it ships.
+5. Set `cover` to one of the motifs in `src/lib/covers.ts`, write three or
+   four `takeaways`, and pick a `pullQuote`: a sentence from the body, word
+   for word.
+6. Place figures and the pull quote with a paragraph of their own in the
+   Markdown: `[[figure:<id>]]` (an id from `src/components/Figure.astro`) or
+   `[[pullquote]]`. The renderer strips raw HTML, so this is how a guide
+   places a component; an unknown id or a marker inside a paragraph fails
+   the build. A figure that shows numbers the text does not cite with a
+   source says "Illustrative" on its face.
+7. Add the URL to `scripts/published-urls.txt` when it ships.
 
 ## The SEO gate
 

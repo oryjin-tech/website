@@ -1,8 +1,15 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
 import Site from "../layouts/Site.astro";
-import { GUIDE_COPY, HUB_PATH } from "../lib/i18n";
+import "@fontsource-variable/source-serif-4/opsz.css";
+import "../styles/article.css";
+import { authorOf, authorPath, authorSchema } from "../lib/authors";
+import { coverPath } from "../lib/covers";
+import { GUIDE_COPY, HUB_PATH, PILLARS } from "../lib/i18n";
 import { absolute, appLink, guidePath, guideSlug, isoDate, monthYear } from "../lib/site";
+import Avatar from "./Avatar.astro";
+import Figure from "./Figure.astro";
+import GuideCard from "./GuideCard.astro";
 
 interface Props {
 	guide: CollectionEntry<"guides">;
@@ -13,7 +20,21 @@ const { data } = guide;
 const copy = GUIDE_COPY[data.locale];
 const slug = guideSlug(guide);
 const path = guidePath(guide);
-const { Content } = await render(guide);
+const author = authorOf(data.author);
+const { headings } = await render(guide);
+const toc = headings.filter((h) => h.depth === 2);
+
+/*
+ * The body, cut where a paragraph reads `[[figure:<id>]]` or `[[pullquote]]`.
+ * The Markdown renderer strips raw HTML, so a marker paragraph is how a guide
+ * places a component. split() with one capture group alternates
+ * html, marker, html, marker, html…
+ */
+const html = guide.rendered?.html ?? "";
+const parts = html.split(/<p>\[\[(figure:[a-z0-9-]+|pullquote)\]\]<\/p>/);
+const leftover = parts.filter((_, i) => i % 2 === 0).join("").match(/\[\[[^\]]*\]\]/);
+if (leftover) throw new Error(`${guide.id}: marker ${leftover[0]} must be a paragraph of its own`);
+if (parts.includes("pullquote") && !data.pullQuote) throw new Error(`${guide.id}: [[pullquote]] without a pullQuote`);
 
 const all = await getCollection("guides");
 const fileName = (g: CollectionEntry<"guides">) => g.id.split("/").pop()!;
@@ -38,6 +59,14 @@ const alternates = [
 const ogImage = `/og/${data.locale}/${slug}.png`;
 const url = absolute(path);
 const ctaContent = `guide-${slug}`;
+const pillar = PILLARS[data.locale][data.pillar];
+const hub = HUB_PATH[data.locale];
+
+const share = [
+	{ key: "linkedin", label: "LinkedIn", href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` },
+	{ key: "x", label: "X", href: `https://x.com/intent/post?url=${encodeURIComponent(url)}&text=${encodeURIComponent(data.title)}` },
+	{ key: "email", label: "Email", href: `mailto:?subject=${encodeURIComponent(data.title)}&body=${encodeURIComponent(url)}` },
+];
 
 const jsonLd = {
 	"@context": "https://schema.org",
@@ -50,7 +79,7 @@ const jsonLd = {
 			inLanguage: data.locale,
 			datePublished: isoDate(data.published),
 			dateModified: isoDate(data.updated),
-			author: { "@type": "Organization", name: "Oryjin", url: "https://oryjin.com/" },
+			author: authorSchema(author, absolute(authorPath(author))),
 			publisher: {
 				"@type": "Organization",
 				name: "Oryjin",
@@ -58,12 +87,13 @@ const jsonLd = {
 			},
 			mainEntityOfPage: url,
 			image: absolute(ogImage),
+			articleSection: pillar.title,
 		},
 		{
 			"@type": "BreadcrumbList",
 			itemListElement: [
 				{ "@type": "ListItem", position: 1, name: "Oryjin", item: "https://oryjin.com/" },
-				{ "@type": "ListItem", position: 2, name: copy.crumbGuides, item: absolute(HUB_PATH[data.locale]) },
+				{ "@type": "ListItem", position: 2, name: copy.crumbGuides, item: absolute(hub) },
 				{ "@type": "ListItem", position: 3, name: data.title, item: url },
 			],
 		},
@@ -91,33 +121,188 @@ const jsonLd = {
 	ogImage={ogImage}
 	alternates={alternates}
 	jsonLd={jsonLd}
+	author={author.name}
+	preloadImage={coverPath(slug)}
 >
-<section class="guide-hero">
-  <p class="guide-crumb"><a href="/">Oryjin</a> › <a href={HUB_PATH[data.locale]}>{copy.crumbGuides}</a></p>
-  <p class="section-label">{copy.kicker} · {data.label}</p>
-  <h1>{data.title}</h1>
-  <p class="lede">{data.lede}</p>
-  <div class="guide-meta"><span>{copy.minRead(data.readingMinutes)}</span><span>{copy.updated(monthYear(data.updated, data.locale))}</span><span>{copy.byline}</span></div>
-</section>
-<article class="guide-body">
-<Content />
-  <div class="guide-cta">
-    <b>{data.cta.headline}</b>
-    <span>{data.cta.text}</span>
-    <a href="/#apply" class="cta-btn" data-cta={ctaContent}>{copy.apply} <span class="cta-arrow" aria-hidden="true">→</span></a>
-    <a href={appLink("/request-access", ctaContent)} class="cta-ghost" data-app-link={ctaContent}>{copy.requestAccess}</a>
+<div class="post" data-guide={slug} data-locale={data.locale}>
+  <header class="post-head">
+    <p class="post-crumb"><a href={hub}>{copy.crumbGuides}</a><span aria-hidden="true">/</span><a href={`${hub}#${data.pillar}`}>{pillar.title}</a></p>
+    <h1>{data.title}</h1>
+    <p class="post-standfirst">{data.lede}</p>
+    <div class="post-byline">
+      <a class="post-author" href={authorPath(author)}>
+        <Avatar author={author} size={44} />
+        <span><b>{author.name}</b><small>{author.role}</small></span>
+      </a>
+      <p class="post-meta">
+        <span>{copy.minRead(data.readingMinutes)}</span>
+        <span aria-hidden="true">·</span>
+        <time datetime={isoDate(data.updated)}>{copy.updated(monthYear(data.updated, data.locale))}</time>
+      </p>
+      <div class="post-share" role="group" aria-label={copy.share}>
+        {share.map((s) => (
+          <a href={s.href} target={s.key === "email" ? undefined : "_blank"} rel="noopener" data-share={s.key} aria-label={`${copy.share}: ${s.label}`} title={s.label}>
+            {s.key === "linkedin" && <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm7 0h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.35h-4v-4.74c0-1.13-.02-2.59-1.58-2.59-1.58 0-1.82 1.23-1.82 2.5v4.83h-4v-11Z"/></svg>}
+            {s.key === "x" && <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.19L2 3h6.33l4.37 5.77L17.75 3Zm-1.08 16.17h1.7L7.4 4.74H5.58l11.09 14.43Z"/></svg>}
+            {s.key === "email" && <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5h18v13H3v-13Zm2 2v.3l7 4.7 7-4.7v-.3H5Zm14 2.7-7 4.7-7-4.7v6.3h14v-6.3Z"/></svg>}
+          </a>
+        ))}
+        <button type="button" class="post-copy" data-copy={url} data-copied={copy.copied} aria-label={copy.copyLink} title={copy.copyLink}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.5-3.5a3 3 0 1 1 4.2 4.2l-2.1 2.1a1 1 0 0 1-1.4-1.4l2.1-2.1a1 1 0 0 0-1.4-1.4L12 13.4a1 1 0 0 1-1.4 0Zm2.8-2.8a1 1 0 0 1 0 1.4l-3.5 3.5a3 3 0 1 1-4.2-4.2l2.1-2.1a1 1 0 1 1 1.4 1.4l-2.1 2.1a1 1 0 1 0 1.4 1.4l3.5-3.5a1 1 0 0 1 1.4 0Z"/></svg>
+        </button>
+        <span class="post-copied" role="status" aria-live="polite"></span>
+      </div>
+    </div>
+  </header>
+
+  <figure class="post-cover">
+    <img src={coverPath(slug)} alt="" width="1200" height="630" fetchpriority="high" decoding="async">
+  </figure>
+
+  <div class="post-shell">
+    {toc.length > 2 && (
+    <aside class="post-toc" aria-label={copy.toc}>
+      <div class="post-toc-inner">
+        <p>{copy.toc}</p>
+        <ol>{toc.map((h) => <li><a href={`#${h.slug}`} data-toc={h.slug}>{h.text}</a></li>)}</ol>
+      </div>
+    </aside>
+    )}
+
+    <article class="guide-body">
+      {data.takeaways.length > 0 && (
+      <section class="post-takeaways" aria-labelledby="takeaways">
+        <h2 id="takeaways">{copy.takeaways}</h2>
+        <ul>{data.takeaways.map((t) => <li>{t}</li>)}</ul>
+      </section>
+      )}
+
+      <div class="post-prose">
+        {parts.map((part, i) =>
+          i % 2 === 0
+            ? <Fragment set:html={part} />
+            : part === "pullquote"
+              ? <aside class="post-pull" aria-hidden="true"><p>{data.pullQuote}</p></aside>
+              : <Figure id={part.slice("figure:".length)} />,
+        )}
+      </div>
+
+      <div class="post-end">
+        <p class="post-tags">
+          <a href={`${hub}#${data.pillar}`}>{pillar.title}</a>
+          <a href={hub}>{data.label}</a>
+        </p>
+        <div class="post-share post-share-end" role="group" aria-label={copy.share}>
+          {share.map((s) => (
+            <a href={s.href} target={s.key === "email" ? undefined : "_blank"} rel="noopener" data-share={s.key}>{s.label}</a>
+          ))}
+        </div>
+      </div>
+
+      <section class="post-authorcard" aria-label={copy.writtenBy}>
+        <Avatar author={author} size={64} />
+        <div>
+          <p class="post-authorcard-kicker">{copy.writtenBy}</p>
+          <p class="post-authorcard-name"><a href={authorPath(author)}>{author.name}</a></p>
+          <p class="post-authorcard-bio">{author.short}</p>
+        </div>
+      </section>
+
+      {data.faq.length > 0 && (
+      <section class="guide-faq">
+        <h2>{copy.faq}</h2>
+        {data.faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </section>
+      )}
+
+      <div class="guide-cta">
+        <b>{data.cta.headline}</b>
+        <span>{data.cta.text}</span>
+        <div class="guide-cta-actions">
+          <a href="/#apply" class="cta-btn" data-cta={ctaContent}>{copy.apply} <span class="cta-arrow" aria-hidden="true">→</span></a>
+          <a href={appLink("/request-access", ctaContent)} class="cta-ghost" data-app-link={ctaContent}>{copy.requestAccess}</a>
+        </div>
+      </div>
+
+      {related.length > 0 && (
+      <section class="guide-related" aria-label={copy.relatedLabel}>
+        <div class="guide-related-head">
+          <h2>{copy.related}</h2>
+          <a href={hub}>{copy.allGuides} →</a>
+        </div>
+        <div class="guide-related-grid">
+          {related.slice(0, 3).map((g) => <GuideCard guide={g} variant="card" />)}
+        </div>
+      </section>
+      )}
+    </article>
   </div>
-  {data.faq.length > 0 && (
-  <section class="guide-faq">
-    <h2>{copy.faq}</h2>
-    <dl>{data.faq.map((f) => (<><dt>{f.q}</dt><dd>{f.a}</dd></>))}</dl>
+
+  <section class="post-newsletter" aria-label={copy.newsletterTitle}>
+    <img src="/the-payment-economics.svg" alt="" width="48" height="48" loading="lazy">
+    <div>
+      <b>{copy.newsletterTitle}</b>
+      <span>{copy.newsletterText}</span>
+    </div>
+    <a class="cta-ghost" href="https://www.thepaymenteconomics.com/subscribe" target="_blank" rel="noopener">{copy.newsletterCta}</a>
   </section>
-  )}
-  {related.length > 0 && (
-  <aside class="guide-related" aria-label={copy.relatedLabel}>
-    <h2>{copy.related}</h2>
-    <ul>{related.map((g) => (<li><a href={guidePath(g)}>{g.data.title}</a></li>))}</ul>
-  </aside>
-  )}
-</article>
+</div>
+
+<script is:inline>
+(function () {
+  var post = document.querySelector(".post");
+  if (!post) return;
+  var slug = post.getAttribute("data-guide");
+  var locale = post.getAttribute("data-locale");
+  function push(o) { window.dataLayer = window.dataLayer || []; window.dataLayer.push(o); }
+
+  /* Copy link */
+  document.querySelectorAll(".post-copy").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var done = function () {
+        var s = b.parentNode.querySelector(".post-copied");
+        if (s) { s.textContent = b.getAttribute("data-copied"); setTimeout(function () { s.textContent = ""; }, 2200); }
+        b.classList.add("is-done"); setTimeout(function () { b.classList.remove("is-done"); }, 2200);
+      };
+      if (navigator.clipboard) navigator.clipboard.writeText(b.getAttribute("data-copy")).then(done, function () {});
+      push({ event: "learn_share", slug: slug, locale: locale, network: "copy" });
+    });
+  });
+  document.querySelectorAll("[data-share]").forEach(function (a) {
+    a.addEventListener("click", function () { push({ event: "learn_share", slug: slug, locale: locale, network: a.getAttribute("data-share") }); });
+  });
+
+  /* Table of contents: highlight the section being read */
+  var links = Array.prototype.slice.call(document.querySelectorAll("[data-toc]"));
+  if (links.length) {
+    var heads = links.map(function (l) { return document.getElementById(l.getAttribute("data-toc")); }).filter(Boolean);
+    var current;
+    var onScroll = function () {
+      var line = innerHeight * 0.3, id = heads[0] && heads[0].id;
+      heads.forEach(function (h) { if (h.getBoundingClientRect().top < line) id = h.id; });
+      if (id === current) return; current = id;
+      links.forEach(function (l) { l.classList.toggle("is-on", l.getAttribute("data-toc") === id); });
+    };
+    addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  }
+
+  /* Read depth through the article body, once per bucket */
+  var body = document.querySelector(".post-prose");
+  var sent = {};
+  function depth() {
+    if (!body) return;
+    var r = body.getBoundingClientRect();
+    var seen = (innerHeight - r.top) / r.height;
+    [25, 50, 75, 100].forEach(function (b) {
+      if (!sent[b] && seen >= b / 100) { sent[b] = 1; push({ event: "learn_article_read", slug: slug, locale: locale, depth: b }); }
+    });
+  }
+  addEventListener("scroll", depth, { passive: true }); depth();
+})();
+</script>
 </Site>

@@ -1,0 +1,46 @@
+---
+/**
+ * A guide in a list. `row` is the hub's Medium-style line (text left, cover
+ * right), `card` the cover-on-top card used under an article and on the
+ * author page, `feature` the hub's lead story.
+ */
+import type { CollectionEntry } from "astro:content";
+import { authorOf } from "../lib/authors";
+import { coverPath } from "../lib/covers";
+import { GUIDE_COPY, PILLARS } from "../lib/i18n";
+import { guidePath, guideSlug, monthYear } from "../lib/site";
+import Avatar from "./Avatar.astro";
+
+interface Props {
+	guide: CollectionEntry<"guides">;
+	variant?: "row" | "card" | "feature";
+	/** The heading level of the title, so a list sits under the right section. */
+	level?: 2 | 3;
+	eager?: boolean;
+}
+const { guide, variant = "card", level = 3, eager = false } = Astro.props;
+const { data } = guide;
+const copy = GUIDE_COPY[data.locale];
+const author = authorOf(data.author);
+const href = guidePath(guide);
+const H = `h${level}` as "h2" | "h3";
+const pillar = PILLARS[data.locale][data.pillar].title;
+---
+<div class={`gcard gcard-${variant}`}>
+  <a class="gcard-cover" href={href} tabindex="-1" aria-hidden="true">
+    <img src={coverPath(guideSlug(guide))} alt="" width="1200" height="630" loading={eager ? "eager" : "lazy"} decoding="async">
+  </a>
+  <div class="gcard-body">
+    <p class="gcard-kicker"><span>{data.label}</span>{variant === "feature" && <span class="gcard-pillar">{pillar}</span>}</p>
+    <H class="gcard-title"><a href={href}>{data.title}</a></H>
+    {variant !== "card" && <p class="gcard-desc">{data.description}</p>}
+    <p class="gcard-meta">
+      <Avatar author={author} size={22} />
+      <span class="gcard-author">{author.name}</span>
+      <span class="dot" aria-hidden="true">·</span>
+      <span>{copy.minRead(data.readingMinutes)}</span>
+      {variant !== "card" && <span class="dot" aria-hidden="true">·</span>}
+      {variant !== "card" && <time datetime={data.updated.toISOString().slice(0, 10)}>{monthYear(data.updated, data.locale)}</time>}
+    </p>
+  </div>
+</div>

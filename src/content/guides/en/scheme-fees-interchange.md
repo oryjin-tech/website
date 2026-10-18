@@ -24,6 +24,14 @@ related:
   - psp-contract-renegotiation
   - payment-cost-forecast
   - chargeback-ratio-thresholds
+author: oryjin-team
+cover: network
+pullQuote: "A blended-price account with no network-cost report can only be modelled. That is itself a finding."
+takeaways:
+  - "A card payment's cost stacks interchange, scheme fees, the acquirer's markup, FX and per-event fees. Only consumer interchange is capped in the EEA."
+  - "Scheme fees are not capped and grew 33.9% for European merchants between 2018 and 2022, according to EuroCommerce."
+  - "Measured, billed and modelled figures describe the same cost and must never be added together."
+  - "Split the cost of each payment by card type, market, currency and pattern to see which layer moved and why."
 ---
 ## The layers, from the issuer to your bank account
 
@@ -37,6 +45,8 @@ related:
 
 **Per-event fees** are charged per authorisation, 3-D Secure attempt, refund, retry and dispute. They never appear as a percentage, so they escape a rate comparison entirely.
 
+[[figure:interchange-rates]]
+
 ## Why the regulators are involved
 
 In March 2025 the UK Payment Systems Regulator concluded that Visa and Mastercard do not provide acquirers with "sufficiently clear and detailed information" about their fees, that queries take a long time to resolve, and that some of the largest acquirers buy external consultancy to understand what they themselves are charged. In July 2026 the regulator imposed directions requiring the schemes to publish their fee logic and to give six months' notice of new or changed fees, with compliance due in 2027. The inputs will become publishable; attributing them to your own transactions remains your problem.
@@ -46,6 +56,10 @@ In March 2025 the UK Payment Systems Regulator concluded that Visa and Mastercar
 Three kinds of figures describe the same cost, and they should never be added together. A **measured** figure comes from a settlement row or a network-cost report that decomposes each charge; some acquirers provide this, mostly on interchange++ accounts. A **billed** figure comes from the invoice, classified by fee type. A **modelled** figure is an estimate built from the regulated caps, the schemes' published commitments and public fee schedules, applied to your card mix; it is what you have when the provider discloses nothing, and it should be shown as a band, not a point.
 
 A blended-price account with no network-cost report can only be modelled. That is itself a finding: the case for asking your provider for interchange++ pricing is that it turns a modelled band into a measured line.
+
+[[figure:three-figures]]
+
+[[pullquote]]
 
 ## Reading your own cost by card type, market and pattern
 

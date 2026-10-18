@@ -1,0 +1,226 @@
+---
+/**
+ * The guides' figures, placed where a guide's Markdown has a paragraph that
+ * reads `[[figure:<id>]]` (GuidePage.astro swaps it). HTML and CSS where the
+ * figure is a list of rows, so labels stay readable on a phone; SVG only for
+ * the forecast band. Drawn in the app's chart idiom: white card, brand blue,
+ * light-blue bars, dashed guides.
+ *
+ * Every figure either restates numbers the guide's text already cites with
+ * their source, or is labelled "Illustrative" on its face.
+ */
+interface Props {
+	id: string;
+}
+const { id } = Astro.props;
+
+const FIGURE_IDS = [
+	"cost-layers",
+	"interchange-rates",
+	"three-figures",
+	"renewal-timeline",
+	"asks-ladder",
+	"forecast-band",
+	"threshold-cells",
+	"dispute-types",
+] as const;
+
+if (!(FIGURE_IDS as readonly string[]).includes(id)) {
+	throw new Error(`Unknown figure "${id}": add it to src/components/Figure.astro`);
+}
+
+/* ── forecast-band data (illustrative) ── */
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar"];
+const actual = [182, 176, 190, 188, 195, 201, 198, 207, 211];
+const median = [219, 236, 241, 214, 211, 220];
+const spread = [5, 9, 13, 15, 17, 19];
+const W = 640;
+const H = 300;
+const pad = { l: 56, r: 16, t: 20, b: 40 };
+const yMin = 160;
+const yMax = 270;
+const X = (i: number) => pad.l + (i * (W - pad.l - pad.r)) / (months.length - 1);
+const Y = (v: number) => pad.t + ((yMax - v) * (H - pad.t - pad.b)) / (yMax - yMin);
+const r1 = (n: number) => Math.round(n * 10) / 10;
+const last = actual.length - 1;
+const fIdx = median.map((_, k) => last + 1 + k);
+const bandTop = [[X(last), Y(actual[last])], ...fIdx.map((i, k) => [X(i), Y(median[k] + spread[k])])];
+const bandBot = [...fIdx.map((i, k) => [X(i), Y(median[k] - spread[k])])].reverse();
+const bandPath = `M${[...bandTop, ...bandBot, [X(last), Y(actual[last])]].map(([x, y]) => `${r1(x)},${r1(y)}`).join(" L")} Z`;
+const actualPts = actual.map((v, i) => `${r1(X(i))},${r1(Y(v))}`).join(" ");
+const medianPts = [[X(last), Y(actual[last])], ...fIdx.map((i, k) => [X(i), Y(median[k])])]
+	.map(([x, y]) => `${r1(x)},${r1(y)}`)
+	.join(" ");
+const yTicks = [180, 200, 220, 240, 260];
+
+/* ── bars ── */
+const pct = (v: number, max: number) => `${(v / max) * 100}%`;
+const cells = [
+	{ label: "All traffic, blended", v: 0.4, note: "what the monthly report shows" },
+	{ label: "DE · Visa credit", v: 0.9 },
+	{ label: "IT · Mastercard credit", v: 1.05 },
+	{ label: "ES · Mastercard credit", v: 0.55 },
+	{ label: "FR · CB debit", v: 0.15 },
+];
+const LIMIT = 0.75;
+const THRESHOLD = 1.5;
+const CELL_MAX = 2;
+---
+{id === "cost-layers" && (
+<figure class="fig">
+  <div class="fig-card">
+    <div class="fig-head"><span class="fig-title">One invoice total, six layers underneath</span></div>
+    <ol class="fig-layers">
+      <li data-k="moves"><b>Interchange</b><span>Paid to the issuer. Capped for EEA consumer cards, not for commercial ones.</span><i>Moves on its own</i></li>
+      <li data-k="moves"><b>Scheme fees</b><span>Charged by Visa and Mastercard. Revised on published cycles.</span><i>Moves on its own</i></li>
+      <li data-k="fixed"><b>Acquirer or PSP markup</b><span>The layer your contract prices.</span><i>In your contract</i></li>
+      <li data-k="moves"><b>FX</b><span>When card, transaction and settlement currencies differ.</span><i>Moves on its own</i></li>
+      <li data-k="partly"><b>Per-event fees</b><span>Authorisation, 3-D Secure, refunds, retries, disputes.</span><i>Partly in your contract</i></li>
+      <li data-k="moves"><b>Fraud and chargeback losses</b><span>Grow with disputes, not with the rate card.</span><i>Moves on its own</i></li>
+    </ol>
+  </div>
+  <figcaption>Your contract fixes the markup and a few per-event prices. The other layers move without a contract line changing.</figcaption>
+</figure>
+)}
+
+{id === "interchange-rates" && (
+<figure class="fig">
+  <div class="fig-card">
+    <div class="fig-head"><span class="fig-title">Interchange, as a share of the payment</span></div>
+    <div class="fig-bars" style="--step:20%">
+      <div class="fig-bar"><span class="fig-bar-label">Consumer debit, EEA</span><span class="fig-bar-track"><i style={`width:${pct(0.2, 2.5)}`}></i><em style={`left:${pct(0.2, 2.5)}`}>0.20% cap</em></span></div>
+      <div class="fig-bar"><span class="fig-bar-label">Consumer credit, EEA</span><span class="fig-bar-track"><i style={`width:${pct(0.3, 2.5)}`}></i><em style={`left:${pct(0.3, 2.5)}`}>0.30% cap</em></span></div>
+      <div class="fig-bar is-strong"><span class="fig-bar-label">Commercial cards, Europe</span><span class="fig-bar-track"><i class="is-range" style={`left:${pct(1.3, 2.5)};width:${pct(1.1, 2.5)}`}></i><em class="is-before" style={`left:${pct(1.3, 2.5)}`}>1.3% to 2.4%</em></span></div>
+      <div class="fig-axis" aria-hidden="true">{[0, 0.5, 1, 1.5, 2, 2.5].map((t) => <span style={`left:${pct(t, 2.5)}`}>{t}%</span>)}</div>
+    </div>
+  </div>
+  <figcaption>Commercial cards sit outside the cap, at roughly six times the consumer rate. Sources: Regulation (EU) 2015/751; EuroCommerce.</figcaption>
+</figure>
+)}
+
+{id === "three-figures" && (
+<figure class="fig">
+  <div class="fig-card">
+    <div class="fig-head"><span class="fig-title">Three kinds of figure for the same cost</span></div>
+    <div class="fig-trio">
+      <div><svg viewBox="0 0 120 40" aria-hidden="true"><line x1="6" y1="20" x2="114" y2="20" class="ax"/><circle cx="62" cy="20" r="6" class="pt"/></svg><b>Measured</b><span>From a settlement row or a network-cost report that splits each charge. Mostly on interchange++ accounts.</span><em>A point</em></div>
+      <div><svg viewBox="0 0 120 40" aria-hidden="true"><line x1="6" y1="20" x2="114" y2="20" class="ax"/><rect x="40" y="12" width="44" height="16" rx="3" class="bar"/></svg><b>Billed</b><span>From the invoice, classified by fee type.</span><em>A line total</em></div>
+      <div><svg viewBox="0 0 120 40" aria-hidden="true"><line x1="6" y1="20" x2="114" y2="20" class="ax"/><rect x="26" y="10" width="72" height="20" rx="10" class="band"/><circle cx="62" cy="20" r="3.5" class="pt"/></svg><b>Modelled</b><span>From the caps, the schemes' commitments and public schedules, applied to your card mix.</span><em>A band</em></div>
+    </div>
+    <p class="fig-foot">Never add them together.</p>
+  </div>
+  <figcaption>A blended-price account with no network-cost report can only be modelled. Interchange++ turns the band into a measured line.</figcaption>
+</figure>
+)}
+
+{id === "renewal-timeline" && (
+<figure class="fig">
+  <div class="fig-card">
+    <div class="fig-head"><span class="fig-title">A renegotiation, from the 60-day mark to the first invoices</span></div>
+    <ol class="fig-steps">
+      <li><b>60 days out</b><span>End date and notice period on the renewal radar.</span></li>
+      <li><b>Price the year</b><span>Twelve months against the contract: gap, tier, effective markup.</span></li>
+      <li><b>Build the asks</b><span>An internal brief and a provider-facing fact sheet.</span></li>
+      <li><b>Two rounds</b><span>Asks the provider can check. Concessions decided beforehand.</span></li>
+      <li><b>Signature</b><span>The new contract loaded as terms you can compute with.</span></li>
+      <li><b>First three invoices</b><span>Checked against the new terms. What it earned, recorded.</span></li>
+    </ol>
+  </div>
+  <figcaption>Starting at 60 days leaves time to pull the data, build the case and hold two rounds of conversation.</figcaption>
+</figure>
+)}
+
+{id === "asks-ladder" && (
+<figure class="fig">
+  <div class="fig-card">
+    <div class="fig-head"><span class="fig-title">The asks, from easiest to win to hardest</span></div>
+    <ol class="fig-ladder">
+      <li style="--w:100%"><b>Correct the billing gap and credit it</b><span>Owed, not negotiated</span></li>
+      <li style="--w:88%"><b>Apply the tier the volume already qualifies for</b></li>
+      <li style="--w:76%"><b>Move from blended to interchange++</b><span>Network costs passed at cost</span></li>
+      <li style="--w:64%"><b>Lower the markup where most of the volume is</b></li>
+      <li style="--w:52%"><b>Remove or cap per-event fees</b><span>Refunds, retries, disputes</span></li>
+      <li style="--w:42%"><b>Align FX terms with your settlement currencies</b></li>
+    </ol>
+  </div>
+  <figcaption>Each ask rests on a fact from your own data, not on a market rumour.</figcaption>
+</figure>
+)}
+
+{id === "forecast-band" && (
+<figure class="fig">
+  <div class="fig-card">
+    <div class="fig-head"><span class="fig-title">Monthly payment fees, actual and forecast</span><span class="fig-tag">Illustrative</span></div>
+    <svg class="fig-chart" viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Line chart: monthly fees rise from about €180k in January to €211k in September, then a forecast with a widening P10 to P90 band, peaking near €241k in December.">
+      {yTicks.map((t) => (
+        <g>
+          <line x1={pad.l} x2={W - pad.r} y1={Y(t)} y2={Y(t)} class="grid" />
+          <text x={pad.l - 10} y={Y(t) + 4} text-anchor="end" class="tick">€{t}k</text>
+        </g>
+      ))}
+      {months.map((m, i) => (i % 3 === 0 || i === months.length - 1) && <text x={X(i)} y={H - 14} text-anchor="middle" class="tick">{m}</text>)}
+      <line x1={X(last)} x2={X(last)} y1={pad.t} y2={H - pad.b} class="split" />
+      <text x={X(last) + 8} y={pad.t + 12} class="note">Forecast →</text>
+      <line x1={X(9)} x2={X(9)} y1={Y(median[0]) - 18} y2={H - pad.b} class="driver" />
+      <line x1={X(10)} x2={X(10)} y1={Y(median[1]) - 26} y2={H - pad.b} class="driver" />
+      <circle cx={X(9)} cy={Y(median[0]) - 24} r="9" class="driver-dot" /><text x={X(9)} y={Y(median[0]) - 20} text-anchor="middle" class="driver-n">1</text>
+      <circle cx={X(10)} cy={Y(median[1]) - 32} r="9" class="driver-dot" /><text x={X(10)} y={Y(median[1]) - 28} text-anchor="middle" class="driver-n">2</text>
+      <path d={bandPath} class="band" />
+      <polyline points={medianPts} class="median" />
+      <polyline points={actualPts} class="actual" />
+      {actual.map((v, i) => <circle cx={X(i)} cy={Y(v)} r="3.5" class="dot" />)}
+    </svg>
+    <ul class="fig-legend">
+      <li><i class="lg-actual"></i>Actual</li>
+      <li><i class="lg-median"></i>Forecast</li>
+      <li><i class="lg-band"></i>P10 to P90</li>
+      <li><b>1</b>Scheme fee revision, October</li>
+      <li><b>2</b>Volume tier reached, November</li>
+    </ul>
+  </div>
+  <figcaption>A range with named drivers. The band widens with the horizon instead of hiding the uncertainty inside one number.</figcaption>
+</figure>
+)}
+
+{id === "threshold-cells" && (
+<figure class="fig">
+  <div class="fig-card">
+    <div class="fig-head"><span class="fig-title">Dispute ratio by cell, against the thresholds</span><span class="fig-tag">Illustrative</span></div>
+    <div class="fig-bars fig-cells" style={`--step:25%;--limit:${pct(LIMIT, CELL_MAX)};--threshold:${pct(THRESHOLD, CELL_MAX)}`}>
+      {cells.map((c) => (
+        <div class:list={["fig-bar", { "is-over": c.v > LIMIT, "is-blended": c.note }]}>
+          <span class="fig-bar-label">{c.label}</span>
+          <span class="fig-bar-track"><i style={`width:${pct(c.v, CELL_MAX)}`}></i><em style={`left:${pct(c.v, CELL_MAX)}`}>{c.v.toFixed(2)}%</em></span>
+        </div>
+      ))}
+      <div class="fig-axis" aria-hidden="true">{[0, 0.5, 1, 1.5, 2].map((t) => <span style={`left:${pct(t, CELL_MAX)}`}>{t}%</span>)}</div>
+    </div>
+    <ul class="fig-legend">
+      <li><i class="lg-limit"></i>Your internal limit, 0.75% (example)</li>
+      <li><i class="lg-threshold"></i>Visa enforcement threshold, EU, 1.5% from April 2026</li>
+    </ul>
+  </div>
+  <figcaption>Two cells are past the internal limit while the blended ratio reads 0.40%. Alert on the cell, not on the average.</figcaption>
+</figure>
+)}
+
+{id === "dispute-types" && (
+<figure class="fig">
+  <div class="fig-card">
+    <div class="fig-head"><span class="fig-title">Two kinds of dispute, two owners</span></div>
+    <div class="fig-duo">
+      <div>
+        <b>Fraud disputes</b>
+        <span>The cardholder says they never made the payment.</span>
+        <dl><dt>Owner</dt><dd>Risk and authentication</dd><dt>Levers</dt><dd>3-D Secure, velocity rules, device signals</dd></dl>
+      </div>
+      <div>
+        <b>Non-fraud disputes</b>
+        <span>The goods did not arrive, the subscription was not cancelled, the charge was not recognised.</span>
+        <dl><dt>Owner</dt><dd>Operations</dd><dt>Levers</dt><dd>Delivery confirmation, cancellation flows, a descriptor customers recognise</dd></dl>
+      </div>
+    </div>
+  </div>
+  <figcaption>Reported as one ratio, they hide which team owns the fix. Split them, price them, give each its own threshold.</figcaption>
+</figure>
+)}
