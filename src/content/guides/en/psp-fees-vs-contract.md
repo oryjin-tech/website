@@ -13,7 +13,7 @@ order: 1
 locale: en
 cta:
   headline: "See your own fees checked against your contract, every month."
-  text: "Oryjin continuously monitors your entire stack, from PSP and acquirer fees to scheme fees, fraud, chargebacks and orchestration, and turns it into decision-grade intelligence. Early access is open for European merchants doing €2 to 20M GMV a month."
+  text: "Every month, Oryjin reconciles each processor against its contract, ranks the next actions in euros with each figure labelled detected or modelled, sends the claims and shows what came back. Early access is open for European merchants with €10 to 200M of card payments a year."
 faq:
   - q: "Is a higher effective rate always a billing error?"
     a: "No. Most of the increase usually comes from card mix, scheme fee revisions and per-event fees that are contractually correct. Billing errors exist, but they are the smaller, recoverable part. Separating the two is the point of checking fees against the contract."

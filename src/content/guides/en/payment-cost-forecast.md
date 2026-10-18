@@ -13,7 +13,7 @@ order: 4
 locale: en
 cta:
   headline: "Get a fee forecast for the quarter and the fiscal year, with its range and its drivers, from your own data."
-  text: "Oryjin continuously monitors your entire stack, from PSP and acquirer fees to scheme fees, fraud, chargebacks and orchestration, and turns it into decision-grade intelligence. Early access is open for European merchants doing €2 to 20M GMV a month."
+  text: "Every month, Oryjin reconciles each processor against its contract, ranks the next actions in euros with each figure labelled detected or modelled, sends the claims and shows what came back. Early access is open for European merchants with €10 to 200M of card payments a year."
 faq:
   - q: "How far ahead can payment costs be forecast reliably?"
     a: "A quarter with a tight band; a fiscal year with a wider one. Beyond that, contract renewals and scheme revisions you cannot yet see dominate the uncertainty. Refresh the forecast monthly rather than extending the horizon."

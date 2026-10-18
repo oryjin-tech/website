@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- ═══ CORE SEO ═══════════════════════════════ -->
-<title>Oryjin — The payment cockpit for Stripe, Adyen &amp; every PSP</title>
-<meta name="description" content="The best payment teams don't guess. Oryjin monitors your whole stack, acquirer fees, scheme fees, fraud, chargebacks and orchestration, into decisions.">
+<title>Oryjin — Decision intelligence for payment costs</title>
+<meta name="description" content="Every PSP reconciled against its contract each month, the next actions ranked in euros and labelled detected or modelled, then what came back. For European merchants.">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="author" content="Oryjin">
 <meta name="theme-color" content="#1652D9">
@@ -15,18 +15,18 @@
 <!-- ═══ OPEN GRAPH / LINKEDIN / FACEBOOK ══════ -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://oryjin.com/">
-<meta property="og:title" content="Know where your payment margin goes, and win it back — Oryjin">
-<meta property="og:description" content="Checks PSP fees against your contracts, ranks what to change first in euros and forecasts next quarter. Stripe and Adyen connectors. Independent of your PSP.">
+<meta property="og:title" content="What to change first in your payment costs, and what it earns you — Oryjin">
+<meta property="og:description" content="Every processor reconciled against its contract each month. The next actions ranked in euros, detected or modelled, never mixed. Then what actually came back. Independent of your PSP.">
 <meta property="og:image" content="https://oryjin.com/og-navy.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Oryjin — payment cost intelligence for Stripe, Adyen and multi-PSP merchants">
+<meta property="og:image:alt" content="Oryjin — decision intelligence for payment costs, for European merchants">
 <meta property="og:site_name" content="Oryjin">
 <meta property="og:locale" content="en_GB">
 <!-- ═══ TWITTER / X CARD ══════════════════════ -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Know where your payment margin goes, and win it back — Oryjin">
-<meta name="twitter:description" content="Checks PSP fees against your contracts, ranks what to change first in euros and forecasts next quarter. Stripe and Adyen connectors. Independent of your PSP.">
+<meta name="twitter:title" content="What to change first in your payment costs, and what it earns you — Oryjin">
+<meta name="twitter:description" content="Every processor reconciled against its contract each month. The next actions ranked in euros, detected or modelled, never mixed. Then what actually came back. Independent of your PSP.">
 <meta name="twitter:image" content="https://oryjin.com/og-navy.png">
 <!-- ═══ FAVICON ════════════════════════════════ -->
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -54,7 +54,7 @@
         "width": 512,
         "height": 512
       },
-      "description": "Oryjin is an independent payment cockpit for European merchants. It continuously monitors the whole payment stack, acquirer fees, scheme costs, FX, fraud, chargebacks and orchestration, into one model, prices every move, checks billing against contracts, forecasts costs and ranks the next decisions.",
+      "description": "Oryjin is decision intelligence for payment costs, independent of any PSP. Every month it reconciles each processor against its contract, ranks what to change first in euros with each figure labelled detected or modelled, sends the claims, forecasts the payments line of the budget and shows what actually came back.",
       "email": "contact@oryjin.com",
       "foundingDate": "2026",
       "address": {
@@ -89,20 +89,20 @@
       "creator": {
         "@id": "https://oryjin.com/#org"
       },
-      "description": "Payment cockpit for European merchants processing €2M–€20M a month: fees, fraud, chargebacks and routing across Stripe, Adyen and every other PSP, turned into decision-grade intelligence.",
+      "description": "Decision intelligence for payment costs, for European merchants with €10M to €200M of card payments a year: Stripe, Adyen, Mollie and every other PSP reconciled against their contracts, the next actions ranked in euros, claims sent and settled, the payments budget forecast and held against each closed month.",
       "featureList": [
-        "Stripe connector",
-        "Adyen connector",
-        "Other PSPs and acquirers from contracts, invoices and reports",
-        "Billing checked against contract terms every month",
-        "Claim packs with transaction-level evidence",
-        "Full cost split into acquisition, processing and FX, operations and losses",
-        "Cost variance split into volume, mix and unit cost",
-        "Cost per payment pattern",
-        "Fee forecast by month, quarter or fiscal year with a P10–P90 range",
-        "What-if scenarios priced on the merchant's own data",
-        "Contract renewal radar and negotiation brief",
-        "Alerts in Slack and an in-app inbox"
+              "Stripe, Adyen and Mollie connectors",
+              "PayPal, Klarna, Viva.com, Worldline and Monext connectors rolling out",
+              "Any processor, acquirer or ERP from contracts, invoices, settlement reports and CSV exports",
+              "Every processor reconciled against its contract every month, with coverage stated",
+              "Recommendations ranked in euros, each labelled detected or modelled",
+              "Claim letters with transaction-level evidence, sent and settled line by line",
+              "Recoveries summary, cost statement and negotiation dossier as PDFs",
+              "Interchange checked against the EU regulated caps",
+              "Announced Visa and Mastercard fee changes priced on the merchant's own mix",
+              "The payments line of the budget as three named lines, held against each closed month",
+              "Scenarios priced on the merchant's own data",
+              "Alerts in Slack and an in-app inbox"
       ]
     },
     {
@@ -132,7 +132,15 @@
           "name": "Are my PSP or acquirer fees higher than my contract says?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Often, and rarely by design. Oryjin checks every PSP and acquirer invoice and settlement against your contract terms each month: processing, refund and dispute fees, tier rates and uncontracted lines. Anything billed above contract comes with the payment references your provider can verify."
+            "text": "Often, and rarely by design. Every month Oryjin runs each processor's settlement rows and invoice against the contract terms: processing, refund and dispute fees, tier rates, the regulated interchange caps and uncontracted lines. Anything billed above contract becomes a finding with the payment references and the clause, and the findings gather into one claim letter per processor that you send and settle line by line."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between detected and modelled?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Detected means billed above your contract, with the rows and the clause behind it: money you can claim. Modelled means an estimate from published schedules and your own mix, with its assumptions stated: money you could stop spending. Oryjin labels every figure one or the other and never adds the two together."
           }
         },
         {
@@ -148,7 +156,7 @@
           "name": "How do I prepare a PSP contract renegotiation with real data?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Start 60 days before renewal, with a year of your own volume priced against the contract. Oryjin produces the negotiation brief, the asks with the evidence behind each, and a fact sheet you can hand to the provider."
+            "text": "Start 60 days before renewal, with a year of your own volume priced against the contract. Oryjin raises the renewal on its radar, writes the negotiation dossier with the asks and the evidence behind each, and prints the same facts as a sheet you can hand to the provider."
           }
         },
         {
@@ -156,7 +164,7 @@
           "name": "Can I forecast payment costs for next quarter or the fiscal year?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The forecast is built from your own volume, mix and contract mechanics, with a P10–P90 range and named drivers such as an approaching tier or an announced scheme fee revision. Each closed month is then held against the forecast made at its start."
+            "text": "Yes. The payments line of the budget is built from your own volume plan, mix and contract mechanics, as three named lines rather than a vague band, with the announced Visa and Mastercard fee changes, tier crossings and renewals dated on a calendar. Each closed month is then held against the forecast made at its start."
           }
         },
         {
@@ -164,7 +172,7 @@
           "name": "How do I keep my chargeback ratio under the card scheme thresholds?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Watch it weekly, not at month end. Oryjin tracks dispute and chargeback ratios by market and card type against the schemes' thresholds, prices the fees and losses at stake, and alerts the right person in Slack or the inbox when a ratio starts to climb."
+            "text": "Watch it weekly, not at month end. Oryjin tracks dispute, chargeback and refund rates by processor from the data it pulls, prices the fees at stake, and alerts the right person in Slack or the inbox when a rate crosses the line you set."
           }
         },
         {
@@ -172,7 +180,15 @@
           "name": "Which PSPs and acquirers does Oryjin cover?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "All of them. We started with native Stripe and Adyen integrations, and more connectors are on the way. Any other PSP or acquirer is covered today by uploading its settlement reports, invoices and contract terms in the dashboard, which adds data sources and context and makes the reconciliation and the reading of your costs more reliable."
+            "text": "All of them, three ways in. Stripe, Adyen and Mollie have native connectors that keep pulling settlements, fees and authorisations. PayPal, Klarna, Viva.com, Worldline and Monext connectors are rolling out account by account. Every other processor, acquirer or ERP comes in from the contracts, invoices, settlement reports and CSV exports you already have, mapped once."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I try it before requesting access?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, without an account. Explore the sample company, a mid-market merchant on Stripe and Adyen refreshed nightly, check one of your own processor invoices, estimate your fees against published prices and the regulated caps, or compare Stripe, Adyen and Mollie on a month of your volume. Every door ends at the same request-access desk."
           }
         },
         {
@@ -180,7 +196,7 @@
           "name": "Is Oryjin independent, and how is my data protected?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Oryjin is not a PSP and not an orchestrator: it never moves money, never changes a setting, and has no stake in which provider you use. Data is hosted in the EU by Scaleway (Paris), never includes cardholder data, and is covered by an NDA before sharing and a DPA from day one."
+            "text": "Oryjin is not a PSP and not an orchestrator: it recommends and simulates, never moves money, never changes a setting, and has no stake in which provider you use. There is no success fee. Data is hosted in the EU by Scaleway (Paris), never includes cardholder data, and is covered by an NDA before sharing and a DPA from day one."
           }
         }
       ]
@@ -194,7 +210,8 @@
 <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yygg_vb.woff2" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
-<noscript><style>.reveal{opacity:1!important;transform:none!important}.dc-bar i{width:var(--w)!important}</style></noscript>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}.dc-bar i{width:var(--w)!important}
+</style></noscript>
 <script>
 /* Logo fallback (replaces the per-image base64 blobs — same visual result) */
 function oryFallback(img){
@@ -1006,6 +1023,47 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 .sticky-cta .cta-ghost { padding: 10px 14px; font-size: 13px; flex-shrink: 0; }
 @media (max-width: 760px) { .sticky-cta { display: flex; } body.has-sticky { padding-bottom: 64px; } }
 .security-item::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--grad); flex-shrink: 0; }
+/* ─── V6: decision intelligence ─── */
+.cta-group .cta-ghost { max-width: 100%; }
+.wv-bar .s1 { flex-basis: 58%; background: var(--v); }
+.wv-bar .s2 { flex-basis: 42%; background: var(--violet); }
+.wv-bar .s3 { display: none; }
+.wv-bar .s4 { flex-basis: 0%; background: repeating-linear-gradient(135deg, rgb(var(--v-rgb) / 0.18) 0 5px, transparent 5px 10px); border-left: 0 solid var(--bdr2); }
+.why-viz[data-state="1"] .wv-bar .s1 { flex-basis: 58%; }
+.why-viz[data-state="1"] .wv-bar .s2 { opacity: 1; filter: none; }
+.why-viz[data-state="1"] .wv-bar .s1::after { content: '€18,400'; }
+.why-viz[data-state="1"] .wv-bar .s2::after { content: '€13,300'; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 11px; font-weight: 700; color: #fff; background: rgba(255,255,255,0.22); border-radius: 6px; padding: 2px 6px; }
+.why-viz[data-state="2"] .wv-bar .s1 { flex-basis: 56%; }
+.why-viz[data-state="2"] .wv-bar .s1 span::after { content: ' · came back'; font-weight: 500; }
+.why-viz[data-state="2"] .wv-bar .s2 { flex-basis: 0%; opacity: 0; }
+.why-viz[data-state="2"] .wv-bar .s4 { flex-basis: 2%; border-left-width: 1px; }
+.why-viz[data-state="2"] .wv-set[data-set="2"] b { background: linear-gradient(110deg,var(--teal),var(--v)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.letter { background: var(--surf2); border: 1px solid var(--bdr); border-left: 3px solid var(--v); border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; font-size: 13.5px; color: var(--txt); line-height: 1.55; }
+.letter p { margin: 0 0 6px; }
+.letter p:last-child { margin: 0; }
+.letter-to { font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--dim); }
+.inbox li i.ok { background: var(--green); }
+.inbox li i.warn { background: var(--amber); box-shadow: 0 0 0 4px rgba(183,121,31,0.15); }
+.inbox.steps li.done i { background: var(--green); }
+.mid-cta-btns { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.mid-cta .cta-ghost { padding: 12px 18px; font-size: 14px; }
+.mid-cta .cta-btn { padding: 12px 22px; font-size: 14px; }
+@media (max-width: 760px) { .mid-cta { flex-direction: column; align-items: stretch; text-align: center; } .mid-cta-btns { justify-content: center; } }
+.eu-section { padding-top: 0; }
+.out-section.eu-section .out-grid { max-width: 1040px; margin: 0 auto; }
+.out-section .out-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 980px) { .out-section .out-grid.four { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .out-section .out-grid.four { grid-template-columns: 1fr; } }
+.out-card h3 { font-size: 18px; }
+.out-card p { font-size: 14px; }
+.int-logos { grid-template-columns: repeat(3, 1fr); }
+.int-tile.soon, .int-tile.docs { grid-column: 1 / -1; }
+.int-tile.soon b, .int-tile.docs b { font-size: 13px; line-height: 1.5; }
+.int-tile.soon > span:last-child::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); margin-right: 6px; }
+.cx-mark-m { background: linear-gradient(135deg, #141C2E 0%, #000 100%); }
+.form-success-body a { display: inline-block; }
+@media (max-width: 480px) { .app-bar { flex-wrap: wrap; gap: 8px; } .app-ex { margin-left: 0; width: 100%; } .app-url { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } }
+@media (max-width: 760px) { .int-logos { grid-template-columns: 1fr 1fr 1fr; gap: 8px; } .int-tile { padding: 12px; } .int-tile .cx-mark { width: 36px; height: 36px; font-size: 16px; border-radius: 10px; } }
 </style>
 </head>
 <body>
@@ -1020,8 +1078,8 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     <a href="#product" class="nav-link">Product</a>
     <a href="#integrations" class="nav-link">Integrations</a>
     <a href="#faq" class="nav-link">FAQ</a>
-    <a href="https://app.oryjin.com/request-access?source=website&amp;utm_source=website&amp;utm_medium=cta&amp;utm_content=nav" class="nav-link" data-app-link="nav">Request access</a>
-    <a href="#apply" class="nav-cta" data-cta="nav">Apply for early access</a>
+    <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=nav" class="nav-link" data-app-link="nav" data-app-target="sample">Explore the sample</a>
+    <a href="#apply" class="nav-cta" data-cta="nav">Request access</a>
   </div>
 </nav>
 <main>
@@ -1033,27 +1091,26 @@ body,button,input,select,textarea{font-family:var(--font-display)}
   <div class="hero-content">
     <div class="eyebrow">
       <span class="eyebrow-dot"></span>
-      <span id="mm-eyebrow">Early access · now open</span>
+      <span id="mm-eyebrow">Early access · Decision intelligence for payment costs</span>
     </div>
     <h1 class="headline" id="mm-h1">
-      Know where your payment margin goes.<br>
-      <span class="headline-em">And win it back.</span>
+      What to change first in your payment costs,<br>
+      <span class="headline-em">and what it will earn you.</span>
     </h1>
     <p class="sub">
-      Oryjin continuously monitors your entire stack, from PSP and acquirer fees to scheme fees, fraud, chargebacks and orchestration, and turns it into <strong>decision-grade intelligence.</strong>
+      Every month, Oryjin reconciles each processor against its contract, ranks the next actions in euros with <strong>each figure labelled detected or modelled</strong>, sends the claims, and shows what actually came back.
     </p>
     <div class="cta-group">
-      <a href="#apply" class="cta-btn" data-cta="hero">Apply for early access <span class="cta-arrow" aria-hidden="true">→</span></a>
-      <a href="#product" class="cta-ghost">See the platform</a>
-      <a href="https://app.oryjin.com/request-access?source=website&amp;utm_source=website&amp;utm_medium=cta&amp;utm_content=hero" class="cta-ghost" data-app-link="hero">Request access</a>
+      <a href="#apply" class="cta-btn" data-cta="hero">Request access <span class="cta-arrow" aria-hidden="true">→</span></a>
+      <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=hero" class="cta-ghost" data-app-link="hero" data-app-target="sample">Explore the sample company</a>
     </div>
-    <p class="hero-integr">Built for European merchants doing <b>€2 to 20M GMV a month</b>. A PSP renewal in the next 12 months? <b>That's the best moment to start.</b></p>
+    <p class="hero-integr">For European merchants with <b>€10 to 200M of card payments a year</b>. A PSP renewal in the next 12 months? <b>The best moment to start.</b></p>
   </div>
 
 </section>
 <!-- ─── MARQUEE TRUST STRIP ─── -->
 <div class="marquee-section reveal">
-  <div class="marquee-label-row">Built by payment and fintech operators from</div>
+  <div class="marquee-label-row">Founded by payment and fintech operators from</div>
   <div class="marquee-outer">
     <div class="marquee-track" id="marquee-track">
       <!-- ── SET 1 ── -->
@@ -1111,44 +1168,44 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     </div>
   </div>
 </div>
-<!-- ─── OUTCOMES ─── -->
+<!-- ─── WHY ─── -->
 <section class="out-section" id="platform">
   <div class="sec-head reveal">
   <p class="section-label">Why Oryjin</p>
-  <h2 class="section-head">The best payment teams don't guess.<br><span>They know.</span></h2>
-  <p class="section-sub">Your payment margin moves every day: a fee, a fraud pattern, a currency, a payment method, a 3DS challenge that fails. Most teams find out later. Oryjin sits outside the payment flow, on your side, so you know first.</p>
+  <h2 class="section-head">Dashboards tell you what happened.<br><span>Oryjin tells you what to do.</span></h2>
+  <p class="section-sub">PSP dashboards and observability tools describe your costs. Consultants hold the rules of thumb. Oryjin encodes those rules, runs them on your own data every month, and answers the three questions a finance lead actually asks.</p>
   </div>
   <div class="why-wrap">
     <div class="why-steps reveal reveal-delay-1" role="tablist" aria-label="Why Oryjin">
-      <button class="why-step is-on" role="tab" aria-selected="true" data-why="0" type="button"><span class="why-n">01</span><b>The whole margin, not just the fees</b><p>Acceptance, operations, losses. Every provider, every market, every payment pattern, in one number your CFO can defend.</p><i></i></button>
-      <button class="why-step" role="tab" aria-selected="false" data-why="1" type="button"><span class="why-n">02</span><b>The cause, not the symptom</b><p>When your margin moves, you know which fee, market, method or fraud pattern moved it, what it costs you, and whether it should have.</p><i></i></button>
-      <button class="why-step" role="tab" aria-selected="false" data-why="2" type="button"><span class="why-n">03</span><b>Ahead of the quarter, not behind the invoice</b><p>The next months played out in scenarios, and the signal at the right desk while there is still time to win the margin back.</p><i></i></button>
+      <button class="why-step is-on" role="tab" aria-selected="true" data-why="0" type="button"><span class="why-n">01</span><b>What should I change first?</b><p>One ranked list across every processor: billed above contract, a volume tier about to be missed, a market or a method costing more than it should. Each line with the rows and the clause behind it.</p><i></i></button>
+      <button class="why-step" role="tab" aria-selected="false" data-why="1" type="button"><span class="why-n">02</span><b>What will it earn me?</b><p>Every action priced in euros on your own volume and mix, and labelled. Detected: billed above contract, claimable. Modelled: from published schedules, with its assumptions stated. The two are never added together.</p><i></i></button>
+      <button class="why-step" role="tab" aria-selected="false" data-why="2" type="button"><span class="why-n">03</span><b>How sure are you?</b><p>Claims go out as letters and are settled line by line. Each closed month is held against the forecast made at its start. You see what we said, and what came back.</p><i></i></button>
     </div>
     <div class="why-viz reveal reveal-delay-2" id="why-viz" data-state="0">
-      <div class="wv-head"><span class="wv-ttl">Where €100 of revenue goes</span><span class="wv-tag">Illustrative</span></div>
+      <div class="wv-head"><span class="wv-ttl">Next actions · September</span><span class="wv-tag">Illustrative</span></div>
       <div class="wv-big" aria-live="polite">
-        <div class="wv-set" data-set="0"><b>€2.00</b><span>of every €100, this month</span></div>
-        <div class="wv-set" data-set="1"><b>+€0.13</b><span>vs last month · three causes</span></div>
-        <div class="wv-set" data-set="2"><b>€1.86</b><span>next quarter, if you act now</span></div>
+        <div class="wv-set" data-set="0"><b>€31,700</b><span>at stake, ranked across 3 processors</span></div>
+        <div class="wv-set" data-set="1"><b>€18,400</b><span>detected · €13,300 modelled, never added</span></div>
+        <div class="wv-set" data-set="2"><b>€17,900</b><span>came back, of €18,400 claimed</span></div>
       </div>
       <div class="wv-bar" aria-hidden="true">
-        <i class="s1"><span>Acceptance</span></i><i class="s2"><span>Ops</span></i><i class="s3"><span>Losses</span></i><i class="s4"><span>Won back</span></i>
+        <i class="s1"><span>Detected</span></i><i class="s2"><span>Modelled</span></i><i class="s4"></i>
       </div>
       <div class="wv-panes">
         <ul class="wv-pane" data-pane="0">
-          <li><em class="k1"></em><span>Acceptance <small>PSP, acquirer, scheme, FX</small></span><b>€1.42</b></li>
-          <li><em class="k2"></em><span>Operations <small>3DS, retries, disputes handling</small></span><b>€0.31</b></li>
-          <li><em class="k3"></em><span>Losses <small>fraud, chargebacks, refunds fees</small></span><b>€0.27</b></li>
+          <li><em class="k1"></em><span>Volume tier never applied <small>Adyen · 3 months · 41,200 payments</small></span><b>€18,400</b></li>
+          <li><em class="k2"></em><span>Ask for interchange++ pricing <small>Stripe · blended today</small></span><b>€9k–14k / yr</b></li>
+          <li><em class="k2"></em><span>Bancontact for BE shoppers <small>Mollie · share of card volume priced</small></span><b>€3,100 / yr</b></li>
         </ul>
         <ul class="wv-pane" data-pane="1">
-          <li><em class="up"></em><span>Germany <small>3DS challenges failing, retried twice</small></span><b>+€0.06</b></li>
-          <li><em class="up"></em><span>GBP <small>FX markup applied above contract</small></span><b>+€0.04</b></li>
-          <li><em class="up"></em><span>Recurring <small>MIT retries billed as new attempts</small></span><b>+€0.03</b></li>
+          <li><em class="k1"></em><span>Detected <small>rows, clause 4.2, claim pack ready</small></span><b>€18,400</b></li>
+          <li><em class="k2"></em><span>Modelled <small>published schedule, assumptions shown</small></span><b>€13,300 / yr</b></li>
+          <li><em class="ghost"></em><span>Not checked <small>Mollie: no contract on file yet, said so</small></span><b class="dimb">—</b></li>
         </ul>
         <ul class="wv-pane" data-pane="2">
-          <li><em class="ghost"></em><span>If nothing changes <small>Q4, same mix and volume</small></span><b class="dimb">€2.11</b></li>
-          <li><em class="won"></em><span>With the three actions <small>routing, contract line, retry rule</small></span><b>€1.86</b></li>
-          <li class="wv-toast"><i></i><span><b>Signal sent</b> · Payment Ops · 3DS challenge rate, Germany</span><small>now</small></li>
+          <li><em class="k1"></em><span>Claim settled <small>Adyen · credited on the October invoice</small></span><b>€17,900</b></li>
+          <li><em class="won"></em><span>Forecast vs closed month <small>September · said €139k, came in at €137k</small></span><b>−1.4%</b></li>
+          <li class="wv-toast"><i></i><span><b>Recovered</b> · Adyen claim · €17,900 of €18,400 · 2 lines written off</span><small>now</small></li>
         </ul>
       </div>
     </div>
@@ -1158,92 +1215,98 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 <section class="band product-section" id="product">
   <div class="sec-head reveal">
     <p class="section-label">The product</p>
-    <h2 class="section-head">Four jobs.<br><span>One cockpit.</span></h2>
-    <p class="section-sub">Detect what moved, explain why, plan the quarter, act before it hits the margin. Click through the tour or let it play.</p>
+    <h2 class="section-head">Detect. Claim. Plan.<br><span>Then prove it.</span></h2>
+    <p class="section-sub">The loop every figure goes through, on the pages your team will open. Click through the tour or let it play.</p>
   </div>
   <div class="tour">
     <div class="tour-tabs" role="tablist" aria-label="Product tour">
-      <button class="tour-tab is-on" role="tab" aria-selected="true" data-tab="detect" type="button"><b>Detect</b><span>Drift, fraud, overbilling</span><i></i></button>
-      <button class="tour-tab" role="tab" aria-selected="false" data-tab="explain" type="button"><b>Explain</b><span>Why the cost moved</span><i></i></button>
-      <button class="tour-tab" role="tab" aria-selected="false" data-tab="plan" type="button"><b>Plan</b><span>Budget, routing, renewals</span><i></i></button>
-      <button class="tour-tab" role="tab" aria-selected="false" data-tab="act" type="button"><b>Act</b><span>Alerts and decisions</span><i></i></button>
+      <button class="tour-tab is-on" role="tab" aria-selected="true" data-tab="detect" type="button"><b>Detect</b><span>Ranked, labelled, with evidence</span><i></i></button>
+      <button class="tour-tab" role="tab" aria-selected="false" data-tab="claim" type="button"><b>Claim</b><span>One letter per processor</span><i></i></button>
+      <button class="tour-tab" role="tab" aria-selected="false" data-tab="plan" type="button"><b>Plan</b><span>Budget, calendar, scenarios</span><i></i></button>
+      <button class="tour-tab" role="tab" aria-selected="false" data-tab="prove" type="button"><b>Prove</b><span>What came back</span><i></i></button>
     </div>
     <div class="app">
-      <div class="app-bar"><span class="dc-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="app-url" id="app-url">app.oryjin.com/findings</span><span class="app-ex">Illustrative data</span></div>
+      <div class="app-bar"><span class="dc-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="app-url" id="app-url">app.oryjin.com/recommendations</span><span class="app-ex">Illustrative data</span></div>
       <div class="app-body">
         <aside class="app-side" aria-hidden="true">
           <img src="brand/oryjin-symbol.svg" alt="" width="22" height="22" class="app-mark">
           <span data-nav="overview">Overview</span>
-          <span data-nav="detect" class="is-on">Findings</span>
-          <span data-nav="explain">Analytics</span>
-          <span data-nav="disputes">Disputes</span>
+          <span data-nav="inbox">Inbox</span>
+          <span data-nav="detect" class="is-on">Recommendations</span>
+          <span data-nav="analytics">Analytics</span>
+          <span data-nav="alerts">Alerts</span>
           <span data-nav="plan">Forecast</span>
-          <span data-nav="act">Alerts</span>
-          <span data-nav="contracts">Contracts</span>
-          <span data-nav="connectors">Connectors</span>
-          <span class="app-side-foot">Marketplace demo · €9M/mo</span>
+          <span data-nav="scenarios">Scenarios</span>
+          <span data-nav="prove">Reconciliation</span>
+          <span data-nav="costs">Costs</span>
+          <span data-nav="sources">Sources</span>
+          <span class="app-side-foot">Sample company · €110M/yr</span>
         </aside>
         <div class="app-main">
 
-          <section class="scr is-on" data-scr="detect" aria-label="Findings screen">
-            <div class="scr-head"><p class="scr-ttl">What changed · September</p><span class="scr-btn">Export</span></div>
+          <section class="scr is-on" data-scr="detect" aria-label="Recommendations screen">
+            <div class="scr-head"><p class="scr-ttl">Recommendations · September</p><span class="scr-btn">Summary PDF</span></div>
             <div class="kpis">
-              <div class="kpi"><b><span class="cnt" data-to="25410" data-pre="€">€0</span></b><span>detected above contract</span></div>
-              <div class="kpi"><b><span class="cnt" data-to="4550" data-pre="€">€0</span>/mo</b><span>of cost drift, priced</span></div>
+              <div class="kpi"><b><span class="cnt" data-to="18400" data-pre="€">€0</span></b><span>detected, ready to claim</span></div>
+              <div class="kpi"><b><span class="cnt" data-to="13300" data-pre="€">€0</span>/yr</b><span>modelled, assumptions shown</span></div>
               <div class="kpi"><b><span class="cnt" data-to="52">0</span> days</b><span>to the Adyen renewal</span></div>
             </div>
             <ol class="na-list">
-              <li class="na-row"><span class="na-rank">1</span><span class="na-main"><b>Volume tier never applied</b><span class="na-meta">Adyen · 3 months · 41,200 payments</span></span><span class="na-tag det">Detected</span><span class="na-amt">€18,400</span><span class="na-next">Claim pack ready</span></li>
-              <li class="na-row"><span class="na-rank">2</span><span class="na-main"><b>Commercial card share up 1.2 pt</b><span class="na-meta">All PSPs · DE and NL · scheme fees and interchange +6 bps</span></span><span class="na-tag drf">Drift</span><span class="na-amt">€2,900 / mo</span><span class="na-next">Mix vs rate isolated</span></li>
-              <li class="na-row"><span class="na-rank">3</span><span class="na-main"><b>Chargeback ratio on DE Visa at 0.92%</b><span class="na-meta">Rising 3 weeks · VAMP limit 1.5% · dispute fees + losses</span></span><span class="na-tag rsk">Risk</span><span class="na-amt">€3,400 / mo</span><span class="na-next">Rule change priced</span></li>
-              <li class="na-row"><span class="na-rank">4</span><span class="na-main"><b>Ask for interchange++ pricing</b><span class="na-meta">Stripe · blended rate today</span></span><span class="na-tag mod">Modelled</span><span class="na-amt">€9k–14k / yr</span><span class="na-next">Assumptions shown</span></li>
+              <li class="na-row"><span class="na-rank">1</span><span class="na-main"><b>Volume tier never applied</b><span class="na-meta">Adyen · June to August · 41,200 payments · clause 4.2</span></span><span class="na-tag det">Detected</span><span class="na-amt">€18,400</span><span class="na-next">Claim pack ready</span></li>
+              <li class="na-row"><span class="na-rank">2</span><span class="na-main"><b>Ask for interchange++ pricing</b><span class="na-meta">Stripe · blended rate today · your own card mix</span></span><span class="na-tag mod">Modelled</span><span class="na-amt">€9k–14k / yr</span><span class="na-next">Assumptions shown</span></li>
+              <li class="na-row"><span class="na-rank">3</span><span class="na-main"><b>Interchange above the regulated cap</b><span class="na-meta">Adyen · EEA consumer debit billed at 0.3% · cap 0.2%</span></span><span class="na-tag det">Detected</span><span class="na-amt">€2,100</span><span class="na-next">Added to the claim</span></li>
+              <li class="na-row"><span class="na-rank">4</span><span class="na-main"><b>Offer Bancontact to Belgian shoppers</b><span class="na-meta">Mollie · 11% of BE volume on cards · local method priced</span></span><span class="na-tag mod">Modelled</span><span class="na-amt">€3,100 / yr</span><span class="na-next">Scenario ready</span></li>
             </ol>
-            <p class="scr-foot"><b>Detected</b> = billed above your contract, with payment references. <b>Drift</b> and <b>Risk</b> = measured changes in mix, fees, fraud or disputes, priced. <b>Modelled</b> = an estimate, with its assumptions. Never added together.</p>
+            <p class="scr-foot"><b>Detected</b> = billed above your contract, with the rows and the clause. <b>Modelled</b> = an estimate from published schedules, with its assumptions. Two lists, never one total.</p>
           </section>
 
-          <section class="scr" data-scr="explain" aria-label="Analytics screen">
-            <div class="scr-head"><p class="scr-ttl">Full cost · August vs July</p><span class="scr-btn">Export</span></div>
+          <section class="scr" data-scr="claim" aria-label="Claim screen">
+            <div class="scr-head"><p class="scr-ttl">Claim · Adyen · 2 findings</p><span class="scr-btn">Claim pack PDF</span></div>
             <div class="kpis">
-              <div class="kpi"><b><span class="cnt" data-to="148200" data-pre="€">€0</span></b><span>full payment cost</span></div>
-              <div class="kpi"><b>1.73%</b><span>effective rate · <em class="up">+9 bps</em></span></div>
-              <div class="kpi"><b>+€4.4k</b><span>vs July</span></div>
+              <div class="kpi"><b><span class="cnt" data-to="20500" data-pre="€">€0</span></b><span>claimed, 2 findings, 3 months</span></div>
+              <div class="kpi"><b>12 Sep</b><span>sent by you, from your mailbox</span></div>
+              <div class="kpi"><b>+14 d</b><span>follow-up reminder set</span></div>
             </div>
-            <p class="scr-lbl">Where the money went</p>
-            <div class="stack" role="img" aria-label="Cost split: acquisition 62%, processing and FX 21%, operations 9%, fraud and disputes 8%">
-              <i style="--w:62%;background:var(--v)"></i><i style="--w:21%;background:var(--violet)"></i><i style="--w:9%;background:var(--teal)"></i><i style="--w:8%;background:var(--amber)"></i>
+            <div class="letter" aria-label="The claim letter">
+              <p class="letter-to">To Adyen Merchant Services · re: contract 2024-07, clauses 4.2 and 6.1</p>
+              <p>Between June and August, 41,200 payments were billed at the 0.30% tier although the monthly volume agreed for the 0.25% tier was reached in June. Over the same months, 8,900 EEA consumer debit payments were billed interchange at 0.30%, above the regulated 0.20% cap.</p>
+              <p>The payment references and the monthly totals are attached. We ask for a credit of <b>€20,500</b> on the next invoice.</p>
             </div>
-            <div class="stack-leg"><span><i style="background:var(--v)"></i>Acquisition 62%</span><span><i style="background:var(--violet)"></i>Processing &amp; FX 21%</span><span><i style="background:var(--teal)"></i>Operations 9%</span><span><i style="background:var(--amber)"></i>Fraud &amp; disputes 8%</span></div>
-            <p class="scr-lbl">What moved it</p>
-            <div class="pv-var">
-              <div class="pv-var-row"><span>Volume</span><i style="--w:62%"></i><b>+€3.1k</b></div>
-              <div class="pv-var-row"><span>Card mix</span><i style="--w:38%" class="mix"></i><b>+€1.9k</b></div>
-              <div class="pv-var-row"><span>Unit cost</span><i style="--w:12%" class="neg"></i><b>−€0.6k</b></div>
-            </div>
+            <ul class="inbox steps">
+              <li class="done"><i></i><span class="ib-main"><b>Ready</b><span>Findings gathered, letter written, evidence attached</span></span><span class="ib-when">9 Sep</span></li>
+              <li class="done"><i></i><span class="ib-main"><b>Sent</b><span>By the merchant · new months do not disturb a letter already sent</span></span><span class="ib-when">12 Sep</span></li>
+              <li class="new"><i></i><span class="ib-main"><b>Settled</b><span>€17,900 credited on the October invoice · 2 lines written off, recorded as such</span></span><span class="ib-when">Oct 3</span></li>
+            </ul>
           </section>
 
           <section class="scr" data-scr="plan" aria-label="Forecast screen">
-            <div class="scr-head"><p class="scr-ttl">Fee forecast · Q4</p><span class="scr-btn">Scenarios (7)</span></div>
+            <div class="scr-head"><p class="scr-ttl">Forecast · Q4 budget</p><span class="scr-btn">Scenarios (7)</span></div>
             <div class="kpis">
-              <div class="kpi"><b><span class="cnt" data-to="421" data-pre="€" data-suf="k">€0k</span></b><span>next quarter, P10–P90 €398k–447k</span></div>
-              <div class="kpi"><b>±3%</b><span>last quarter's miss</span></div>
+              <div class="kpi"><b><span class="cnt" data-to="421" data-pre="€" data-suf="k">€0k</span></b><span>payments line, on your volume plan</span></div>
+              <div class="kpi"><b>−1.4%</b><span>last closed month vs its forecast</span></div>
               <div class="kpi"><b>Nov</b><span>Adyen tier reached at €10M</span></div>
             </div>
             <div class="pv-fc big" aria-hidden="true">
               <svg viewBox="0 0 320 110" preserveAspectRatio="none"><path class="band" d="M150 54 L180 48 L210 50 L240 38 L270 38 L300 26 L300 72 L270 76 L240 74 L210 84 L180 76 L150 62 Z"/><path class="hist" d="M10 86 L40 80 L70 82 L100 70 L130 66 L150 59"/><path class="proj" d="M150 59 L180 62 L210 67 L240 56 L270 57 L300 49"/><line x1="150" y1="10" x2="150" y2="104" class="now"/></svg>
-              <div class="pv-fc-cap"><span>Actual</span><span>Forecast · P10–P90</span></div>
+              <div class="pv-fc-cap"><span>Closed months</span><span>Plan · Trend · With the actions</span></div>
             </div>
-            <div class="chips"><span>Volume +6%</span><span>Commercial card share +1.2 pt</span><span>Scheme fee revision · 1 Oct</span><span>Route DE debit via acquirer B: −€1,900 / mo</span><span>Renewal in 52 days</span></div>
+            <div class="chips"><span>Visa scheme fee revision · 1 Oct · priced on your mix</span><span>Adyen renewal · 52 days · dossier ready</span><span>Scenario: route DE debit via acquirer B · −€1,900 / mo</span><span>Volume plan +6%</span></div>
           </section>
 
-          <section class="scr" data-scr="act" aria-label="Alerts screen">
-            <div class="scr-head"><p class="scr-ttl">Alerts</p><span class="scr-btn">Rules (6)</span></div>
+          <section class="scr" data-scr="prove" aria-label="Reconciliation screen">
+            <div class="scr-head"><p class="scr-ttl">Reconciliation · September</p><span class="scr-btn">Cost statement PDF</span></div>
+            <div class="kpis">
+              <div class="kpi"><b>3 of 3</b><span>processors checked this month</span></div>
+              <div class="kpi"><b><span class="cnt" data-to="17900" data-pre="€">€0</span></b><span>recovered, of €18,400 claimed</span></div>
+              <div class="kpi"><b>−1.4%</b><span>said €139k, came in at €137k</span></div>
+            </div>
             <ul class="inbox">
-              <li class="new"><i></i><span class="ib-main"><b>Adyen effective rate +14 bps vs contract this week</b><span>€2,140 · probable cause: scheme fee category · finding opened</span></span><span class="ib-when">2 min</span></li>
-              <li><i></i><span class="ib-main"><b>Adyen contract renews in 52 days</b><span>Negotiation brief ready · a year of volume priced</span></span><span class="ib-when">Today</span></li>
-              <li><i></i><span class="ib-main"><b>DE Visa chargeback ratio at 0.92%, rising</b><span>VAMP limit 1.5% · 3DS rule change priced at −€2,100 / mo</span></span><span class="ib-when">Mon</span></li>
-              <li><i></i><span class="ib-main"><b>€4,870 recovered from Stripe</b><span>Claim closed · credited on the August invoice</span></span><span class="ib-when">Sep 12</span></li>
+              <li><i class="ok"></i><span class="ib-main"><b>Stripe · checked</b><span>Contract, invoice and settlement rows for the month · no open finding</span></span><span class="ib-when">2 Oct</span></li>
+              <li class="new"><i></i><span class="ib-main"><b>Adyen · checked, 1 open finding</b><span>Tier applied since September · interchange line still above the cap</span></span><span class="ib-when">2 Oct</span></li>
+              <li><i class="warn"></i><span class="ib-main"><b>Mollie · not checked</b><span>No contract on file yet: we say so rather than guess</span></span><span class="ib-when">2 Oct</span></li>
+              <li><i class="ok"></i><span class="ib-main"><b>€17,900 recovered from Adyen</b><span>Claim settled · 2 lines written off · in the recoveries summary</span></span><span class="ib-when">Oct 3</span></li>
             </ul>
-            <div class="toast" aria-hidden="true"><img src="brand/oryjin-symbol.svg" alt="" width="20" height="20"><div><b>#payments-ops</b><span>Oryjin: Adyen effective rate +14 bps vs contract · €2,140 · open finding →</span></div></div>
+            <div class="toast" aria-hidden="true"><img src="brand/oryjin-symbol.svg" alt="" width="20" height="20"><div><b>#payments-ops</b><span>Oryjin: Adyen effective rate +14 bps vs contract this week · €2,140 · finding opened →</span></div></div>
           </section>
 
         </div>
@@ -1251,26 +1314,42 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     </div>
   </div>
   <div class="mid-cta reveal">
-    <span>This is a demo workspace. Yours fills with your own Stripe, Adyen and acquirer data.</span>
-    <a href="#apply" class="cta-btn" data-cta="tour">See it on my data <span class="cta-arrow" aria-hidden="true">→</span></a>
+    <span>This is a demo workspace. Explore the sample company yourself, or see the loop run on your own data.</span>
+    <span class="mid-cta-btns">
+      <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=tour" class="cta-ghost" data-app-link="tour" data-app-target="sample">Explore the sample</a>
+      <a href="#apply" class="cta-btn" data-cta="tour">Request access <span class="cta-arrow" aria-hidden="true">→</span></a>
+    </span>
   </div>
 </section>
 
-
-
-
+<!-- ─── EUROPEAN WEDGE ─── -->
+<section class="out-section eu-section" id="europe">
+  <div class="sec-head reveal">
+    <p class="section-label">Built for European payments</p>
+    <h2 class="section-head">The rules a consultant knows.<br><span>Run every month, on your data.</span></h2>
+    <p class="section-sub">Card-centric tools built for the US miss where European money hides. Oryjin's rule library starts there, and grows with every insight from a prospect's data, a sales call or a scheme bulletin.</p>
+  </div>
+  <div class="out-grid four reveal">
+    <div class="out-card"><span class="out-num">IFR</span><h3>Interchange above the regulated cap</h3><p>EEA consumer cards are capped at 0.2% and 0.3%. Billed above it is detected, with the rows, and goes into the claim.</p></div>
+    <div class="out-card"><span class="out-num">LOCAL</span><h3>Local methods, priced</h3><p>Bancontact, iDEAL, CB, girocard: what a share of your card volume would cost on the local rail, modelled on your own mix.</p></div>
+    <div class="out-card"><span class="out-num">DATED</span><h3>Scheme fee changes, on a calendar</h3><p>Announced Visa and Mastercard revisions priced on your mix and dated beside your renewals and tier crossings.</p></div>
+    <div class="out-card"><span class="out-num">HONEST</span><h3>Understated on purpose</h3><p>A month that cannot be checked says so. A wrong euro is treated as a severity-one bug, not a rounding issue.</p></div>
+  </div>
+</section>
 
 <!-- ─── INTEGRATIONS ─── -->
 <section class="int-section" id="integrations">
   <div class="int-row reveal">
     <div class="int-txt">
-      <h2>Your favourite connectors,<br><span>at hand.</span></h2>
-      <p>Stripe and Adyen connectors keep pulling settlements, fees and authorisations. Every other PSP and acquirer comes in from the contracts, invoices and reports you already have. No integration project.</p>
+      <h2>Every processor,<br><span>three ways in.</span></h2>
+      <p>Native connectors keep pulling settlements, fees and authorisations. More roll out account by account. Everything else comes in from the contracts, invoices, settlement reports and exports you already have, mapped once. No integration project.</p>
     </div>
     <div class="int-logos">
       <div class="int-tile live"><span class="cx-mark" aria-hidden="true">S</span><b>Stripe</b><span>Connector</span></div>
       <div class="int-tile live"><span class="cx-mark cx-mark-a" aria-hidden="true">A</span><b>Adyen</b><span>Connector</span></div>
-      <div class="int-tile docs"><b>Mangopay · Worldline · Checkout.com · PayPal · Braintree · any acquirer</b><span>From contracts, invoices &amp; reports</span></div>
+      <div class="int-tile live"><span class="cx-mark cx-mark-m" aria-hidden="true">M</span><b>Mollie</b><span>Connector</span></div>
+      <div class="int-tile soon"><b>PayPal · Klarna · Viva.com · Worldline · Monext</b><span>Connectors rolling out, account by account</span></div>
+      <div class="int-tile docs"><b>Checkout.com · Mangopay · PayPlug · any acquirer · your ERP</b><span>From contracts, invoices, settlement reports &amp; CSV exports</span></div>
     </div>
   </div>
 </section>
@@ -1279,14 +1358,14 @@ body,button,input,select,textarea{font-family:var(--font-display)}
   <div class="sec-head reveal">
     <p class="section-label">Who it's for</p>
     <h2 class="section-head">Three roles.<br><span>One set of numbers.</span></h2>
-    <p class="section-sub">Payment Ops opens it daily, the Head of Payments before every negotiation, the CFO at budget time.</p>
+    <p class="section-sub">Payment Ops opens it daily, the Head of Payments before every negotiation, the CFO at budget time and when the board asks what came back.</p>
   </div>
   <div class="team-row reveal">
-    <div class="team"><b>CFO</b><span>Cost vs budget, the forecast, a one-page recoveries summary for the board.</span></div>
-    <div class="team"><b>Head of Payments</b><span>Effective rate by market and PSP, renewal radar, negotiation brief.</span></div>
-    <div class="team"><b>Payment Ops</b><span>Today's exceptions, declines, disputes and fraud costs, alerts in Slack.</span></div>
+    <div class="team"><b>CFO</b><span>The payments line of the budget, each month held against its forecast, and a one-page recoveries summary for the board.</span></div>
+    <div class="team"><b>Head of Payments</b><span>Effective rate by processor and market, the renewal radar, the negotiation dossier with the asks and the evidence.</span></div>
+    <div class="team"><b>Payment Ops</b><span>This month's findings, the claim letters, approval, decline and dispute rates, alerts in Slack.</span></div>
   </div>
-  <p class="team-note reveal">Unlimited users. Independent of your PSP: Oryjin never moves money and never changes a setting.</p>
+  <p class="team-note reveal">Unlimited users. Not a PSP, not an orchestrator: Oryjin recommends and simulates, never moves money, never changes a setting. Priced on your volume, no success fee.</p>
 </section>
 
 
@@ -1294,7 +1373,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 <!-- ─── FAQ ─── -->
 <section class="faq-section" id="faq">
   <p class="section-label reveal">FAQ</p>
-  <h2 class="section-head reveal">Payment fee questions,<br><span>answered.</span></h2>
+  <h2 class="section-head reveal">Payment cost questions,<br><span>answered.</span></h2>
   <div class="faq-list reveal">
     <div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false">Why did my payment fees go up when my PSP contract didn&#x27;t change?<span class="faq-ic" aria-hidden="true"></span></button>
@@ -1302,7 +1381,11 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     </div>
     <div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false">Are my PSP or acquirer fees higher than my contract says?<span class="faq-ic" aria-hidden="true"></span></button>
-      <div class="faq-a"><p>Often, and rarely by design. Oryjin checks every PSP and acquirer invoice and settlement against your contract terms each month: processing, refund and dispute fees, tier rates and uncontracted lines. Anything billed above contract comes with the payment references your provider can verify.</p></div>
+      <div class="faq-a"><p>Often, and rarely by design. Every month Oryjin runs each processor&#x27;s settlement rows and invoice against the contract terms: processing, refund and dispute fees, tier rates, the regulated interchange caps and uncontracted lines. Anything billed above contract becomes a finding with the payment references and the clause, and the findings gather into one claim letter per processor that you send and settle line by line.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" type="button" aria-expanded="false">What is the difference between detected and modelled?<span class="faq-ic" aria-hidden="true"></span></button>
+      <div class="faq-a"><p>Detected means billed above your contract, with the rows and the clause behind it: money you can claim. Modelled means an estimate from published schedules and your own mix, with its assumptions stated: money you could stop spending. Oryjin labels every figure one or the other and never adds the two together.</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false">What do scheme fees and interchange really cost me?<span class="faq-ic" aria-hidden="true"></span></button>
@@ -1310,31 +1393,35 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     </div>
     <div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false">How do I prepare a PSP contract renegotiation with real data?<span class="faq-ic" aria-hidden="true"></span></button>
-      <div class="faq-a"><p>Start 60 days before renewal, with a year of your own volume priced against the contract. Oryjin produces the negotiation brief, the asks with the evidence behind each, and a fact sheet you can hand to the provider. <a class="faq-more" href="/psp-contract-renegotiation">Read the guide →</a></p></div>
+      <div class="faq-a"><p>Start 60 days before renewal, with a year of your own volume priced against the contract. Oryjin raises the renewal on its radar, writes the negotiation dossier with the asks and the evidence behind each, and prints the same facts as a sheet you can hand to the provider. <a class="faq-more" href="/psp-contract-renegotiation">Read the guide →</a></p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false">Can I forecast payment costs for next quarter or the fiscal year?<span class="faq-ic" aria-hidden="true"></span></button>
-      <div class="faq-a"><p>Yes. The forecast is built from your own volume, mix and contract mechanics, with a P10–P90 range and named drivers such as an approaching tier or an announced scheme fee revision. Each closed month is then held against the forecast made at its start. <a class="faq-more" href="/payment-cost-forecast">Read the guide →</a></p></div>
+      <div class="faq-a"><p>Yes. The payments line of the budget is built from your own volume plan, mix and contract mechanics, as three named lines rather than a vague band, with the announced Visa and Mastercard fee changes, tier crossings and renewals dated on a calendar. Each closed month is then held against the forecast made at its start. <a class="faq-more" href="/payment-cost-forecast">Read the guide →</a></p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false">How do I keep my chargeback ratio under the card scheme thresholds?<span class="faq-ic" aria-hidden="true"></span></button>
-      <div class="faq-a"><p>Watch it weekly, not at month end. Oryjin tracks dispute and chargeback ratios by market and card type against the schemes&#x27; thresholds, prices the fees and losses at stake, and alerts the right person in Slack or the inbox when a ratio starts to climb. <a class="faq-more" href="/chargeback-ratio-thresholds">Read the guide →</a></p></div>
+      <div class="faq-a"><p>Watch it weekly, not at month end. Oryjin tracks dispute, chargeback and refund rates by processor from the data it pulls, prices the fees at stake, and alerts the right person in Slack or the inbox when a rate crosses the line you set. <a class="faq-more" href="/chargeback-ratio-thresholds">Read the guide →</a></p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false">Which PSPs and acquirers does Oryjin cover?<span class="faq-ic" aria-hidden="true"></span></button>
-      <div class="faq-a"><p>All of them. We started with native Stripe and Adyen integrations, and more connectors are on the way. Any other PSP or acquirer is covered today by uploading its settlement reports, invoices and contract terms in the dashboard, which adds data sources and context and makes the reconciliation and the reading of your costs more reliable.</p></div>
+      <div class="faq-a"><p>All of them, three ways in. Stripe, Adyen and Mollie have native connectors that keep pulling settlements, fees and authorisations. PayPal, Klarna, Viva.com, Worldline and Monext connectors are rolling out account by account. Every other processor, acquirer or ERP comes in from the contracts, invoices, settlement reports and CSV exports you already have, mapped once.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" type="button" aria-expanded="false">Can I try it before requesting access?<span class="faq-ic" aria-hidden="true"></span></button>
+      <div class="faq-a"><p>Yes, without an account. Explore the sample company, a mid-market merchant on Stripe and Adyen refreshed nightly, check one of your own processor invoices, estimate your fees against published prices and the regulated caps, or compare Stripe, Adyen and Mollie on a month of your volume. Every door ends at the same request-access desk. <a class="faq-more" href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=faq" data-app-link="faq" data-app-target="sample">Open the sample company →</a></p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false">Is Oryjin independent, and how is my data protected?<span class="faq-ic" aria-hidden="true"></span></button>
-      <div class="faq-a"><p>Oryjin is not a PSP and not an orchestrator: it never moves money, never changes a setting, and has no stake in which provider you use. Data is hosted in the EU by Scaleway (Paris), never includes cardholder data, and is covered by an NDA before sharing and a DPA from day one.</p></div>
+      <div class="faq-a"><p>Oryjin is not a PSP and not an orchestrator: it recommends and simulates, never moves money, never changes a setting, and has no stake in which provider you use. There is no success fee. Data is hosted in the EU by Scaleway (Paris), never includes cardholder data, and is covered by an NDA before sharing and a DPA from day one.</p></div>
     </div>
   </div>
 </section>
 <!-- ─── FORM ─── -->
 <section class="band form-section" id="apply">
-  <p class="section-label reveal">Early access</p>
-  <h2 class="form-head reveal">Ready to see where<br>your margin goes?</h2>
-  <p class="form-sub reveal">Onboarding runs on your real data, with a founder on every account. <strong>Tell us about your stack and we reply within 24 hours.</strong></p>
+  <p class="section-label reveal">Request access</p>
+  <h2 class="form-head reveal">See it on<br>your own figures.</h2>
+  <p class="form-sub reveal">Early access runs on your real data, with a founder on every account. <strong>Tell us about your stack and we reply within one working day.</strong></p>
 <div class="apply-form reveal">
     <div class="apply-form-inner" id="form-body">
       <div class="form-grid">
@@ -1378,20 +1465,21 @@ body,button,input,select,textarea{font-family:var(--font-display)}
       </div>
       <div class="form-grid">
         <div class="form-row">
-          <label class="form-label" for="volume">Monthly volume <span style="color:#DC2626" aria-hidden="true">*</span></label>
+          <label class="form-label" for="volume">Card payments a year <span style="color:#DC2626" aria-hidden="true">*</span></label>
           <select class="form-select" id="volume" required aria-describedby="err-volume" onchange="liveValidate('volume',true)">
             <option value="" disabled selected>Select range</option>
-            <option>Under €2M</option>
-            <option>€2M – €5M</option>
-            <option>€5M – €10M</option>
-            <option>€10M – €20M</option>
-            <option>€20M+</option>
+            <option>Under €10M</option>
+            <option>€10M – €25M</option>
+            <option>€25M – €50M</option>
+            <option>€50M – €100M</option>
+            <option>€100M – €200M</option>
+            <option>Over €200M</option>
           </select>
           <span class="field-error" id="err-volume" aria-live="polite"></span>
-          <p class="form-note">Best fit: €2 to 20M GMV a month</p>
+          <p class="form-note">Best fit: €10 to 200M a year</p>
         </div>
         <div class="form-row">
-          <label class="form-label" for="psps">Active PSPs <span style="color:#DC2626" aria-hidden="true">*</span></label>
+          <label class="form-label" for="psps">Payment processors <span style="color:#DC2626" aria-hidden="true">*</span></label>
           <input class="form-input" id="psps" type="text" placeholder="e.g. Adyen + Stripe" required aria-describedby="err-psps" oninput="liveValidate('psps')" onblur="liveValidate('psps',true)">
           <span class="field-error" id="err-psps" aria-live="polite"></span>
           <p class="form-note">All PSPs and acquirers you use</p>
@@ -1404,19 +1492,20 @@ body,button,input,select,textarea{font-family:var(--font-display)}
       </div>
       <p class="form-summary" id="form-summary" role="alert" hidden></p>
       <button class="submit-btn" id="submit-btn" type="button" onclick="submitForm()" disabled>
-        Apply for early access →
+        Request access →
       </button>
       <p class="form-disclaimer">
         All fields are required. NDA available before any data is shared. Data hosted by Scaleway, Paris region — see our <a href="/privacy.html" style="color:var(--vdk)">privacy policy</a>.<br>
-        Applications are reviewed in the order received.
+        Not ready to talk? <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=form" data-app-link="form" data-app-target="sample" style="color:var(--vdk)">Explore the sample company</a> first, no account needed.
       </p>
     </div>
     <div class="form-success" id="form-success" role="status">
       <div class="form-success-icon" aria-hidden="true"><img src="brand/oryjin-symbol.svg" alt="" width="40" height="40"></div>
-      <div class="form-success-head">Application received.</div>
+      <div class="form-success-head">Request received.</div>
       <div class="form-success-body">
-        We review every application and reply within <strong>24 hours</strong>.<br><br>
-        Meanwhile, follow Oryjin on LinkedIn:<br><br>
+        Someone from the team replies within <strong>one working day</strong>.<br><br>
+        Meanwhile, explore the sample company or follow Oryjin on LinkedIn:<br><br>
+        <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=success" data-app-link="success" data-app-target="sample">→ Open the sample company</a><br>
         <a href="https://www.linkedin.com/company/oryjin-payment-intelligence" target="_blank" rel="noopener">→ linkedin.com/company/oryjin-payment-intelligence</a>
       </div>
     </div>
@@ -1464,16 +1553,15 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 </div>
 
 <div class="sticky-cta" id="sticky-cta">
-  <span>Know where your margin goes.</span>
-  <a href="#apply" class="cta-btn" data-cta="sticky">Apply for early access <span class="cta-arrow" aria-hidden="true">→</span></a>
-  <a href="https://app.oryjin.com/request-access?source=website&amp;utm_source=website&amp;utm_medium=cta&amp;utm_content=sticky" class="cta-ghost" data-app-link="sticky">Request access</a>
+  <span>What to change first, in euros.</span>
+  <a href="#apply" class="cta-btn" data-cta="sticky">Request access <span class="cta-arrow" aria-hidden="true">→</span></a>
 </div>
 <!-- ─── FOOTER ─── -->
 <footer>
   <div class="footer-inner">
     <div>
       <a href="#" class="footer-brand-logo"><img class="nav-lockup" src="brand/oryjin-lockup.svg" alt="Oryjin" width="104" height="28" loading="lazy"></a>
-      <p class="footer-brand-desc">The independent payment cockpit for European merchants. Your whole payment margin, from acquirers and schemes to PSPs and fraud tools, in one place: every fee, every loss, every routing choice, turned into decisions you can defend.</p>
+      <p class="footer-brand-desc">Decision intelligence for payment costs, independent of any PSP. Every processor reconciled against its contract each month, the next actions ranked in euros and labelled detected or modelled, the claims sent, the budget held against what came in.</p>
       <span class="footer-brand-tagline">Paris, France · 2026</span>
     </div>
     <div>
@@ -1482,7 +1570,8 @@ body,button,input,select,textarea{font-family:var(--font-display)}
         <a href="mailto:contact@oryjin.com">contact@oryjin.com</a>
         <a href="https://www.linkedin.com/company/oryjin-payment-intelligence" target="_blank" rel="noopener">LinkedIn → Oryjin</a>
         <a href="https://www.thepaymenteconomics.com" target="_blank" rel="noopener">The Payment Economics — independent review</a>
-        <a href="https://app.oryjin.com/request-access?source=website&amp;utm_source=website&amp;utm_medium=cta&amp;utm_content=footer" data-app-link="footer">Request access</a>
+        <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=footer" data-app-link="footer" data-app-target="sample">Explore the sample company</a>
+        <a href="#apply" data-cta="footer">Request access</a>
       </div>
     </div>
     <div>
@@ -1536,7 +1625,7 @@ function getAttribution(){
   var scrs = [].slice.call(root.querySelectorAll('.scr'));
   var navs = [].slice.call(root.querySelectorAll('.app-side span[data-nav]'));
   var url  = document.getElementById('app-url');
-  var URLS = { detect:'app.oryjin.com/findings', explain:'app.oryjin.com/analytics', plan:'app.oryjin.com/forecast', act:'app.oryjin.com/alerts' };
+  var URLS = { detect:'app.oryjin.com/recommendations', claim:'app.oryjin.com/recommendations/claims', plan:'app.oryjin.com/forecast', prove:'app.oryjin.com/reconciliation' };
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, timer = null, MS = 6000;
   root.style.setProperty('--tour-ms', MS + 'ms');
   function count(scr){
@@ -1551,7 +1640,8 @@ function getAttribution(){
   function show(key){
     tabs.forEach(function(t){ var on = t.getAttribute('data-tab') === key; t.classList.toggle('is-on', on); t.setAttribute('aria-selected', on); });
     scrs.forEach(function(x){ var on = x.getAttribute('data-scr') === key; x.classList.toggle('is-on', on); if (on) count(x); });
-    navs.forEach(function(n){ n.classList.toggle('is-on', n.getAttribute('data-nav') === key); });
+    var navKey = key === 'claim' ? 'detect' : key;
+    navs.forEach(function(n){ n.classList.toggle('is-on', n.getAttribute('data-nav') === navKey); });
     if (url) url.textContent = URLS[key] || URLS.detect;
   }
   function next(){ var i = tabs.findIndex(function(t){ return t.classList.contains('is-on'); }); show(tabs[(i + 1) % tabs.length].getAttribute('data-tab')); }
@@ -1573,10 +1663,10 @@ function getAttribution(){
    Canonical stays https://oryjin.com/ so SEO sees one page.
 ═══════════════════════════════════════════════ */
 var MM = {
-  adyen:    { eyebrow: 'Early access · now open for Adyen merchants', a: 'Know where your Adyen margin goes.', b: 'And win it back.' },
-  stripe:   { eyebrow: 'Early access · now open for Stripe merchants', a: 'Know where your Stripe margin goes.', b: 'And win it back.' },
-  scheme:   { eyebrow: 'Early access · scheme fees, interchange and markup, explained', a: 'See what scheme fees really cost you.', b: 'And win it back.' },
-  multipsp: { eyebrow: 'Early access · one cockpit for every PSP', a: 'Know where your margin goes, across every PSP.', b: 'And win it back.' }
+  adyen:    { eyebrow: 'Early access · now open for Adyen merchants', a: 'What to change first in your Adyen costs,', b: 'and what it will earn you.' },
+  stripe:   { eyebrow: 'Early access · now open for Stripe merchants', a: 'What to change first in your Stripe costs,', b: 'and what it will earn you.' },
+  scheme:   { eyebrow: 'Early access · scheme fees, interchange and markup, priced', a: 'What scheme fees really cost you,', b: 'and what to do about it.' },
+  multipsp: { eyebrow: 'Early access · every PSP, one set of numbers', a: 'What to change first across every PSP,', b: 'and what it will earn you.' }
 };
 (function messageMatch(){
   try {
@@ -1607,7 +1697,7 @@ var MM = {
     marks.forEach(function(m){ if (pct >= m && !seen[m]) { seen[m] = 1; push({ event: 'scroll_depth', percent: m }); } }); }
   addEventListener('scroll', depth, { passive: true });
   document.querySelectorAll('.tour-tab').forEach(function(t){ t.addEventListener('click', function(){ push({ event: 'tour_tab', tab: t.getAttribute('data-tab') }); }); });
-  var started = false; document.querySelectorAll('#form-body input, #form-body select').forEach(function(f){ f.addEventListener('focus', function(){ if (!started) { started = true; push({ event: 'form_start', form: 'early_access' }); } }); });
+  var started = false; document.querySelectorAll('#form-body input, #form-body select').forEach(function(f){ f.addEventListener('focus', function(){ if (!started) { started = true; push({ event: 'form_start', form: 'request_access' }); } }); });
   var bar = document.getElementById('sticky-cta'), form = document.getElementById('apply'), hero = document.querySelector('.hero');
   if (bar && form && hero && 'IntersectionObserver' in window) {
     document.body.classList.add('has-sticky');
@@ -1619,7 +1709,7 @@ var MM = {
 })();
 function trackConversion(meta){
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: 'generate_lead', form: 'early_access', volume: meta.volume, role: meta.role });
+  window.dataLayer.push({ event: 'generate_lead', form: 'request_access', volume: meta.volume, role: meta.role });
   // LinkedIn and Google Ads conversions: fired by assets/site-analytics.js
   // only when the visitor accepted advertising and the ids are set in
   // assets/site-config.js.
@@ -1765,7 +1855,7 @@ function liveValidate(id, fromBlur = false) {
       else clearErr(id);
       break;
     case 'volume':
-      if (!val) { if (fromBlur) setErr(id, 'Please select your monthly volume'); else clearErr(id); }
+      if (!val) { if (fromBlur) setErr(id, 'Please select your yearly card volume'); else clearErr(id); }
       else clearErr(id);
       break;
   }
@@ -1782,7 +1872,7 @@ function validateForm() {
     });
   const sum = document.getElementById('form-summary');
   if (first) {
-    if (sum) { sum.textContent = first === 'email' && document.getElementById('email').value.trim() ? 'A company email address is required.' : 'Please complete every field before applying.'; sum.hidden = false; }
+    if (sum) { sum.textContent = first === 'email' && document.getElementById('email').value.trim() ? 'A company email address is required.' : 'Please complete every field before sending.'; sum.hidden = false; }
     document.getElementById(first)?.focus();
     return false;
   }
@@ -1794,7 +1884,7 @@ function validateForm() {
    both delivering to contact@oryjin.com
 ═══════════════════════════════════════════════ */
 const WEB3FORMS_KEY = 'd4a26234-36c7-4fcc-8205-05f2e97beec1';
-const SUBMIT_LABEL  = 'Apply for early access →';
+const SUBMIT_LABEL  = 'Request access →';
 /* The consent box gates the button: nothing is sent until it is ticked. */
 (function consentGate(){
   var box = document.getElementById('consent'), btn = document.getElementById('submit-btn');
@@ -1802,13 +1892,14 @@ const SUBMIT_LABEL  = 'Apply for early access →';
   function sync(){ btn.disabled = !box.checked; }
   box.addEventListener('change', sync); sync();
 })();
-/* The app's lead desk speaks ANNUAL card-volume bands; the form asks monthly. */
+/* The form asks the app's own ANNUAL card-volume bands. */
 const VOLUME_BANDS = {
-  'Under €2M':  'starter',
-  '€2M – €5M':  'pro_25_50',
-  '€5M – €10M': 'pro_50_100',
-  '€10M – €20M':'pro_100_200',
-  '€20M+':      'above_200'
+  'Under €10M':    'starter',
+  '€10M – €25M':   'pro_10_25',
+  '€25M – €50M':   'pro_25_50',
+  '€50M – €100M':  'pro_50_100',
+  '€100M – €200M': 'pro_100_200',
+  'Over €200M':    'above_200'
 };
 /* Free-text PSP field → the app's processor slugs; unknown names stay in the message. */
 const PSP_SLUGS = [
@@ -1845,7 +1936,7 @@ async function submitForm() {
     'Reply-to':        email,
     'Company':         company,
     'Role':            role,
-    'Monthly Volume':  volume,
+    'Yearly Volume':   volume,
     'PSPs':            psps,
     'Source':          source,
     'Click ID':        attr.gclid || attr.li_fat_id || ''
@@ -1863,7 +1954,7 @@ async function submitForm() {
         role: role,
         volumeBand: VOLUME_BANDS[volume],
         processors: pspSlugsOf(psps),
-        message: 'Monthly card volume: ' + volume + '. Processors as typed: ' + psps,
+        message: 'Card volume a year: ' + volume + '. Processors as typed: ' + psps,
         locale: 'en',
         website: document.getElementById('website').value
       }, 6000);
@@ -1877,7 +1968,7 @@ async function submitForm() {
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
           access_key:  WEB3FORMS_KEY,
-          subject:     'Oryjin — Early access application: ' + company + ' (' + date.slice(0,10) + ')',
+          subject:     'Oryjin — Access request: ' + company + ' (' + date.slice(0,10) + ')',
           from_name:   fname + ' ' + lname,
           replyto:     email,
           botcheck:    '',
@@ -1894,7 +1985,7 @@ async function submitForm() {
         method:  'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
-          _subject:  'Oryjin — Early access: ' + company,
+          _subject:  'Oryjin — Access request: ' + company,
           _template: 'table',
           _captcha:  'false',
           ...payload

@@ -1,22 +1,25 @@
 # Oryjin
 
-> Oryjin is an independent payment cockpit for European merchants processing €2M–€20M a month online. It continuously monitors the whole payment stack (acquirer fees, scheme costs, FX, fraud, chargebacks, orchestration) into one model, checks billing against contracts, explains what moves payment cost, ranks the next actions in euros (each labelled detected or modelled), and forecasts future fees. It is not a PSP or an orchestrator: it never moves money and never changes a setting. Based in Paris, France.
+> Oryjin is decision intelligence for payment costs, for European merchants with €10M to €200M of card payments a year. Every month it reconciles each processor (Stripe, Adyen, Mollie and every other PSP or acquirer) against its contract, ranks what to change first in euros with each figure labelled detected (billed above contract, claimable) or modelled (from published schedules, with assumptions), sends the claims and settles them line by line, forecasts the payments line of the budget and holds each closed month against it. It is not a PSP or an orchestrator: it recommends and simulates, never moves money and never changes a setting. No success fee. Based in Paris, France.
 
 ## Key facts
-- Connectors: Stripe, Adyen
-- Other providers (Mangopay, Worldline, Checkout.com, PayPal, Braintree, acquirers): via contracts, invoices and reports
-- Detect: billing checked against contract terms every month; claim packs with transaction-level evidence
-- Explain: full cost split into acquisition, processing and FX, operations and losses; variance split into volume, mix and unit cost; cost per payment pattern
-- Plan: fee forecast by month, quarter or fiscal year with a P10–P90 range; what-if scenarios; contract renewal radar and negotiation brief
-- Act: alerts in Slack and an in-app inbox; recoveries summary for the CFO
-- Detected and modelled savings are never added together
+- Native connectors: Stripe, Adyen, Mollie
+- Connectors rolling out: PayPal, Klarna, Viva.com, Worldline, Monext
+- Any other processor, acquirer or ERP: from contracts, invoices, settlement reports and CSV exports, mapped once
+- Detect: every processor reconciled against its contract every month, coverage stated (a month that cannot be checked says so); findings with the rows and the clause
+- Claim: one claim letter per processor with transaction-level evidence, sent by the merchant, settled line by line; recoveries summary and claim pack as PDFs
+- Plan: the payments line of the budget as three named lines on the merchant's own volume plan; announced Visa and Mastercard fee changes priced and dated beside renewals and tier crossings; scenarios priced on the merchant's data; renewal radar and negotiation dossier
+- Prove: each closed month held against its forecast; recovered euros are money that moved, never an estimate
+- European rules first: interchange above the EU regulated caps, local methods (Bancontact, iDEAL, CB, girocard) priced
+- Detected and modelled figures are labelled and never added together
 - Users: CFOs, Heads of Payments, Payment Operations (unlimited users)
-- Early access: onboarding on real data, with a founder on every account
+- Early access: onboarding on real data, with a founder on every account; subscription priced on volume, no success fee
 - Hosting: Scaleway, Paris region (EU); no cardholder data
 - Contact: contact@oryjin.com
 
 ## Links
-- Apply for early access: https://oryjin.com/#apply
+- Request access: https://oryjin.com/#apply
+- Try without an account (sample company, invoice check, fee estimate, processor comparison): https://app.oryjin.com/try
 - Privacy policy: https://oryjin.com/privacy.html
 - The Payment Economics, an independent payment economics review: https://www.thepaymenteconomics.com
 - LinkedIn: https://www.linkedin.com/company/oryjin-payment-intelligence

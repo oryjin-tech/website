@@ -13,7 +13,7 @@ order: 5
 locale: en
 cta:
   headline: "Track your dispute and chargeback ratios by market and card type against the scheme thresholds, with the cost of each lever priced."
-  text: "Oryjin continuously monitors your entire stack, from PSP and acquirer fees to scheme fees, fraud, chargebacks and orchestration, and turns it into decision-grade intelligence. Early access is open for European merchants doing €2 to 20M GMV a month."
+  text: "Every month, Oryjin reconciles each processor against its contract, ranks the next actions in euros with each figure labelled detected or modelled, sends the claims and shows what came back. Early access is open for European merchants with €10 to 200M of card payments a year."
 faq:
   - q: "Is a 1% chargeback ratio safe?"
     a: "It is under Visa's 1.5% EU enforcement threshold, but close enough that a single bad month on one card type can cross it. Most merchants set an internal limit around half the published threshold and monitor by segment rather than in aggregate."

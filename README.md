@@ -91,15 +91,25 @@ Every page loads two scripts at the end of its body:
 
 ### The links into the app
 
-Every link marked `data-app-link="<section>"` points at
-`https://app.oryjin.com/request-access?source=website&utm_source=website&utm_medium=cta&utm_content=<section>`.
-On load the script appends the visitor's own inbound `utm_*`, `gclid`,
-`li_fat_id`, `msclkid` and `ref` (kept for the session in `sessionStorage`),
-and an inbound `utm_source` overrides the default — a LinkedIn visitor
-reaches the app as `utm_source=linkedin`. This rides the link, not a cookie,
-so a refused banner still yields an attributed lead on the app's desk.
+Every link marked `data-app-link="<section>"` points into the app with
+`utm_source=website&utm_medium=cta&utm_content=<section>`. The door is the
+app's free front door, `https://app.oryjin.com/try` (the sample company, an
+invoice check, a fee estimate, a processor comparison, every one ending at
+the app's request-access desk): the one-pager, the shared nav, the guides'
+CTA and the hub all point there, the hub's tool cards at `/try/estimate`
+and `/try` directly. A link names its door in `data-app-target`
+(`sample`, `estimate`); without one the event names the app path. On load the script appends the
+visitor's own inbound `utm_*`, `gclid`, `li_fat_id`, `msclkid` and `ref`
+(kept for the session in `sessionStorage`), and an inbound `utm_source`
+overrides the default — a LinkedIn visitor reaches the app as
+`utm_source=linkedin`. This rides the link, not a cookie, so a refused banner
+still yields an attributed lead on the app's desk.
 
-### The early-access form
+The one-pager has ONE form, the request-access form below, and no second
+link to the app's own form: both land on the same desk, and a visitor should
+not meet two doors with different fields.
+
+### The request-access form
 
 It posts twice: first `POST https://app.oryjin.com/api/leads` (JSON, 6 s
 timeout, never blocks the visitor), then web3forms as before so the email
@@ -109,7 +119,7 @@ copy always arrives. The app body is:
 {
   "name": "Camille Durand", "email": "camille@acme.example", "company": "Acme",
   "role": "CFO", "volumeBand": "pro_25_50", "processors": ["adyen", "stripe"],
-  "message": "Monthly card volume: €2M – €5M. Processors as typed: Adyen + Stripe",
+  "message": "Card volume a year: €25M – €50M. Processors as typed: Adyen + Stripe",
   "consent": true, "consentVersion": "website-2026-10-16b", "locale": "en", "website": "",
   "attribution": {
     "utmSource": "linkedin", "utmMedium": "social", "utmCampaign": "202610-renewal",
@@ -121,9 +131,10 @@ copy always arrives. The app body is:
 ```
 
 Empty attribution fields are omitted. `website` is the honeypot (a hidden
-field no person sees). Monthly volume maps to the app's annual bands
-(`VOLUME_BANDS` in index.html); the free-text PSP field maps to slugs by
-keyword (`PSP_SLUGS`), unknown names staying in `message`.
+field no person sees). The volume select asks the app's own annual bands
+(`VOLUME_BANDS` in index.html, the same six the app's pricing bands use);
+the free-text PSP field maps to slugs by keyword (`PSP_SLUGS`), unknown
+names staying in `message`.
 
 ### Consent
 
