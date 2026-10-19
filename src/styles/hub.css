@@ -7,7 +7,8 @@
 .hub-lede { font-family: var(--serif); font-size: clamp(19px, 2.2vw, 22px); line-height: 1.55; color: var(--dim); max-width: 640px; margin: 0 auto 28px; text-wrap: pretty; }
 .hub-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .hub-chips a { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--txt); text-decoration: none; background: var(--surf); border: 1px solid var(--rule); border-radius: 999px; padding: 8px 15px; transition: border-color .2s, color .2s, transform .2s; }
-.hub-chips a:hover { border-color: var(--v); color: var(--v); transform: translateY(-1px); }
+.hub-chips a:hover { border-color: var(--pillar, var(--v)); color: var(--pillar, var(--v)); transform: translateY(-1px); }
+.hub-chips a[data-pillar]::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--pillar); box-shadow: 0 0 0 3px rgb(var(--pillar-rgb) / 0.18); }
 .hub-chips span { font-size: 12px; font-weight: 700; color: var(--muted); background: var(--surf2); border-radius: 999px; padding: 1px 7px; }
 
 .hub-featured { max-width: var(--wide); margin: 64px auto 0; padding: 0 24px; }
@@ -15,7 +16,8 @@
 .hub-main { max-width: var(--wide); margin: 72px auto 0; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 64px; }
 .hub-pillar + .hub-pillar { margin-top: 56px; }
 .hub-pillar { scroll-margin-top: 96px; }
-.hub-pillar h2 { font-size: 13px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin: 0 0 8px; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
+.hub-pillar h2 { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin: 0 0 8px; padding-bottom: 12px; border-bottom: 2px solid var(--pillar); }
+.hub-pillar h2::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--pillar); box-shadow: 0 0 0 3px rgb(var(--pillar-rgb) / 0.18); }
 .hub-pillar-intro { font-size: 15px; color: var(--dim); line-height: 1.6; margin: 14px 0 0; max-width: 60ch; }
 .hub-side-inner { position: sticky; top: 104px; display: grid; gap: 20px; }
 .hub-box { background: var(--surf); border: 1px solid var(--rule); border-radius: 16px; padding: 20px; }

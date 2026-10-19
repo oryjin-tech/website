@@ -29,7 +29,7 @@ pnpm check:site   # the SEO gate over dist/, as CI runs it
   card, FAQ, CTA, related guides. **`src/layouts/Site.astro`** is the head,
   nav and footer every generated page shares.
 - **`src/components/Figure.astro`** — the guides' figures, one per id;
-  **`src/lib/covers.ts`** — the generated covers, one motif per topic;
+  **`src/lib/covers.ts`** — the generated covers, one motif per topic, the pillar's colour leading the wash;
   **`src/lib/authors.ts`** — the bylines.
 - **`src/styles/`** — `site.css` (tokens, nav, buttons, footer: the chrome
   lifted from the one-pager), `article.css` (guide typography, figures,

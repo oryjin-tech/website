@@ -71,7 +71,7 @@ const jsonLd = {
     <h1>What your payments really cost, and how to lower it</h1>
     <p class="hub-lede">Practical guides for finance teams at European merchants. Each one answers a single question about payment costs, works it through with figures, and says where every figure comes from.</p>
     <nav class="hub-chips" aria-label="Topics">
-      {pillars.map((p) => <a href={`#${p.key}`}>{p.title}<span>{p.guides.length}</span></a>)}
+      {pillars.map((p) => <a href={`#${p.key}`} data-pillar={p.key}>{p.title}<span>{p.guides.length}</span></a>)}
       <a href="#tools">Free tools</a>
     </nav>
   </header>
@@ -83,7 +83,7 @@ const jsonLd = {
   <div class="hub-main">
     <div class="hub-list-col">
       {pillars.map((p) => (
-        <section class="hub-pillar" id={p.key} aria-labelledby={`h-${p.key}`}>
+        <section class="hub-pillar" id={p.key} data-pillar={p.key} aria-labelledby={`h-${p.key}`}>
           <h2 id={`h-${p.key}`}>{p.title}</h2>
           <p class="hub-pillar-intro">{p.intro}</p>
           <div>{p.guides.map((g) => <GuideCard guide={g} variant="row" />)}</div>

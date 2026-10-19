@@ -110,6 +110,16 @@
   --vglow:  rgb(var(--v-rgb) / 0.18);
   --white:  var(--ink); /* legacy name; resolves to kit ink */
 }
+/* ─── PILLAR COLOUR ───────────────────────────────────────────────────
+   The hub's three pillars each own one of the kit's colours, and a guide
+   page, a card, a chip or a section carries its pillar's as --pillar: the
+   eyebrow, the takeaways, the counters, the active contents line, the FAQ
+   toggles and the kicker all read it. Costs teal, acceptance purple (the
+   losses), strategy blue (the brand's own, for the pillar that is Oryjin's
+   pitch). The series palette for FIGURES is separate: --oryjin-chart-*. */
+[data-pillar="costs"]      { --pillar: var(--teal);   --pillar-rgb: var(--teal-rgb); }
+[data-pillar="acceptance"] { --pillar: var(--violet); --pillar-rgb: var(--violet-rgb); }
+[data-pillar="strategy"]   { --pillar: var(--v);      --pillar-rgb: var(--v-rgb); }
 html { scroll-behavior: smooth; overflow-x: clip; }
 /* FIX: the "body {" selector was missing in the previous version, so none of these rules applied */
 body {

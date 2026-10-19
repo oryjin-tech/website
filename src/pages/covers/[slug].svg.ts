@@ -10,6 +10,6 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 export const GET: APIRoute<{ guide: CollectionEntry<"guides"> }> = ({ props }) =>
-	new Response(coverSvg(props.guide.data.cover, guideSlug(props.guide)), {
+	new Response(coverSvg(props.guide.data.cover, props.guide.data.pillar, guideSlug(props.guide)), {
 		headers: { "Content-Type": "image/svg+xml" },
 	});
