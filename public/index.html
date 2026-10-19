@@ -180,7 +180,7 @@
           "name": "Which PSPs and acquirers does Oryjin cover?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "All of them. Send what you already have: settlement reports, fee statements, authorisation exports, invoices, contracts and order files, from any PSP, acquirer or ERP, as PDF, CSV or Excel. Oryjin reads the documents and maps the columns once; every later file with the same header reads itself. Stripe, Adyen and Mollie also connect natively and keep pulling settlements, fees and authorisations on their own, with PayPal, Klarna, Viva.com, Worldline and Monext rolling out."
+            "text": "All of them. Send what you already have: settlement reports, fee statements, authorisation exports, invoices, contracts and order files, from any PSP, acquirer or ERP. Oryjin reads the documents and maps the columns once; every later file with the same header reads itself. Stripe, Adyen and Mollie also connect natively and keep pulling settlements, fees and authorisations on their own, with PayPal, Klarna, Viva.com, Worldline and Monext rolling out."
           }
         },
         {
@@ -697,6 +697,16 @@ nav.scrolled{border-bottom-color:rgba(20,28,46,0.10);box-shadow:0 8px 30px -20px
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 @media (max-width: 480px) { .form-grid { grid-template-columns: 1fr; } }
 .form-note { font-size: 13px; color: var(--muted); margin-top: 6px; }
+.form-optional { font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--muted); margin-left: 4px; }
+.psp-field { border: 0; padding: 0; min-width: 0; text-align: left; }
+.psp-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.psp-chip { position: relative; cursor: pointer; }
+.psp-chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.psp-chip span { display: inline-block; padding: 8px 14px; border: 1px solid var(--bdr); border-radius: 999px; background: rgba(20,28,46,0.04); color: var(--txt); font-size: 14px; font-weight: 600; transition: border-color 0.2s, background 0.2s, color 0.2s; }
+.psp-chip:hover span { border-color: rgb(var(--v-rgb) / 0.5); }
+.psp-chip input:checked + span { border-color: var(--v); background: rgb(var(--v-rgb) / 0.12); color: var(--vdk); }
+.psp-chip input:focus-visible + span { outline: 2px solid var(--v); outline-offset: 2px; }
+.psp-other { margin-top: 10px; }
 .field-error { display: block; font-size: 12px; font-weight: 500; color: #DC2626; margin-top: 5px; min-height: 15px; line-height: 1.4; transition: opacity 0.2s; }
 .field-error:empty { opacity: 0; }
 .field-error.warn { color: #B45309; }
@@ -957,15 +967,6 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 @media (max-width: 480px) { .tour-tab span { display: none; } .hero-v5 { padding-top: 104px; } }
 /* ─── V5: OUTCOMES ─── */
 .out-section { padding: 96px 24px; }
-.out-section .out-grid { max-width: 1040px; margin: 0 auto; }
-.out-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.out-card { background: var(--surf); border: 1px solid var(--bdr); border-radius: 16px; padding: 24px; text-align: left; position: relative; overflow: hidden; transition: transform .25s, box-shadow .25s, border-color .25s; }
-.out-card::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--grad); }
-.out-card:hover { transform: translateY(-3px); border-color: rgb(var(--v-rgb) / 0.35); box-shadow: 0 24px 50px -30px rgb(var(--v-rgb) / 0.45); }
-.out-num { font-size: 12px; font-weight: 800; letter-spacing: 0.12em; color: var(--vdk); }
-.out-card h3 { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin: 8px 0 8px; line-height: 1.25; }
-.out-card p { font-size: 15px; color: var(--dim); line-height: 1.6; }
-@media (max-width: 760px) { .out-grid { grid-template-columns: 1fr; } }
 /* ─── WHY: margin viz ─── */
 .why-wrap { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 28px; align-items: center; text-align: left; }
 .why-steps { display: grid; gap: 10px; }
@@ -979,7 +980,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 .why-step.is-on { background: var(--surf); border-color: var(--bdr); box-shadow: 0 24px 50px -36px rgb(var(--v-rgb) / 0.45); }
 .why-step.is-on::before { background: var(--grad); }
 .why-step.is-on .why-n { color: var(--vdk); }
-.why-step.is-on p { max-height: 120px; opacity: 1; margin-top: 8px; }
+.why-step.is-on p { max-height: 260px; opacity: 1; margin-top: 8px; }
 .why-step.is-on i { animation: tourbar var(--why-ms, 5200ms) linear forwards; }
 .why-wrap:hover .why-step.is-on i, .why-wrap.paused .why-step.is-on i { animation-play-state: paused; }
 .why-step:focus-visible { outline: 2px solid var(--v); outline-offset: 2px; }
@@ -1044,8 +1045,11 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 .int-txt h2 { font-size: clamp(22px, 2.6vw, 28px); font-weight: 800; letter-spacing: -0.03em; color: var(--ink); line-height: 1.25; margin-bottom: 10px; }
 .int-txt h2 span { color: var(--v); }
 .int-txt p { font-size: 15px; color: var(--dim); line-height: 1.6; }
+.int-txt p + p { margin-top: 10px; }
+.int-txt .int-lead, .int-txt .int-no { color: var(--ink); font-weight: 600; }
 .int-logos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .int-tile { background: var(--surf); border: 1px solid var(--bdr); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 6px; text-align: left; }
+.int-tile .int-k { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--v); }
 .int-tile b { font-size: 15px; font-weight: 800; color: var(--ink); }
 .int-tile > span:last-child { font-size: 13px; color: var(--dim); }
 .int-tile.live > span:last-child::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--green); margin-right: 6px; }
@@ -1059,9 +1063,11 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 .team-section .team-row { max-width: 1040px; margin: 0 auto; }
 .team-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .team { background: var(--surf); border: 1px solid var(--bdr); border-radius: 14px; padding: 16px 18px; text-align: left; }
-.team b { display: block; font-size: 16px; font-weight: 800; color: var(--v); margin-bottom: 4px; }
+.team b { display: block; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--v); margin-bottom: 8px; }
+.team em { display: block; font-style: normal; font-size: 17px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); line-height: 1.3; margin-bottom: 6px; }
 .team span { font-size: 15px; color: var(--dim); line-height: 1.5; }
-.team-note { margin-top: 16px; font-size: 13px; color: var(--dim); }
+.team-note { margin-top: 20px; font-size: 15px; color: var(--ink); }
+.team-note b { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--v); margin-right: 10px; }
 @media (max-width: 760px) { .team-row { grid-template-columns: 1fr; } }
 .nl-input{min-width:0}
 @media (max-width: 760px) { .product-section, .out-section, .team-section, .int-section, .form-section, .faq-section { padding-top: 64px; padding-bottom: 64px; } .sec-head .section-sub, .section-sub { margin-bottom: 28px; } }
@@ -1095,13 +1101,6 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 .mid-cta .cta-ghost { padding: 12px 18px; font-size: 14px; }
 .mid-cta .cta-btn { padding: 12px 22px; font-size: 14px; }
 @media (max-width: 760px) { .mid-cta { flex-direction: column; align-items: stretch; text-align: center; } .mid-cta-btns { justify-content: center; } }
-.eu-section { padding-top: 0; }
-.out-section.eu-section .out-grid { max-width: 1040px; margin: 0 auto; }
-.out-section .out-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-@media (max-width: 980px) { .out-section .out-grid.four { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 560px) { .out-section .out-grid.four { grid-template-columns: 1fr; } }
-.out-card h3 { font-size: 18px; }
-.out-card p { font-size: 14px; }
 .form-success-body a { display: inline-block; }
 @media (max-width: 480px) { .app-bar { flex-wrap: wrap; gap: 8px; } .app-ex { margin-left: 0; width: 100%; } .app-url { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } }
 @media (max-width: 760px) { .int-logos { gap: 8px; } .int-tile { padding: 12px; } }
@@ -1120,7 +1119,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     <a href="#product" class="nav-link">Product</a>
     <a href="#integrations" class="nav-link">Integrations</a>
     <a href="#faq" class="nav-link">FAQ</a>
-    <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=nav" class="nav-link" data-app-link="nav" data-app-target="sample">Explore the sample</a>
+    <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=nav" class="nav-link" data-app-link="nav" data-app-target="sample">Try it live</a>
     <a href="#apply" class="nav-cta" data-cta="nav">Apply for early access</a>
   </div>
 </nav>
@@ -1150,7 +1149,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 </section>
 <!-- ─── MARQUEE TRUST STRIP ─── -->
 <div class="marquee-section reveal">
-  <div class="marquee-label-row">Founded by payment and fintech operators from</div>
+  <div class="marquee-label-row">Founded by payment and fintech experts from</div>
   <div class="marquee-outer">
     <div class="marquee-track" id="marquee-track">
       <!-- ── SET 1 ── -->
@@ -1213,13 +1212,13 @@ body,button,input,select,textarea{font-family:var(--font-display)}
   <div class="sec-head reveal">
   <p class="section-label">Why Oryjin</p>
   <h2 class="section-head">The best payment teams don't guess.<br><span>They know.</span></h2>
-  <p class="section-sub">Your payment margin moves every day: a fee, a fraud pattern, a currency, a payment method, a 3DS challenge that fails. Most teams find out later, from a dashboard or a consultant. Oryjin encodes what the consultants know and runs it on your own data every month, outside the payment flow and on your side, so you know first.</p>
+  <p class="section-sub">Your payment margins shift every day. Fees, fraud, currencies, payment methods, failed 3DS challenges — every change has a cost. Oryjin brings consultant-level expertise to your own data, continuously uncovering what’s moving your margins and why. No waiting for reports. No guesswork. Just answers, on your side.</p>
   </div>
   <div class="why-wrap">
     <div class="why-steps reveal reveal-delay-1" role="tablist" aria-label="Why Oryjin">
-      <button class="why-step is-on" role="tab" aria-selected="true" data-why="0" type="button"><span class="why-n">01 <em>· What should I change first?</em></span><b>The whole margin, not just the fees</b><p>Acceptance, operations, losses. Every provider, every market, every payment pattern, in one number your CFO can defend, and the next actions ranked under it.</p><i></i></button>
-      <button class="why-step" role="tab" aria-selected="false" data-why="1" type="button"><span class="why-n">02 <em>· Why did it move?</em></span><b>The cause, not the symptom</b><p>When your margin moves, you know which fee, market, method or pattern moved it and what it costs. Each cause is labelled: detected, from the rows and the contract clause, or modelled, from published schedules, with its assumptions. Never added together.</p><i></i></button>
-      <button class="why-step" role="tab" aria-selected="false" data-why="2" type="button"><span class="why-n">03 <em>· What will it earn me?</em></span><b>Ahead of the quarter, not behind the invoice</b><p>The next months played out in scenarios, each action priced on your own volume and mix, and the signal at the right desk while there is still time to win the margin back.</p><i></i></button>
+      <button class="why-step is-on" role="tab" aria-selected="true" data-why="0" type="button"><span class="why-n">01 <em>· What should I change first?</em></span><b>Every opportunity. Ranked by impact.</b><p>Your payment performance goes far beyond processing fees. Oryjin connects acceptance rates, transaction costs, fraud, and operational losses across every provider and market.</p><i></i></button>
+      <button class="why-step" role="tab" aria-selected="false" data-why="1" type="button"><span class="why-n">02 <em>· Why did it move?</em></span><b>The cause, not the symptom</b><p>Your payment margin changes for a reason. Oryjin pinpoints what’s driving it — rising fees, shifting markets, changing payment methods — and quantifies the impact. Every insight is backed by your own data or clearly identified as a modelled estimate.</p><i></i></button>
+      <button class="why-step" role="tab" aria-selected="false" data-why="2" type="button"><span class="why-n">03 <em>· What will it earn me?</em></span><b>Know the impact before you act.</b><p>What if you switched providers, renegotiated fees, or improved acceptance rates? Oryjin models the financial impact of every decision using your actual transaction volumes and payment mix. Compare scenarios, forecast your savings, and make every payment decision count.</p><i></i></button>
     </div>
     <div class="why-viz reveal reveal-delay-2" id="why-viz" data-state="0">
       <div class="wv-head"><span class="wv-ttl">Where €100 of revenue goes</span><span class="wv-tag">Illustrative</span></div>
@@ -1255,98 +1254,92 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 <section class="band product-section" id="product">
   <div class="sec-head reveal">
     <p class="section-label">The product</p>
-    <h2 class="section-head">Detect. Claim. Plan.<br><span>Then prove it.</span></h2>
-    <p class="section-sub">The loop every figure goes through, on the pages your team will open. Click through the tour or let it play.</p>
+    <h2 class="section-head">Four jobs.<br><span>One cockpit.</span></h2>
+    <p class="section-sub">Detect what moved, explain why, plan the quarter, act before it hits the margin. Click through the tour or let it play.</p>
   </div>
   <div class="tour">
     <div class="tour-tabs" role="tablist" aria-label="Product tour">
-      <button class="tour-tab is-on" role="tab" aria-selected="true" data-tab="detect" type="button"><b>Detect</b><span>Ranked, labelled, with evidence</span><i></i></button>
-      <button class="tour-tab" role="tab" aria-selected="false" data-tab="claim" type="button"><b>Claim</b><span>One letter per processor</span><i></i></button>
-      <button class="tour-tab" role="tab" aria-selected="false" data-tab="plan" type="button"><b>Plan</b><span>Budget, calendar, scenarios</span><i></i></button>
-      <button class="tour-tab" role="tab" aria-selected="false" data-tab="prove" type="button"><b>Prove</b><span>What came back</span><i></i></button>
+      <button class="tour-tab is-on" role="tab" aria-selected="true" data-tab="detect" type="button"><b>Detect</b><span>Drift, fraud, overbilling</span><i></i></button>
+      <button class="tour-tab" role="tab" aria-selected="false" data-tab="explain" type="button"><b>Explain</b><span>Why the cost moved</span><i></i></button>
+      <button class="tour-tab" role="tab" aria-selected="false" data-tab="plan" type="button"><b>Plan</b><span>Budget, routing, renewals</span><i></i></button>
+      <button class="tour-tab" role="tab" aria-selected="false" data-tab="act" type="button"><b>Act</b><span>Alerts and decisions</span><i></i></button>
     </div>
     <div class="app">
-      <div class="app-bar"><span class="dc-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="app-url" id="app-url">app.oryjin.com/recommendations</span><span class="app-ex">Illustrative data</span></div>
+      <div class="app-bar"><span class="dc-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="app-url" id="app-url">app.oryjin.com/findings</span><span class="app-ex">Illustrative data</span></div>
       <div class="app-body">
         <aside class="app-side" aria-hidden="true">
           <img src="brand/oryjin-symbol.svg" alt="" width="22" height="22" class="app-mark">
           <span data-nav="overview">Overview</span>
-          <span data-nav="inbox">Inbox</span>
-          <span data-nav="detect" class="is-on">Recommendations</span>
-          <span data-nav="analytics">Analytics</span>
-          <span data-nav="alerts">Alerts</span>
+          <span data-nav="detect" class="is-on">Findings</span>
+          <span data-nav="explain">Analytics</span>
+          <span data-nav="disputes">Disputes</span>
           <span data-nav="plan">Forecast</span>
-          <span data-nav="scenarios">Scenarios</span>
-          <span data-nav="prove">Reconciliation</span>
-          <span data-nav="costs">Costs</span>
-          <span data-nav="sources">Sources</span>
-          <span class="app-side-foot">Sample company · €110M/yr</span>
+          <span data-nav="act">Alerts</span>
+          <span data-nav="contracts">Contracts</span>
+          <span data-nav="connectors">Connectors</span>
+          <span class="app-side-foot">Marketplace demo · €9M/mo</span>
         </aside>
         <div class="app-main">
 
-          <section class="scr is-on" data-scr="detect" aria-label="Recommendations screen">
-            <div class="scr-head"><p class="scr-ttl">Recommendations · September</p><span class="scr-btn">Summary PDF</span></div>
+          <section class="scr is-on" data-scr="detect" aria-label="Findings screen">
+            <div class="scr-head"><p class="scr-ttl">What changed · September</p><span class="scr-btn">Export</span></div>
             <div class="kpis">
-              <div class="kpi"><b><span class="cnt" data-to="18400" data-pre="€">€0</span></b><span>detected, ready to claim</span></div>
-              <div class="kpi"><b><span class="cnt" data-to="13300" data-pre="€">€0</span>/yr</b><span>modelled, assumptions shown</span></div>
+              <div class="kpi"><b><span class="cnt" data-to="25410" data-pre="€">€0</span></b><span>detected above contract</span></div>
+              <div class="kpi"><b><span class="cnt" data-to="4550" data-pre="€">€0</span>/mo</b><span>of cost drift, priced</span></div>
               <div class="kpi"><b><span class="cnt" data-to="52">0</span> days</b><span>to the Adyen renewal</span></div>
             </div>
             <ol class="na-list">
-              <li class="na-row"><span class="na-rank">1</span><span class="na-main"><b>Volume tier never applied</b><span class="na-meta">Adyen · June to August · 41,200 payments · clause 4.2</span></span><span class="na-tag det">Detected</span><span class="na-amt">€18,400</span><span class="na-next">Claim pack ready</span></li>
-              <li class="na-row"><span class="na-rank">2</span><span class="na-main"><b>Ask for interchange++ pricing</b><span class="na-meta">Stripe · blended rate today · your own card mix</span></span><span class="na-tag mod">Modelled</span><span class="na-amt">€9k–14k / yr</span><span class="na-next">Assumptions shown</span></li>
-              <li class="na-row"><span class="na-rank">3</span><span class="na-main"><b>Interchange above the regulated cap</b><span class="na-meta">Adyen · EEA consumer debit billed at 0.3% · cap 0.2%</span></span><span class="na-tag det">Detected</span><span class="na-amt">€2,100</span><span class="na-next">Added to the claim</span></li>
-              <li class="na-row"><span class="na-rank">4</span><span class="na-main"><b>Offer Bancontact to Belgian shoppers</b><span class="na-meta">Mollie · 11% of BE volume on cards · local method priced</span></span><span class="na-tag mod">Modelled</span><span class="na-amt">€3,100 / yr</span><span class="na-next">Scenario ready</span></li>
+              <li class="na-row"><span class="na-rank">1</span><span class="na-main"><b>Volume tier never applied</b><span class="na-meta">Adyen · 3 months · 41,200 payments</span></span><span class="na-tag det">Detected</span><span class="na-amt">€18,400</span><span class="na-next">Claim pack ready</span></li>
+              <li class="na-row"><span class="na-rank">2</span><span class="na-main"><b>Commercial card share up 1.2 pt</b><span class="na-meta">All PSPs · DE and NL · scheme fees and interchange +6 bps</span></span><span class="na-tag drf">Drift</span><span class="na-amt">€2,900 / mo</span><span class="na-next">Mix vs rate isolated</span></li>
+              <li class="na-row"><span class="na-rank">3</span><span class="na-main"><b>Chargeback ratio on DE Visa at 0.92%</b><span class="na-meta">Rising 3 weeks · VAMP limit 1.5% · dispute fees + losses</span></span><span class="na-tag rsk">Risk</span><span class="na-amt">€3,400 / mo</span><span class="na-next">Rule change priced</span></li>
+              <li class="na-row"><span class="na-rank">4</span><span class="na-main"><b>Ask for interchange++ pricing</b><span class="na-meta">Stripe · blended rate today</span></span><span class="na-tag mod">Modelled</span><span class="na-amt">€9k–14k / yr</span><span class="na-next">Assumptions shown</span></li>
             </ol>
-            <p class="scr-foot"><b>Detected</b> = billed above your contract, with the rows and the clause. <b>Modelled</b> = an estimate from published schedules, with its assumptions. Two lists, never one total.</p>
+            <p class="scr-foot"><b>Detected</b> = billed above your contract, with payment references. <b>Drift</b> and <b>Risk</b> = measured changes in mix, fees, fraud or disputes, priced. <b>Modelled</b> = an estimate, with its assumptions. Never added together.</p>
           </section>
 
-          <section class="scr" data-scr="claim" aria-label="Claim screen">
-            <div class="scr-head"><p class="scr-ttl">Claim · Adyen · 2 findings</p><span class="scr-btn">Claim pack PDF</span></div>
+          <section class="scr" data-scr="explain" aria-label="Analytics screen">
+            <div class="scr-head"><p class="scr-ttl">Full cost · August vs July</p><span class="scr-btn">Export</span></div>
             <div class="kpis">
-              <div class="kpi"><b><span class="cnt" data-to="20500" data-pre="€">€0</span></b><span>claimed, 2 findings, 3 months</span></div>
-              <div class="kpi"><b>12 Sep</b><span>sent by you, from your mailbox</span></div>
-              <div class="kpi"><b>+14 d</b><span>follow-up reminder set</span></div>
+              <div class="kpi"><b><span class="cnt" data-to="148200" data-pre="€">€0</span></b><span>full payment cost</span></div>
+              <div class="kpi"><b>1.73%</b><span>effective rate · <em class="up">+9 bps</em></span></div>
+              <div class="kpi"><b>+€4.4k</b><span>vs July</span></div>
             </div>
-            <div class="letter" aria-label="The claim letter">
-              <p class="letter-to">To Adyen Merchant Services · re: contract 2024-07, clauses 4.2 and 6.1</p>
-              <p>Between June and August, 41,200 payments were billed at the 0.30% tier although the monthly volume agreed for the 0.25% tier was reached in June. Over the same months, 8,900 EEA consumer debit payments were billed interchange at 0.30%, above the regulated 0.20% cap.</p>
-              <p>The payment references and the monthly totals are attached. We ask for a credit of <b>€20,500</b> on the next invoice.</p>
+            <p class="scr-lbl">Where the money went</p>
+            <div class="stack" role="img" aria-label="Cost split: acquisition 62%, processing and FX 21%, operations 9%, fraud and disputes 8%">
+              <i style="--w:62%;background:var(--v)"></i><i style="--w:21%;background:var(--violet)"></i><i style="--w:9%;background:var(--teal)"></i><i style="--w:8%;background:var(--amber)"></i>
             </div>
-            <ul class="inbox steps">
-              <li class="done"><i></i><span class="ib-main"><b>Ready</b><span>Findings gathered, letter written, evidence attached</span></span><span class="ib-when">9 Sep</span></li>
-              <li class="done"><i></i><span class="ib-main"><b>Sent</b><span>By the merchant · new months do not disturb a letter already sent</span></span><span class="ib-when">12 Sep</span></li>
-              <li class="new"><i></i><span class="ib-main"><b>Settled</b><span>€17,900 credited on the October invoice · 2 lines written off, recorded as such</span></span><span class="ib-when">Oct 3</span></li>
-            </ul>
+            <div class="stack-leg"><span><i style="background:var(--v)"></i>Acquisition 62%</span><span><i style="background:var(--violet)"></i>Processing &amp; FX 21%</span><span><i style="background:var(--teal)"></i>Operations 9%</span><span><i style="background:var(--amber)"></i>Fraud &amp; disputes 8%</span></div>
+            <p class="scr-lbl">What moved it</p>
+            <div class="pv-var">
+              <div class="pv-var-row"><span>Volume</span><i style="--w:62%"></i><b>+€3.1k</b></div>
+              <div class="pv-var-row"><span>Card mix</span><i style="--w:38%" class="mix"></i><b>+€1.9k</b></div>
+              <div class="pv-var-row"><span>Unit cost</span><i style="--w:12%" class="neg"></i><b>−€0.6k</b></div>
+            </div>
           </section>
 
           <section class="scr" data-scr="plan" aria-label="Forecast screen">
-            <div class="scr-head"><p class="scr-ttl">Forecast · Q4 budget</p><span class="scr-btn">Scenarios (7)</span></div>
+            <div class="scr-head"><p class="scr-ttl">Fee forecast · Q4</p><span class="scr-btn">Scenarios (7)</span></div>
             <div class="kpis">
-              <div class="kpi"><b><span class="cnt" data-to="421" data-pre="€" data-suf="k">€0k</span></b><span>payments line, on your volume plan</span></div>
-              <div class="kpi"><b>−1.4%</b><span>last closed month vs its forecast</span></div>
+              <div class="kpi"><b><span class="cnt" data-to="421" data-pre="€" data-suf="k">€0k</span></b><span>next quarter, P10–P90 €398k–447k</span></div>
+              <div class="kpi"><b>±3%</b><span>last quarter's miss</span></div>
               <div class="kpi"><b>Nov</b><span>Adyen tier reached at €10M</span></div>
             </div>
             <div class="pv-fc big" aria-hidden="true">
               <svg viewBox="0 0 320 110" preserveAspectRatio="none"><path class="band" d="M150 54 L180 48 L210 50 L240 38 L270 38 L300 26 L300 72 L270 76 L240 74 L210 84 L180 76 L150 62 Z"/><path class="hist" d="M10 86 L40 80 L70 82 L100 70 L130 66 L150 59"/><path class="proj" d="M150 59 L180 62 L210 67 L240 56 L270 57 L300 49"/><line x1="150" y1="10" x2="150" y2="104" class="now"/></svg>
-              <div class="pv-fc-cap"><span>Closed months</span><span>Plan · Trend · With the actions</span></div>
+              <div class="pv-fc-cap"><span>Actual</span><span>Forecast · P10–P90</span></div>
             </div>
-            <div class="chips"><span>Visa scheme fee revision · 1 Oct · priced on your mix</span><span>Adyen renewal · 52 days · dossier ready</span><span>Scenario: route DE debit via acquirer B · −€1,900 / mo</span><span>Volume plan +6%</span></div>
+            <div class="chips"><span>Volume +6%</span><span>Commercial card share +1.2 pt</span><span>Scheme fee revision · 1 Oct</span><span>Route DE debit via acquirer B: −€1,900 / mo</span><span>Renewal in 52 days</span></div>
           </section>
 
-          <section class="scr" data-scr="prove" aria-label="Reconciliation screen">
-            <div class="scr-head"><p class="scr-ttl">Reconciliation · September</p><span class="scr-btn">Cost statement PDF</span></div>
-            <div class="kpis">
-              <div class="kpi"><b>3 of 3</b><span>processors checked this month</span></div>
-              <div class="kpi"><b><span class="cnt" data-to="17900" data-pre="€">€0</span></b><span>recovered, of €18,400 claimed</span></div>
-              <div class="kpi"><b>−1.4%</b><span>said €139k, came in at €137k</span></div>
-            </div>
+          <section class="scr" data-scr="act" aria-label="Alerts screen">
+            <div class="scr-head"><p class="scr-ttl">Alerts</p><span class="scr-btn">Rules (6)</span></div>
             <ul class="inbox">
-              <li><i class="ok"></i><span class="ib-main"><b>Stripe · checked</b><span>Contract, invoice and settlement rows for the month · no open finding</span></span><span class="ib-when">2 Oct</span></li>
-              <li class="new"><i></i><span class="ib-main"><b>Adyen · checked, 1 open finding</b><span>Tier applied since September · interchange line still above the cap</span></span><span class="ib-when">2 Oct</span></li>
-              <li><i class="warn"></i><span class="ib-main"><b>Mollie · not checked</b><span>No contract on file yet: we say so rather than guess</span></span><span class="ib-when">2 Oct</span></li>
-              <li><i class="ok"></i><span class="ib-main"><b>€17,900 recovered from Adyen</b><span>Claim settled · 2 lines written off · in the recoveries summary</span></span><span class="ib-when">Oct 3</span></li>
+              <li class="new"><i></i><span class="ib-main"><b>Adyen effective rate +14 bps vs contract this week</b><span>€2,140 · probable cause: scheme fee category · finding opened</span></span><span class="ib-when">2 min</span></li>
+              <li><i></i><span class="ib-main"><b>Adyen contract renews in 52 days</b><span>Negotiation brief ready · a year of volume priced</span></span><span class="ib-when">Today</span></li>
+              <li><i></i><span class="ib-main"><b>DE Visa chargeback ratio at 0.92%, rising</b><span>VAMP limit 1.5% · 3DS rule change priced at −€2,100 / mo</span></span><span class="ib-when">Mon</span></li>
+              <li><i></i><span class="ib-main"><b>€4,870 recovered from Stripe</b><span>Claim closed · credited on the August invoice</span></span><span class="ib-when">Sep 12</span></li>
             </ul>
-            <div class="toast" aria-hidden="true"><img src="brand/oryjin-symbol.svg" alt="" width="20" height="20"><div><b>#payments-ops</b><span>Oryjin: Adyen effective rate +14 bps vs contract this week · €2,140 · finding opened →</span></div></div>
+            <div class="toast" aria-hidden="true"><img src="brand/oryjin-symbol.svg" alt="" width="20" height="20"><div><b>#payments-ops</b><span>Oryjin: Adyen effective rate +14 bps vs contract · €2,140 · open finding →</span></div></div>
           </section>
 
         </div>
@@ -1356,24 +1349,9 @@ body,button,input,select,textarea{font-family:var(--font-display)}
   <div class="mid-cta reveal">
     <span>This is a demo workspace. Explore the sample company yourself, or see the loop run on your own data.</span>
     <span class="mid-cta-btns">
-      <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=tour" class="cta-ghost" data-app-link="tour" data-app-target="sample">Explore the sample</a>
+      <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=tour" class="cta-ghost" data-app-link="tour" data-app-target="sample">Try it live</a>
       <a href="#apply" class="cta-btn" data-cta="tour">Apply for early access <span class="cta-arrow" aria-hidden="true">→</span></a>
     </span>
-  </div>
-</section>
-
-<!-- ─── EUROPEAN WEDGE ─── -->
-<section class="out-section eu-section" id="europe">
-  <div class="sec-head reveal">
-    <p class="section-label">Built for European payments</p>
-    <h2 class="section-head">The rules a consultant knows.<br><span>Run every month, on your data.</span></h2>
-    <p class="section-sub">Card-centric tools built for the US miss where European money hides. Oryjin's rule library starts there, and grows with every insight from a prospect's data, a sales call or a scheme bulletin.</p>
-  </div>
-  <div class="out-grid four reveal">
-    <div class="out-card"><span class="out-num">IFR</span><h3>Interchange above the regulated cap</h3><p>EEA consumer cards are capped at 0.2% and 0.3%. Billed above it is detected, with the rows, and goes into the claim.</p></div>
-    <div class="out-card"><span class="out-num">LOCAL</span><h3>Local methods, priced</h3><p>Bancontact, iDEAL, CB, girocard: what a share of your card volume would cost on the local rail, modelled on your own mix.</p></div>
-    <div class="out-card"><span class="out-num">DATED</span><h3>Scheme fee changes, on a calendar</h3><p>Announced Visa and Mastercard revisions priced on your mix and dated beside your renewals and tier crossings.</p></div>
-    <div class="out-card"><span class="out-num">HONEST</span><h3>Understated on purpose</h3><p>A month that cannot be checked says so. A wrong euro is treated as a severity-one bug, not a rounding issue.</p></div>
   </div>
 </section>
 
@@ -1381,18 +1359,21 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 <section class="int-section" id="integrations">
   <div class="int-row reveal">
     <div class="int-txt">
-      <h2>Any data source.<br><span>One ledger.</span></h2>
-      <p>Send what you already have: settlement reports, fee statements, authorisation exports, invoices, contracts and order files, from any PSP, acquirer or ERP, as PDF, CSV or Excel. Oryjin reads the documents, maps the columns once, and every later file reads itself. Stripe, Adyen and Mollie also connect natively and keep pulling on their own. No integration project, no engineer on your side.</p>
+      <h2>Your data.<br><span>One clear picture.</span></h2>
+      <p class="int-lead">All your payment data, finally in one place.</p>
+      <p>Connect your payment providers or simply upload the files you already have. Oryjin brings together transactions, fees, contracts, invoices, and settlements to give you a complete view of your payment economics.</p>
+      <p class="int-no">No complex integrations. No engineering required. No switching providers.</p>
     </div>
     <div class="int-logos">
       <div class="int-tile live">
         <div class="int-marks"><img src="/brand/stripe.svg" alt="Stripe" width="55" height="23" loading="lazy"><img src="/brand/adyen.svg" alt="Adyen" width="55" height="18" loading="lazy"><img src="/brand/mollie.svg" alt="Mollie" width="51" height="18" loading="lazy"></div>
-        <b>Native connectors</b>
-        <span>Settlements, fees and authorisations, pulled on their own. PayPal, Klarna, Viva.com, Worldline and Monext rolling out.</span>
+        <small class="int-k">Native connectors</small>
+        <b>Connect once. Stay in sync.</b>
+        <span>Automatically pull transactions, fees, and settlements from your payment providers. Your data stays up to date, without manual work.</span>
       </div>
-      <div class="int-tile live"><b>Any export</b><span>CSV or Excel from any processor, acquirer or ERP. Map the columns once; the next file with the same header reads itself.</span></div>
-      <div class="int-tile live"><b>Your documents</b><span>Contracts, invoices and statements as PDF. Read automatically, every figure kept beside its source page.</span></div>
-      <div class="int-tile live"><b>Your orders</b><span>Volumes from your shop or ERP, by business unit and sales channel. The denominator every rate is read against.</span></div>
+      <div class="int-tile live"><small class="int-k">Any export</small><b>Any provider. Any format.</b><span>Upload CSV or Excel exports from any processor, acquirer, or ERP. Map your data once. Oryjin handles the rest.</span></div>
+      <div class="int-tile live"><small class="int-k">Your documents</small><b>From documents to insights.</b><span>Upload your contracts, invoices, and fee statements. Oryjin extracts the numbers and connects them to your actual payment activity.</span></div>
+      <div class="int-tile live"><small class="int-k">Your orders</small><b>Connect payments to revenue.</b><span>Bring in order data from your shop or ERP. Understand payment costs and performance across your business.</span></div>
     </div>
   </div>
 </section>
@@ -1400,15 +1381,15 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 <section class="band team-section" id="teams">
   <div class="sec-head reveal">
     <p class="section-label">Who it's for</p>
-    <h2 class="section-head">Three roles.<br><span>One set of numbers.</span></h2>
-    <p class="section-sub">Payment Ops opens it daily, the Head of Payments before every negotiation, the CFO at budget time and when the board asks what came back.</p>
+    <h2 class="section-head">One platform.<br><span>Every payment decision.</span></h2>
+    <p class="section-sub">From day-to-day operations to strategic planning, Oryjin gives every team the insights they need to improve payment performance, control costs, and protect margins.</p>
   </div>
   <div class="team-row reveal">
-    <div class="team"><b>CFO</b><span>The payments line of the budget, each month held against its forecast, and a one-page recoveries summary for the board.</span></div>
-    <div class="team"><b>Head of Payments</b><span>Effective rate by processor and market, the renewal radar, the negotiation dossier with the asks and the evidence.</span></div>
-    <div class="team"><b>Payment Ops</b><span>This month's findings, the claim letters, approval, decline and dispute rates, alerts in Slack.</span></div>
+    <div class="team"><b>CFO</b><em>Protect your margins.</em><span>Get a clear view of payment costs, understand their impact on profitability, and forecast expenses with confidence.</span></div>
+    <div class="team"><b>Head of Payments</b><em>Turn insights into leverage.</em><span>Benchmark providers, uncover savings opportunities, and negotiate better terms with data-backed evidence.</span></div>
+    <div class="team"><b>Payment Operations</b><em>Stay ahead of every issue.</em><span>Spot unexpected fees, track payment performance, and identify problems before they become costly.</span></div>
   </div>
-  <p class="team-note reveal">Unlimited users. Not a PSP, not an orchestrator: Oryjin recommends and simulates, never moves money, never changes a setting. Priced on your volume, no success fee.</p>
+  <p class="team-note reveal"><b>Bottom line</b> One source of truth. Every team aligned. No changes to your payment stack.</p>
 </section>
 
 
@@ -1448,7 +1429,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     </div>
     <div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false">Which PSPs and acquirers does Oryjin cover?<span class="faq-ic" aria-hidden="true"></span></button>
-      <div class="faq-a"><p>All of them. Send what you already have: settlement reports, fee statements, authorisation exports, invoices, contracts and order files, from any PSP, acquirer or ERP, as PDF, CSV or Excel. Oryjin reads the documents and maps the columns once; every later file with the same header reads itself. Stripe, Adyen and Mollie also connect natively and keep pulling settlements, fees and authorisations on their own, with PayPal, Klarna, Viva.com, Worldline and Monext rolling out.</p></div>
+      <div class="faq-a"><p>All of them. Send what you already have: settlement reports, fee statements, authorisation exports, invoices, contracts and order files, from any PSP, acquirer or ERP. Oryjin reads the documents and maps the columns once; every later file with the same header reads itself. Stripe, Adyen and Mollie also connect natively and keep pulling settlements, fees and authorisations on their own, with PayPal, Klarna, Viva.com, Worldline and Monext rolling out.</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false">Can I try it before requesting access?<span class="faq-ic" aria-hidden="true"></span></button>
@@ -1469,20 +1450,15 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     <div class="apply-form-inner" id="form-body">
       <div class="form-grid">
         <div class="form-row">
-          <label class="form-label" for="fname">First name <span style="color:#DC2626" aria-hidden="true">*</span></label>
-          <input class="form-input" id="fname" type="text" placeholder="First name" autocomplete="given-name" required aria-describedby="err-fname" oninput="liveValidate('fname')" onblur="liveValidate('fname',true)">
-          <span class="field-error" id="err-fname" aria-live="polite"></span>
+          <label class="form-label" for="fullname">Name <span style="color:#DC2626" aria-hidden="true">*</span></label>
+          <input class="form-input" id="fullname" type="text" placeholder="First and last name" autocomplete="name" required aria-describedby="err-fullname" oninput="liveValidate('fullname')" onblur="liveValidate('fullname',true)">
+          <span class="field-error" id="err-fullname" aria-live="polite"></span>
         </div>
         <div class="form-row">
-          <label class="form-label" for="lname">Last name <span style="color:#DC2626" aria-hidden="true">*</span></label>
-          <input class="form-input" id="lname" type="text" placeholder="Last name" autocomplete="family-name" required aria-describedby="err-lname" oninput="liveValidate('lname')" onblur="liveValidate('lname',true)">
-          <span class="field-error" id="err-lname" aria-live="polite"></span>
+          <label class="form-label" for="email">Professional email <span style="color:#DC2626" aria-hidden="true">*</span></label>
+          <input class="form-input" id="email" type="email" placeholder="you@company.com" autocomplete="email" required aria-describedby="err-email" oninput="liveValidate('email')" onblur="liveValidate('email',true)">
+          <span class="field-error" id="err-email" aria-live="polite"></span>
         </div>
-      </div>
-      <div class="form-row">
-        <label class="form-label" for="email">Professional email <span style="color:#DC2626" aria-hidden="true">*</span></label>
-        <input class="form-input" id="email" type="email" placeholder="you@company.com" autocomplete="email" required aria-describedby="err-email" oninput="liveValidate('email')" onblur="liveValidate('email',true)">
-        <span class="field-error" id="err-email" aria-live="polite"></span>
       </div>
       <div class="form-grid">
         <div class="form-row">
@@ -1506,28 +1482,35 @@ body,button,input,select,textarea{font-family:var(--font-display)}
           <span class="field-error" id="err-role" aria-live="polite"></span>
         </div>
       </div>
-      <div class="form-grid">
-        <div class="form-row">
-          <label class="form-label" for="volume">Card payments a year <span style="color:#DC2626" aria-hidden="true">*</span></label>
-          <select class="form-select" id="volume" required aria-describedby="err-volume" onchange="liveValidate('volume',true)">
-            <option value="" disabled selected>Select range</option>
-            <option>Under €10M</option>
-            <option>€10M – €25M</option>
-            <option>€25M – €50M</option>
-            <option>€50M – €100M</option>
-            <option>€100M – €200M</option>
-            <option>Over €200M</option>
-          </select>
-          <span class="field-error" id="err-volume" aria-live="polite"></span>
-          <p class="form-note">Best fit: €10 to 200M a year</p>
-        </div>
-        <div class="form-row">
-          <label class="form-label" for="psps">Payment processors <span style="color:#DC2626" aria-hidden="true">*</span></label>
-          <input class="form-input" id="psps" type="text" placeholder="e.g. Adyen + Stripe" required aria-describedby="err-psps" oninput="liveValidate('psps')" onblur="liveValidate('psps',true)">
-          <span class="field-error" id="err-psps" aria-live="polite"></span>
-          <p class="form-note">All PSPs and acquirers you use</p>
-        </div>
+      <div class="form-row">
+        <label class="form-label" for="volume">Card payments a year <span style="color:#DC2626" aria-hidden="true">*</span></label>
+        <select class="form-select" id="volume" required aria-describedby="err-volume" onchange="liveValidate('volume',true)">
+          <option value="" disabled selected>Select range</option>
+          <option>Under €10M</option>
+          <option>€10M – €25M</option>
+          <option>€25M – €50M</option>
+          <option>€50M – €100M</option>
+          <option>€100M – €200M</option>
+          <option>Over €200M</option>
+        </select>
+        <span class="field-error" id="err-volume" aria-live="polite"></span>
+        <p class="form-note">Best fit: €10 to 200M a year</p>
       </div>
+      <fieldset class="form-row psp-field">
+        <legend class="form-label">Payment processors <span class="form-optional">optional</span></legend>
+        <div class="psp-chips">
+          <label class="psp-chip"><input type="checkbox" name="psp" value="stripe"><span>Stripe</span></label>
+          <label class="psp-chip"><input type="checkbox" name="psp" value="adyen"><span>Adyen</span></label>
+          <label class="psp-chip"><input type="checkbox" name="psp" value="mollie"><span>Mollie</span></label>
+          <label class="psp-chip"><input type="checkbox" name="psp" value="checkout"><span>Checkout.com</span></label>
+          <label class="psp-chip"><input type="checkbox" name="psp" value="worldline"><span>Worldline</span></label>
+          <label class="psp-chip"><input type="checkbox" name="psp" value="paypal"><span>PayPal</span></label>
+          <label class="psp-chip"><input type="checkbox" name="psp" value="braintree"><span>Braintree</span></label>
+          <label class="psp-chip"><input type="checkbox" name="psp" value="klarna"><span>Klarna</span></label>
+          <label class="psp-chip"><input type="checkbox" id="psp-other-toggle" name="psp" value="other"><span>Other</span></label>
+        </div>
+        <input class="form-input psp-other" id="psps-other" type="text" placeholder="Which ones? e.g. Worldpay, a bank acquirer" aria-label="Other payment processors" hidden>
+      </fieldset>
       <div class="hp-field" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
       <div class="form-consent">
         <input type="checkbox" id="consent" name="consent" required aria-describedby="consent-note">
@@ -1538,8 +1521,8 @@ body,button,input,select,textarea{font-family:var(--font-display)}
         Apply for early access →
       </button>
       <p class="form-disclaimer">
-        All fields are required. NDA available before any data is shared. Data hosted by Scaleway, Paris region — see our <a href="/privacy.html" style="color:var(--vdk)">privacy policy</a>.<br>
-        Not ready to talk? <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=form" data-app-link="form" data-app-target="sample" style="color:var(--vdk)">Explore the sample company</a> first, no account needed.
+        NDA available before any data is shared. Data hosted by Scaleway, Paris region — see our <a href="/privacy.html" style="color:var(--vdk)">privacy policy</a>.<br>
+        Not ready to talk? <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=form" data-app-link="form" data-app-target="sample" style="color:var(--vdk)">Try it live</a> first, no account needed.
       </p>
     </div>
     <div class="form-success" id="form-success" role="status">
@@ -1613,7 +1596,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
         <a href="mailto:contact@oryjin.com">contact@oryjin.com</a>
         <a href="https://www.linkedin.com/company/oryjin-payment-intelligence" target="_blank" rel="noopener">LinkedIn → Oryjin</a>
         <a href="https://www.thepaymenteconomics.com" target="_blank" rel="noopener">The Payment Economics — independent review</a>
-        <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=footer" data-app-link="footer" data-app-target="sample">Explore the sample company</a>
+        <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=footer" data-app-link="footer" data-app-target="sample">Try it live</a>
         <a href="#apply" data-cta="footer">Apply for early access</a>
       </div>
     </div>
@@ -1668,7 +1651,7 @@ function getAttribution(){
   var scrs = [].slice.call(root.querySelectorAll('.scr'));
   var navs = [].slice.call(root.querySelectorAll('.app-side span[data-nav]'));
   var url  = document.getElementById('app-url');
-  var URLS = { detect:'app.oryjin.com/recommendations', claim:'app.oryjin.com/recommendations/claims', plan:'app.oryjin.com/forecast', prove:'app.oryjin.com/reconciliation' };
+  var URLS = { detect:'app.oryjin.com/findings', explain:'app.oryjin.com/analytics', plan:'app.oryjin.com/forecast', act:'app.oryjin.com/alerts' };
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, timer = null, MS = 6000;
   root.style.setProperty('--tour-ms', MS + 'ms');
   function count(scr){
@@ -1683,8 +1666,7 @@ function getAttribution(){
   function show(key){
     tabs.forEach(function(t){ var on = t.getAttribute('data-tab') === key; t.classList.toggle('is-on', on); t.setAttribute('aria-selected', on); });
     scrs.forEach(function(x){ var on = x.getAttribute('data-scr') === key; x.classList.toggle('is-on', on); if (on) count(x); });
-    var navKey = key === 'claim' ? 'detect' : key;
-    navs.forEach(function(n){ n.classList.toggle('is-on', n.getAttribute('data-nav') === navKey); });
+    navs.forEach(function(n){ n.classList.toggle('is-on', n.getAttribute('data-nav') === key); });
     if (url) url.textContent = URLS[key] || URLS.detect;
   }
   function next(){ var i = tabs.findIndex(function(t){ return t.classList.contains('is-on'); }); show(tabs[(i + 1) % tabs.length].getAttribute('data-tab')); }
@@ -1867,20 +1849,12 @@ function liveValidate(id, fromBlur = false) {
   if (!el) return;
   const val = el.value.trim();
   switch (id) {
-    case 'fname':
-      if (!val) { if (fromBlur) setErr(id, 'First name is required'); else clearErr(id); }
-      else clearErr(id);
-      break;
-    case 'lname':
-      if (!val) { if (fromBlur) setErr(id, 'Last name is required'); else clearErr(id); }
+    case 'fullname':
+      if (!val) { if (fromBlur) setErr(id, 'Name is required'); else clearErr(id); }
       else clearErr(id);
       break;
     case 'company':
       if (!val) { if (fromBlur) setErr(id, 'Company name is required'); else clearErr(id); }
-      else clearErr(id);
-      break;
-    case 'psps':
-      if (!val) { if (fromBlur) setErr(id, 'Please list your active PSPs'); else clearErr(id); }
       else clearErr(id);
       break;
     case 'email':
@@ -1907,15 +1881,16 @@ function liveValidate(id, fromBlur = false) {
    FULL VALIDATION ON SUBMIT
 ═══════════════════════════════════════════════ */
 function validateForm() {
-  ['fname','lname','email','company','role','volume','psps'].forEach(id => liveValidate(id, true));
-  const first = ['fname','lname','email','company','role','volume','psps']
+  const REQUIRED = ['fullname','email','company','role','volume'];
+  REQUIRED.forEach(id => liveValidate(id, true));
+  const first = REQUIRED
     .find(id => {
       const err = document.getElementById('err-' + id);
       return err && err.textContent.trim();
     });
   const sum = document.getElementById('form-summary');
   if (first) {
-    if (sum) { sum.textContent = first === 'email' && document.getElementById('email').value.trim() ? 'A company email address is required.' : 'Please complete every field before applying.'; sum.hidden = false; }
+    if (sum) { sum.textContent = first === 'email' && document.getElementById('email').value.trim() ? 'A company email address is required.' : 'Please complete the required fields before applying.'; sum.hidden = false; }
     document.getElementById(first)?.focus();
     return false;
   }
@@ -1944,7 +1919,8 @@ const VOLUME_BANDS = {
   '€100M – €200M': 'pro_100_200',
   'Over €200M':    'above_200'
 };
-/* Free-text PSP field → the app's processor slugs; unknown names stay in the message. */
+/* The chips give the app's processor slugs directly; the "Other" text maps by
+   keyword, and unknown names stay in the message. */
 const PSP_SLUGS = [
   ['stripe','stripe'], ['adyen','adyen'], ['mollie','mollie'], ['paypal','paypal'], ['checkout','checkout'],
   ['worldline','worldline'], ['monext','monext'], ['klarna','klarna'], ['viva','viva'], ['braintree','braintree'],
@@ -1955,16 +1931,28 @@ function pspSlugsOf(text){
   PSP_SLUGS.forEach(function(pair){ if (lower.indexOf(pair[0]) !== -1 && found.indexOf(pair[1]) === -1) found.push(pair[1]); });
   return found.slice(0, 8);
 }
+(function pspOther(){
+  var box = document.getElementById('psp-other-toggle'), input = document.getElementById('psps-other');
+  if (!box || !input) return;
+  box.addEventListener('change', function(){ input.hidden = !box.checked; if (box.checked) input.focus(); });
+})();
+function checkedPsps(){
+  return Array.prototype.slice.call(document.querySelectorAll('input[name="psp"]:checked'))
+    .filter(function(c){ return c.value !== 'other'; });
+}
 async function submitForm() {
   if (!validateForm()) return;
   if (!document.getElementById('consent').checked) return;
-  const fname   = document.getElementById('fname').value.trim();
-  const lname   = document.getElementById('lname').value.trim();
+  const name    = document.getElementById('fullname').value.trim();
   const email   = document.getElementById('email').value.trim();
   const company = document.getElementById('company').value.trim();
   const role    = document.getElementById('role').value;
   const volume  = document.getElementById('volume').value;
-  const psps    = document.getElementById('psps').value.trim();
+  const chosen  = checkedPsps();
+  const other   = document.getElementById('psp-other-toggle').checked ? document.getElementById('psps-other').value.trim() : '';
+  const psps    = chosen.map(function(c){ return c.nextElementSibling.textContent; }).concat(other ? [other] : []).join(', ');
+  const pspSlugs = chosen.map(function(c){ return c.value; });
+  pspSlugsOf(other).forEach(function(slug){ if (pspSlugs.indexOf(slug) === -1) pspSlugs.push(slug); });
   const date    = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
   const attr    = getAttribution();
   const source  = attr.utm_source ? [attr.utm_source, attr.utm_medium, attr.utm_campaign, attr.utm_term].filter(Boolean).join(' / ') : (document.referrer || 'direct');
@@ -1974,8 +1962,7 @@ async function submitForm() {
   btn.style.opacity = '0.72';
   const payload = {
     'Date':            date,
-    'First Name':      fname,
-    'Last Name':       lname,
+    'Name':            name,
     'Reply-to':        email,
     'Company':         company,
     'Role':            role,
@@ -1991,13 +1978,13 @@ async function submitForm() {
   if (window.OryjinSite) {
     try {
       appSent = await window.OryjinSite.postLead({
-        name: (fname + ' ' + lname).trim(),
+        name: name,
         email: email,
         company: company,
         role: role,
         volumeBand: VOLUME_BANDS[volume],
-        processors: pspSlugsOf(psps),
-        message: 'Card volume a year: ' + volume + '. Processors as typed: ' + psps,
+        processors: pspSlugs.slice(0, 8),
+        message: 'Card volume a year: ' + volume + '. Processors: ' + (psps || 'not given'),
         locale: 'en',
         website: document.getElementById('website').value
       }, 6000);
@@ -2012,7 +1999,7 @@ async function submitForm() {
         body: JSON.stringify({
           access_key:  WEB3FORMS_KEY,
           subject:     'Oryjin — Early access application: ' + company + ' (' + date.slice(0,10) + ')',
-          from_name:   fname + ' ' + lname,
+          from_name:   name,
           replyto:     email,
           botcheck:    '',
           ...payload
