@@ -6,6 +6,7 @@
 - Any data source: settlement reports, fee statements, authorisation exports, invoices, contracts and order files from any PSP, acquirer or ERP, as PDF, CSV or Excel; documents read automatically, columns mapped once and reused by header
 - Native connectors: Stripe, Adyen, Mollie (settlements, fees and authorisations pulled on their own)
 - Connectors rolling out: PayPal, Klarna, Viva.com, Worldline, Monext
+- Security and independence: hosted in France (Scaleway, Paris); independent of PSPs, no commissions; read-only access to processors, never moves money, never changes a setting; GDPR, with a DPA and an NDA on every account
 - Detect: every processor reconciled against its contract every month, coverage stated (a month that cannot be checked says so); findings with the rows and the clause
 - Claim: one claim letter per processor with transaction-level evidence, sent by the merchant, settled line by line; recoveries summary and claim pack as PDFs
 - Plan: the payments line of the budget as three named lines on the merchant's own volume plan; announced Visa and Mastercard fee changes priced and dated beside renewals and tier crossings; scenarios priced on the merchant's data; renewal radar and negotiation dossier
