@@ -27,11 +27,13 @@
  *   site_lead_submitted      { volume, role }          the form landed
  *   site_newsletter_subscribed {}                      newsletter strip
  *   site_cta_clicked         { section, target }       any link into the app
- *                                                      (target "request-access",
- *                                                      or the link's
- *                                                      data-app-target: the
+ *                                                      (target: the link's
+ *                                                      data-app-target — the
  *                                                      hub's "estimate",
- *                                                      "sample"),
+ *                                                      "sample" — or else the
+ *                                                      app path it opens,
+ *                                                      "try" or
+ *                                                      "request-access"),
  *                                                      or a scroll-to-form CTA
  *                                                      (target "apply")
  *   site_faq_opened          { page }                  once per guide page load
@@ -276,7 +278,9 @@
       link.setAttribute("href", url.toString());
       link.addEventListener("click", function (event) {
         var target = event.currentTarget;
-        capture("site_cta_clicked", { section: target.getAttribute("data-app-link") || "page", target: target.getAttribute("data-app-target") || "request-access" });
+        var door = target.getAttribute("data-app-target") || "";
+        if (!door) { try { door = new URL(target.getAttribute("href"), location.href).pathname.replace(/^\/+|\/+$/g, ""); } catch (e) {} }
+        capture("site_cta_clicked", { section: target.getAttribute("data-app-link") || "page", target: door || "request-access" });
       });
     }
   }

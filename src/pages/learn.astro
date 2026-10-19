@@ -71,7 +71,7 @@ const jsonLd = {
     <h1>What your payments really cost, and how to lower it</h1>
     <p class="hub-lede">Practical guides for finance teams at European merchants. Each one answers a single question about payment costs, works it through with figures, and says where every figure comes from.</p>
     <nav class="hub-chips" aria-label="Topics">
-      {pillars.map((p) => <a href={`#${p.key}`}>{p.title}<span>{p.guides.length}</span></a>)}
+      {pillars.map((p) => <a href={`#${p.key}`} data-pillar={p.key}>{p.title}<span>{p.guides.length}</span></a>)}
       <a href="#tools">Free tools</a>
     </nav>
   </header>
@@ -83,7 +83,7 @@ const jsonLd = {
   <div class="hub-main">
     <div class="hub-list-col">
       {pillars.map((p) => (
-        <section class="hub-pillar" id={p.key} aria-labelledby={`h-${p.key}`}>
+        <section class="hub-pillar" id={p.key} data-pillar={p.key} aria-labelledby={`h-${p.key}`}>
           <h2 id={`h-${p.key}`}>{p.title}</h2>
           <p class="hub-pillar-intro">{p.intro}</p>
           <div>{p.guides.map((g) => <GuideCard guide={g} variant="row" />)}</div>
@@ -105,9 +105,9 @@ const jsonLd = {
         </section>
         <section class="hub-box hub-nl">
           <img src="/the-payment-economics.svg" alt="" width="40" height="40" loading="lazy">
-          <h2>The Payment Economics</h2>
-          <p>One independent study a month on what payment acceptance really costs in Europe.</p>
-          <a class="cta-ghost" href="https://www.thepaymenteconomics.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+          <h2>Know more. Pay less.</h2>
+          <p>The Payment Economics, independent research by Oryjin. One data-driven study every month on what payment acceptance really costs in Europe — and where the opportunities lie. Free to read.</p>
+          <a class="cta-ghost" href="https://www.thepaymenteconomics.com" target="_blank" rel="noopener">Explore the publication ↗</a>
         </section>
       </div>
     </aside>
@@ -137,10 +137,10 @@ const jsonLd = {
   <article class="guide-body hub-cta-wrap">
     <div class="guide-cta">
       <b>See your own payment costs, layer by layer, from your own data.</b>
-      <span>Oryjin continuously monitors your entire stack, from PSP and acquirer fees to scheme fees, fraud, chargebacks and orchestration, and turns it into decision-grade intelligence. Early access is open for European merchants doing €2 to 20M GMV a month.</span>
+      <span>Oryjin continuously monitors your entire stack, from PSP and acquirer fees to scheme fees, fraud, chargebacks and orchestration, and turns it into decision-grade intelligence. Early access is open for European merchants with €10 to 200M of card payments a year.</span>
       <div class="guide-cta-actions">
         <a href="/#apply" class="cta-btn" data-cta="learn-hub">Apply for early access <span class="cta-arrow" aria-hidden="true">→</span></a>
-        <a href={appLink("/request-access", "learn-hub")} class="cta-ghost" data-app-link="learn-hub">Request access</a>
+        <a href={appLink("/try", "learn-hub")} class="cta-ghost" data-app-link="learn-hub" data-app-target="sample">Try it live</a>
       </div>
     </div>
   </article>

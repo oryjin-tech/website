@@ -41,7 +41,7 @@ const SKY = "#8FB2FF";
 export async function ogImage(
 	kicker: string,
 	title: string,
-	opts: { cover?: string; byline?: string } = {},
+	opts: { cover?: string; byline?: string; kickerColour?: string } = {},
 ): Promise<Buffer> {
 	const { regular, bold, lockup } = await load();
 	const withCover = Boolean(opts.cover);
@@ -64,7 +64,7 @@ export async function ogImage(
 				[
 					{ type: "img", props: { src: lockup, width: 200, height: 54 } },
 					layer({ flexDirection: "column", gap: 22, width: withCover ? 700 : 1040, marginTop: withCover ? 110 : 150 }, [
-						layer({ fontSize: 26, fontWeight: 500, color: SKY, letterSpacing: 1 }, kicker),
+						layer({ fontSize: 26, fontWeight: 500, color: opts.kickerColour ?? SKY, letterSpacing: 1 }, kicker),
 						layer({ fontSize: size, fontWeight: 700, lineHeight: 1.12, letterSpacing: -1.5 }, title),
 						...(opts.byline ? [layer({ fontSize: 24, fontWeight: 500, color: "rgba(255,255,255,0.72)", marginTop: 6 }, opts.byline)] : []),
 					]),

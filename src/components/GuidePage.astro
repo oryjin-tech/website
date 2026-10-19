@@ -62,6 +62,15 @@ const ctaContent = `guide-${slug}`;
 const pillar = PILLARS[data.locale][data.pillar];
 const hub = HUB_PATH[data.locale];
 
+/*
+ * The title's lead phrase, the part before the first colon ("Chargeback
+ * ratio: staying under…"), set in the brand gradient the landing page gives
+ * its headlines' punchline. A title without a colon stays all ink.
+ */
+const colon = data.title.indexOf(": ");
+const titleLead = colon > 0 ? data.title.slice(0, colon + 1) : null;
+const titleRest = colon > 0 ? data.title.slice(colon + 1) : data.title;
+
 const share = [
 	{ key: "linkedin", label: "LinkedIn", href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` },
 	{ key: "x", label: "X", href: `https://x.com/intent/post?url=${encodeURIComponent(url)}&text=${encodeURIComponent(data.title)}` },
@@ -124,10 +133,10 @@ const jsonLd = {
 	author={author.name}
 	preloadImage={coverPath(slug)}
 >
-<div class="post" data-guide={slug} data-locale={data.locale}>
+<div class="post" data-guide={slug} data-locale={data.locale} data-pillar={data.pillar}>
   <header class="post-head">
-    <p class="post-crumb"><a href={hub}>{copy.crumbGuides}</a><span aria-hidden="true">/</span><a href={`${hub}#${data.pillar}`}>{pillar.title}</a></p>
-    <h1>{data.title}</h1>
+    <p class="post-crumb"><span class="post-pill"><span class="post-pill-dot" aria-hidden="true"></span><a href={hub}>{copy.crumbGuides}</a><span class="post-pill-sep" aria-hidden="true">·</span><a href={`${hub}#${data.pillar}`}>{pillar.title}</a></span></p>
+    <h1>{titleLead && <span class="post-h1-lead">{titleLead}</span>}{titleRest}</h1>
     <p class="post-standfirst">{data.lede}</p>
     <div class="post-byline">
       <a class="post-author" href={authorPath(author)}>
@@ -225,7 +234,7 @@ const jsonLd = {
         <span>{data.cta.text}</span>
         <div class="guide-cta-actions">
           <a href="/#apply" class="cta-btn" data-cta={ctaContent}>{copy.apply} <span class="cta-arrow" aria-hidden="true">→</span></a>
-          <a href={appLink("/request-access", ctaContent)} class="cta-ghost" data-app-link={ctaContent}>{copy.requestAccess}</a>
+          <a href={appLink("/try", ctaContent)} class="cta-ghost" data-app-link={ctaContent} data-app-target="sample">{copy.sample}</a>
         </div>
       </div>
 

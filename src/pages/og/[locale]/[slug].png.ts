@@ -3,7 +3,7 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import { GUIDE_COPY } from "../../../lib/i18n";
 import { ogImage } from "../../../lib/og-image";
 import { authorOf } from "../../../lib/authors";
-import { coverSvg } from "../../../lib/covers";
+import { coverSvg, PILLAR_COLOURS } from "../../../lib/covers";
 import { guideSlug } from "../../../lib/site";
 
 export const getStaticPaths = (async () => {
@@ -18,7 +18,8 @@ export const GET: APIRoute<{ guide: CollectionEntry<"guides"> }> = async ({ prop
 	const { data } = props.guide;
 	const author = authorOf(data.author);
 	const png = await ogImage(`${GUIDE_COPY[data.locale].kicker} · ${data.label}`, data.title, {
-		cover: coverSvg(data.cover, guideSlug(props.guide)),
+		cover: coverSvg(data.cover, data.pillar, guideSlug(props.guide)),
+		kickerColour: PILLAR_COLOURS[data.pillar].light,
 		byline: `${author.name} · ${GUIDE_COPY[data.locale].minRead(data.readingMinutes)}`,
 	});
 	return new Response(new Uint8Array(png), { headers: { "Content-Type": "image/png" } });

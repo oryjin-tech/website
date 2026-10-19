@@ -8,9 +8,15 @@
  *
  * The mark never appears here: the brand gradient is for surfaces, and a
  * cover is a surface.
+ *
+ * All three colours wash every cover, but the guide's pillar leads: its
+ * colour fills the middle and the other two sit in the corners, so the
+ * covers of one pillar read as a family on the hub and the social card
+ * carries the pillar's tint in its kicker.
  */
 
 export type CoverMotif = "layers" | "network" | "timeline" | "fan" | "threshold";
+export type Pillar = "costs" | "acceptance" | "strategy";
 
 export const COVER_W = 1200;
 export const COVER_H = 630;
@@ -26,6 +32,17 @@ const PURPLE = "#6302CC";
 const TEAL_LT = "#5FD0DC";
 const BLUE_LT = "#8FB2FF";
 const PURPLE_LT = "#C49BFF";
+
+/**
+ * The pillar's colour, as site.css maps it (costs teal, acceptance purple,
+ * strategy blue), with the light tint that reads on navy: the cover's lead
+ * wash and the social card's kicker.
+ */
+export const PILLAR_COLOURS: Record<Pillar, { base: string; light: string; wash: string }> = {
+	costs: { base: TEAL, light: TEAL_LT, wash: "gTeal" },
+	acceptance: { base: PURPLE, light: PURPLE_LT, wash: "gPurple" },
+	strategy: { base: BLUE, light: BLUE_LT, wash: "gBlue" },
+};
 
 const f = (n: number) => Math.round(n * 10) / 10;
 
@@ -54,12 +71,14 @@ function defs(): string {
 </defs>`;
 }
 
-function backdrop(r: () => number): string {
+function backdrop(r: () => number, pillar: Pillar): string {
 	const jx = () => f((r() - 0.5) * 120);
+	const lead = PILLAR_COLOURS[pillar].wash;
+	const [corner1, corner2] = ["gPurple", "gBlue", "gTeal"].filter((id) => id !== lead);
 	return `<rect width="${COVER_W}" height="${COVER_H}" fill="url(#bg)"/>
-<ellipse cx="${f(980 + jx())}" cy="${f(90 + jx() / 2)}" rx="520" ry="380" fill="url(#gPurple)"/>
-<ellipse cx="${f(620 + jx())}" cy="${f(330 + jx() / 2)}" rx="560" ry="420" fill="url(#gBlue)"/>
-<ellipse cx="${f(120 + jx())}" cy="${f(600 + jx() / 2)}" rx="520" ry="380" fill="url(#gTeal)"/>
+<ellipse cx="${f(1000 + jx())}" cy="${f(80 + jx() / 2)}" rx="460" ry="340" fill="url(#${corner1})" opacity="0.8"/>
+<ellipse cx="${f(110 + jx())}" cy="${f(610 + jx() / 2)}" rx="460" ry="340" fill="url(#${corner2})" opacity="0.8"/>
+<ellipse cx="${f(640 + jx())}" cy="${f(320 + jx() / 2)}" rx="720" ry="520" fill="url(#${lead})"/>
 <rect width="${COVER_W}" height="${COVER_H}" fill="url(#dots)"/>`;
 }
 
@@ -229,10 +248,10 @@ const MOTIFS: Record<CoverMotif, (r: () => number) => string> = {
 	threshold,
 };
 
-/** The cover SVG for a guide, from its motif and a seed (its slug). */
-export function coverSvg(motif: CoverMotif, seed: string): string {
+/** The cover SVG for a guide, from its motif, its pillar and a seed (its slug). */
+export function coverSvg(motif: CoverMotif, pillar: Pillar, seed: string): string {
 	const r = rng(seed);
-	return `<svg xmlns="http://www.w3.org/2000/svg" width="${COVER_W}" height="${COVER_H}" viewBox="0 0 ${COVER_W} ${COVER_H}">${defs()}${backdrop(r)}${MOTIFS[motif](r)}</svg>`;
+	return `<svg xmlns="http://www.w3.org/2000/svg" width="${COVER_W}" height="${COVER_H}" viewBox="0 0 ${COVER_W} ${COVER_H}">${defs()}${backdrop(r, pillar)}${MOTIFS[motif](r)}</svg>`;
 }
 
 export const coverPath = (slug: string) => `/covers/${slug}.svg`;

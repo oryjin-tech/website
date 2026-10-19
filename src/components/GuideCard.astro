@@ -26,7 +26,7 @@ const href = guidePath(guide);
 const H = `h${level}` as "h2" | "h3";
 const pillar = PILLARS[data.locale][data.pillar].title;
 ---
-<div class={`gcard gcard-${variant}`}>
+<div class={`gcard gcard-${variant}`} data-pillar={data.pillar}>
   <a class="gcard-cover" href={href} tabindex="-1" aria-hidden="true">
     <img src={coverPath(guideSlug(guide))} alt="" width="1200" height="630" loading={eager ? "eager" : "lazy"} decoding="async">
   </a>
