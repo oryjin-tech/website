@@ -3,7 +3,7 @@
 > Oryjin is decision intelligence for payment costs, for European merchants with €10M to €200M of card payments a year. Every month it reconciles each processor (Stripe, Adyen, Mollie and every other PSP or acquirer) against its contract, ranks what to change first in euros with each figure labelled detected (billed above contract, claimable) or modelled (from published schedules, with assumptions), sends the claims and settles them line by line, forecasts the payments line of the budget and holds each closed month against it. It is not a PSP or an orchestrator: it recommends and simulates, never moves money and never changes a setting. No success fee. Based in Paris, France.
 
 ## Key facts
-- Any data source: settlement reports, fee statements, authorisation exports, invoices, contracts and order files from any PSP, acquirer or ERP, as PDF, CSV or Excel; documents read automatically, columns mapped once and reused by header
+- Any data source: settlement reports, fee statements, authorisation exports, invoices, contracts and order files from any PSP, acquirer or ERP; documents read automatically, columns mapped once and reused by header
 - Native connectors: Stripe, Adyen, Mollie (settlements, fees and authorisations pulled on their own)
 - Connectors rolling out: PayPal, Klarna, Viva.com, Worldline, Monext
 - Security and independence: hosted in France (Scaleway, Paris); independent of PSPs, no commissions; read-only access to processors, never moves money, never changes a setting; GDPR, with a DPA and an NDA on every account

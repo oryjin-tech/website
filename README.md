@@ -119,7 +119,7 @@ copy always arrives. The app body is:
 {
   "name": "Camille Durand", "email": "camille@acme.example", "company": "Acme",
   "role": "CFO", "volumeBand": "pro_25_50", "processors": ["adyen", "stripe"],
-  "message": "Card volume a year: €25M – €50M. Processors as typed: Adyen + Stripe",
+  "message": "Card volume a year: €25M – €50M. Processors: Stripe, Adyen",
   "consent": true, "consentVersion": "website-2026-10-16b", "locale": "en", "website": "",
   "attribution": {
     "utmSource": "linkedin", "utmMedium": "social", "utmCampaign": "202610-renewal",
@@ -133,8 +133,10 @@ copy always arrives. The app body is:
 Empty attribution fields are omitted. `website` is the honeypot (a hidden
 field no person sees). The volume select asks the app's own annual bands
 (`VOLUME_BANDS` in index.html, the same six the app's pricing bands use);
-the free-text PSP field maps to slugs by keyword (`PSP_SLUGS`), unknown
-names staying in `message`.
+the processors are optional chips whose values are the app's slugs; the
+"Other" chip opens a text field that maps to slugs by keyword (`PSP_SLUGS`),
+unknown names staying in `message`. Required: name, email, company, role,
+volume.
 
 ### Consent
 
