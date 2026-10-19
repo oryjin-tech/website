@@ -85,7 +85,7 @@ echo "  favicon-maskable-512x512.png (inset 70% for Android's mask)"
 # like a thumbnail of a thumbnail.
 magick favicon-16x16.png favicon-32x32.png favicon-48x48.png \
 	favicon-64x64.png favicon-128x128.png favicon-256x256.png \
-	-strip favicon.ico
+	-strip -type TrueColorAlpha favicon.ico
 echo "  favicon.ico               (16/32/48/64/128/256)"
 
 # 128 and 256 exist only to be frames of the .ico; nothing links them.
