@@ -239,7 +239,6 @@ footer { border-top: 1px solid var(--bdr); background: var(--bg2); padding: 56px
 @media (max-width: 720px) { footer { padding: 40px 24px 32px; } .footer-inner { grid-template-columns: 1fr; gap: 32px; } }
 .footer-brand-logo { font-size: 17px; font-weight: 800; color: var(--white); letter-spacing: -0.4px; display: flex; align-items: center; gap: 6px; margin-bottom: 14px; text-decoration: none; }
 .footer-brand-logo-mark { color: var(--vlt); font-size: 18px; }
-.footer-brand-claim { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); line-height: 1.4; max-width: 260px; margin-bottom: 6px; }
 .footer-brand-desc { font-size: 14px; color: var(--dim); line-height: 1.7; max-width: 260px; margin-bottom: 20px; }
 .footer-brand-tagline { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: rgba(20,28,46,0.04); border: 1px solid var(--bdr); border-radius: 6px; padding: 5px 10px; }
 .footer-col-head { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); margin-bottom: 18px; }
