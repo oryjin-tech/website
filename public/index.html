@@ -91,9 +91,9 @@
       },
       "description": "Decision intelligence for payment costs, for European merchants with €10M to €200M of card payments a year: Stripe, Adyen, Mollie and every other PSP reconciled against their contracts, the next actions ranked in euros, claims sent and settled, the payments budget forecast and held against each closed month.",
       "featureList": [
-              "Stripe, Adyen and Mollie connectors",
-              "PayPal, Klarna, Viva.com, Worldline and Monext connectors rolling out",
-              "Any processor, acquirer or ERP from contracts, invoices, settlement reports and CSV exports",
+              "Any data source: settlement reports, fee statements, authorisation exports, invoices, contracts and order files from any PSP, acquirer or ERP, as PDF, CSV or Excel",
+              "Documents read automatically, columns mapped once and reused by header",
+              "Stripe, Adyen and Mollie connectors; PayPal, Klarna, Viva.com, Worldline and Monext rolling out",
               "Every processor reconciled against its contract every month, with coverage stated",
               "Recommendations ranked in euros, each labelled detected or modelled",
               "Claim letters with transaction-level evidence, sent and settled line by line",
@@ -180,7 +180,7 @@
           "name": "Which PSPs and acquirers does Oryjin cover?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "All of them, three ways in. Stripe, Adyen and Mollie have native connectors that keep pulling settlements, fees and authorisations. PayPal, Klarna, Viva.com, Worldline and Monext connectors are rolling out account by account. Every other processor, acquirer or ERP comes in from the contracts, invoices, settlement reports and CSV exports you already have, mapped once."
+            "text": "All of them. Send what you already have: settlement reports, fee statements, authorisation exports, invoices, contracts and order files, from any PSP, acquirer or ERP, as PDF, CSV or Excel. Oryjin reads the documents and maps the columns once; every later file with the same header reads itself. Stripe, Adyen and Mollie also connect natively and keep pulling settlements, fees and authorisations on their own, with PayPal, Klarna, Viva.com, Worldline and Monext rolling out."
           }
         },
         {
@@ -1049,9 +1049,9 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 .int-tile b { font-size: 15px; font-weight: 800; color: var(--ink); }
 .int-tile > span:last-child { font-size: 13px; color: var(--dim); }
 .int-tile.live > span:last-child::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--green); margin-right: 6px; }
-.int-tile.docs { grid-column: 1 / -1; }
-.int-tile.docs b { font-size: 13px; line-height: 1.5; }
-.cx-mark-a { background: linear-gradient(135deg, #0ABF53 0%, #047857 100%); }
+.int-marks { display: flex; align-items: center; gap: 16px; margin-bottom: 4px; }
+.int-marks img { height: 18px; width: auto; display: block; }
+.int-marks img[alt="Stripe"] { height: 23px; }
 @media (max-width: 600px) { .marquee-logo-img { height: 34px; max-width: 170px; } .marquee-item { padding: 0 32px; } }
 @media (max-width: 760px) { .int-row { grid-template-columns: 1fr; padding: 24px; } }
 /* ─── V5: TEAMS ─── */
@@ -1102,14 +1102,10 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 @media (max-width: 560px) { .out-section .out-grid.four { grid-template-columns: 1fr; } }
 .out-card h3 { font-size: 18px; }
 .out-card p { font-size: 14px; }
-.int-logos { grid-template-columns: repeat(3, 1fr); }
-.int-tile.soon, .int-tile.docs { grid-column: 1 / -1; }
-.int-tile.soon b, .int-tile.docs b { font-size: 13px; line-height: 1.5; }
-.int-tile.soon > span:last-child::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); margin-right: 6px; }
-.cx-mark-m { background: linear-gradient(135deg, #141C2E 0%, #000 100%); }
 .form-success-body a { display: inline-block; }
 @media (max-width: 480px) { .app-bar { flex-wrap: wrap; gap: 8px; } .app-ex { margin-left: 0; width: 100%; } .app-url { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } }
-@media (max-width: 760px) { .int-logos { grid-template-columns: 1fr 1fr 1fr; gap: 8px; } .int-tile { padding: 12px; } .int-tile .cx-mark { width: 36px; height: 36px; font-size: 16px; border-radius: 10px; } }
+@media (max-width: 760px) { .int-logos { gap: 8px; } .int-tile { padding: 12px; } }
+@media (max-width: 480px) { .int-logos { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -1385,15 +1381,18 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 <section class="int-section" id="integrations">
   <div class="int-row reveal">
     <div class="int-txt">
-      <h2>Every processor,<br><span>three ways in.</span></h2>
-      <p>Native connectors keep pulling settlements, fees and authorisations. More roll out account by account. Everything else comes in from the contracts, invoices, settlement reports and exports you already have, mapped once. No integration project.</p>
+      <h2>Any data source.<br><span>One ledger.</span></h2>
+      <p>Send what you already have: settlement reports, fee statements, authorisation exports, invoices, contracts and order files, from any PSP, acquirer or ERP, as PDF, CSV or Excel. Oryjin reads the documents, maps the columns once, and every later file reads itself. Stripe, Adyen and Mollie also connect natively and keep pulling on their own. No integration project, no engineer on your side.</p>
     </div>
     <div class="int-logos">
-      <div class="int-tile live"><span class="cx-mark" aria-hidden="true">S</span><b>Stripe</b><span>Connector</span></div>
-      <div class="int-tile live"><span class="cx-mark cx-mark-a" aria-hidden="true">A</span><b>Adyen</b><span>Connector</span></div>
-      <div class="int-tile live"><span class="cx-mark cx-mark-m" aria-hidden="true">M</span><b>Mollie</b><span>Connector</span></div>
-      <div class="int-tile soon"><b>PayPal · Klarna · Viva.com · Worldline · Monext</b><span>Connectors rolling out, account by account</span></div>
-      <div class="int-tile docs"><b>Checkout.com · Mangopay · PayPlug · any acquirer · your ERP</b><span>From contracts, invoices, settlement reports &amp; CSV exports</span></div>
+      <div class="int-tile live">
+        <div class="int-marks"><img src="/brand/stripe.svg" alt="Stripe" width="55" height="23" loading="lazy"><img src="/brand/adyen.svg" alt="Adyen" width="55" height="18" loading="lazy"><img src="/brand/mollie.svg" alt="Mollie" width="51" height="18" loading="lazy"></div>
+        <b>Native connectors</b>
+        <span>Settlements, fees and authorisations, pulled on their own. PayPal, Klarna, Viva.com, Worldline and Monext rolling out.</span>
+      </div>
+      <div class="int-tile live"><b>Any export</b><span>CSV or Excel from any processor, acquirer or ERP. Map the columns once; the next file with the same header reads itself.</span></div>
+      <div class="int-tile live"><b>Your documents</b><span>Contracts, invoices and statements as PDF. Read automatically, every figure kept beside its source page.</span></div>
+      <div class="int-tile live"><b>Your orders</b><span>Volumes from your shop or ERP, by business unit and sales channel. The denominator every rate is read against.</span></div>
     </div>
   </div>
 </section>
@@ -1449,7 +1448,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     </div>
     <div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false">Which PSPs and acquirers does Oryjin cover?<span class="faq-ic" aria-hidden="true"></span></button>
-      <div class="faq-a"><p>All of them, three ways in. Stripe, Adyen and Mollie have native connectors that keep pulling settlements, fees and authorisations. PayPal, Klarna, Viva.com, Worldline and Monext connectors are rolling out account by account. Every other processor, acquirer or ERP comes in from the contracts, invoices, settlement reports and CSV exports you already have, mapped once.</p></div>
+      <div class="faq-a"><p>All of them. Send what you already have: settlement reports, fee statements, authorisation exports, invoices, contracts and order files, from any PSP, acquirer or ERP, as PDF, CSV or Excel. Oryjin reads the documents and maps the columns once; every later file with the same header reads itself. Stripe, Adyen and Mollie also connect natively and keep pulling settlements, fees and authorisations on their own, with PayPal, Klarna, Viva.com, Worldline and Monext rolling out.</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false">Can I try it before requesting access?<span class="faq-ic" aria-hidden="true"></span></button>
