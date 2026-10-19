@@ -515,6 +515,14 @@ nav.scrolled{border-bottom-color:rgba(20,28,46,0.10);box-shadow:0 8px 30px -20px
   transition: border-color 0.2s, transform 0.2s;
 }
 .cta-ghost:hover { border-color: var(--v); transform: translateY(-2px); }
+.cta-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 15px; font-weight: 600; color: var(--txt);
+  padding: 15px 18px; border-radius: 14px; text-decoration: none;
+  transition: color 0.2s;
+}
+.cta-link:hover { color: var(--vdk); }
+.cta-link:hover .cta-arrow { transform: translate(2px, -2px); }
 .hero-integr { margin-top: 28px; font-size: 13px; color: var(--muted); }
 .hero-integr b { color: var(--txt); font-weight: 700; }
 /* ─────────────────────────────────────────────
@@ -1119,7 +1127,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     <a href="#integrations" class="nav-link">Integrations</a>
     <a href="#faq" class="nav-link">FAQ</a>
     <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=nav" class="nav-link" data-app-link="nav" data-app-target="sample">Try it live</a>
-    <a href="#apply" class="nav-cta" data-cta="nav">Apply for early access</a>
+    <a href="#apply" class="nav-cta" data-cta="nav">Get early access</a>
   </div>
 </nav>
 <main>
@@ -1138,11 +1146,13 @@ body,button,input,select,textarea{font-family:var(--font-display)}
       <span class="headline-em">And win it back.</span>
     </h1>
     <p class="sub">
-      Oryjin continuously monitors your entire stack, from PSP and acquirer fees to scheme fees, fraud, chargebacks and orchestration, and turns it into <strong>decision-grade intelligence.</strong>
+      Oryjin is the intelligence layer for your entire payment stack, from processing and scheme fees to fraud, chargebacks, and orchestration. <strong>Uncover hidden costs, improve performance, and make every payment decision count.</strong>
     </p>
     <div class="cta-group">
-      <a href="#apply" class="cta-btn" data-cta="hero">Apply for early access <span class="cta-arrow" aria-hidden="true">→</span></a>
+      <a href="#apply" class="cta-btn" data-cta="hero">Get early access <span class="cta-arrow" aria-hidden="true">→</span></a>
+      <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=hero" class="cta-link" data-app-link="hero" data-app-target="sample">Try the live demo <span class="cta-arrow" aria-hidden="true">↗</span></a>
     </div>
+    <p class="hero-integr">Independent intelligence. No changes to your payment stack.</p>
   </div>
 
 </section>
@@ -1349,7 +1359,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
     <span>This is a demo workspace. Explore the sample company yourself, or see the loop run on your own data.</span>
     <span class="mid-cta-btns">
       <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=tour" class="cta-ghost" data-app-link="tour" data-app-target="sample">Try it live</a>
-      <a href="#apply" class="cta-btn" data-cta="tour">Apply for early access <span class="cta-arrow" aria-hidden="true">→</span></a>
+      <a href="#apply" class="cta-btn" data-cta="tour">Get early access <span class="cta-arrow" aria-hidden="true">→</span></a>
     </span>
   </div>
 </section>
@@ -1517,7 +1527,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
       </div>
       <p class="form-summary" id="form-summary" role="alert" hidden></p>
       <button class="submit-btn" id="submit-btn" type="button" onclick="submitForm()" disabled>
-        Apply for early access →
+        Get early access →
       </button>
       <p class="form-disclaimer">
         Hosted in France · Independent of PSPs · Read-only access, never moves money · DPA and NDA on every account — see our <a href="/privacy.html" style="color:var(--vdk)">privacy policy</a>.<br>
@@ -1567,7 +1577,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
 
 <div class="sticky-cta" id="sticky-cta">
   <span>Know where your margin goes.</span>
-  <a href="#apply" class="cta-btn" data-cta="sticky">Apply for early access <span class="cta-arrow" aria-hidden="true">→</span></a>
+  <a href="#apply" class="cta-btn" data-cta="sticky">Get early access <span class="cta-arrow" aria-hidden="true">→</span></a>
 </div>
 <!-- ─── FOOTER ─── -->
 <footer>
@@ -1584,7 +1594,7 @@ body,button,input,select,textarea{font-family:var(--font-display)}
         <a href="#product">How it works</a>
         <a href="#integrations">Integrations</a>
         <a href="https://app.oryjin.com/try?utm_source=website&amp;utm_medium=cta&amp;utm_content=footer" data-app-link="footer" data-app-target="sample">Try the live demo ↗</a>
-        <a href="#apply" data-cta="footer">Apply for early access</a>
+        <a href="#apply" data-cta="footer">Get early access</a>
       </div>
     </div>
     <div>
@@ -1888,7 +1898,7 @@ function validateForm() {
    both delivering to contact@oryjin.com
 ═══════════════════════════════════════════════ */
 const WEB3FORMS_KEY = 'd4a26234-36c7-4fcc-8205-05f2e97beec1';
-const SUBMIT_LABEL  = 'Apply for early access →';
+const SUBMIT_LABEL  = 'Get early access →';
 /* The consent box gates the button: nothing is sent until it is ticked. */
 (function consentGate(){
   var box = document.getElementById('consent'), btn = document.getElementById('submit-btn');
