@@ -33,6 +33,7 @@ rendered, never hand-drawn, by `scripts/render-brand-assets.sh`.
 | `oryjin-tile-square.svg` | the same tile, `rx=0` — `apple-touch-icon` only |
 | `oryjin-maskable.svg` | square, inset to the middle 70% — Android's own mask |
 | `colors.css` | the three brand colours plus supporting neutrals |
+| `tokens.css` | generated in core from the app's stylesheet: the kit's colours with RGB channels, the gradient, the app's neutrals and statuses as hex, the chart palette, the type stacks. The site's `:root` blocks transcribe it |
 
 `colors.css` is reference, not a runtime dependency: this site inlines all of
 its CSS, so the token values are transcribed into the `:root` block of
