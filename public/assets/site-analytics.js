@@ -30,7 +30,7 @@
  *                                                      (target: the link's
  *                                                      data-app-target — the
  *                                                      hub's "estimate",
- *                                                      "sample" — or else the
+ *                                                      "sample", "try" — or else the
  *                                                      app path it opens,
  *                                                      "try" or
  *                                                      "request-access"),
