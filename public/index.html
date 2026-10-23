@@ -1666,15 +1666,20 @@ function getAttribution(){
     if (url) url.textContent = URLS[key] || URLS.detect;
   }
   function next(){ var i = tabs.findIndex(function(t){ return t.classList.contains('is-on'); }); show(tabs[(i + 1) % tabs.length].getAttribute('data-tab')); }
-  function play(){ if (reduce) return; stop(); timer = setInterval(next, MS); }
+  // Only pointing at (or focusing into) the tour itself holds it, not the whole section:
+  // scrolling past puts the cursor over the band, and that alone must not stop the tour.
+  var tour = root.querySelector('.tour') || root, hover = false, focus = false, inView = !('IntersectionObserver' in window);
+  function restartBar(){ var bar = root.querySelector('.tour-tab.is-on i'); if (bar) { bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = ''; } }
+  function play(){ stop(); if (reduce || hover || focus || !inView || document.hidden) return; restartBar(); timer = setInterval(next, MS); }
   function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+  function hold(){ tour.classList.toggle('paused', hover || focus); play(); }
   tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.getAttribute('data-tab')); play(); }); });
-  root.addEventListener('mouseenter', stop); root.addEventListener('mouseleave', play);
-  root.addEventListener('focusin', stop); root.addEventListener('focusout', play);
-  document.addEventListener('visibilitychange', function(){ document.hidden ? stop() : play(); });
+  tour.addEventListener('mouseenter', function(){ hover = true; hold(); }); tour.addEventListener('mouseleave', function(){ hover = false; hold(); });
+  tour.addEventListener('focusin', function(){ focus = true; hold(); }); tour.addEventListener('focusout', function(){ focus = false; hold(); });
+  document.addEventListener('visibilitychange', play);
   if ('IntersectionObserver' in window) {
     var seen = false;
-    new IntersectionObserver(function(e){ if (e[0].isIntersecting) { if (!seen) { seen = true; count(scrs[0]); } play(); } else stop(); }, { threshold: 0.25 }).observe(root);
+    new IntersectionObserver(function(e){ inView = e[0].isIntersecting; if (inView && !seen) { seen = true; count(scrs[0]); } play(); }, { threshold: 0.25 }).observe(root);
   } else { count(scrs[0]); play(); }
 })();
 /* ═══════════════════════════════════════════════
