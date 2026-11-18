@@ -5,8 +5,10 @@
  * accounts exist.
  *
  *   posthogKey          The PostHog project key (the same project as the app,
- *                       EU Cloud). Filled in by hand by Victor; empty = no
- *                       analytics at all, banner or not.
+ *                       EU Cloud). Empty = no analytics at all, banner or
+ *                       not. With a key, visits are counted without cookies
+ *                       until the visitor answers the banner, which needs
+ *                       "Enable cookieless tracking" in that project.
  *   posthogHost         EU ingestion host. Leave as is.
  *   appUrl              Where "Request access" and the lead post go.
  *   linkedinPartnerId   LinkedIn Insight Tag partner id (Campaign Manager →
@@ -28,5 +30,5 @@ window.ORYJIN_SITE = {
   linkedinConversionId: "",
   googleAdsId: "",
   googleAdsLeadLabel: "",
-  consentVersion: "website-2026-10-16b"
+  consentVersion: "website-2026-11-18"
 };

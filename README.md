@@ -83,8 +83,10 @@ Every page loads two scripts at the end of its body:
   PostHog key by hand** (the same project as the app, EU Cloud). An empty id
   means that tag never loads; with no key and no ad id the banner never shows,
   because there is nothing to consent to.
-- `assets/site-analytics.js` — the consent banner, PostHog (opt-out by
-  default, capturing only after the visitor accepted analytics), the
+- `assets/site-analytics.js` — the consent banner, PostHog (with cookies only
+  after the visitor accepted analytics; before any answer, visits are counted
+  in PostHog's cookieless mode, which keeps nothing in the browser; after a
+  refusal, nothing), the
   `dataLayer` → PostHog shim, the request-access links, the lead post to the
   app, and the advertising tags behind the advertising category. The list of
   events it captures is at the top of the file.
@@ -120,7 +122,7 @@ copy always arrives. The app body is:
   "name": "Camille Durand", "email": "camille@acme.example", "company": "Acme",
   "role": "CFO", "volumeBand": "pro_25_50", "processors": ["adyen", "stripe"],
   "message": "Card volume a year: €25M – €50M. Processors: Stripe, Adyen",
-  "consent": true, "consentVersion": "website-2026-10-16b", "locale": "en", "website": "",
+  "consent": true, "consentVersion": "website-2026-11-18", "locale": "en", "website": "",
   "attribution": {
     "utmSource": "linkedin", "utmMedium": "social", "utmCampaign": "202610-renewal",
     "utmContent": "post-3", "utmTerm": "", "referrer": "https://www.linkedin.com/",
@@ -142,6 +144,13 @@ volume.
 
 Two categories, analytics and advertising; the choice lives six months in
 the cookie `oryjin_consent` on this host only (the app has its own stance).
+
+Until the visitor answers, the page view and the named events are counted
+without a cookie or an identifier, through a second PostHog instance in
+cookieless mode ("Enable cookieless tracking" must stay on in the project:
+Settings → Web analytics). Those visits carry no country, and PostHog tells
+visitors apart by a hash that changes every day: a week's unique visitors
+are the sum of its days. A visitor who refuses is not measured at all.
 The "Cookies" link in every footer reopens the banner. **Bump
 `consentVersion`** in `assets/site-config.js` whenever the consent copy, the
 privacy page or the list of tags changes meaning: a stored choice under an
