@@ -6,8 +6,11 @@
  *
  *   - the consent banner (hand-rolled, two categories, six-month cookie on
  *     THIS host only — the app on app.oryjin.com keeps its own stance);
- *   - PostHog, loaded only with a project key and capturing only once the
- *     visitor accepted analytics (opt-out by default);
+ *   - PostHog, loaded only with a project key, in one of two ways and never
+ *     both for the same visitor: with cookies once the visitor accepted
+ *     analytics; before any answer, in PostHog's cookieless mode, which counts
+ *     the visit and keeps nothing in the browser. A visitor who refused is
+ *     not measured at all;
  *   - the dataLayer shim: every `dataLayer.push({event, …})` the pages make
  *     stays on the bus (the ad tags read it) and is forwarded to PostHog;
  *   - the links into the app: inbound utm_*, click ids and `ref` are carried
@@ -19,7 +22,8 @@
  *     advertising consent and only when their ids are set.
  *
  * Events captured in PostHog (counts and enums only — never the email, never
- * free text):
+ * free text). Before the visitor answers the banner they are sent without an
+ * identifier, next to the page view; clicks are not auto-captured then:
  *
  *   site_scroll_depth        { percent }               25/50/75/100
  *   site_tour_tab            { tab }                   the product tour
@@ -96,7 +100,9 @@
   }
 
   function applyConsent() {
-    if (consent && consent.analytics) enableAnalytics(); else disableAnalytics();
+    if (!consent) countAnonymously();
+    else if (consent.analytics) enableAnalytics();
+    else disableAnalytics();
     if (consent && consent.advertising) loadAdTags();
   }
 
@@ -168,7 +174,7 @@
       '<span class="ory-consent-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/><path d="M11 17v.01"/><path d="M7 14v.01"/></svg></span>' +
       '<h2 id="ory-consent-title">Cookies</h2>' +
       "</div>" +
-      '<p id="ory-consent-desc">We use cookies to measure how the site is used and how our campaigns perform. Nothing is set until you choose. <a href="/privacy.html">Privacy policy</a></p>' +
+      '<p id="ory-consent-desc">We use cookies to measure how the site is used and how our campaigns perform. Nothing is set until you choose; until then visits are only counted, anonymously and without cookies. <a href="/privacy.html">Privacy policy</a></p>' +
       '<div class="ory-consent-panel"><ul class="ory-consent-choices">' +
       '<li><label for="ory-consent-analytics"><span><b>Analytics</b><small>Audience measurement.</small></span><input type="checkbox" role="switch" id="ory-consent-analytics"></label></li>' +
       '<li><label for="ory-consent-advertising"><span><b>Advertising</b><small>Campaign measurement.</small></span><input type="checkbox" role="switch" id="ory-consent-advertising"></label></li>' +
@@ -287,51 +293,121 @@
 
   /* ------------------------------------------------------------- PostHog */
 
-  var posthogLoaded = false;
+  /* Two instances of the same library, for two states of the same visitor:
+   *
+   *   window.posthog       the visitor accepted analytics. Cookies, a stable
+   *                        identifier shared with app.oryjin.com, autocapture.
+   *   window.posthog.anon  the visitor has not answered the banner. PostHog's
+   *                        cookieless mode: no cookie, nothing in local or
+   *                        session storage, no identifier kept in the browser.
+   *                        PostHog counts the visit under a hash that changes
+   *                        every day and drops the IP address before storing.
+   *                        Page views, page leaves and the named events below;
+   *                        no autocapture.
+   *
+   * A visitor who refused gets neither. Needs "Enable cookieless tracking" in
+   * the PostHog project (Settings → Web analytics); without it PostHog drops
+   * the anonymous events. */
+  var snippetInstalled = false;
+  var posthogLoaded = false; // the instance with cookies: asked for
+  var posthogInited = false; // … and its init made (on the stub or the library)
+  var anonLoaded = false;    // the cookieless instance
 
-  function loadPostHog() {
-    if (posthogLoaded || !config.posthogKey) return;
-    posthogLoaded = true;
+  function installSnippet() {
+    if (snippetInstalled) return;
+    snippetInstalled = true;
     // The official snippet: a queueing stub, then array.js from the EU host.
     /* eslint-disable */
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     /* eslint-enable */
+  }
+
+  /* The anonymous instance already asked for the library: a second init
+     made on the stub (an array, which the library replaces with an object)
+     would fetch array.js a second time. Wait for the library instead. */
+  function whenLibraryReady(run, tries) {
+    if (!anonLoaded || !Array.isArray(window.posthog)) { run(); return; }
+    if ((tries || 0) > 50) return; // ten seconds: the library never came
+    setTimeout(function () { whenLibraryReady(run, (tries || 0) + 1); }, 200);
+  }
+
+  function countAnonymously() {
+    if (anonLoaded || posthogLoaded || !config.posthogKey) return;
+    installSnippet();
+    anonLoaded = true;
     window.posthog.init(config.posthogKey, {
       api_host: config.posthogHost || "https://eu.i.posthog.com",
-      // Nothing is captured until the visitor accepts analytics.
-      opt_out_capturing_by_default: true,
+      cookieless_mode: "always",
       person_profiles: "identified_only",
-      // The default, stated on purpose: the cookie sits on .oryjin.com, so a
-      // visitor who later signs in to app.oryjin.com is the same person.
-      cross_subdomain_cookie: true,
       capture_pageview: true,
       capture_pageleave: true,
-      autocapture: true,
-      disable_session_recording: true
+      autocapture: false,
+      disable_session_recording: true,
+      disable_surveys: true
+    }, "anon");
+  }
+
+  /* The visitor answered: the anonymous count stops with this page view. */
+  function stopCountingAnonymously() {
+    if (!anonLoaded || !window.posthog || !window.posthog.anon) return;
+    try { window.posthog.anon.set_config({ capture_pageleave: false }); } catch (e) { /* stub */ }
+  }
+
+  function loadPostHog() {
+    if (posthogLoaded || !config.posthogKey) return;
+    posthogLoaded = true;
+    // This page view was already counted if the anonymous instance ran.
+    var alreadyCounted = anonLoaded;
+    installSnippet();
+    whenLibraryReady(function () {
+      window.posthog.init(config.posthogKey, {
+        api_host: config.posthogHost || "https://eu.i.posthog.com",
+        // Nothing is captured until the visitor accepts analytics.
+        opt_out_capturing_by_default: true,
+        person_profiles: "identified_only",
+        // The default, stated on purpose: the cookie sits on .oryjin.com, so a
+        // visitor who later signs in to app.oryjin.com is the same person.
+        cross_subdomain_cookie: true,
+        capture_pageview: !alreadyCounted,
+        capture_pageleave: true,
+        autocapture: true,
+        disable_session_recording: true
+      });
+      posthogInited = true;
+      if (consent && consent.analytics) { window.posthog.opt_in_capturing(); flushQueue(); }
     });
   }
 
   function analyticsOn() {
-    return !!(consent && consent.analytics && window.posthog && posthogLoaded);
+    return !!(consent && consent.analytics && window.posthog && posthogInited);
   }
 
   function enableAnalytics() {
+    stopCountingAnonymously();
     loadPostHog();
-    if (window.posthog && posthogLoaded) {
-      window.posthog.opt_in_capturing();
-      flushQueue();
-    }
+    if (posthogInited) { window.posthog.opt_in_capturing(); flushQueue(); }
   }
 
   function disableAnalytics() {
-    if (window.posthog && posthogLoaded) window.posthog.opt_out_capturing();
+    stopCountingAnonymously();
+    queue = [];
+    if (posthogInited) window.posthog.opt_out_capturing();
   }
 
+  /* One event, one instance: with cookies once accepted, anonymous before any
+     answer, nowhere after a refusal. An event raised between the click on
+     "Accept" and the init of the instance with cookies waits in `queue`. */
   var queue = [];
 
   function capture(name, props) {
-    if (analyticsOn()) { window.posthog.capture(name, props || {}); return; }
-    if (!consent) queue.push([name, props || {}]); // asked before answering: keep this page's events
+    if (consent && consent.analytics) {
+      if (posthogInited) window.posthog.capture(name, props || {});
+      else queue.push([name, props || {}]);
+      return;
+    }
+    if (!consent && anonLoaded && window.posthog && window.posthog.anon) {
+      window.posthog.anon.capture(name, props || {});
+    }
   }
 
   function flushQueue() {
