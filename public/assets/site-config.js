@@ -10,6 +10,10 @@
  *                       until the visitor answers the banner, which needs
  *                       "Enable cookieless tracking" in that project.
  *   posthogHost         EU ingestion host. Leave as is.
+ *   gaMeasurementId     Google Analytics 4, "G-XXXXXXXXXX": property "ORYJIN —
+ *                       site et app" (account Oryjin, farah@oryjin.com), web
+ *                       stream "oryjin.com et app.oryjin.com". Loads only
+ *                       after the visitor accepted analytics. Empty = no GA.
  *   appUrl              Where "Request access" and the lead post go.
  *   linkedinPartnerId   LinkedIn Insight Tag partner id (Campaign Manager →
  *                       Analyze → Insight Tag). Empty until LinkedIn Ads run.
@@ -25,10 +29,11 @@
 window.ORYJIN_SITE = {
   posthogKey: "phc_ppgWZ8hwtRcY2cPZGkH4WaTtSrCfzqydzWtWtrZk5969",
   posthogHost: "https://eu.i.posthog.com",
+  gaMeasurementId: "G-XMZB0TD9SC",
   appUrl: "https://app.oryjin.com",
   linkedinPartnerId: "",
   linkedinConversionId: "",
   googleAdsId: "",
   googleAdsLeadLabel: "",
-  consentVersion: "website-2026-11-18"
+  consentVersion: "website-2026-11-20"
 };

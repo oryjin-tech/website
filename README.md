@@ -78,8 +78,9 @@ back.
 
 Every page loads two scripts at the end of its body:
 
-- `assets/site-config.js` — the public ids: the PostHog project key, the app
-  URL, the LinkedIn and Google Ads ids, the consent version. **Fill the
+- `assets/site-config.js` — the public ids: the PostHog project key, the
+  Google Analytics measurement id, the app URL, the LinkedIn and Google Ads
+  ids, the consent version. **Fill the
   PostHog key by hand** (the same project as the app, EU Cloud). An empty id
   means that tag never loads; with no key and no ad id the banner never shows,
   because there is nothing to consent to.
@@ -90,6 +91,41 @@ Every page loads two scripts at the end of its body:
   `dataLayer` → PostHog shim, the request-access links, the lead post to the
   app, and the advertising tags behind the advertising category. The list of
   events it captures is at the top of the file.
+
+### Google Analytics
+
+GA4 property "ORYJIN — site et app" (account Oryjin, owned by
+farah@oryjin.com), one web stream for oryjin.com and app.oryjin.com,
+`G-XMZB0TD9SC`. It loads only after the visitor accepted analytics (Consent
+Mode basic: before that, no request goes to Google) on its own gtag queue,
+`oryGaLayer`, so `window.dataLayer` stays the site's bus. Google signals,
+ad personalisation and Google's data sharing are off; data is kept 14 months.
+
+The stream's Google tag is a Tag Manager container (`GTM-PGHJHRVX`, managed
+from GA: Admin → Data streams → Configure tag settings). It sends the page
+view as soon as gtag.js runs and ignores `config` parameters, so the
+settings live in GA, not in this script: cookies 13 months from the first
+visit (tag settings → Override cookie settings), Google signals off,
+ad personalisation off.
+
+- `espace` (a custom dimension) splits the reports in two: `vitrine` for
+  oryjin.com and the app's public pages (`/try`, sign-in, sign-up, legal),
+  `app` for the client area. Two event-modification rules in GA set it from
+  the page URL on every event, page views included (Admin → Events →
+  Modify events); the script states it on its own events too.
+- The named events go out under GA4 names (`GA_EVENTS` in
+  `site-analytics.js`); `generate_lead` is a key event. GA4's enhanced
+  measurement adds 90 % scrolls, outbound clicks, form interactions and
+  downloads (site search and video are off).
+- `section_view { section }`: a block of the page, the first time half of
+  it is on screen. Name a block with `data-section="…"` when its id or its
+  heading would make a poor name.
+- The team's visits: open any page once with `?interne=1` (cookie
+  `ory_internal` on .oryjin.com, 13 months, read by the app too); hits then
+  go out as `traffic_type: internal`, which the property's "Internal
+  Traffic" data filter drops, and PostHog events carry
+  `oryjin_internal: true`. `?interne=0` removes the mark.
+- Search Console (domain property `oryjin.com`) is linked to the property.
 
 ### The links into the app
 
@@ -142,7 +178,7 @@ volume.
 
 ### Consent
 
-Two categories, analytics and advertising; the choice lives six months in
+Two categories, analytics (PostHog, Google Analytics) and advertising; the choice lives six months in
 the cookie `oryjin_consent` on this host only (the app has its own stance).
 
 Until the visitor answers, the page view and the named events are counted
