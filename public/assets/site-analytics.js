@@ -11,6 +11,17 @@
  *     analytics; before any answer, in PostHog's cookieless mode, which counts
  *     the visit and keeps nothing in the browser. A visitor who refused is
  *     not measured at all;
+ *   - Google Analytics 4, loaded only once the visitor accepted analytics and
+ *     only with a measurement id (Consent Mode "basic": before that, not one
+ *     request goes to Google). Every hit carries `espace: "vitrine"`, the
+ *     dimension that tells the site apart from the client area of the app;
+ *     Google signals and ad personalisation are off;
+ *   - the blocks of each page: one event the first time a block is half on
+ *     screen (`site_section_viewed`, GA4 `section_view`);
+ *   - the team's own visits: opening any page with `?interne=1` marks the
+ *     browser (cookie `ory_internal` on .oryjin.com, so the app reads it too)
+ *     and its hits go out as `traffic_type: internal`, which the GA4 data
+ *     filter drops; `?interne=0` removes the mark;
  *   - the dataLayer shim: every `dataLayer.push({event, …})` the pages make
  *     stays on the bus (the ad tags read it) and is forwarded to PostHog;
  *   - the links into the app: inbound utm_*, click ids and `ref` are carried
@@ -46,6 +57,14 @@
  *                                                      to 25/50/75/100%
  *   learn_share              { slug, locale, network } a guide's share buttons
  *                                                      (linkedin, x, email, copy)
+ *   site_section_viewed      { section }               a block of the page was
+ *                                                      half on screen (once per
+ *                                                      block and page load)
+ *
+ * The same events go to Google Analytics, under GA4 names (GA_EVENTS below:
+ * the lead is `generate_lead`, a key event), only after consent. GA4's own
+ * enhanced measurement adds page views, 90 % scrolls, outbound clicks, form
+ * interactions and file downloads.
  *
  * Public surface: window.OryjinSite — consent.get/open/set, attribution(),
  * landingPath(), distinctId(), capture(), postLead(), conversion().
@@ -73,10 +92,20 @@
     return null;
   }
 
-  function writeCookie(name, value, maxAge) {
-    // No `domain=`: the choice is this site's, never the app's.
+  function writeCookie(name, value, maxAge, sharedWithApp) {
+    // No `domain=` by default: the choice is this site's, never the app's.
+    // `sharedWithApp` puts the cookie on .oryjin.com (the team's own mark).
     var secure = location.protocol === "https:" ? "; Secure" : "";
-    document.cookie = name + "=" + encodeURIComponent(value) + "; Max-Age=" + maxAge + "; Path=/; SameSite=Lax" + secure;
+    var domain = sharedWithApp && /(^|\.)oryjin\.com$/.test(location.hostname) ? "; Domain=oryjin.com" : "";
+    document.cookie = name + "=" + encodeURIComponent(value) + "; Max-Age=" + maxAge + "; Path=/; SameSite=Lax" + secure + domain;
+  }
+
+  /* GA4's own cookies sit on the registrable domain (.oryjin.com). */
+  function expireCookie(name) {
+    var past = "=; Max-Age=0; Path=/";
+    document.cookie = name + past;
+    document.cookie = name + past + "; Domain=" + location.hostname;
+    if (/(^|\.)oryjin\.com$/.test(location.hostname)) document.cookie = name + past + "; Domain=oryjin.com";
   }
 
   /* ------------------------------------------------------------ consent */
@@ -104,6 +133,7 @@
     else if (consent.analytics) enableAnalytics();
     else disableAnalytics();
     if (consent && consent.advertising) loadAdTags();
+    updateGoogleConsent();
   }
 
   /* ------------------------------------------------------------- banner */
@@ -176,7 +206,7 @@
       "</div>" +
       '<p id="ory-consent-desc">We use cookies to measure how the site is used and how our campaigns perform. Nothing is set until you choose; until then visits are only counted, anonymously and without cookies. <a href="/privacy.html">Privacy policy</a></p>' +
       '<div class="ory-consent-panel"><ul class="ory-consent-choices">' +
-      '<li><label for="ory-consent-analytics"><span><b>Analytics</b><small>Audience measurement.</small></span><input type="checkbox" role="switch" id="ory-consent-analytics"></label></li>' +
+      '<li><label for="ory-consent-analytics"><span><b>Analytics</b><small>Audience measurement (PostHog, Google Analytics).</small></span><input type="checkbox" role="switch" id="ory-consent-analytics"></label></li>' +
       '<li><label for="ory-consent-advertising"><span><b>Advertising</b><small>Campaign measurement.</small></span><input type="checkbox" role="switch" id="ory-consent-advertising"></label></li>' +
       "</ul></div>" +
       '<div class="ory-consent-actions">' +
@@ -345,6 +375,7 @@
       disable_session_recording: true,
       disable_surveys: true
     }, "anon");
+    if (isInternal() && window.posthog.anon) window.posthog.anon.register({ oryjin_internal: true });
   }
 
   /* The visitor answered: the anonymous count stops with this page view. */
@@ -374,6 +405,7 @@
         disable_session_recording: true
       });
       posthogInited = true;
+      if (isInternal()) window.posthog.register({ oryjin_internal: true });
       if (consent && consent.analytics) { window.posthog.opt_in_capturing(); flushQueue(); }
     });
   }
@@ -386,12 +418,14 @@
     stopCountingAnonymously();
     loadPostHog();
     if (posthogInited) { window.posthog.opt_in_capturing(); flushQueue(); }
+    loadGoogleAnalytics();
   }
 
   function disableAnalytics() {
     stopCountingAnonymously();
     queue = [];
     if (posthogInited) window.posthog.opt_out_capturing();
+    disableGoogleAnalytics();
   }
 
   /* One event, one instance: with cookies once accepted, anonymous before any
@@ -403,6 +437,7 @@
     if (consent && consent.analytics) {
       if (posthogInited) window.posthog.capture(name, props || {});
       else queue.push([name, props || {}]);
+      sendToGoogle(name, props || {});
       return;
     }
     if (!consent && anonLoaded && window.posthog && window.posthog.anon) {
@@ -418,6 +453,194 @@
   function distinctId() {
     if (!analyticsOn()) return null;
     try { return window.posthog.get_distinct_id() || null; } catch (e) { return null; }
+  }
+
+  /* ---------------------------------------------------- Google Analytics */
+
+  /* gtag runs on its own queue (`oryGaLayer`, the `l=` parameter of the
+   * script URL), never on `window.dataLayer`: the pages' pushes there are
+   * forwarded by the shim below, and gtag.js would otherwise take the bus
+   * over. Google Analytics and the Google Ads tag share this one gtag.
+   *
+   * Loaded only after the visitor accepted analytics (Consent Mode "basic"):
+   * nothing reaches Google before that, and a refusal afterwards turns it off
+   * and expires its cookies (_ga, _ga_<id>, 13 months: GA's tag settings). */
+  var GA_LAYER = "oryGaLayer";
+  var INTERNAL_COOKIE = "ory_internal";
+  var INTERNAL_MAX_AGE = 34128000; // 395 days, 13 months
+  var gtagScriptFor = {};
+  var gaLoaded = false;
+  var seenBlocks = []; // blocks seen on this page before GA loaded
+
+  /* The GA4 name of each event; an event not listed here stays in PostHog. */
+  var GA_EVENTS = {
+    site_lead_submitted: "generate_lead",
+    site_cta_clicked: "cta_click",
+    site_tour_tab: "tour_tab",
+    site_scroll_depth: "scroll_depth",
+    site_newsletter_subscribed: "newsletter_subscribe",
+    site_why_step: "why_step",
+    site_section_viewed: "section_view",
+    learn_article_read: "article_read",
+    learn_share: "share"
+  };
+
+  function markInternal() {
+    var flag;
+    try { flag = new URLSearchParams(location.search).get("interne"); } catch (e) { return; }
+    if (flag === "1") writeCookie(INTERNAL_COOKIE, "1", INTERNAL_MAX_AGE, true);
+    else if (flag === "0") expireCookie(INTERNAL_COOKIE);
+  }
+
+  function isInternal() {
+    return readCookie(INTERNAL_COOKIE) === "1";
+  }
+
+  function gtag() {
+    window[GA_LAYER] = window[GA_LAYER] || [];
+    window[GA_LAYER].push(arguments);
+  }
+
+  /* One gtag.js for every Google id: the first id loads it, the next ones
+     only add their own `config`. */
+  function loadGtagScript(id) {
+    if (gtagScriptFor.any) return false;
+    gtagScriptFor.any = true;
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(id) + "&l=" + GA_LAYER;
+    document.head.appendChild(s);
+    gtag("js", new Date());
+    return true;
+  }
+
+  function googleConsentState() {
+    var ads = !!(consent && consent.advertising) ? "granted" : "denied";
+    return {
+      analytics_storage: consent && consent.analytics ? "granted" : "denied",
+      ad_storage: ads,
+      ad_user_data: ads,
+      ad_personalization: "denied"
+    };
+  }
+
+  function updateGoogleConsent() {
+    if (gtagScriptFor.any) gtag("consent", "update", googleConsentState());
+  }
+
+  /* The Google tag configures the stream from GA's own settings and sends
+   * the page view as soon as gtag.js runs; `config` parameters (custom ones,
+   * cookie lifetime, send_page_view) are not applied to it. So:
+   *   - the cookie lifetime (13 months), Google signals and ad
+   *     personalisation are set in GA (tag settings and data collection);
+   *   - `espace` is set on every event, page views included, by two event
+   *     modification rules in GA that read the URL (README);
+   *   - `traffic_type` goes through `set`, which the page view does carry. */
+  function loadGoogleAnalytics() {
+    var id = config.gaMeasurementId;
+    if (!id) return;
+    window["ga-disable-" + id] = false;
+    if (gaLoaded) return;
+    gaLoaded = true;
+    if (!gtagScriptFor.any) gtag("consent", "default", googleConsentState());
+    gtag("set", "ads_data_redaction", true);
+    if (isInternal()) gtag("set", { traffic_type: "internal" });
+    gtag("config", id, {
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false,
+      cookie_flags: "SameSite=Lax;Secure"
+    });
+    loadGtagScript(id);
+    seenBlocks.forEach(function (block) { sendToGoogle("site_section_viewed", { section: block }); });
+  }
+
+  function disableGoogleAnalytics() {
+    var id = config.gaMeasurementId;
+    if (!id) return;
+    window["ga-disable-" + id] = true;
+    expireCookie("_ga");
+    expireCookie("_ga_" + id.replace(/^G-/, ""));
+  }
+
+  /* Stated on each event this script sends (GA's rules set the same value
+     from the URL on every event, page views included). */
+  function everyHit() {
+    var params = { espace: "vitrine" };
+    if (isInternal()) params.traffic_type = "internal";
+    return params;
+  }
+
+  function sendToGoogle(name, props) {
+    var id = config.gaMeasurementId;
+    var gaName = GA_EVENTS[name];
+    if (!id || !gaName || !gaLoaded || window["ga-disable-" + id]) return;
+    var params = everyHit();
+    Object.keys(props).forEach(function (key) { params[key] = props[key]; });
+    if (name === "learn_share") { params.method = props.network; params.content_type = "guide"; params.item_id = props.slug; delete params.network; delete params.slug; delete params.locale; params.locale = props.locale; }
+    if (name === "site_lead_submitted") params.form = "request_access";
+    gtag("event", gaName, params);
+  }
+
+  /* --------------------------------------------------------- page blocks */
+
+  /* One event the first time a block of the page is half on screen: half of
+   * the block, or half of the screen for a block taller than the screen.
+   * A block is a top-level <section> (or [data-section]), the guide's
+   * call-to-action, and each heading of a guide's body. Its name is
+   * data-section, else its id, else its heading, made into a short slug. */
+  function slugify(text) {
+    var slug = String(text || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    if (slug.length <= 40) return slug;
+    var cut = slug.slice(0, 41);
+    return cut.slice(0, cut.lastIndexOf("-") > 10 ? cut.lastIndexOf("-") : 40);
+  }
+
+  function blockName(el) {
+    var name = el.getAttribute("data-section") || el.id;
+    var cls = typeof el.className === "string" ? el.className : "";
+    if (!name && /(^|\s)(hero|post-head|guide-hero)(\s|-|$)/.test(cls)) name = "hero";
+    if (!name && el.matches(".guide-cta")) name = "cta";
+    if (!name) {
+      var heading = el.querySelector("h1, h2, h3");
+      name = heading ? (heading.innerText || heading.textContent) : el.getAttribute("aria-label") || cls.split(/\s+/)[0];
+    }
+    return slugify(name);
+  }
+
+  function watchBlocks() {
+    if (typeof IntersectionObserver !== "function") return;
+    var all = document.querySelectorAll("section, [data-section], .post-head, .guide-cta, .post-prose h2[id]");
+    var names = {};
+    var blocks = [];
+    for (var i = 0; i < all.length; i++) {
+      var el = all[i];
+      if (el.closest(".ory-consent")) continue;
+      var parent = el.parentElement && el.parentElement.closest("section, [data-section]");
+      if (parent && !el.matches(".post-prose h2[id]")) continue;
+      var name = blockName(el);
+      if (!name) continue;
+      if (names[name]) { names[name] += 1; name = name + "-" + names[name]; } else names[name] = 1;
+      el.setAttribute("data-ory-block", name);
+      blocks.push(el);
+    }
+    if (blocks.length === 0) return;
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var visible = entry.intersectionRect.height;
+        var whole = entry.boundingClientRect.height || 1;
+        var screen = window.innerHeight || document.documentElement.clientHeight || whole;
+        if (visible < Math.min(whole, screen) / 2) return;
+        observer.unobserve(el);
+        var block = el.getAttribute("data-ory-block");
+        // Seen before the visitor accepted: GA gets it once it loads.
+        if (!gaLoaded) seenBlocks.push(block);
+        capture("site_section_viewed", { section: block });
+      });
+    }, { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
+    blocks.forEach(function (el) { observer.observe(el); });
   }
 
   /* ------------------------------------------------------- dataLayer shim */
@@ -479,15 +702,9 @@
       document.head.appendChild(li);
     }
     if (config.googleAdsId) {
-      window.dataLayer = window.dataLayer || [];
-      var gtagLayer = window.dataLayer;
-      window.gtag = window.gtag || function () { Array.prototype.push.call(gtagLayer, arguments); };
-      var g = document.createElement("script");
-      g.async = true;
-      g.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(config.googleAdsId);
-      document.head.appendChild(g);
-      window.gtag("js", new Date());
-      window.gtag("config", config.googleAdsId, { allow_ad_personalization_signals: false });
+      if (!gtagScriptFor.any) gtag("consent", "default", googleConsentState());
+      loadGtagScript(config.googleAdsId);
+      gtag("config", config.googleAdsId, { allow_ad_personalization_signals: false });
     }
   }
 
@@ -497,8 +714,8 @@
     if (window.lintrk && config.linkedinConversionId) {
       try { window.lintrk("track", { conversion_id: config.linkedinConversionId }); } catch (e) { /* tag not ready */ }
     }
-    if (window.gtag && config.googleAdsId && config.googleAdsLeadLabel) {
-      try { window.gtag("event", "conversion", { send_to: config.googleAdsId + "/" + config.googleAdsLeadLabel }); } catch (e) { /* tag not ready */ }
+    if (adTagsLoaded && config.googleAdsId && config.googleAdsLeadLabel) {
+      gtag("event", "conversion", { send_to: config.googleAdsId + "/" + config.googleAdsLeadLabel });
     }
   }
 
@@ -553,14 +770,16 @@
   /* -------------------------------------------------------------- boot */
 
   function boot() {
+    markInternal();
     captureInbound();
     installDataLayer();
     consent = loadConsent();
     applyConsent();
     decorateAppLinks();
     wireCookieLinks();
+    watchBlocks();
     if (document.querySelector(".guide-cta")) capture("site_faq_opened", { page: location.pathname });
-    if (!consent && config.posthogKey) showBanner(false);
+    if (!consent && (config.posthogKey || config.gaMeasurementId)) showBanner(false);
     else if (!consent && (config.linkedinPartnerId || config.googleAdsId)) showBanner(false);
   }
 
@@ -570,6 +789,7 @@
       open: function () { showBanner(true); },
       set: function (choice) { saveConsent(choice || {}); hideBanner(); }
     },
+    internal: isInternal,
     attribution: attribution,
     landingPath: landingPath,
     distinctId: distinctId,
